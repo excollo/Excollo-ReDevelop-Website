@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FeatureCard = ({ title, description, showDescription }) => {
+const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
   return (
     <Paper
       elevation={6}
       sx={{
-        background: "linear-gradient(145deg, #05000a, #432d5a)",
+        background: "#000000",
         borderRadius: "12px",
         textAlign: "center",
         padding: "2rem",
-        height: "300px", // Fixed height
+        height: "300px",
         width: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        boxShadow: "0px 0px 20px 5px rgba(174, 110, 197, 0.5)", // Adjusted shadow
+        border: isFinalState
+          ? "2px solid rgba(130, 98, 159, 0.8)"
+          : "2px solid rgba(130, 98, 159, 0.8)", // Made border always present but transparent when not final
+        transition: "all 0.3s ease", // Added transition for smooth border appearance
         "&:hover": {
-          backgroundColor: "#2c2c2c",
-          transition: "all 0.3s ease",
+          backgroundColor: "#000000",
           transform: "translateY(-5px)",
+          boxShadow: "0px 0px 25px 8px rgba(174, 110, 197, 0.6)", // Enhanced shadow on hover
         },
       }}
     >
@@ -31,6 +36,7 @@ const FeatureCard = ({ title, description, showDescription }) => {
         variant="h5"
         fontWeight="bold"
         gutterBottom
+        className="feature-title"
         sx={{
           background: "linear-gradient(to bottom right, #2579e3, #8e54f7)",
           WebkitBackgroundClip: "text",
@@ -41,62 +47,104 @@ const FeatureCard = ({ title, description, showDescription }) => {
       >
         {title}
       </Typography>
-      {showDescription && (
-        <Typography
-          variant="body1"
-          color="white"
-          sx={{
-            fontFamily: '"Inter", sans-serif',
-            maxWidth: "80%",
-          }}
-        >
-          {description}
-        </Typography>
-      )}
+      <Typography
+        variant="body1"
+        color="white"
+        className="feature-description"
+        sx={{
+          fontFamily: '"Inter", sans-serif',
+          maxWidth: "80%",
+          opacity: showDescription ? 1 : 0,
+          transition: "opacity 0.3s ease",
+        }}
+      >
+        {description}
+      </Typography>
     </Paper>
   );
 };
 
 const HeroPageSection4 = () => {
   const [isCardShrunk, setIsCardShrunk] = useState(false);
+  const mainCardRef = useRef(null);
+  const sideCardsRef = useRef(null);
+  const cardsContainerRef = useRef(null);
+  const titleRef = useRef(null);
 
   useEffect(() => {
-    const mainCardTrigger = ScrollTrigger.create({
-      trigger: ".hero-page-section-4",
-      start: "top 20%",
-      end: "+=100",
-      scrub: 0.5,
-      onEnter: () => setIsCardShrunk(true),
-      onLeaveBack: () => setIsCardShrunk(false),
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const scale = Math.pow(progress, 1.5);
+    let ctx = gsap.context(() => {
+      // Initial setup for side cards
+      gsap.set(".side-cards-container", {
+        opacity: 0,
+        display: "block",
+        x: (index) => (index === 0 ? -100 : 100),
+      });
 
-        gsap.to(".main-card", {
-          width: `${80 - scale * 65}%`, // Adjusted scale
-          duration: 0.1,
-          ease: "power2.out",
-        });
+      // Create the main scroll trigger
+      const mainCardTrigger = ScrollTrigger.create({
+        trigger: ".hero-page-section-4",
+        start: "top 20%",
+        end: "+=100",
+        scrub: 0.5,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const scale = Math.pow(progress, 1.5);
+          const minFontSize = 1.6;
 
-        gsap.to(".side-cards-container", {
-          opacity: scale,
-          x: 0,
-          duration: 1,
-        });
+          // Smooth animations for main card
+          gsap.to(".main-card", {
+            width: `${80 - scale * 65}%`,
+            duration: 0.3,
+            ease: "power2.out",
+          });
 
-        gsap.to(".cards-container", {
-          gap: "15rem",
-          duration: 0.1,
-          ease: "power2.out",
-          marginLeft: "-5%",
-        });
-      },
-      onLeave: () => {
-        gsap.to(window, { scrollTo: ".hero-page-section-5", duration: 1 });
-      },
+          // Smooth animations for side cards
+          gsap.to(".side-cards-container", {
+            opacity: scale,
+            x: 0,
+            duration: 1,
+            ease: "power2.out",
+          });
+
+          // Smooth animations for cards container
+          gsap.to(".cards-container", {
+            gap: `${2 + scale * 13}rem`,
+            duration: 0.3,
+            ease: "power2.out",
+            marginLeft: `-${scale * 5}%`,
+          });
+
+          // Smooth animations for title
+          gsap.to(".main-card .feature-title", {
+            fontSize: `${Math.max(3 - scale * 1.5, minFontSize)}rem`,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          // Reversed fade for description - now shows when shrunk
+          gsap.to(".main-card .feature-description", {
+            opacity: scale > 0.5 ? 1 : 0,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          setIsCardShrunk(scale > 0.5);
+        },
+        onLeave: () => {
+          gsap.to(window, {
+            scrollTo: ".hero-page-section-5",
+            duration: 1,
+            ease: "power2.inOut",
+          });
+        },
+      });
+
+      return () => {
+        mainCardTrigger.kill();
+      };
     });
 
-    return () => mainCardTrigger.kill();
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -111,6 +159,7 @@ const HeroPageSection4 = () => {
       }}
     >
       <Box
+        ref={titleRef}
         className="title-section"
         sx={{
           position: "sticky",
@@ -135,6 +184,7 @@ const HeroPageSection4 = () => {
       </Box>
 
       <Box
+        ref={cardsContainerRef}
         className="cards-container"
         sx={{
           position: "sticky",
@@ -144,52 +194,53 @@ const HeroPageSection4 = () => {
           alignItems: "center",
           gap: "2rem",
           padding: "0 2rem",
-          transition: "gap 0.2s ease",
+          transition: "gap 0.3s ease",
         }}
       >
         <Box
+          ref={sideCardsRef}
           className="side-cards-container"
           sx={{
-            width: "15%", // Equal width for all cards
+            width: "15%",
             opacity: 0,
-            transform: "translateX(-100px)",
-            display: isCardShrunk ? "block" : "none",
           }}
         >
           <FeatureCard
             title="Iterative Excellence"
             description="Our solutions evolve with your business, ensuring long-term success."
-            showDescription={true}
+            showDescription={isCardShrunk}
+            isFinalState={isCardShrunk}
           />
         </Box>
 
         <Box
+          ref={mainCardRef}
           className="main-card"
           sx={{
-            width: "80%", // Equal width for all cards
-            transition: "width 0.2s ease",
+            width: "80%",
+            transition: "width 0.3s ease",
           }}
         >
           <FeatureCard
             title="Outcome as a Service"
             description="We deliver tangible results-like increased sales or operational efficiency-not just products"
             showDescription={isCardShrunk}
+            isFinalState={isCardShrunk}
           />
         </Box>
 
         <Box
           className="side-cards-container"
           sx={{
-            width: "15%", // Equal width for all cards
+            width: "15%",
             opacity: 0,
-            transform: "translateX(100px)",
-            display: isCardShrunk ? "block" : "none",
           }}
         >
           <FeatureCard
             title="Future-Forward Strategies"
             description="Cutting-edge AI and automation drive scalable, innovative solutions."
-            showDescription={true}
+            showDescription={isCardShrunk}
+            isFinalState={isCardShrunk}
           />
         </Box>
       </Box>

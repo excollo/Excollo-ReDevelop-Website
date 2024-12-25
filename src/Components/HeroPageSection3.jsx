@@ -234,7 +234,7 @@ const HeroPageSection3 = () => {
             WebkitTextFillColor: "transparent",
           }}
         >
-          Excollo?
+          Services
         </Box>
       </Typography>
       <CardDesign sx={{ zIndex: 1, marginTop: "100px" }}>
