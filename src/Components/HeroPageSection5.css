@@ -1,0 +1,69 @@
+@keyframes svgReveal {
+  0% {
+    clip-path: inset(100% 0% 100% 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes iconBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.icon-bounce {
+  animation: iconBounce 1s ease-in-out 2 0.5s; /* Add delay */
+}
+
+@keyframes iconAnimation {
+  0% {
+    transform: translateY(300px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes iconAnimationReverse {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+}
+
+@keyframes svgClose {
+  0% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 100% 100% 0);
+    opacity: 0;
+  }
+}
+
+.svg-close {
+  animation: svgClose 1s forwards;
+}
+
+@keyframes textFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
