@@ -47,7 +47,7 @@ const HeroPage = () => {
       timeline.to(".threeDE", {
         x: "24%",
         y: "-2%",
-        duration: 0.5,
+        duration: 1,
         ease: "power2.out",
       });
 

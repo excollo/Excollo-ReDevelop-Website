@@ -78,13 +78,6 @@ const HeroPageSection4 = () => {
           ease: "power2.out",
         });
 
-        gsap.to(".title-section", {
-          opacity: progress,
-          y: 50 * (1 - progress),
-          duration: 1,
-          ease: "power2.out",
-        });
-
         gsap.to(".side-cards-container", {
           opacity: scale,
           x: 0,
@@ -124,8 +117,6 @@ const HeroPageSection4 = () => {
           top: "5%",
           textAlign: "center",
           zIndex: 2,
-          opacity: 0,
-          transform: "translateY(50px)",
         }}
       >
         <Typography variant="h3" fontWeight="bold">

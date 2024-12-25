@@ -183,6 +183,19 @@ const HeroPageSection3 = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (sectionRef.current) {
+      gsap.to(sectionRef.current, {
+        scrollTo: {
+          y: sectionRef.current.offsetTop + currentCard * 450,
+          autoKill: false,
+        },
+        duration: 1,
+        ease: "power2.inOut",
+      });
+    }
+  }, [currentCard]);
+
   return (
     <Box
       ref={sectionRef}
@@ -268,7 +281,11 @@ const HeroPageSection3 = () => {
       </CardDesign>
       <PaginationDots>
         {cardData.map((_, index) => (
-          <Dot key={index} active={index === currentCard} />
+          <Dot
+            key={index}
+            active={index === currentCard}
+            onClick={() => setCurrentCard(index)}
+          />
         ))}
       </PaginationDots>
     </Box>
