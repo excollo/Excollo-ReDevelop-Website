@@ -19,7 +19,7 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center", // Center the content vertically
+        justifyContent: "center",
         boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
         border: isFinalState ? "1px solid #7e22ce" : "1px solid #7e22ce",
         transition: "all 0.3s ease",
@@ -41,8 +41,8 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
           WebkitTextFillColor: "transparent",
           display: "inline-block",
           marginBottom: "2rem",
-          marginTop: isFinalState ? "0" : "2rem", // Adjust marginTop dynamically
-          transition: "margin-top 0.5s ease", // Smooth transition for marginTop
+          marginTop: isFinalState ? "0" : "2rem",
+          transition: "margin-top 0.5s ease",
         }}
       >
         {title}
@@ -66,6 +66,7 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
 
 const HeroPageSection4 = ({ onComplete }) => {
   const [isCardShrunk, setIsCardShrunk] = useState(false);
+  const sectionRef = useRef(null);
   const mainCardRef = useRef(null);
   const sideCardsRef = useRef(null);
   const cardsContainerRef = useRef(null);
@@ -96,24 +97,23 @@ const HeroPageSection4 = ({ onComplete }) => {
         start: "top 20%",
         end: "+=300",
         scrub: 0.5,
+        pin: true, // Pin the entire section
+        pinSpacing: true,
         snap: {
-          snapTo: 0.5, // Snap to the middle of the section
+          snapTo: (value) => Math.round(value * 10) / 10,
           duration: { min: 0.2, max: 0.5 },
           ease: "power1.inOut",
         },
         onUpdate: (self) => {
           const progress = self.progress;
           const scale = Math.pow(progress, 1.5);
-          const minFontSize = 1.6;
 
-          // Smooth animations for main card
           gsap.to(".main-card", {
             width: `${80 - scale * 60}%`,
             duration: 0.3,
             ease: "power2.out",
           });
 
-          // Smooth animations for side cards
           gsap.to(".side-cards-container", {
             opacity: scale,
             x: 0,
@@ -121,7 +121,6 @@ const HeroPageSection4 = ({ onComplete }) => {
             ease: "power2.out",
           });
 
-          // Smooth animations for cards container
           gsap.to(".cards-container", {
             gap: `${2 + scale * 8}rem`,
             duration: 0.3,
@@ -129,30 +128,29 @@ const HeroPageSection4 = ({ onComplete }) => {
             marginLeft: `-${scale * 2}%`,
           });
 
-          // Smooth animations for title
           gsap.to(".main-card .feature-title", {
-            fontSize: `${Math.max(3 - scale * 1.5, minFontSize)}rem`,
+            fontSize: `${Math.max(3 - scale * 1.5, 1.6)}rem`,
             duration: 1,
             ease: "power2.out",
           });
 
-          // Reversed fade for description - now shows when shrunk
           gsap.to(".main-card .feature-description", {
             opacity: scale > 0.9 ? 1 : 0,
-            duration: scale > 0.9 ? 0.2 : 0, // Instant disappearance when hiding
+            duration: scale > 0.9 ? 0.2 : 0,
             ease: "none",
           });
 
           setIsCardShrunk(scale > 0.1);
         },
-
         onLeave: () => {
-          gsap.to(window, {
-            scrollTo: ".hero-page-section-5",
-            duration: 1,
-            ease: "power2.inOut",
-            onComplete: onComplete, // Call onComplete when the scroll is finished
-          });
+          if (onComplete) {
+            gsap.to(window, {
+              scrollTo: ".hero-page-section-5",
+              duration: 1,
+              ease: "power2.inOut",
+              onComplete,
+            });
+          }
         },
       });
 
@@ -166,9 +164,10 @@ const HeroPageSection4 = ({ onComplete }) => {
 
   return (
     <Box
+      ref={sectionRef}
       className="hero-page-section-4"
       sx={{
-        minHeight: "100vh",
+        height: "100vh",
         color: "#fff",
         position: "relative",
         overflow: "hidden",
@@ -204,8 +203,8 @@ const HeroPageSection4 = ({ onComplete }) => {
         ref={cardsContainerRef}
         className="cards-container"
         sx={{
-          position: "sticky",
-          top: "30%",
+          position: "relative",
+          height: "calc(100vh - 200px)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -235,7 +234,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           className="main-card"
           sx={{
             width: "80%",
-            transition: "width 0.3s ease",
+            transition: "width 0.4s ease",
           }}
         >
           <FeatureCard
