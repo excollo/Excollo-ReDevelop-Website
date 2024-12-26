@@ -88,8 +88,8 @@ const PaginationDots = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  gap: "0.5rem",
-  marginTop: "1rem",
+  gap: "1rem",
+  marginTop: "2rem",
 }));
 
 const Dot = styled(Box)(({ theme, active }) => ({
@@ -97,17 +97,21 @@ const Dot = styled(Box)(({ theme, active }) => ({
   height: "10px",
   borderRadius: "50%",
   backgroundColor: active ? "#fff" : "#888",
+  zIndex: 1,
   transition: "background-color 0.3s ease",
+  cursor: "pointer",
+  "&:hover": {
+    transform: "scale(1.2)",
+    transition: "transform 0.2s ease",
+  },
 }));
 
 const HeroPageSection3 = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [currentCard, setCurrentCard] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState("forward");
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
   const titleCardRefs = useRef([]);
-  const lastScrollTop = useRef(0);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -234,7 +238,7 @@ const HeroPageSection3 = () => {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [scrollDirection]);
+  }, []);
 
   useEffect(() => {
     gsap.to(".hero-page-section-3", {
@@ -262,6 +266,41 @@ const HeroPageSection3 = () => {
       });
     }
   }, [currentCard]);
+
+  const handleDotClick = (index) => {
+    setCurrentCard(index);
+
+    // Animate the cards to the selected index
+    cardData.forEach((_, i) => {
+      if (i === index) {
+        gsap.to(cardRefs.current[i], {
+          x: "0%",
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+        gsap.to(titleCardRefs.current[i], {
+          x: "0%",
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      } else {
+        gsap.to(cardRefs.current[i], {
+          x: i < index ? "-100%" : "100%",
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
+        });
+        gsap.to(titleCardRefs.current[i], {
+          x: i < index ? "100%" : "-100%",
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
+        });
+      }
+    });
+  };
 
   return (
     <Box
@@ -358,7 +397,7 @@ const HeroPageSection3 = () => {
           <Dot
             key={index}
             active={index === currentCard}
-            onClick={() => setCurrentCard(index)}
+            onClick={() => handleDotClick(index)}
           />
         ))}
       </PaginationDots>
