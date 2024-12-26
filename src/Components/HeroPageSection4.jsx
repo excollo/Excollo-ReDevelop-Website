@@ -13,22 +13,22 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
         background: "#000000",
         borderRadius: "12px",
         textAlign: "center",
-        padding: "2rem",
+        padding: "1rem",
         height: "300px",
         width: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        boxShadow: "0px 0px 20px 5px rgba(174, 110, 197, 0.5)", // Adjusted shadow
+        boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px", // Adjusted shadow
         border: isFinalState
-          ? "2px solid rgba(130, 98, 159, 0.8)"
-          : "2px solid rgba(130, 98, 159, 0.8)", // Made border always present but transparent when not final
+          ? "1px solid #7e22ce"
+          : "1px solid #7e22ce", // Made border always present but transparent when not final
         transition: "all 0.3s ease", // Added transition for smooth border appearance
         "&:hover": {
           backgroundColor: "#000000",
           transform: "translateY(-5px)",
-          boxShadow: "0px 0px 25px 8px rgba(174, 110, 197, 0.6)", // Enhanced shadow on hover
+          boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px", // Enhanced shadow on hover
         },
       }}
     >
@@ -55,7 +55,7 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
           fontFamily: '"Inter", sans-serif',
           maxWidth: "80%",
           opacity: showDescription ? 1 : 0,
-          transition: "opacity 0.3s ease",
+          transition: "opacity 0.5s ease",
         }}
       >
         {description}
@@ -93,7 +93,7 @@ const HeroPageSection4 = () => {
 
           // Smooth animations for main card
           gsap.to(".main-card", {
-            width: `${80 - scale * 65}%`,
+            width: `${80 - scale * 60}%`,
             duration: 0.3,
             ease: "power2.out",
           });
@@ -108,10 +108,10 @@ const HeroPageSection4 = () => {
 
           // Smooth animations for cards container
           gsap.to(".cards-container", {
-            gap: `${2 + scale * 13}rem`,
+            gap: `${2 + scale * 8}rem`,
             duration: 0.3,
             ease: "power2.out",
-            marginLeft: `-${scale * 5}%`,
+            marginLeft: `-${scale * 2}%`,
           });
 
           // Smooth animations for title
@@ -123,8 +123,8 @@ const HeroPageSection4 = () => {
 
           // Reversed fade for description - now shows when shrunk
           gsap.to(".main-card .feature-description", {
-            opacity: scale > 0.5 ? 1 : 0,
-            duration: 0.3,
+            opacity: scale > 0.9 ? 1 : 0,
+            duration: 1.5,
             ease: "power2.out",
           });
 
@@ -201,7 +201,7 @@ const HeroPageSection4 = () => {
           ref={sideCardsRef}
           className="side-cards-container"
           sx={{
-            width: "15%",
+            width: "20%",
             opacity: 0,
           }}
         >
@@ -232,7 +232,7 @@ const HeroPageSection4 = () => {
         <Box
           className="side-cards-container"
           sx={{
-            width: "15%",
+            width: "20%",
             opacity: 0,
           }}
         >

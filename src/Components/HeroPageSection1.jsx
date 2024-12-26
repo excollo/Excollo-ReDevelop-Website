@@ -13,6 +13,7 @@ const HeroPageSection1 = () => {
         px: { xs: 2, sm: 4 },
         gap: "10%",
         position: "relative",
+        zIndex: 2, // Set consistent z-index
         "--gradient-start": "#ff7e5f", // Custom gradient start color for this section
         "--gradient-end": "#feb47b", // Custom gradient end color for this section
       }}
@@ -93,7 +94,7 @@ const HeroPageSection1 = () => {
         </Typography>
         <Typography
           component="a"
-          href="#whatwedo"
+          href="#scheduleaconsultation"
           sx={{
             display: "inline-block", // Ensures the button behaves like a block
             color: "#ffffff",
@@ -104,6 +105,8 @@ const HeroPageSection1 = () => {
             borderRadius: "40px",
             background:
               "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
+            zIndex: 3, // Ensure the button is above other elements
+            position: "relative",
             "&:hover": {
               background:
                 "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",

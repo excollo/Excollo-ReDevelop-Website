@@ -1,16 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { useInView } from "react-intersection-observer";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./HeroPageSection5.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HeroPageSection5 = () => {
   const [ref, inView] = useInView({
     triggerOnce: false,
-    threshold: 1, // Ensure the effect triggers only when the entire section is in view
+    threshold: 1,
   });
 
   const [scrollY, setScrollY] = useState(0);
   const svgRefs = useRef([]);
+  const textRef = useRef(null);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +45,56 @@ const HeroPageSection5 = () => {
     });
   }, [inView]);
 
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: textRef.current,
+        start: "top bottom",
+        end: "top center",
+        scrub: true,
+      },
+    });
+
+    tl.fromTo(
+      textRef.current,
+      {
+        y: 200,
+        fontSize: "7rem",
+      },
+      {
+        y: 0,
+        fontSize: "3.5rem",
+        fontWeight: "bold",
+        duration: 1,
+        ease: "power2.out",
+      }
+    );
+
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top bottom",
+      end: "bottom bottom",
+      onEnter: () => {
+        steps.forEach((step, index) => {
+          tl.fromTo(
+            svgRefs.current[index],
+            {
+              clipPath: "inset(100% 0% 100% 0)",
+              opacity: 0,
+            },
+            {
+              clipPath: "inset(0 0 0 0)",
+              opacity: 1,
+              duration: 1,
+              ease: "power2.out",
+            },
+            "-=0.5"
+          );
+        });
+      },
+    });
+  }, []);
+
   const steps = [
     {
       icon: (
@@ -55,7 +111,7 @@ const HeroPageSection5 = () => {
             width: "48px",
             position: "relative",
             margin: "0 auto",
-            transform: `translateY(${scrollY * 0.1}px)`,
+            transform: `translateY(${scrollY * 0.01}px)`,
             animation: inView
               ? "iconAnimation 1s ease-out forwards 1s, iconBounce 1s ease-in-out 2 1s" // Add delay
               : "iconAnimationReverse 1s ease-out forwards",
@@ -124,7 +180,10 @@ const HeroPageSection5 = () => {
   ];
 
   return (
-    <Box sx={{ color: "#fff", marginTop: "-5rem", minHeight: "100vh" }}>
+    <Box
+      ref={sectionRef}
+      sx={{ color: "#fff", marginTop: "-5rem", minHeight: "100vh" }}
+    >
       <Box
         sx={{
           minHeight: "100vh",
@@ -149,7 +208,11 @@ const HeroPageSection5 = () => {
             animation: inView ? "textFadeIn 1s ease-out forwards 0.5s" : "none", // Add delay
           }}
         >
-          <Typography variant="h3" fontWeight="bold">
+          <Typography
+            ref={textRef}
+            variant="h2"
+            fontWeight="bold"
+          >
             How We{" "}
             <Box
               component="span"

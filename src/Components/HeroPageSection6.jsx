@@ -17,11 +17,11 @@ const HeroPageSection6 = () => {
       }}
     >
       {/* Content Section */}
-      <Box sx={{ flex: "1", maxWidth: "600px" }}>
+      <Box sx={{ flex: "1", maxWidth: "650px" }}>
         <Typography
-          variant="h3"
+          variant="h2"
           component="h1"
-          sx={{ fontWeight: "400", marginBottom: "1rem" }}
+          sx={{ fontWeight: "bold", marginBottom: "1rem" }}
         >
           Ready for your <br />
           <Box

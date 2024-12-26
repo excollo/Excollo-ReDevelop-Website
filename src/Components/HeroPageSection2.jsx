@@ -15,7 +15,6 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
     const gradient = gradientRef.current;
     const content = contentRef.current;
 
-    // Create a GSAP timeline for the scroll effect
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -23,15 +22,13 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         end: "bottom center",
         scrub: true,
         onComplete: () => {
-          // Notify parent when all animations are complete
           setTimeout(() => {
             onAnimationComplete();
-          }, 100); // Small buffer after animations finish
+          }, 100);
         },
       },
     });
 
-    // Animate the gradient background from the center
     tl.fromTo(
       gradient,
       {
@@ -46,7 +43,6 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
       }
     );
 
-    // Animate the content and button together from the right
     tl.fromTo(
       content,
       {
@@ -80,7 +76,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         padding: "4rem",
         fontFamily: '"Inter", sans-serif',
         position: "relative",
-        zIndex: 0,
+        zIndex: 2, // Set consistent z-index
         overflow: "hidden",
       }}
     >
@@ -88,13 +84,14 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         ref={gradientRef}
         sx={{
           position: "absolute",
-          top: 0,
+          top: "30%",
           left: 0,
           right: 0,
           bottom: 0,
-          background: `radial-gradient(closest-side, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
-          zIndex: 0,
-          transformOrigin: "center center", // Ensure the gradient scales from the center
+          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
+          zIndex: 1, // Set consistent z-index
+          pointerEvents: "none",
+          transformOrigin: "center center",
         }}
       />
 
@@ -102,7 +99,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         ref={contentRef}
         sx={{
           position: "relative",
-          zIndex: 1,
+          zIndex: 2, // Set consistent z-index
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -115,8 +112,8 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
             justifyContent: "right",
             marginBottom: "2rem",
             position: "relative",
-            zIndex: 1,
-            marginTop: "20rem",
+            zIndex: 2, // Set consistent z-index
+            marginTop: "30rem",
             marginLeft: "45%",
           }}
         >
@@ -131,38 +128,36 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 mb: 10,
               }}
             >
-              Excollo delivers outcomes, <br />
-              leveraging AI to make businesses <br />
-              future-ready, boosting <br />
-              productivity and efficiency at <br />
-              every step.
+              Excollo delivers outcomes, leveraging AI to make <br /> businesses
+              future-ready, boosting productivity and <br /> efficiency at every
+              step.
             </Typography>
 
-            <Typography
-              component="a"
-              href="#whatwedo"
-              sx={{
-                display: "inline-block",
-                color: "#ffffff",
-                textDecoration: "none",
-                fontSize: "16px",
-                border: "1px solid transparent",
-                padding: "20px 80px",
-                borderRadius: "40px",
-                background:
-                  "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
-                transition: "background 0.3s ease",
-                "&:hover": {
-                  background:
-                    "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-                  color: "#ffffff",
-                },
-              }}
-            >
-              What We Do
-            </Typography>
+                   <Typography
+                     component="a"
+                     href="#scheduleaconsultation"
+                     sx={{
+                       display: "inline-block", // Ensures the button behaves like a block
+                       color: "#ffffff",
+                       textDecoration: "none",
+                       fontSize: "16px",
+                       border: "1px solid transparent",
+                       padding: "20px 60px",
+                       borderRadius: "40px",
+                       background:
+                         "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
+                       zIndex: 3, // Ensure the button is above other elements
+                       "&:hover": {
+                         background:
+                           "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",
+                         color: "#ffffff",
+                       },
+                     }}
+                   >
+                     What we do
+                   </Typography>
+               </Box>
           </Box>
-        </Box>
       </Box>
     </Box>
   );

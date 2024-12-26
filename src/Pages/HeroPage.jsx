@@ -57,26 +57,27 @@ const HeroPage = () => {
         ease: "power2.out",
       });
 
-      timeline.to(".navbar", {
-        opacity: 1,
-        x: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      });
-
-      timeline.to(".hero-content", {
-        opacity: 1,
-        x: 0,
-        duration: 0.5,
-        stagger: 0.2,
-        ease: "power2.out",
-        onComplete: () => {
-          setAnimationComplete(true);
-          setTimeout(() => {
-            setHero1Complete(true);
-          }, 500);
-        },
-      });
+      timeline.add([
+        gsap.to(".navbar", {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        }),
+        gsap.to(".hero-content", {
+          opacity: 1,
+          x: 0,
+          duration: 0.1,
+          stagger: 0.2,
+          ease: "power2.out",
+          onComplete: () => {
+            setAnimationComplete(true);
+            setTimeout(() => {
+              setHero1Complete(true);
+            }, 500);
+          },
+        }),
+      ]);
     }
   }, [showThreeDE]);
 
@@ -114,7 +115,7 @@ const HeroPage = () => {
           path: [
             { x: "24%", y: "0%" },
             { x: "12%", y: "50%" },
-            { x: "-23vw", y: "103vh" },
+            { x: "-23vw", y: "114vh" },
           ],
           curviness: 1.5,
         },
@@ -160,28 +161,24 @@ const HeroPage = () => {
             offsetY: 0,
           },
           ease: "power2.inOut",
+          onComplete: () => {
+            gsap.fromTo(
+              ".hero-page-section-5",
+              {
+                opacity: 0,
+                y: 100,
+              },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+              }
+            );
+          },
         });
       },
     });
-
-    gsap.fromTo(
-      ".hero-page-section-5",
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".hero-page-section-5",
-          start: "top center",
-          end: "bottom center",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -210,7 +207,7 @@ const HeroPage = () => {
           position: "absolute",
           top: 0,
           left: 0,
-          zIndex: 2,
+          zIndex: 2, // Set consistent z-index
         }}
       >
         <Box
@@ -234,7 +231,7 @@ const HeroPage = () => {
           width: "90%",
           height: "5%",
           background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
-          zIndex: 1,
+          zIndex: 1, // Set consistent z-index
           opacity: 0,
         }}
       />
@@ -242,7 +239,7 @@ const HeroPage = () => {
         className="navbar"
         sx={{
           position: "relative",
-          zIndex: 3,
+          zIndex: 3, // Set consistent z-index
           marginTop: "1rem",
           opacity: 0,
           transform: "translateX(-100px)",
@@ -256,14 +253,21 @@ const HeroPage = () => {
           display: "flex",
           position: "relative",
           zIndex: 3,
-          opacity: 0,
-          transform: "translateX(-100px)",
+          opacity: 1,
+          transform: "translateX(100)",
         }}
       >
         <HeroPageSection1 animationComplete={animationComplete} />
       </Box>
       <Box sx={{ visibility: hero1Complete ? "visible" : "hidden" }}>
-        <Box className="hero-section-2">
+        <Box
+          className="hero-section-2"
+          sx={{
+            position: "relative",
+            zIndex: 3,
+            opacity: 1,
+          }}
+        >
           <HeroPageSection2
             onAnimationComplete={() => setHero2Complete(true)}
           />

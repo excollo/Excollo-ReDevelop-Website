@@ -205,6 +205,7 @@ const HeroPageSection3 = () => {
         position: "relative",
         overflow: "hidden",
         height: "auto",
+        marginTop: "8rem",
         minHeight: "100vh",
       }}
     >
@@ -221,8 +222,8 @@ const HeroPageSection3 = () => {
         }}
       />
       <Typography
-        variant="h1"
-        sx={{ color: "#fff", position: "relative", top: "20px", zIndex: 1 }}
+        variant="h2"
+        sx={{ color: "#fff", fontWeight: "bold" ,position: "relative", top: "20px", zIndex: 1 }}
       >
         Our{" "}
         <Box
