@@ -19,16 +19,14 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px", // Adjusted shadow
-        border: isFinalState
-          ? "1px solid #7e22ce"
-          : "1px solid #7e22ce", // Made border always present but transparent when not final
-        transition: "all 0.3s ease", // Added transition for smooth border appearance
+        justifyContent: "center", // Center the content vertically
+        boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
+        border: isFinalState ? "1px solid #7e22ce" : "1px solid #7e22ce",
+        transition: "all 0.3s ease",
         "&:hover": {
           backgroundColor: "#000000",
           transform: "translateY(-5px)",
-          boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px", // Enhanced shadow on hover
+          boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
         },
       }}
     >
@@ -43,6 +41,8 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
           WebkitTextFillColor: "transparent",
           display: "inline-block",
           marginBottom: "2rem",
+          marginTop: isFinalState ? "0" : "2rem", // Adjust marginTop dynamically
+          transition: "margin-top 0.5s ease", // Smooth transition for marginTop
         }}
       >
         {title}
@@ -64,7 +64,7 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
   );
 };
 
-const HeroPageSection4 = () => {
+const HeroPageSection4 = ({ onComplete }) => {
   const [isCardShrunk, setIsCardShrunk] = useState(false);
   const mainCardRef = useRef(null);
   const sideCardsRef = useRef(null);
@@ -80,12 +80,27 @@ const HeroPageSection4 = () => {
         x: (index) => (index === 0 ? -100 : 100),
       });
 
-      // Create the main scroll trigger
+      // Create the scroll trigger for the title
+      ScrollTrigger.create({
+        trigger: ".hero-page-section-4",
+        start: "top top",
+        end: "top 20%",
+        scrub: 0.5,
+        pin: ".title-section",
+        pinSpacing: false,
+      });
+
+      // Create the main scroll trigger for the cards
       const mainCardTrigger = ScrollTrigger.create({
         trigger: ".hero-page-section-4",
         start: "top 20%",
-        end: "+=100",
+        end: "+=300",
         scrub: 0.5,
+        snap: {
+          snapTo: 0.5, // Snap to the middle of the section
+          duration: { min: 0.2, max: 0.5 },
+          ease: "power1.inOut",
+        },
         onUpdate: (self) => {
           const progress = self.progress;
           const scale = Math.pow(progress, 1.5);
@@ -117,24 +132,26 @@ const HeroPageSection4 = () => {
           // Smooth animations for title
           gsap.to(".main-card .feature-title", {
             fontSize: `${Math.max(3 - scale * 1.5, minFontSize)}rem`,
-            duration: 0.3,
+            duration: 1,
             ease: "power2.out",
           });
 
           // Reversed fade for description - now shows when shrunk
           gsap.to(".main-card .feature-description", {
             opacity: scale > 0.9 ? 1 : 0,
-            duration: 1.5,
-            ease: "power2.out",
+            duration: scale > 0.9 ? 0.2 : 0, // Instant disappearance when hiding
+            ease: "none",
           });
 
-          setIsCardShrunk(scale > 0.5);
+          setIsCardShrunk(scale > 0.1);
         },
+
         onLeave: () => {
           gsap.to(window, {
             scrollTo: ".hero-page-section-5",
             duration: 1,
             ease: "power2.inOut",
+            onComplete: onComplete, // Call onComplete when the scroll is finished
           });
         },
       });
@@ -145,7 +162,7 @@ const HeroPageSection4 = () => {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [onComplete]);
 
   return (
     <Box

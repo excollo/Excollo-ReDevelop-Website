@@ -21,6 +21,7 @@ const HeroPage = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
   const [hero1Complete, setHero1Complete] = useState(false);
   const [hero2Complete, setHero2Complete] = useState(false);
+  const [hero4Complete, setHero4Complete] = useState(false); // Add state for HeroPageSection4 completion
   const threeDERef = useRef(null);
 
   useEffect(() => {
@@ -130,60 +131,28 @@ const HeroPage = () => {
   }, [hero1Complete]);
 
   useEffect(() => {
-    gsap.fromTo(
-      ".hero-page-section-4",
-      {
-        opacity: 0,
-        y: 100,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".hero-page-section-4",
-          start: "top center",
-          end: "bottom center",
-          toggleActions: "play none none reverse",
+    if (hero4Complete) {
+      gsap.fromTo(
+        ".hero-page-section-5",
+        {
+          opacity: 0,
+          y: 100,
         },
-      }
-    );
-
-    ScrollTrigger.create({
-      trigger: ".hero-page-section-4",
-      start: "bottom center",
-      onEnter: () => {
-        gsap.to(window, {
-          duration: 1.5,
-          scrollTo: {
-            y: ".hero-page-section-5",
-            offsetY: 0,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".hero-page-section-5",
+            start: "top center",
+            end: "bottom center",
+            toggleActions: "play none none reverse",
           },
-          ease: "power2.inOut",
-          onComplete: () => {
-            gsap.fromTo(
-              ".hero-page-section-5",
-              {
-                opacity: 0,
-                y: 100,
-              },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power2.out",
-              }
-            );
-          },
-        });
-      },
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+        }
+      );
+    }
+  }, [hero4Complete]);
 
   return (
     <Box
@@ -276,7 +245,7 @@ const HeroPage = () => {
           <HeroPageSection3 />
         </Box>
         <Box>
-          <HeroPageSection4 />
+          <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
         </Box>
         <Box className="hero-page-section-5">
           <HeroPageSection5 />
