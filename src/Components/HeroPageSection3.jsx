@@ -15,7 +15,7 @@ const cardData = [
   {
     title: "Product Development",
     description:
-      "Scalable websites, web apps, and mobile apps tailored to your business’s unique needs.",
+      "Scalable websites, web apps, and mobile apps tailored to your business's unique needs.",
   },
   {
     title: "Tech Consultancy",
@@ -103,12 +103,35 @@ const Dot = styled(Box)(({ theme, active }) => ({
 const HeroPageSection3 = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [currentCard, setCurrentCard] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState("forward");
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
   const titleCardRefs = useRef([]);
+  const lastScrollTop = useRef(0);
 
   useEffect(() => {
     const section = sectionRef.current;
+
+    // Initial setup for first card
+    gsap.set([cardRefs.current[0], titleCardRefs.current[0]], {
+      x: "0%",
+      opacity: 1,
+    });
+
+    // Modified initial positions for other cards
+    cardData.forEach((_, index) => {
+      if (index > 0) {
+        gsap.set(cardRefs.current[index], {
+          x: "-100%", // Cards start from left
+          opacity: 0,
+        });
+        gsap.set(titleCardRefs.current[index], {
+          x: "100%", // Titles start from right
+          opacity: 0,
+        });
+      }
+    });
+
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -118,8 +141,11 @@ const HeroPageSection3 = () => {
         pin: true,
         snap: {
           snapTo: 1 / (cardData.length * 2 - 1),
-          duration: { min: 0.2, max: 0.5 },
+          duration: { min: 0.2, max: 1 },
           ease: "power1.inOut",
+        },
+        onEnter: () => {
+          setCurrentCard(0);
         },
         onUpdate: (self) => {
           const progress = self.progress;
@@ -129,45 +155,86 @@ const HeroPageSection3 = () => {
       },
     });
 
-    cardData.forEach((_, index) => {
-      const card = cardRefs.current[index];
-      const titleCard = titleCardRefs.current[index];
-
-      // Entry animation for both cards simultaneously
-      timeline.fromTo(
-        [card, titleCard],
+    // First card animation remains unchanged
+    timeline
+      .to(
+        cardRefs.current[0],
         {
-          x: (i) => (i === 0 ? "-100%" : "100%"),
+          x: "100%", // Card Container exits to right
           opacity: 0,
-        },
-        {
-          x: "0%",
-          opacity: 1,
           duration: 0.5,
-          ease: "power2.out",
+          ease: "power2.in",
         },
-        index
+        0.5
+      )
+      .to(
+        titleCardRefs.current[0],
+        {
+          x: "-100%", // Title Card exits to left
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
+        },
+        0.5
       );
 
-      // Exit animation for both cards simultaneously
-      if (index < cardData.length - 1) {
-        timeline.to(
-          [card, titleCard],
-          {
-            x: (i) => (i === 0 ? "100%" : "-100%"),
-            opacity: 0,
-            duration: 0.5,
-            ease: "power2.in",
-          },
-          index + 0.5
-        );
+    // Modified animations for subsequent cards
+    cardData.forEach((_, index) => {
+      if (index > 0) {
+        // Entrance animation - card from left, title from right
+        timeline
+          .to(
+            cardRefs.current[index],
+            {
+              x: "0%",
+              opacity: 1,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            index
+          )
+          .to(
+            titleCardRefs.current[index],
+            {
+              x: "0%",
+              opacity: 1,
+              duration: 0.5,
+              ease: "power2.out",
+            },
+            index
+          );
+
+        // Exit animation - card to right, title to left
+        if (index < cardData.length - 1) {
+          timeline
+            .to(
+              cardRefs.current[index],
+              {
+                x: "100%", // Exit to right
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.in",
+              },
+              index + 0.5
+            )
+            .to(
+              titleCardRefs.current[index],
+              {
+                x: "-100%", // Exit to left
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.in",
+              },
+              index + 0.5
+            );
+        }
       }
     });
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
+  }, [scrollDirection]);
 
   useEffect(() => {
     gsap.to(".hero-page-section-3", {
@@ -218,12 +285,18 @@ const HeroPageSection3 = () => {
           bottom: 0,
           background: `radial-gradient(closest-side, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
           zIndex: 0,
-          transformOrigin: "center center", // Ensure the gradient scales from the center
+          transformOrigin: "center center",
         }}
       />
       <Typography
         variant="h2"
-        sx={{ color: "#fff", fontWeight: "bold" ,position: "relative", top: "20px", zIndex: 1 }}
+        sx={{
+          color: "#fff",
+          fontWeight: "bold",
+          position: "relative",
+          top: "20px",
+          zIndex: 1,
+        }}
       >
         Our{" "}
         <Box

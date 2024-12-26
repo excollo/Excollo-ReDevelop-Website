@@ -13,8 +13,7 @@ import HeroPageSection1 from "../Components/HeroPageSection1";
 const HeroPage1 = () => {
   return (
     <div>
-        <HeroPageSection1 />
-        <HeroPageSection2 />
+        <HeroPageSection3 />
     </div>
   );
 };
