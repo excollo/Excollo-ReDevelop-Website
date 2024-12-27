@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HeroPageSection4 from "../Components/HeroPageSection4";
 import HeroPageSection5 from "../Components/HeroPageSection5";
 import ServiceSection from "../Components/HeroPageSection3";
@@ -11,12 +11,15 @@ import HeroPageSection2 from "../Components/HeroPageSection2";
 import HeroPageSection1 from "../Components/HeroPageSection1";
 
 const HeroPage1 = () => {
+  const [isSection5Complete, setIsSection5Complete] = useState(false);
+
   return (
     <div>
-        <HeroPageSection2 />
-        <HeroPageSection4 />
-        <HeroPageSection5 />
-        <HeroPageSection6 />
+      <HeroPageSection2 />
+      <HeroPageSection4 />
+      <HeroPageSection5/>
+      <HeroPageSection6 />
+
     </div>
   );
 };

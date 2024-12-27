@@ -3,102 +3,167 @@ import { Box, Typography, Grid } from "@mui/material";
 import { useInView } from "react-intersection-observer";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./HeroPageSection5.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HeroPageSection5 = () => {
+const HeroPageSection5 = ({ onComplete }) => {
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 1,
   });
 
-  const [scrollY, setScrollY] = useState(0);
   const svgRefs = useRef([]);
   const textRef = useRef(null);
   const sectionRef = useRef(null);
 
+  const [scrollY, setScrollY] = useState(0); // Track scroll position
+  const [isScrollingDown, setIsScrollingDown] = useState(true); // Track scroll direction
+
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
-      svgRefs.current.forEach((svgRef) => {
-        if (window.scrollY > svgRef.offsetTop + svgRef.offsetHeight) {
-          svgRef.classList.add("svg-close");
-        } else {
-          svgRef.classList.remove("svg-close");
-        }
-      });
+      const newScrollY = window.scrollY;
+      setIsScrollingDown(newScrollY > scrollY);
+      setScrollY(newScrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [scrollY]);
 
   useEffect(() => {
-    svgRefs.current.forEach((svgRef, index) => {
-      const iconElement = svgRef.previousSibling.firstChild;
-      iconElement.addEventListener("animationend", (event) => {
-        if (event.animationName === "iconAnimationReverse") {
-          svgRef.classList.add("svg-close");
-        }
-      });
-    });
-  }, [inView]);
+    // Flag to track whether the heading animation has started
+    let headingAnimationStarted = false;
 
-    useEffect(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: textRef.current,
-          start: "top bottom", // Trigger as soon as the top of the element enters the bottom of the viewport
-          end: "bottom top",
-          scrub: true,
+    const headingTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: textRef.current,
+        start: "top bottom", // Trigger the heading animation
+        end: "bottom top",
+        scrub: true,
+        toggleActions: "play none none reverse",
+        onEnter: () => {
+          headingAnimationStarted = true;
+          svgRefs.current.forEach((refs) => {
+            if (refs.top && refs.top.scrollTrigger) {
+              refs.top.scrollTrigger.kill();
+            }
+            if (refs.bottom && refs.bottom.scrollTrigger) {
+              refs.bottom.scrollTrigger.kill();
+            }
+          });
         },
-      });
-
-      tl.fromTo(
-        textRef.current,
-        {
-          fontSize: "10rem",
+        onLeave: () => {
+          if (onComplete) {
+            onComplete();
+          }
         },
-        {
-          fontSize: "3.5rem",
-          fontWeight: "bold",
-          duration: 2, // Increase duration for smoother transition
-          ease: "power10.out", // Use a smoother easing function
-        }
-      );
-
-
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top bottom",
-      end: "bottom bottom",
-      onEnter: () => {
-        steps.forEach((step, index) => {
-          tl.fromTo(
-            svgRefs.current[index],
-            {
-              clipPath: "inset(100% 0% 100% 0)",
-              opacity: 0,
-            },
-            {
-              clipPath: "inset(0 0 0 0)",
-              opacity: 1,
-              duration: 1,
-              ease: "power2.out",
-            },
-            "-=0.5"
-          );
-        });
       },
     });
-  }, []);
+
+    headingTimeline.fromTo(
+      textRef.current,
+      { fontSize: "8rem" },
+      {
+        fontSize: "3.5rem",
+        fontWeight: "bold",
+        duration: 0.5,
+        ease: "power6.out",
+      }
+    );
+
+    // Ensure icons are in sync and clipPath animations are applied to all SVGs
+    svgRefs.current.forEach((refs, index) => {
+      const threshold = isScrollingDown ? 1 : 0.7;
+
+      if (refs.top && !headingAnimationStarted) {
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: refs.top,
+            start: `top ${threshold * 100}%`,
+            end: `top ${threshold * 30}%`,
+            scrub: true,
+            toggleActions: "play none none reverse",
+            onComplete: () => {
+              if (index === svgRefs.current.length - 1 && onComplete) {
+                onComplete();
+              }
+            },
+          },
+        });
+
+        timeline
+          .fromTo(
+            refs.top,
+            { clipPath: "polygon(0 0, 100% 0, 0 0, 0% 100%)" },
+            {
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+              duration: 0.3, // Make it consistent across all icons
+              ease: "power2.out",
+            }
+          )
+          .fromTo(
+            `.icon-${index}`,
+            { y: 200 },
+            { y: -50, duration: 0.5, ease: "power2.out" }
+          );
+      }
+
+      if (refs.bottom && !headingAnimationStarted) {
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: refs.bottom,
+            start: `top ${threshold * 100}%`,
+            end: `top ${threshold * 30}%`,
+            scrub: true,
+            toggleActions: "play none none reverse",
+            onComplete: () => {
+              if (index === svgRefs.current.length - 1 && onComplete) {
+                onComplete();
+              }
+            },
+          },
+        });
+
+        timeline
+          .fromTo(
+            refs.bottom,
+            { clipPath: "polygon(0 0, 100% 0, 0 0, 0% 100%)" },
+            {
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+              duration: 0.3, // Consistent across all SVGs
+              ease: "power2.out",
+            }
+          )
+          .fromTo(
+            `.icon-${index}`,
+            { y: 300 },
+            { y: -50, duration: 0.5, ease: "power2.out" }
+          )
+          .fromTo(
+            `.title-${index}`,
+            { opacity: 0, scale: 0.5 },
+            { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+            "<"
+          )
+          .fromTo(
+            `.description-${index}`,
+            { opacity: 0, scale: 0.5 },
+            { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+            "<"
+          );
+      }
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [onComplete, isScrollingDown]);
 
   const steps = [
     {
       icon: (
         <Box
-          className="icon"
+          className="icon icon-0"
           sx={{
             background: "linear-gradient(180deg, #2579e3, #8e54f7)",
             WebkitMaskImage:
@@ -110,10 +175,7 @@ const HeroPageSection5 = () => {
             width: "48px",
             position: "relative",
             margin: "0 auto",
-            transform: `translateY(${scrollY * 0.01}px)`,
-            animation: inView
-              ? "iconAnimation 1s ease-out forwards 1s, iconBounce 1s ease-in-out 2 1s" // Add delay
-              : "iconAnimationReverse 1s ease-out forwards",
+            transform: `translateY(${scrollY * 0.1}px)`,
             opacity: 1,
           }}
         />
@@ -125,7 +187,7 @@ const HeroPageSection5 = () => {
     {
       icon: (
         <Box
-          className="icon"
+          className="icon icon-1"
           sx={{
             background: "linear-gradient(180deg, #2579e3, #8e54f7)",
             WebkitMaskImage:
@@ -138,9 +200,6 @@ const HeroPageSection5 = () => {
             position: "relative",
             margin: "0 auto",
             transform: `translateY(${scrollY * 0.1}px)`,
-            animation: inView
-              ? "iconAnimation 1s ease-out forwards 1s, iconBounce 1s ease-in-out 2 1s" // Add delay
-              : "iconAnimationReverse 1s ease-out forwards",
             opacity: 1,
           }}
         />
@@ -152,7 +211,7 @@ const HeroPageSection5 = () => {
     {
       icon: (
         <Box
-          className="icon"
+          className="icon icon-2"
           sx={{
             background: "linear-gradient(180deg, #2579e3, #8e54f7)",
             WebkitMaskImage:
@@ -165,9 +224,6 @@ const HeroPageSection5 = () => {
             position: "relative",
             margin: "0 auto",
             transform: `translateY(${scrollY * 0.1}px)`,
-            animation: inView
-              ? "iconAnimation 1s ease-out forwards 1s, iconBounce 1s ease-in-out 2 1s" // Add delay
-              : "iconAnimationReverse 1s ease-out forwards",
             opacity: 1,
           }}
         />
@@ -204,14 +260,9 @@ const HeroPageSection5 = () => {
           sx={{
             textAlign: "center",
             zIndex: 2, // Make sure it transitions over the content
-            animation: inView ? "textFadeIn 1s ease-out forwards 0.5s" : "none", // Add delay
           }}
         >
-          <Typography
-            ref={textRef}
-            variant="h2"
-            fontWeight="bold"
-          >
+          <Typography ref={textRef} variant="h2" fontWeight="bold">
             How We{" "}
             <Box
               component="span"
@@ -248,38 +299,30 @@ const HeroPageSection5 = () => {
                   mb: 2,
                   marginTop: "15rem",
                   zIndex: 1,
-                  animation: inView
-                    ? "iconAnimation 1s ease-out forwards 1s" // Add delay
-                    : "iconAnimationReverse 1s ease-out forwards",
                 }}
+                ref={(el) =>
+                  (svgRefs.current[index] = {
+                    ...svgRefs.current[index],
+                  })
+                }
               >
                 {step.icon}
               </Box>
               <Typography
+                className={`title-${index}`}
                 variant="h6"
                 gutterBottom
                 sx={{
-                  opacity: 0,
-                  transition:
-                    "opacity 2s ease-out 1s, transform 2s ease-out 1s", // Add delay
                   zIndex: 1,
-                  animation: inView
-                    ? "textFadeIn 2s ease-out forwards 1.5s" // Add delay
-                    : "none",
                 }}
               >
                 {step.title}
               </Typography>
               <Typography
+                className={`description-${index}`}
                 variant="body2"
                 sx={{
-                  opacity: 0,
-                  transition:
-                    "opacity 2s ease-out 1s, transform 2s ease-out 1s", // Add delay
                   zIndex: 2,
-                  animation: inView
-                    ? "textFadeIn 2s ease-out forwards 1.5s" // Add delay
-                    : "none",
                 }}
               >
                 {step.description}
@@ -293,18 +336,20 @@ const HeroPageSection5 = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 position="relative"
-                zIndex={1}
+                zIndex={2} // Adjusted to be above other elements
+                ref={(el) =>
+                  (svgRefs.current[index] = {
+                    ...svgRefs.current[index],
+                    top: el,
+                  })
+                }
                 sx={{
                   marginLeft: "38%",
-                  marginTop: "5rem",
+                  marginTop: "7rem", // Adjusted for visibility
                   display: "block",
-                  zIndex: 0,
-                  transition: "clip-path 2s ease-out, opacity 2s ease-out",
-                  animation: inView
-                    ? "svgReveal 1s forwards 0.5s"
-                    : "svgClose  1s forwards 0.5s", // Add delay
+                  clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)", // Initially hidden
+                  transition: "clip-path 1s ease-in-out",
                 }}
-                ref={(el) => (svgRefs.current[index] = el)}
               >
                 <path
                   d="M6.78125 10.64L13.8769 2C14.0663 1.77 14.3453 1.64 14.6443 1.64L144.913 2C145.241 2 145.55 2.17 145.74 2.44L151.5 11"
@@ -322,16 +367,19 @@ const HeroPageSection5 = () => {
                 aria-hidden="true"
                 position="relative"
                 zIndex={3}
+                ref={(el) =>
+                  (svgRefs.current[index] = {
+                    ...svgRefs.current[index],
+                    bottom: el,
+                  })
+                }
                 sx={{
                   marginLeft: "38%",
                   marginTop: "-18px",
                   display: "block",
-                  transition: "clip-path 2s ease-out, opacity 2s ease-out",
-                  animation: inView
-                    ? "svgReveal 1s forwards 0.5s"
-                    : "svgClose  1s forwards 0.5s", // Add delay
+                  clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)", // Initially hidden
+                  transition: "clip-path 1s ease-in-out",
                 }}
-                ref={(el) => (svgRefs.current[index] = el)}
               >
                 <path
                   d="M150.802 10L155.822 17.44C156.272 18.1 155.792 19 154.992 19H2.00249C1.15249 19 0.692494 18.02 1.23249 17.36L7.30249 10"
