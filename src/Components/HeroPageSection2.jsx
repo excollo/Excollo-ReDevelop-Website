@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Typography } from "@mui/material";
 import { gsap } from "gsap";
+import {Link} from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -134,8 +135,8 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
             </Typography>
 
                    <Typography
-                     component="a"
-                     href="#scheduleaconsultation"
+                     component={Link}
+                     to="/about"
                      sx={{
                        display: "inline-block", // Ensures the button behaves like a block
                        color: "#ffffff",

@@ -1,5 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 import Logo from "../assets/logo/large-full-logo.png";
 
 const NavBar = () => {
@@ -9,6 +10,7 @@ const NavBar = () => {
         backgroundColor: "transparent", // Transparent background
         boxShadow: "none", // Removes the default AppBar shadow
         position: "fixed", // Make the navbar scroll with content
+        zIndex: 10, // Ensure NavBar is on top
       }}
     >
       <Toolbar sx={{ justifyContent: "space-around", position: "relative" }}>
@@ -32,8 +34,8 @@ const NavBar = () => {
         {/* Navigation Links */}
         <Box display="flex" gap="30px" sx={{ position: "relative", zIndex: 2 }}>
           <Typography
-            component="a"
-            href="#about"
+            component={Link}
+            to="/about"
             sx={{
               color: "#FFFFFF",
               textDecoration: "none",
@@ -41,6 +43,7 @@ const NavBar = () => {
               ml: "200px",
               padding: "5px 10px",
               borderRadius: "5px",
+              cursor: "pointer",
               "&:hover": {
                 background: "linear-gradient(to right, #4A306D, #3F51B5)",
                 borderRadius: "15px",

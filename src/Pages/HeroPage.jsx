@@ -10,8 +10,8 @@ import HeroPageSection2 from "../Components/HeroPageSection2";
 import HeroPageSection3 from "../Components/HeroPageSection3";
 import HeroPageSection4 from "../Components/HeroPageSection4";
 import HeroPageSection5 from "../Components/HeroPageSection5";
-import HeroPageSection6 from "../Components/HeroPageSection6";
 import Footer from "../Components/Footer";
+import HeroPageSection6 from "../Components/HeroPageSection6";
 import HeroPageSection7 from "../Components/HeroPageSection7";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
@@ -208,7 +208,7 @@ const HeroPage = () => {
         className="navbar"
         sx={{
           position: "relative",
-          zIndex: 3, // Set consistent z-index
+          zIndex: 10, // Ensure NavBar is on top
           marginTop: "1rem",
           opacity: 0,
           transform: "translateX(-100px)",

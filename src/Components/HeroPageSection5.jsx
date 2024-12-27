@@ -45,30 +45,29 @@ const HeroPageSection5 = () => {
     });
   }, [inView]);
 
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: textRef.current,
-        start: "top bottom",
-        end: "top center",
-        scrub: true,
-      },
-    });
+    useEffect(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: textRef.current,
+          start: "top bottom", // Trigger as soon as the top of the element enters the bottom of the viewport
+          end: "bottom top",
+          scrub: true,
+        },
+      });
 
-    tl.fromTo(
-      textRef.current,
-      {
-        y: 200,
-        fontSize: "7rem",
-      },
-      {
-        y: 0,
-        fontSize: "3.5rem",
-        fontWeight: "bold",
-        duration: 1,
-        ease: "power2.out",
-      }
-    );
+      tl.fromTo(
+        textRef.current,
+        {
+          fontSize: "10rem",
+        },
+        {
+          fontSize: "3.5rem",
+          fontWeight: "bold",
+          duration: 2, // Increase duration for smoother transition
+          ease: "power10.out", // Use a smoother easing function
+        }
+      );
+
 
     ScrollTrigger.create({
       trigger: sectionRef.current,

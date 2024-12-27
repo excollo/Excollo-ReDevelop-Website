@@ -113,6 +113,52 @@ const HeroPageSection3 = () => {
   const cardRefs = useRef([]);
   const titleCardRefs = useRef([]);
 
+  const animateCards = (targetIndex) => {
+    cardData.forEach((_, index) => {
+      if (index === targetIndex) {
+        // Animate current card in from left
+        gsap.to(cardRefs.current[index], {
+          x: "0%",
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+        // Animate title card in from right
+        gsap.to(titleCardRefs.current[index], {
+          x: "0%",
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      } else if (index === currentCard) {
+        // Animate current card out to the right
+        gsap.to(cardRefs.current[index], {
+          x: "100%",
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
+        });
+        // Animate current title card out to the left
+        gsap.to(titleCardRefs.current[index], {
+          x: "-100%",
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
+        });
+      } else {
+        // Ensure other cards are hidden
+        gsap.set(cardRefs.current[index], {
+          x: "-100%",
+          opacity: 0,
+        });
+        gsap.set(titleCardRefs.current[index], {
+          x: "100%",
+          opacity: 0,
+        });
+      }
+    });
+  };
+
   useEffect(() => {
     const section = sectionRef.current;
 
@@ -144,17 +190,25 @@ const HeroPageSection3 = () => {
         scrub: 1,
         pin: true,
         snap: {
-          snapTo: 1 / (cardData.length * 2 - 1),
-          duration: { min: 0.2, max: 1 },
+          snapTo: 1 / (cardData.length - 1),
+          duration: { min: 0.2, max: 0.3 },
+          delay: 2,
           ease: "power1.inOut",
         },
         onEnter: () => {
           setCurrentCard(0);
         },
         onUpdate: (self) => {
-          const progress = self.progress;
-          const cardIndex = Math.round(progress * (cardData.length - 1));
-          setCurrentCard(cardIndex);
+          const progress = Math.min(Math.max(self.progress, 0), 1);
+          const newIndex = Math.round(progress * (cardData.length - 1));
+          if (newIndex !== currentCard) {
+            setCurrentCard(newIndex);
+            animateCards(newIndex);
+          }
+        },
+        onLeaveBack: () => {
+          setCurrentCard(0);
+          animateCards(0);
         },
       },
     });
@@ -181,59 +235,6 @@ const HeroPageSection3 = () => {
         },
         0.5
       );
-
-    // Modified animations for subsequent cards
-    cardData.forEach((_, index) => {
-      if (index > 0) {
-        // Entrance animation - card from left, title from right
-        timeline
-          .to(
-            cardRefs.current[index],
-            {
-              x: "0%",
-              opacity: 1,
-              duration: 0.5,
-              ease: "power2.out",
-            },
-            index
-          )
-          .to(
-            titleCardRefs.current[index],
-            {
-              x: "0%",
-              opacity: 1,
-              duration: 0.5,
-              ease: "power2.out",
-            },
-            index
-          );
-
-        // Exit animation - card to right, title to left
-        if (index < cardData.length - 1) {
-          timeline
-            .to(
-              cardRefs.current[index],
-              {
-                x: "100%", // Exit to right
-                opacity: 0,
-                duration: 0.5,
-                ease: "power2.in",
-              },
-              index + 0.5
-            )
-            .to(
-              titleCardRefs.current[index],
-              {
-                x: "-100%", // Exit to left
-                opacity: 0,
-                duration: 0.5,
-                ease: "power2.in",
-              },
-              index + 0.5
-            );
-        }
-      }
-    });
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -269,37 +270,7 @@ const HeroPageSection3 = () => {
 
   const handleDotClick = (index) => {
     setCurrentCard(index);
-
-    // Animate the cards to the selected index
-    cardData.forEach((_, i) => {
-      if (i === index) {
-        gsap.to(cardRefs.current[i], {
-          x: "0%",
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-        gsap.to(titleCardRefs.current[i], {
-          x: "0%",
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      } else {
-        gsap.to(cardRefs.current[i], {
-          x: i < index ? "-100%" : "100%",
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.in",
-        });
-        gsap.to(titleCardRefs.current[i], {
-          x: i < index ? "100%" : "-100%",
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.in",
-        });
-      }
-    });
+    animateCards(index);
   };
 
   return (
