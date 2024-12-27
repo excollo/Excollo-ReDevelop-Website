@@ -5,19 +5,21 @@ import Logo from "../assets/logo/excollo3d.png";
 const HeroPageSection7 = () => {
   const [scrollY, setScrollY] = useState(0);
 
-  // Update scroll position
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
+
+    // Cleanup listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-   const translateY = Math.min(3300 - scrollY * 0.5, 0);
+  // Adjust the translation formula if needed
+  const translateY = Math.max(500 - scrollY * 0.5, 0); // Stops at final position
 
   return (
     <Box>
@@ -26,7 +28,7 @@ const HeroPageSection7 = () => {
         alignItems="center"
         justifyContent="center"
         position="relative"
-        zIndex={2}
+        zIndex={0}
         sx={{
           height: "400px",
           overflow: "hidden",
@@ -38,7 +40,7 @@ const HeroPageSection7 = () => {
           style={{
             height: "300px",
             width: "auto",
-            transform: `translateY(${translateY}px)`, // Initial position lower and move up as user scrolls
+            transform: `translateY(${translateY}px)`, // Scroll effect
             willChange: "transform",
             transition: "transform 0.1s ease-out",
             position: "relative",
@@ -63,11 +65,11 @@ const HeroPageSection7 = () => {
 
       <Divider
         sx={{
-          backgroundColor: "#000000", // Transparent background
+          backgroundColor: "#000000", // Divider color
           height: "2px", // Divider height
-          width: "100%", // Full width of parent Box
+          width: "100%", // Full width
           position: "relative",
-          transform: `translateY(${translateY}px)`, // Move with the image
+          transform: `translateY(${translateY}px)`, // Move with logo
           willChange: "transform",
           transition: "transform 0.1s ease-out",
         }}

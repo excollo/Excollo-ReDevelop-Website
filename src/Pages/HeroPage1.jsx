@@ -15,11 +15,10 @@ const HeroPage1 = () => {
 
   return (
     <div>
-      <HeroPageSection2 />
-      <HeroPageSection4 />
       <HeroPageSection5/>
       <HeroPageSection6 />
-
+      <HeroPageSection7 />
+      <Footer />
     </div>
   );
 };

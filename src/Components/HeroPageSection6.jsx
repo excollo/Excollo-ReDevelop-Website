@@ -1,28 +1,55 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Typography } from "@mui/material";
 import gsap from "gsap";
+
 const HeroPageSection6 = () => {
   const circleRef = useRef(null);
   const containerRef = useRef(null);
-  const textRef = useRef(null);
-  const targetLetters = ["d", "t", "f", "n"];
+  const textRef1 = useRef(null); // Ref for "Ready for your"
+  const textRef2 = useRef(null); // Ref for "digital-transformation?"
+  const targetLetters = ["e", "a", "d", "y", "o", "f", "n", "s", "i"];
+
+  // Helper function to shuffle an array
+  const shuffleArray = (array) => {
+    return array
+      .map((item) => ({ item, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ item }) => item);
+  };
+
   useEffect(() => {
-    if (!textRef.current || !circleRef.current || !containerRef.current) return;
-    // Split text into spans
-    const text = textRef.current.textContent;
-    textRef.current.innerHTML = text
-      .split("")
-      .map((char) => {
-        const isTarget = targetLetters.includes(char.toLowerCase());
-        return `<span class="${
-          isTarget ? "target-letter" : "letter"
-        }" data-letter="${char}">${char}</span>`;
-      })
-      .join("");
-    // Get letter positions relative to the container
-    const letters = textRef.current.querySelectorAll(".target-letter");
+    if (
+      !textRef1.current ||
+      !textRef2.current ||
+      !circleRef.current ||
+      !containerRef.current
+    )
+      return;
+
+    // Split both text contents into spans
+    const splitTextIntoSpans = (textRef) => {
+      const text = textRef.textContent;
+      textRef.innerHTML = text
+        .split("")
+        .map((char) => {
+          const isTarget = targetLetters.includes(char.toLowerCase());
+          return `<span class="${
+            isTarget ? "target-letter" : "letter"
+          }" data-letter="${char}">${char}</span>`;
+        })
+        .join("");
+    };
+
+    splitTextIntoSpans(textRef1.current);
+    splitTextIntoSpans(textRef2.current);
+
+    // Collect all target letters from both refs
+    const letters1 = textRef1.current.querySelectorAll(".target-letter");
+    const letters2 = textRef2.current.querySelectorAll(".target-letter");
+    const allLetters = [...letters1, ...letters2];
+
     const containerRect = containerRef.current.getBoundingClientRect();
-    const letterPositions = Array.from(letters).map((letter) => {
+    let letterPositions = allLetters.map((letter) => {
       const rect = letter.getBoundingClientRect();
       return {
         element: letter,
@@ -38,19 +65,25 @@ const HeroPageSection6 = () => {
           rect.height / 2,
       };
     });
+
     if (letterPositions.length === 0) return;
+
+    // Shuffle letter positions
+    letterPositions = shuffleArray(letterPositions);
+
     // Create timeline
     const tl = gsap.timeline({
       repeat: -1,
-      defaults: { duration: 0.6, ease: "power1.inOut" },
+      defaults: { duration: 0.8, ease: "power10.inOut" },
     });
+
     letterPositions.forEach((pos, index) => {
       const prevPos = index > 0 ? letterPositions[index - 1] : null;
       tl.to(circleRef.current, {
         x: pos.x,
         y: pos.y,
         onStart: () => {
-          gsap.to(pos.element, { opacity: 0, duration: 0.3 }); // Make the letter invisible
+          gsap.to(pos.element, { opacity: 0, duration: 0.8 }); // Make the letter invisible
           if (prevPos) {
             gsap.to(prevPos.element, {
               opacity: 1,
@@ -60,6 +93,7 @@ const HeroPageSection6 = () => {
           }
         },
       });
+
       if (index === letterPositions.length - 1) {
         tl.add(() => {
           gsap.to(pos.element, {
@@ -70,16 +104,19 @@ const HeroPageSection6 = () => {
         });
       }
     });
+
     // Set initial position
     gsap.set(circleRef.current, {
       x: letterPositions[0].x,
       y: letterPositions[0].y,
     });
+
     // Cleanup
     return () => {
       tl.kill();
     };
   }, []);
+
   return (
     <Box
       sx={{
@@ -101,14 +138,14 @@ const HeroPageSection6 = () => {
         <Box
           ref={circleRef}
           sx={{
-            width: "40px", // Reduced size
-            height: "40px", // Reduced size
+            width: "40px",
+            height: "40px",
             background: "linear-gradient(135deg, #E6E6FA, #9370DB)",
             borderRadius: "50%",
             position: "absolute",
             zIndex: 2,
             boxShadow: "0 0 15px rgba(147, 112, 219, 0.5)",
-            transform: "translate(-50%, -50%)", // Center the circle on the letter
+            transform: "translate(-50%, -50%)",
           }}
         />
         <Typography
@@ -130,39 +167,52 @@ const HeroPageSection6 = () => {
             },
           }}
         >
-          Ready for your <br />
           <Box
-            ref={textRef}
+            variant="h3"
+            fontWeight="bold"
+            ref={textRef1}
+            sx={{
+              display: "flex",
+            }}
+          >
+            Ready&nbsp;for&nbsp;your
+          </Box>
+          <Box
+            ref={textRef2}
             component="span"
+            variant="h3"
             sx={{
               background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
               WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "#FFFFFF",
-              color: "#FFFFFF",
+              WebkitTextFillColor: "#a559c8",
+              color: "#a559c8",
+              fontWeight: "bold",
             }}
           >
-            digital transformation?
+            digital&nbsp;Transformation?
           </Box>
         </Typography>
       </Box>
       <Box>
         <Typography
           component="a"
-          href="#talktous"
+          href="#scheduleaconsultation"
           sx={{
             display: "inline-block",
-            color: "#FFFFFF",
+            color: "#ffffff",
             textDecoration: "none",
             fontSize: "16px",
             border: "1px solid transparent",
-            padding: "20px 80px",
+            padding: "20px 60px",
             borderRadius: "40px",
             background:
-              "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
+              "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
+            zIndex: 3,
+            position: "relative",
             "&:hover": {
               background:
                 "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-              color: "#FFFFFF",
+              color: "#ffffff",
             },
           }}
         >
@@ -172,4 +222,5 @@ const HeroPageSection6 = () => {
     </Box>
   );
 };
+
 export default HeroPageSection6;
