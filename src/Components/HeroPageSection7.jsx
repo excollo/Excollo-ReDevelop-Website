@@ -18,17 +18,21 @@ const HeroPageSection7 = () => {
     };
   }, []);
 
-  // Adjust the translation formula if needed
-  const translateY = Math.max(500 - scrollY * 0.5, 0); // Stops at final position
+  // Calculate the image translation
+  const translateYImage = Math.max(3540 - scrollY * 0.5, 0); // Stops when scrollY > 1000
+  const gradientOpacity =
+    scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1; // Starts fading in after image settles
 
   return (
     <Box>
+      {/* Image Scrolling Section */}
       <Box
         display="flex"
         alignItems="center"
         justifyContent="center"
         position="relative"
-        zIndex={0}
+        zIndex={2}
+        marginTop={-7}
         sx={{
           height: "400px",
           overflow: "hidden",
@@ -40,14 +44,14 @@ const HeroPageSection7 = () => {
           style={{
             height: "300px",
             width: "auto",
-            transform: `translateY(${translateY}px)`, // Scroll effect
+            transform: `translateY(${Math.min(translateYImage, 1300)}px)`, // Ensure it doesn't go out of view
             willChange: "transform",
-            transition: "transform 0.1s ease-out",
-            position: "relative",
-            zIndex: 2,
+            transition: "transform 0.2s ease-out",
           }}
         />
       </Box>
+
+      {/* Gradient Animation Section */}
       <Box
         position="relative"
         zIndex={0}
@@ -55,23 +59,19 @@ const HeroPageSection7 = () => {
           left: 0,
           right: 0,
           width: "100%",
-          height: "100px",
-          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
-          transform: `translateY(${translateY}px)`,
-          willChange: "transform",
-          transition: "transform 0.1s ease-out",
+          height: "0px",
+          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, ${gradientOpacity}) 0%, rgba(0, 0, 0, 0) 60%)`,
+          transition: "background 0.3s ease-in-out", // Smooth transition for gradient
         }}
       />
 
+      {/* Divider (Optional) */}
       <Divider
         sx={{
-          backgroundColor: "#000000", // Divider color
-          height: "2px", // Divider height
-          width: "100%", // Full width
+          backgroundColor: "#000000",
+          height: "2px",
+          width: "100%",
           position: "relative",
-          transform: `translateY(${translateY}px)`, // Move with logo
-          willChange: "transform",
-          transition: "transform 0.1s ease-out",
         }}
       />
     </Box>

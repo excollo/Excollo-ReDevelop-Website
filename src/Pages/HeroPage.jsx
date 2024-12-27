@@ -247,8 +247,8 @@ const HeroPage = () => {
         <Box>
           <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
         </Box>
-        <Box className="hero-page-section-5">
-          <HeroPageSection5 />
+        <Box>
+          <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
         </Box>
         <Box>
           <HeroPageSection6 />

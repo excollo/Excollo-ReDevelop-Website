@@ -126,6 +126,7 @@ const HeroPageSection6 = () => {
         justifyContent: "flex-start",
         textAlign: "left",
         marginLeft: "10.5%",
+        marginBottom: "-2rem",
         color: "#fff",
         gap: "10rem",
         paddingBottom: "5rem",
@@ -133,7 +134,7 @@ const HeroPageSection6 = () => {
     >
       <Box
         ref={containerRef}
-        sx={{ flex: "1", maxWidth: "600px", position: "relative" }}
+        sx={{ flex: "1", maxWidth: "670px", position: "relative" }}
       >
         <Box
           ref={circleRef}
@@ -149,7 +150,7 @@ const HeroPageSection6 = () => {
           }}
         />
         <Typography
-          variant="h3"
+          variant="h2"
           component="h1"
           sx={{
             fontWeight: "400",
@@ -184,8 +185,7 @@ const HeroPageSection6 = () => {
             sx={{
               background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
               WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "#a559c8",
-              color: "#a559c8",
+              WebkitTextFillColor: "#9122c4",
               fontWeight: "bold",
             }}
           >

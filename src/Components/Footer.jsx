@@ -14,6 +14,19 @@ const Footer = () => {
         fontFamily: '"Inter", sans-serif',
       }}
     >
+      {/* Gradient Effect */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "12%",
+          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 1) 0%, rgba(0, 0, 0, 0) 60%)`,
+          zIndex: -1,
+        }}
+      />
+
       <Grid container justifyContent="space-between">
         {/* Company Info */}
         <Grid item xs={12} md={4}>
