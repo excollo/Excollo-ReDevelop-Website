@@ -227,7 +227,18 @@ const HeroPageSection5 = ({onAnimationComplete}) => {
 
   return (
     <Box sx={{ minHeight: "100vh" }}>
-      <Box sx={{marginBottom: "-5rem"}}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "78%",
+          left: "15%",
+          width: "70%",
+          height: "6%",
+          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
+          zIndex: 0,
+        }}
+      />
+      <Box sx={{ marginBottom: "-5rem" }}>
         <Typography
           sx={{
             textAlign: "center",

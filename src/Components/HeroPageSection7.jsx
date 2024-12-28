@@ -4,6 +4,7 @@ import Logo from "../assets/logo/excollo3d.png";
 
 const HeroPageSection7 = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,20 +13,29 @@ const HeroPageSection7 = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // Calculate the image translation
-  const translateYImage = Math.max(3400 - scrollY * 0.5, 0); // Stops when scrollY > 1000
+  const handleMouseMove = (e) => {
+    const { clientX, clientY, currentTarget } = e;
+    const rect = currentTarget.getBoundingClientRect();
+    const x = ((clientX - rect.left) / rect.width - 0.5) * 30;
+    const y = ((clientY - rect.top) / rect.height - 0.5) * -30;
+    setRotation({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setRotation({ x: 0, y: 0 });
+  };
+
+  const translateYImage = Math.max(3400 - scrollY * 0.5, 0);
   const gradientOpacity =
-    scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1; // Starts fading in after image settles
+    scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
 
   return (
     <Box>
-      {/* Image Scrolling Section */}
       <Box
         display="flex"
         alignItems="center"
@@ -41,10 +51,16 @@ const HeroPageSection7 = () => {
         <img
           src={Logo}
           alt="Logo"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
           style={{
             height: "300px",
             width: "auto",
-            transform: `translateY(${Math.min(translateYImage, 1300)}px)`, // Ensure it doesn't go out of view
+            transform: `translateY(${Math.min(
+              translateYImage,
+              1300
+            )}px) rotateX(${rotation.y}deg) rotateY(${rotation.x}deg)`,
+            transformStyle: "preserve-3d",
             willChange: "transform",
             transition: "transform 0.2s ease-out",
           }}
@@ -61,11 +77,10 @@ const HeroPageSection7 = () => {
           width: "100%",
           height: "0px",
           background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, ${gradientOpacity}) 0%, rgba(0, 0, 0, 0) 60%)`,
-          transition: "background 0.3s ease-in-out", // Smooth transition for gradient
+          transition: "background 0.3s ease-in-out", 
         }}
       />
-
-      {/* Divider (Optional) */}
+      
       <Divider
         sx={{
           backgroundColor: "#000000",
