@@ -7,22 +7,20 @@ const NavBar = () => {
   return (
     <AppBar
       sx={{
-        backgroundColor: "transparent", // Transparent background
-        boxShadow: "none", // Removes the default AppBar shadow
-        position: "fixed", // Make the navbar scroll with content
-        zIndex: 10, // Ensure NavBar is on top
+        backgroundColor: "transparent",
+        boxShadow: "none",
+        position: "fixed",
+        zIndex: 10,
       }}
     >
       <Toolbar sx={{ justifyContent: "space-around", position: "relative" }}>
-        {/* Logo Section */}
         <Box
           display="flex"
           alignItems="center"
-          gap="10px"
           padding={4}
-          ml={-4}
           mb={2}
-          sx={{ position: "relative", zIndex: 2 }}
+          ml={-10}
+          sx={{ position: "relative", zIndex: 0 }}
         >
           <img
             src={Logo}
@@ -31,62 +29,67 @@ const NavBar = () => {
           />
         </Box>
 
-        {/* Navigation Links */}
-        <Box display="flex" gap="30px" sx={{ position: "relative", zIndex: 2 }}>
+        <Box display="flex" gap="20px" sx={{ position: "relative", zIndex: 0 }}>
           <Typography
             component={Link}
             to="/about"
             sx={{
-              color: "#FFFFFF",
+              display: "inline-block", // Ensures the button behaves like a block
+              color: "#ffffff",
               textDecoration: "none",
               fontSize: "16px",
-              ml: "200px",
-              padding: "5px 10px",
-              borderRadius: "5px",
-              cursor: "pointer",
+              position: "relative",
+              padding: "10px 20px",
               "&:hover": {
-                background: "linear-gradient(to right, #4A306D, #3F51B5)",
-                borderRadius: "15px",
-                padding: "5px 10px",
-                color: "#FFFFFF",
+                background:
+                  "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",
+                color: "#ffffff",
+                border: "1px solid transparent",
+                borderRadius: "40px",
               },
             }}
           >
             About
           </Typography>
           <Typography
-            component="a"
-            href="#services"
+            component={Link}
+            to="/about"
             sx={{
-              color: "#FFFFFF",
+              display: "inline-block", // Ensures the button behaves like a block
+              color: "#ffffff",
               textDecoration: "none",
               fontSize: "16px",
-              padding: "5px 10px",
-              borderRadius: "5px",
+              zIndex: 3, // Ensure the button is above other elements
+              position: "relative",
+              padding: "10px 20px",
               "&:hover": {
-                background: "linear-gradient(to right, #4A306D, #3F51B5)",
-                borderRadius: "15px",
-                padding: "5px 10px",
-                color: "#FFFFFF",
+                background:
+                  "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",
+                color: "#ffffff",
+                border: "1px solid transparent",
+                borderRadius: "40px",
               },
             }}
           >
             Services
           </Typography>
           <Typography
-            component="a"
-            href="#contact"
+            component={Link}
+            to="/about"
             sx={{
+              display: "inline-block", // Ensures the button behaves like a block
               color: "#ffffff",
               textDecoration: "none",
               fontSize: "16px",
-              padding: "5px 10px",
-              borderRadius: "5px",
+              zIndex: 3, // Ensure the button is above other elements
+              position: "relative",
+              padding: "10px 20px",
               "&:hover": {
-                background: "linear-gradient(to right, #4A306D, #3F51B5)",
-                borderRadius: "15px",
-                padding: "5px 10px",
+                background:
+                  "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",
                 color: "#ffffff",
+                border: "1px solid transparent",
+                borderRadius: "40px",
               },
             }}
           >

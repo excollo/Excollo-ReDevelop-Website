@@ -19,7 +19,7 @@ const HeroPageSection7 = () => {
   }, []);
 
   // Calculate the image translation
-  const translateYImage = Math.max(3540 - scrollY * 0.5, 0); // Stops when scrollY > 1000
+  const translateYImage = Math.max(3400 - scrollY * 0.5, 0); // Stops when scrollY > 1000
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1; // Starts fading in after image settles
 

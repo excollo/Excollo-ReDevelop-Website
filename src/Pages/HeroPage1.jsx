@@ -13,13 +13,21 @@ import HeroPageSection1 from "../Components/HeroPageSection1";
 const HeroPage1 = () => {
   const [isSection5Complete, setIsSection5Complete] = useState(false);
 
+  const handleSection5Complete = () => {
+    setIsSection5Complete(true);
+  };
+
   return (
     <div>
       <HeroPageSection4 />
-      <HeroPageSection5 />
-      <HeroPageSection6 />
-      <HeroPageSection6 />
-      <Footer />
+      <HeroPageSection5 onAnimationComplete={handleSection5Complete} />
+      {isSection5Complete && (
+        <>
+          <HeroPageSection6 />
+          <HeroPageSection7 />
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

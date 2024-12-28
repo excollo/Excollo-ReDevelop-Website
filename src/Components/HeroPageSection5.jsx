@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HeroPageSection5 = () => {
+const HeroPageSection5 = ({onAnimationComplete}) => {
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
@@ -30,15 +30,15 @@ const HeroPageSection5 = () => {
 
     headingTimeline.fromTo(
       textRef.current,
-      { scale: 1.5 },
+      { scale: 2 },
       { scale: 1, ease: "power1.out" }
     );
 
     const svgTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".svg-container",
-        start: "center 58%",
-        end: "top center",
+        start: "bottom 50%",
+        end: "center center",
         scrub: 4,
         onUpdate: (self) => {
           if (self.direction === -1) {
@@ -87,8 +87,8 @@ const HeroPageSection5 = () => {
     const iconTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".svg-container",
-        start: "center 52%",
-        end: "top center",
+        start: "bottom 45%",
+        end: "center center",
         scrub: 2,
         onUpdate: (self) => {
           if (self.direction === -1) {
@@ -96,6 +96,9 @@ const HeroPageSection5 = () => {
               if (ref) ref.style.opacity = 1;
             });
           }
+        },
+        onComplete: () => {
+          onAnimationComplete();
         },
       },
     });
@@ -127,22 +130,25 @@ const HeroPageSection5 = () => {
         {
           scale: 0,
           opacity: 0,
-          duration: 1.00,
+          duration: 1.0,
         },
         "<+=1"
-      ) // Start slightly after icons begin moving
+      )
       .to(contentRefs.current, {
         scale: 1,
         opacity: 1,
         duration: 2,
         stagger: 0.2,
         ease: "power2.out",
+        onComplete: () => {
+          onAnimationComplete();
+        },
       });
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
+  }, [onAnimationComplete]);
 
   const steps = [
     {
@@ -221,7 +227,7 @@ const HeroPageSection5 = () => {
 
   return (
     <Box sx={{ minHeight: "100vh" }}>
-      <Box>
+      <Box sx={{marginBottom: "-5rem"}}>
         <Typography
           sx={{
             textAlign: "center",
