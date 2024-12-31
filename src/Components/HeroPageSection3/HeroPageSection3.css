@@ -1,0 +1,12 @@
+.carousel-wrapper {
+  perspective: 1000px;
+}
+
+.carousel-container {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
+.carousel-card {
+  backface-visibility: hidden;
+}

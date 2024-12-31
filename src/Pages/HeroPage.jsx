@@ -7,7 +7,7 @@ import ThreeDE from "../Components/ThreeDE";
 import NavBar from "../Components/NavBar";
 import HeroPageSection1 from "../Components/HeroPageSection1";
 import HeroPageSection2 from "../Components/HeroPageSection2";
-import HeroPageSection3 from "../Components/HeroPageSection3";
+import HeroPageSection3 from "../Components/HeroPageSection3/HeroPageSection3";
 import HeroPageSection4 from "../Components/HeroPageSection4";
 import HeroPageSection5 from "../Components/HeroPageSection5";
 import Footer from "../Components/Footer";
@@ -241,15 +241,15 @@ const HeroPage = () => {
             onAnimationComplete={() => setHero2Complete(true)}
           />
         </Box>
-        <Box className="hero-page-section-3" sx={{ opacity: 0 }}>
+        <Box className="hero-page-section-3" sx={{ opacity: 1 }}>
           <HeroPageSection3 />
         </Box>
         <Box>
           <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
         </Box>
-       <Box>
-        <HeroPageSection5 />
-       </Box>
+        <Box>
+          <HeroPageSection5 />
+        </Box>
         <Box>
           <HeroPageSection6 />
         </Box>
