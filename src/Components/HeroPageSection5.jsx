@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const HeroPageSection5 = () => {
   const textRef = useRef(null);
   const sectionRef = useRef(null);
+  const cardRefs = useRef([]);
 
   useEffect(() => {
     gsap.fromTo(
@@ -31,6 +32,25 @@ const HeroPageSection5 = () => {
       end: "bottom bottom",
       pin: true,
       pinSpacing: false,
+    });
+
+    cardRefs.current.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { x: "70%", opacity: 0 },
+        {
+          x: "0%",
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            end: "top 70%",
+            scrub: true,
+          },
+        }
+      );
     });
   }, []);
 
@@ -61,48 +81,32 @@ const HeroPageSection5 = () => {
       <div className="row">
         <div className="col-md-12">
           <div className="gradientCardBox">
-            <div
-              className="box aos-init aos-animate"
-              data-aos="fade-left"
-              data-aos-easing="linear"
-              data-aos-duration="500"
-            >
-              <span></span>
-              <div className="content">
-                <h2>Understand Your Needs</h2>
-                <p>In-depth discovery to align with your business goals.</p>
+            {[
+              "Understand Your Needs",
+              "Craft a Tailored Plan",
+              "Deliver and Iterate",
+            ].map((title, index) => (
+              <div
+                className="box aos-init aos-animate"
+                data-aos="fade-left"
+                data-aos-easing="linear"
+                data-aos-duration={`${500 + index * 100}`}
+                ref={(el) => (cardRefs.current[index] = el)}
+                key={index}
+              >
+                <span></span>
+                <div className="content">
+                  <h2>{title}</h2>
+                  <p>
+                    {index === 0
+                      ? "In-depth discovery to align with your business goals."
+                      : index === 1
+                      ? "Strategy, implementation, and optimization designed for measurable outcomes."
+                      : "Continuous improvement ensures solutions stay ahead of the curve."}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div
-              className="box aos-init aos-animate"
-              data-aos="fade-left"
-              data-aos-easing="linear"
-              data-aos-duration="600"
-            >
-              <span></span>
-              <div className="content">
-                <h2>Craft a Tailored Plan</h2>
-                <p>
-                  Strategy, implementation, and optimization designed for
-                  measurable outcomes.
-                </p>
-              </div>
-            </div>
-            <div
-              className="box aos-init aos-animate"
-              data-aos="fade-left"
-              data-aos-easing="linear"
-              data-aos-duration="700"
-            >
-              <span></span>
-              <div className="content">
-                <h2>Deliver and Iterate</h2>
-                <p>
-                  Continuous improvement ensures solutions stay ahead of the
-                  curve.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
