@@ -5,7 +5,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
+const FeatureCard = ({
+  title,
+  description,
+  showDescription,
+  isFinalState,
+  isMainCard,
+}) => {
   return (
     <Paper
       elevation={6}
@@ -43,6 +49,7 @@ const FeatureCard = ({ title, description, showDescription, isFinalState }) => {
           marginBottom: "2rem",
           marginTop: isFinalState ? "0" : "2rem",
           transition: "margin-top 0.5s ease",
+          fontSize: isMainCard ? "3rem" : "1.6rem",
         }}
       >
         {title}
@@ -95,7 +102,7 @@ const HeroPageSection4 = ({ onComplete }) => {
       const mainCardTrigger = ScrollTrigger.create({
         trigger: ".hero-page-section-4",
         start: "top 20%",
-        end: "+=300",
+        end: "top 20%",
         scrub: 0.5,
         pin: true, // Pin the entire section
         pinSpacing: true,
@@ -242,6 +249,7 @@ const HeroPageSection4 = ({ onComplete }) => {
             description="We deliver tangible results-like increased sales or operational efficiency-not just products"
             showDescription={isCardShrunk}
             isFinalState={isCardShrunk}
+            isMainCard={true}
           />
         </Box>
 

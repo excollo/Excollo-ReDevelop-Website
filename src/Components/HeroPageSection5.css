@@ -1,0 +1,161 @@
+.gradientCardBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 40px 0;
+}
+
+.gradientCardBox .box {
+  position: relative;
+  width: 20%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 70px;
+  transition: 0.5s;
+}
+
+.gradientCardBox .box::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 50px;
+  width: 50%;
+  height: 100%;
+  text-decoration: none;
+  background: #fff;
+  border-radius: 8px;
+  transform: skewX(15deg);
+  transition: 0.5s;
+}
+
+.gradientCardBox .box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
+  transform: skewX(15deg);
+  transition: 0.5s;
+  filter: blur(30px);
+}
+
+.gradientCardBox .box:hover:before,
+.gradientCardBox .box:hover:after {
+  transform: skewX(0deg);
+  left: 20px;
+  width: calc(100% - 90px);
+}
+
+.gradientCardBox .box:before,
+.gradientCardBox .box:after {
+  background: linear-gradient(
+    180deg,
+    rgba(170, 63, 255, 0.9) 0%,
+    rgba(94, 129, 235, 0.9) 100%
+  );
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    transform: translateY(10px);
+  }
+
+  50% {
+    transform: translate(-10px);
+  }
+}
+
+.gradientCardBox .box .content {
+  position: relative;
+  left: 0;
+  padding: 20px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1;
+  transform: 0.5s;
+  color: #fff;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.gradientCardBox .box:hover .content {
+  left: -25px;
+  padding: 60px 10px;
+  transition: 0.2s;
+  height: 40%;
+}
+
+.gradientCardBox .box .content h2 {
+  font-size: 26px !important;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.gradientCardBox .box:hover .content p {
+  display: block;
+}
+
+.gradientCardBox .box .content p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  line-height: 1.4em;
+  display: none;
+  transition: 0.2s;
+}
+
+.gradientCardBox .box .content a {
+  display: inline-block;
+  font-size: 1.1em;
+  color: #111;
+  background: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.gradientCardBox .box .content a:hover {
+  background: #ffcf4d;
+  border: 1px solid rgba(255, 0, 88, 0.4);
+  box-shadow: 0 1px 15px rgba(1, 1, 1, 0.2);
+}
+
+.gradientCardSection {
+  padding: 100px 0px;
+  overflow-x: hidden;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.card {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.card.animate {
+  animation: slideInRight 0.5s forwards;
+}
