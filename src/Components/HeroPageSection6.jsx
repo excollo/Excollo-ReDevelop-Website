@@ -141,7 +141,7 @@ const HeroPageSection6 = () => {
           sx={{
             width: "40px",
             height: "40px",
-            background: "linear-gradient(135deg, #E6E6FA, #9370DB)",
+            background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             borderRadius: "50%",
             position: "absolute",
             zIndex: 2,
@@ -164,7 +164,7 @@ const HeroPageSection6 = () => {
               display: "inline-block",
               position: "relative",
               transition: "opacity 0.2s",
-              color: "#E6E6FA",
+              color: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             },
           }}
         >
@@ -183,9 +183,10 @@ const HeroPageSection6 = () => {
             component="span"
             variant="h3"
             sx={{
-              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+              color: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)", // Set the text color to a gradient
               WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "#9122c4",
+              WebkitTextFillColor:
+                "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)", // Set the text fill color to the end color of the gradient
               fontWeight: "bold",
             }}
           >

@@ -56,7 +56,7 @@ const HeroPageSection3 = () => {
         <Box
           sx={{
             position: "relative",
-            marginTop: "8rem",
+            marginTop: "5rem",
             zIndex: 0,
           }}
         >

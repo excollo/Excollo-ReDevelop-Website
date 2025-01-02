@@ -21,7 +21,7 @@ const HeroPage = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
   const [hero1Complete, setHero1Complete] = useState(false);
   const [hero2Complete, setHero2Complete] = useState(false);
-  const [hero4Complete, setHero4Complete] = useState(false); // Add state for HeroPageSection4 completion
+  const [hero4Complete, setHero4Complete] = useState(false);
   const threeDERef = useRef(null);
 
   useEffect(() => {
@@ -68,8 +68,7 @@ const HeroPage = () => {
         gsap.to(".hero-content", {
           opacity: 1,
           x: 0,
-          duration: 0.1,
-          stagger: 0.2,
+          duration: 0.5, // Match duration with navbar
           ease: "power2.out",
           onComplete: () => {
             setAnimationComplete(true);
@@ -116,7 +115,7 @@ const HeroPage = () => {
           path: [
             { x: "24%", y: "0%" },
             { x: "12%", y: "50%" },
-            { x: "-23vw", y: "114vh" },
+            { x: "-23vw", y: "113vh" },
           ],
           curviness: 1.5,
         },
@@ -208,7 +207,7 @@ const HeroPage = () => {
         className="navbar"
         sx={{
           position: "relative",
-          zIndex: 10, // Ensure NavBar is on top
+          zIndex: 10, 
           marginTop: "1rem",
           opacity: 0,
           transform: "translateX(-100px)",
@@ -223,7 +222,7 @@ const HeroPage = () => {
           position: "relative",
           zIndex: 3,
           opacity: 1,
-          transform: "translateX(100)",
+          transform: "translateX(-100px)",
         }}
       >
         <HeroPageSection1 animationComplete={animationComplete} />

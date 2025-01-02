@@ -120,11 +120,11 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         >
           <Box>
             <Typography
-              variant="h4"
+              variant="h3"
               color="white"
               sx={{
                 fontWeight: 400,
-                fontSize: { xs: "1.3rem" },
+                fontSize: { xs: "1.5rem" },
                 lineHeight: 1.3,
                 mb: 10,
               }}

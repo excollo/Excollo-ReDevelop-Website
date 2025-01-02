@@ -15,12 +15,12 @@ const carouselContent = [
   {
     title: "AI & Automation",
     description:
-      "From intelligent chatbots to workflow automation, we bring AI solutions that optimize operations and reduce costs.",
+      "Harness cutting-edge machine learning to decode data, predict trends, and empower precise, forward-thinking business strategies.",
   },
   {
     title: "Product Development",
     description:
-      "Scalable websites, web apps, and mobile apps tailored to your business's unique needs.",
+      "Set up or enhance e-commerce and WhatsApp sales channels to unlock new growth avenues.",
   },
   {
     title: "Tech Consultancy",
@@ -30,12 +30,12 @@ const carouselContent = [
   {
     title: "Sales Channel Development",
     description:
-      "Set up or enhance e-commerce and WhatsApp sales channels to unlock new growth avenues.",
+      "Scalable websites, web apps, and mobile apps tailored to your business's unique needs.",
   },
   {
-    title: "Machine Learning-Driven Data Analysis",
+    title: "ML Driven Data Analysis",
     description:
-      "Harness cutting-edge machine learning to decode data, predict trends, and empower precise, forward-thinking business strategies.",
+      "From intelligent chatbots to workflow automation, we bring AI solutions that optimize operations and reduce costs.",
   },
 ];
 
@@ -290,7 +290,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
             {type === "title" ? (
               <Typography
                 variant="h3"
-                fontWeight="bold"
+                fontWeight="600"
                 sx={{
                   background:
                     "linear-gradient(to bottom right, #2579e3, #8e54f7)",

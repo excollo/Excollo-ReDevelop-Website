@@ -291,6 +291,7 @@ const HeroPageSection5 = ({onAnimationComplete}) => {
               sx={{
                 opacity: 0,
                 transform: "scale(0)",
+                marginTop: "4rem",
               }}
             >
               <Typography
