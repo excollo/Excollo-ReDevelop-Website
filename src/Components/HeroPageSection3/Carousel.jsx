@@ -1,7 +1,8 @@
-// Carousel.jsx
 import React, { useRef, useEffect, useState, useContext } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
 import { ScrollContext } from "./ScrollProvider";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const CARD_WIDTH = 620;
 const CARD_HEIGHT = 400;
@@ -119,6 +120,54 @@ const Carousel = ({ isReverse, type = "title" }) => {
     }
   };
 
+  const handleButtonClick = (direction) => {
+    if (!containerRef.current || isScrolling) return;
+
+    const currentPosition = containerRef.current.scrollLeft;
+    const currentIndex = Math.round(currentPosition / TOTAL_WIDTH);
+    const targetIndex = Math.max(
+      0,
+      Math.min(carouselContent.length - 1, currentIndex + direction)
+    );
+    const targetPosition = targetIndex * TOTAL_WIDTH;
+
+    if (targetPosition !== currentPosition) {
+      setIsScrolling(true);
+      setActiveScroller(isReverse ? "reverse" : "normal");
+      setScrollPosition(targetPosition);
+
+      containerRef.current.scrollTo({
+        left: targetPosition,
+        behavior: "smooth",
+      });
+
+      setTimeout(() => {
+        setIsScrolling(false);
+        setActiveScroller(null);
+      }, SCROLL_COOLDOWN);
+    }
+  };
+
+  const handleDotClick = (index) => {
+    if (!containerRef.current || isScrolling) return;
+
+    const targetPosition = index * TOTAL_WIDTH;
+
+    setIsScrolling(true);
+    setActiveScroller(isReverse ? "reverse" : "normal");
+    setScrollPosition(targetPosition);
+
+    containerRef.current.scrollTo({
+      left: targetPosition,
+      behavior: "smooth",
+    });
+
+    setTimeout(() => {
+      setIsScrolling(false);
+      setActiveScroller(null);
+    }, SCROLL_COOLDOWN);
+  };
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -153,7 +202,9 @@ const Carousel = ({ isReverse, type = "title" }) => {
       flex: "0 0 auto",
       width: "40%",
       height: `${CARD_HEIGHT}px`,
-      padding: "2rem",
+      marginTop: "3rem",
+      marginBottom: "3rem",
+      padding: "1rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -198,6 +249,17 @@ const Carousel = ({ isReverse, type = "title" }) => {
         perspective: "1000px",
       }}
     >
+      <IconButton
+        onClick={() => handleButtonClick(-1)}
+        sx={{
+          position: "absolute",
+          left: "10px",
+          zIndex: 3,
+          color: "white",
+        }}
+      >
+        <ArrowBackIosIcon />
+      </IconButton>
       <Box
         ref={containerRef}
         sx={{
@@ -205,6 +267,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
           overflowX: "auto",
           overflowY: "hidden",
           width: "100%",
+          height: "auto",
           scrollSnapType: "x mandatory",
           scrollbarWidth: "none",
           "-ms-overflow-style": "none",
@@ -233,6 +296,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
                     "linear-gradient(to bottom right, #2579e3, #8e54f7)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
+                  marginTop: "-12rem",
                   display: "inline-block",
                   transform: "translateZ(60px)",
                   textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
@@ -251,7 +315,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
                   alignItems: "center",
                   display: "flex",
                   width: "90%",
-                  marginTop: "40%",
+                  marginTop: "10%",
                   transform: "translateZ(40px)",
                   transition: "transform 0.3s ease-out",
                 }}
@@ -260,6 +324,43 @@ const Carousel = ({ isReverse, type = "title" }) => {
               </Typography>
             )}
           </Box>
+        ))}
+      </Box>
+      <IconButton
+        onClick={() => handleButtonClick(1)}
+        sx={{
+          position: "absolute",
+          right: "10px",
+          zIndex: 3,
+          color: "white",
+        }}
+      >
+        <ArrowForwardIosIcon />
+      </IconButton>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: "-2rem",
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
+          zIndex: 3,
+        }}
+      >
+        {carouselContent.map((_, index) => (
+          <Box
+            key={index}
+            onClick={() => handleDotClick(index)}
+            sx={{
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
+              backgroundColor:
+                scrollPosition / TOTAL_WIDTH === index ? "white" : "gray",
+              margin: "0 8px",
+              cursor: "pointer",
+            }}
+          />
         ))}
       </Box>
     </Box>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { TitleCarousel } from "./Carousel";
-import { DescriptionCarousel} from "./Carousel";
+import { DescriptionCarousel } from "./Carousel";
 import { ScrollProvider } from "./ScrollProvider";
 
 const HeroPageSection3 = () => {

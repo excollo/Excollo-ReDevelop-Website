@@ -2,18 +2,20 @@ import React, { useEffect } from "react";
 import { Box, Typography, styled } from "@mui/material";
 import zIndex from "@mui/material/styles/zIndex";
 import { motion } from "framer-motion"; // Import motion for animations
-
 // Remove keyframes since we'll use CSS transforms directly
 // Styled components
 const AboutSection = styled(motion.section)({
   maxWidth: "85%",
   margin: "auto",
   textAlign: "left",
-  padding: "0 20px",
 });
-
 const SectionTitle = styled(motion.div)({
   fontSize: "3rem",
+  fontFamily: '"Inter", sans-serif',
+  fontWeight: "bold",
+  letterSpacing: "-0.00833em", // Adjusted for spacing
+  textUnderlinePosition: "from-font",
+  textDecorationSkipInk: "none",
   marginBottom: "20px",
   "& .highlight": {
     fontSize: "80px",
@@ -22,12 +24,11 @@ const SectionTitle = styled(motion.div)({
     WebkitTextFillColor: "transparent",
   },
 });
-
 const Description = styled(motion.div)({
-  fontSize: "1.2rem",
-  color: "#ffffff",
+  fontSize: "1.4rem",
+  letterSpacing: "-0.00833em",
+  color: "#FFFFFF",
 });
-
 // Framer Motion animation variants
 const containerVariant = {
   hidden: { opacity: 0 },
@@ -38,36 +39,33 @@ const containerVariant = {
     },
   },
 };
-
 const titleVariant = {
   hidden: { opacity: 0, y: -50 }, // Title starts slightly above and hidden
   visible: { opacity: 1, y: 0, transition: { duration: 1.2 } },
 };
-
 const descriptionVariant = {
   hidden: { opacity: 0, y: 20, x: -50 }, // Description starts slightly below and hidden
   visible: { opacity: 1, y: 0, x: 0, transition: { duration: 1.8 } },
 };
-
 const ContentSection = styled("section")({
   display: "flex",
   width: "80%",
   margin: "auto",
-  padding: "50px 20px",
+  padding: "100px 0 20px 0",
   justifyContent: "space-between",
   alignItems: "center",
-  gap: "20px",
+  // gap: "50px",
   "@media (max-width: 768px)": {
     flexDirection: "column",
     alignItems: "flex-start",
   },
 });
-
 const TitleContainer = styled("div")(({ align }) => ({
   flex: "0 0 488px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
+  padding: 10,
   opacity: 0,
   transform: align === "left" ? "translateX(-200px)" : "translateX(200px)",
   transition: "all 1.8s ease-in-out",
@@ -77,26 +75,31 @@ const TitleContainer = styled("div")(({ align }) => ({
   },
   "& h2": {
     textAlign: "left",
-    fontSize: "80px",
-    margin: 0,
+    padding: "55px",
+    fontSize: "4rem",
+    fontFamily: '"Inter", sans-serif',
+    fontWeight: "bold",
+    textUnderlinePosition: "from-font",
+    textDecorationSkipInk: "none",
+    letterSpacing: "-0.00833em",
+    // margin: "0",
     lineHeight: 1.2,
   },
   "@media (max-width: 768px)": {
     width: "100%",
   },
 }));
-
 const Card = styled("div")(({ direction = "90deg", align }) => ({
   width: "588px",
   height: "537px",
-  background: `linear-gradient(${direction},#8E54F780, #332E6C, #0a0a17)`,
+  background: `linear-gradient(${direction},#8E54F780, #332E6C, #0A0A17)`,
   borderRadius: "20px",
   padding: "30px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  //   border: "1px solid #7e22ce",
-  //   boxShadow: "0px 0px 100px 0px rgba(133, 86, 245, 0.4)",
+  // border: "1px solid #7E22CE",
+  // boxShadow: "0px 0px 100px 0px rgba(133, 86, 245, 0.4)",
   opacity: 0,
   transform: align === "left" ? "translateX(-100px)" : "translateX(100px)",
   transition: "all 1.8s ease-out",
@@ -105,18 +108,18 @@ const Card = styled("div")(({ direction = "90deg", align }) => ({
     transform: "translateX(0)",
   },
   "& p": {
-    fontSize: "1.5rem",
+    fontSize: "1.8rem",
+    fontFamily: '"Inter", sans-serif',
     color: "#D1D1E2",
     lineHeight: 1.7,
     textAlign: "left",
-    padding: 20,
-    margin: 20,
+    padding: 30,
+    margin: 25,
     opacity: 0,
     zIndex: 0,
     transform: "scale(0.5) translateY(0) translateX(0)",
     transition: "all 1.8s ease-out",
   },
-
   "&.visible p": {
     opacity: 1,
     zIndex: 1,
@@ -127,10 +130,9 @@ const Card = styled("div")(({ direction = "90deg", align }) => ({
     width: "100%",
   },
 }));
-
 const WorkTable = styled("section")({
-  width: "90%",
-  margin: "60px auto",
+  width: "94%",
+  margin: "60px 70px",
   padding: "20px",
   opacity: 0,
   transform: "translateY(30px)",
@@ -140,13 +142,11 @@ const WorkTable = styled("section")({
     transform: "translateY(0)",
   },
 });
-
 const TableGrid = styled("div")({
   display: "flex",
   flexWrap: "wrap",
   marginTop: "40px",
 });
-
 const TableContent = styled("div")({
   flex: "1 1 10%",
   border: "1px solid grey",
@@ -173,7 +173,6 @@ const TableContent = styled("div")({
     lineHeight: 1.6,
   },
 });
-
 const AboutUsPage = () => {
   useEffect(() => {
     // Create observer instance
@@ -195,16 +194,22 @@ const AboutUsPage = () => {
         rootMargin: "-60px",
       }
     );
-
     // Observe all elements with animate class
     const elements = document.querySelectorAll(".animate");
     elements.forEach((el) => observer.observe(el));
-
     return () => observer.disconnect();
   }, []);
-
   return (
-    <Box sx={{ bgcolor: "#0A0A1E", color: "#fff", minHeight: "100vh", pb: 10 }}>
+    <Box
+      variant="h2 bold"
+      sx={{
+        bgcolor: "#0A0A1E",
+        color: "#fff",
+        minHeight: "100vh",
+        fontFamily: '"Inter", sans-serif',
+        pb: 10,
+      }}
+    >
       {/* Repeat for other sections */}
       <AboutSection
         initial="hidden"
@@ -212,10 +217,10 @@ const AboutUsPage = () => {
         viewport={{ amount: 0.5 }}
         variants={containerVariant}
       >
-        <SectionTitle variants={titleVariant}>
-          <span className="highlight">A</span>bout Us
+        <SectionTitle variant="h2" variants={titleVariant}>
+          <span className="highlight">About Us</span>
         </SectionTitle>
-        <Description variants={descriptionVariant}>
+        <Description variant="h5" variants={descriptionVariant}>
           Excollo is future-ready, offering unparalleled expertise to
           enterprises seeking to transform their digital stack. By leveraging
           cutting-edge AI, automation, and innovative consultancy, we identify
@@ -223,11 +228,16 @@ const AboutUsPage = () => {
           businesses to achieve scalable success.
         </Description>
       </AboutSection>
-
       <ContentSection>
-        <TitleContainer align="left" className="animate">
-          <h2>Our</h2>
-          <h2>Vision</h2>
+        <TitleContainer
+          align="left"
+          className="animate "
+          sx={{ marginLeft: "4rem" }}
+        >
+          <h2>
+            Our <br />
+            Vision
+          </h2>
         </TitleContainer>
         <Card className="animate" align="right">
           <p>
@@ -236,7 +246,6 @@ const AboutUsPage = () => {
           </p>
         </Card>
       </ContentSection>
-
       <ContentSection>
         <Card direction="270deg" className="animate" align="left">
           <p>
@@ -244,16 +253,27 @@ const AboutUsPage = () => {
             delivering cutting-edge solutions that guarantee outcomes.
           </p>
         </Card>
-        <TitleContainer align="right" className="animate">
-          <h2>Our</h2>
-          <h2>Mission</h2>
+        <TitleContainer
+          align="right"
+          className="animate"
+          sx={{ marginRight: "-7rem", textAlign: "right" }}
+        >
+          <h2>
+            Our <br />
+            Mission
+          </h2>
         </TitleContainer>
       </ContentSection>
-
       <ContentSection>
-        <TitleContainer align="left" className="animate">
-          <h2>Our</h2>
-          <h2>Philosophy</h2>
+        <TitleContainer
+          align="left"
+          className="animate"
+          sx={{ marginLeft: "-2rem" }}
+        >
+          <h2>
+            Our <br />
+            Philosophy
+          </h2>
         </TitleContainer>
         <Card className="animate" align="right">
           <p>
@@ -263,14 +283,14 @@ const AboutUsPage = () => {
           </p>
         </Card>
       </ContentSection>
-
       <WorkTable className="animate">
         <Typography
           variant="h2"
           sx={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "43.8px",
-            fontWeight: 700,
+            fontSize: "3rem",
+            fontFamily: '"Inter", sans-serif',
+            fontWeight: "bold",
+            letterSpacing: "-0.00833em",
             textAlign: "center",
             mb: 6,
           }}
@@ -319,5 +339,4 @@ const AboutUsPage = () => {
     </Box>
   );
 };
-
 export default AboutUsPage;

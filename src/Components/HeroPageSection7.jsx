@@ -30,7 +30,7 @@ const HeroPageSection7 = () => {
     setRotation({ x: 0, y: 0 });
   };
 
-  const translateYImage = Math.max(3400 - scrollY * 0.5, 0);
+  const translateYImage = Math.max(2200 - scrollY * 0.5, 0);
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
 
