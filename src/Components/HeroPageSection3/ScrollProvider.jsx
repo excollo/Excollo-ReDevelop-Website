@@ -5,6 +5,8 @@ export const ScrollContext = createContext();
 export const ScrollProvider = ({ children }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [activeScroller, setActiveScroller] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   return (
     <ScrollContext.Provider
@@ -13,6 +15,10 @@ export const ScrollProvider = ({ children }) => {
         setScrollPosition,
         activeScroller,
         setActiveScroller,
+        hoveredIndex,
+        setHoveredIndex,
+        rotation,
+        setRotation,
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { TitleCarousel } from "./TitleCarousel";
-import { DescriptionCarousel } from "./DescriptionCarousel";
+import { TitleCarousel } from "./Carousel";
+import { DescriptionCarousel} from "./Carousel";
 import { ScrollProvider } from "./ScrollProvider";
 
 const HeroPageSection3 = () => {
@@ -17,18 +17,18 @@ const HeroPageSection3 = () => {
       }}
     >
       <Box
-              sx={{
-                position: "absolute",
-                top: "25%",
-                left: "10%",
-                right: "10%",
-                bottom: "10%",
-                background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
-                zIndex: 0, // Set consistent z-index
-                pointerEvents: "none",
-                transformOrigin: "center center",
-              }}
-            />
+        sx={{
+          position: "absolute",
+          top: "25%",
+          left: "10%",
+          right: "10%",
+          bottom: "10%",
+          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
+          zIndex: 0, // Set consistent z-index
+          pointerEvents: "none",
+          transformOrigin: "center center",
+        }}
+      />
       <Typography
         variant="h2"
         sx={{
@@ -36,6 +36,7 @@ const HeroPageSection3 = () => {
           fontWeight: "bold",
           position: "relative",
           top: "20px",
+          background: "black",
         }}
       >
         Our{" "}
@@ -53,11 +54,10 @@ const HeroPageSection3 = () => {
       </Typography>
       <ScrollProvider>
         <Box
-          className="carousel-wrapper"
           sx={{
             position: "relative",
             marginTop: "8rem",
-            zIndex: 1,
+            zIndex: 0,
           }}
         >
           <Box
@@ -69,7 +69,6 @@ const HeroPageSection3 = () => {
               right: 0,
               bottom: 0,
               zIndex: 2,
-              backgroundColor: "transparent",
             }}
           >
             <TitleCarousel />
@@ -83,7 +82,6 @@ const HeroPageSection3 = () => {
               right: 0,
               bottom: 0,
               zIndex: 1,
-              backgroundColor: "transparent",
             }}
           >
             <DescriptionCarousel />
