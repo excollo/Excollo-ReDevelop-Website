@@ -56,8 +56,9 @@
 .gradientCardBox .box:after {
   background: linear-gradient(
     180deg,
-    rgba(170, 63, 255, 0.9) 0%,
-    rgba(94, 129, 235, 0.9) 100%
+    #3283b8,
+    #a97fea,
+    #a97fea
   );
 }
 

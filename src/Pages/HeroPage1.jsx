@@ -5,15 +5,14 @@ import HeroPageSection7 from "../Components/HeroPageSection7";
 import HeroPageSection6 from "../Components/HeroPageSection6";
 import HeroPageSection4 from "../Components/HeroPageSection4";
 import HeroPageSection5 from "../Components/HeroPageSection5";
+import ThreeDE from "../Components/ThreeDE";
+import OurService from "../Components/OurServices";
 
 const HeroPage1 = () => {
 
   return (
     <div>
-      <HeroPageSection3 />
-      <HeroPageSection4 />
-      <HeroPageSection5 />
-      <HeroPageSection6 />
+      <OurService />
     </div>
   );
 };
