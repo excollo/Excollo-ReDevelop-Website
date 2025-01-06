@@ -46,8 +46,8 @@ const HeroPage = () => {
       const timeline = gsap.timeline();
 
       timeline.to(".threeDE", {
-        x: "24%",
-        y: "-2%",
+        x: "28%",
+        y: "2%",
         duration: 1,
         ease: "power2.out",
       });
@@ -113,7 +113,7 @@ const HeroPage = () => {
         },
         motionPath: {
           path: [
-            { x: "24%", y: "0%" },
+            { x: "28%", y: "2%" },
             { x: "12%", y: "50%" },
             { x: "-23vw", y: "113vh" },
           ],
@@ -175,7 +175,7 @@ const HeroPage = () => {
           position: "absolute",
           top: 0,
           left: 0,
-          zIndex: 2, // Set consistent z-index
+          zIndex: 2,
         }}
       >
         <Box

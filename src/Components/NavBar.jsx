@@ -9,16 +9,17 @@ const NavBar = () => {
       sx={{
         backgroundColor: "transparent",
         boxShadow: "none",
-        position: "relative", // Change this to relative
+        position: "relative",
+        width: "85%",
         zIndex: 10,
+        margin: "0 auto",
       }}
     >
-      <Toolbar sx={{ justifyContent: "space-around", position: "relative" }}>
+      <Toolbar sx={{ justifyContent: "space-between", position: "relative" }}>
         <Box
           display="flex"
           alignItems="center"
           padding={4}
-          ml={-11}
           sx={{ position: "relative", zIndex: 0 }}
         >
           <img

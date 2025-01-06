@@ -8,10 +8,10 @@ const HeroPageSection1 = () => {
         color: "#fff",
         display: "flex",
         textAlign: "left",
-        justifyContent: "center",
-        marginLeft: "12%",
+        justifyContent: "left",
+        width: "85%",
         px: { xs: 2, sm: 4 },
-        gap: "10%",
+        marginLeft: "9%",
         position: "relative",
         zIndex: 2, // Set consistent z-index
         "--gradient-start": "#ff7e5f", // Custom gradient start color for this section
@@ -75,6 +75,7 @@ const HeroPageSection1 = () => {
             fontWeight: 200,
             fontSize: { xs: "1.3rem" },
             lineHeight: 1.2,
+            marginLeft: "0.5%",
             mb: 1.5,
           }}
         >
@@ -87,7 +88,8 @@ const HeroPageSection1 = () => {
             fontWeight: 200,
             fontSize: { xs: "1.3rem" },
             lineHeight: 1.2,
-            mb: 8,
+            mb: 6,
+            marginLeft: "0.5%",
           }}
         >
           redefine success.
@@ -99,7 +101,7 @@ const HeroPageSection1 = () => {
             display: "inline-block", // Ensures the button behaves like a block
             color: "#ffffff",
             textDecoration: "none",
-            fontSize: "16px",
+            fontSize: "18px",
             border: "1px solid transparent",
             padding: "20px 40px",
             borderRadius: "40px",

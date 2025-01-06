@@ -6,13 +6,14 @@ import HeroPageSection6 from "../Components/HeroPageSection6";
 import HeroPageSection4 from "../Components/HeroPageSection4";
 import HeroPageSection5 from "../Components/HeroPageSection5";
 import ThreeDE from "../Components/ThreeDE";
-import OurService from "../Components/OurServices";
+import OurServices from "../Components/OurServices/OurServices";
+import LogoCarousel from "../Components/OurServices/Logo";
 
 const HeroPage1 = () => {
 
   return (
     <div>
-      <OurService />
+      <LogoCarousel />
     </div>
   );
 };
