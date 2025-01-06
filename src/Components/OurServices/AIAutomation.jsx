@@ -28,9 +28,9 @@ const AIAutomation = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentDotIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % services.length;
-        console.log("Current Dot Index:", newIndex); 
+      setCurrentDotIndex(() => {
+        const newIndex = Math.floor(Math.random() * services.length);
+        console.log("Current Dot Index:", newIndex);
         return newIndex;
       });
     }, 2000);
@@ -40,7 +40,7 @@ const AIAutomation = () => {
 
   useEffect(() => {
     updateCirclePosition();
-    console.log("Circle position updated"); 
+    console.log("Circle position updated");
 
     // Update position on resize
     window.addEventListener("resize", updateCirclePosition);
@@ -87,6 +87,7 @@ const AIAutomation = () => {
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
+        markers: true,
       },
     });
 
@@ -98,17 +99,20 @@ const AIAutomation = () => {
       },
       {
         opacity: 1,
-        y: 0,
+        y: 200,
+        duration: 1,
       }
     )
       .to(".fade-in-heading", {
         x: "-100%",
         opacity: 0,
+        duration: 1.5,
       })
       .to(".animate-content", {
         x: "0%",
         opacity: 1,
         duration: 1.5,
+        delay: 5,
       })
       .to(".services-title", {
         opacity: 1,
@@ -222,20 +226,29 @@ const AIAutomation = () => {
           left: 0,
           width: "100%",
           height: "100vh",
-          display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Typography
-          variant="h1"
-          sx={{
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          AI & Automation
-        </Typography>
+        <Box>
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            AI & Automation
+          </Typography>
+        </Box>
+        <Box>
+          <Typography
+            variant="h4"
+            sx={{ textAlign: "center", fontWeight: "500", mt: 2 }}
+          >
+            Empower your business with AI
+          </Typography>
+        </Box>
       </Box>
 
       <Box

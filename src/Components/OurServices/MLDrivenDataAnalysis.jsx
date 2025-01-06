@@ -28,8 +28,8 @@ const MLDrivenDataAnalysis = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentDotIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % services.length;
+      setCurrentDotIndex(() => {
+        const newIndex = Math.floor(Math.random() * services.length);
         console.log("Current Dot Index:", newIndex);
         return newIndex;
       });
@@ -163,6 +163,16 @@ const MLDrivenDataAnalysis = () => {
         "Build automation workflows to streamline operations within the WhatsApp channel.",
       ],
     },
+    {
+      id: "panel4",
+      title:
+        "\u00A0\u00A0\u00A0Enhance decision-making with data-driven strategies.",
+      details: [
+        "Use machine learning algorithms to retarget customers effectively.",
+        "Design high-conversion templates tailored to customer needs.",
+        "Build automation workflows to streamline operations within the WhatsApp channel.",
+      ],
+    },
   ];
 
   const GradientDivider = () => (
@@ -271,7 +281,7 @@ const MLDrivenDataAnalysis = () => {
                       minHeight: 105,
                       margin: 0,
                     },
-                    minHeight: 105,
+                    minHeight: 145,
                   }}
                 >
                   <Typography

@@ -10,7 +10,7 @@ import MLDrivenDataAnalysis from "./MLDrivenDataAnalysis";
 const OurServices = () => {
   return (
     <Box className="services-section">
-      <Box sx={{ minHeight: "100vh", display: "flex" }}>
+      <Box sx={{ minHeight: "50vh", display: "flex" }}>
         <Box>
           <Typography
             variant="h2"

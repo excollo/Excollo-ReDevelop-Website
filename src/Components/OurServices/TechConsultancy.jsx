@@ -28,8 +28,8 @@ const TechConsultancy = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentDotIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % services.length;
+      setCurrentDotIndex(() => {
+        const newIndex = Math.floor(Math.random() * services.length);
         console.log("Current Dot Index:", newIndex);
         return newIndex;
       });
@@ -135,41 +135,21 @@ const TechConsultancy = () => {
     {
       id: "panel1",
       title: "\u00A0\u00A0\u00A0We understand your business and identify gaps.",
-      details: [
-        "Automate repetitive queries to save time and resources.",
-        "Provide personalized recommendations based on customer data.",
-        "Seamlessly integrate with existing communication platforms for effortless engagement.",
-      ],
     },
     {
       id: "panel2",
       title:
         "\u00A0\u00A0\u00A0We assess your tech stack to implement solutions that drive efficiency.",
-      details: [
-        "Enable faster access to critical business insights.",
-        "Integrate with existing systems for seamless data sharing.",
-        "Enhance productivity by simplifying complex information retrieval processes.",
-      ],
     },
     {
       id: "panel3",
       title:
         "\u00A0\u00A0\u00A0We identify both tools and technologies to bridge gaps effectively.",
-      details: [
-        "Enable faster access to critical business insights.",
-        "Integrate with existing systems for seamless data sharing.",
-        "Enhance productivity by simplifying complex information retrieval processes.",
-      ],
     },
     {
       id: "panel4",
       title:
         "\u00A0\u00A0\u00A0Guide your digital transformation journey with expert insights. We understand your business and identify gaps.",
-      details: [
-        "Enable faster access to critical business insights.",
-        "Integrate with existing systems for seamless data sharing.",
-        "Enhance productivity by simplifying complex information retrieval processes.",
-      ],
     },
   ];
 
@@ -198,7 +178,7 @@ const TechConsultancy = () => {
       }}
     >
       <Box
-        className="fade-in-h eading-3"
+        className="fade-in-heading-3"
         sx={{
           position: "absolute",
           top: 0,
@@ -273,13 +253,12 @@ const TechConsultancy = () => {
                 }}
               >
                 <AccordionSummary
-                  expandIcon={<ChevronDown style={{ color: "#fff" }} />}
                   sx={{
                     "&.Mui-expanded": {
-                      minHeight: 105,
+                      minHeight: 15,
                       margin: 0,
                     },
-                    minHeight: 105,
+                    minHeight: 145,
                   }}
                 >
                   <Typography
@@ -295,36 +274,6 @@ const TechConsultancy = () => {
                     {service.title}
                   </Typography>
                 </AccordionSummary>
-                <AccordionDetails
-                  sx={{
-                    padding: "0 16px 8px 16px",
-                    maxWidth: "120%",
-                    ml: "1%",
-                  }}
-                >
-                  <List
-                    sx={{
-                      padding: 0,
-                      "& .MuiListItem-root": {
-                        padding: "4px 0",
-                      },
-                    }}
-                  >
-                    {service.details.map((detail, index) => (
-                      <ListItem key={index}>
-                        <ListItemIcon sx={{ minWidth: 25 }}>
-                          <Circle size={8} color="#fff" />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={detail}
-                          primaryTypographyProps={{
-                            sx: { fontSize: "0.9rem" },
-                          }}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                </AccordionDetails>
               </Accordion>
               {index < services.length && <GradientDivider />}
             </React.Fragment>

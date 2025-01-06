@@ -28,8 +28,8 @@ const ProductDevelopment = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentDotIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % services.length;
+      setCurrentDotIndex(() => {
+        const newIndex = Math.floor(Math.random() * services.length);
         console.log("Current Dot Index:", newIndex);
         return newIndex;
       });
@@ -52,85 +52,85 @@ const ProductDevelopment = () => {
         .closest(".services-container-2")
         .getBoundingClientRect();
 
-      console.log("Updating circle position for index:", currentDotIndex); 
+      console.log("Updating circle position for index:", currentDotIndex);
       gsap.to(circleRef.current, {
         top: rect.top - parentRect.top + rect.height / 2 - 30,
-        left: rect.left - parentRect.left + rect.width / 2 - 150, 
+        left: rect.left - parentRect.left + rect.width / 2 - 150,
         duration: 0.8,
         ease: "power2.inOut",
       });
     }
   };
 
-   useEffect(() => {
-      gsap.set(".animate-content-2", {
-        x: "100%",
+  useEffect(() => {
+    gsap.set(".animate-content-2", {
+      x: "100%",
+      opacity: 0,
+    });
+
+    gsap.set(".services-title-2", {
+      opacity: 0,
+      y: 20,
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".services-container-2",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+      },
+    });
+
+    tl.fromTo(
+      ".fade-in-heading-2",
+      {
         opacity: 0,
-      });
-  
-      gsap.set(".services-title-2", {
+        y: 200,
+      },
+      {
+        opacity: 1,
+        y: 0,
+      }
+    )
+      .to(".fade-in-heading-2", {
+        x: "-100%",
         opacity: 0,
-        y: 20,
+      })
+      .to(".animate-content-2", {
+        x: "0%",
+        opacity: 1,
+        duration: 1.5,
+      })
+      .to(".services-title-2", {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        delay: 0.3,
       });
-  
-      const tl = gsap.timeline({
+
+    // Animate service items
+    gsap.utils.toArray(".service-item").forEach((item, index) => {
+      gsap.from(item, {
         scrollTrigger: {
-          trigger: ".services-container-2",
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1,
-          pin: true,
-          pinSpacing: true,
-          anticipatePin: 1,
+          trigger: item,
+          start: "top bottom-=100",
+          toggleActions: "play none none reverse",
         },
+        opacity: 0,
+        y: 50,
+        duration: 0.6,
+        delay: index * 0.1,
       });
-  
-      tl.fromTo(
-        ".fade-in-heading-2",
-        {
-          opacity: 0,
-          y: 200,
-        },
-        {
-          opacity: 1,
-          y: 0,
-        }
-      )
-        .to(".fade-in-heading-2", {
-          x: "-100%",
-          opacity: 0,
-        })
-        .to(".animate-content-2", {
-          x: "0%",
-          opacity: 1,
-          duration: 1.5,
-        })
-        .to(".services-title-2", {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          delay: 0.3,
-        });
-  
-      // Animate service items
-      gsap.utils.toArray(".service-item").forEach((item, index) => {
-        gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top bottom-=100",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 0,
-          y: 50,
-          duration: 0.6,
-          delay: index * 0.1,
-        });
-      });
-  
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    }, []);
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   const services = [
     {
@@ -144,6 +144,25 @@ const ProductDevelopment = () => {
     },
     {
       id: "panel2",
+      title:
+        "\u00A0\u00A0\u00A0Develop robust web and mobile applications tailored to your needs.",
+      details: [
+        "Enable faster access to critical business insights.",
+        "Integrate with existing systems for seamless data sharing.",
+        "Enhance productivity by simplifying complex information retrieval processes.",
+      ],
+    },
+    {
+      id: "panel3",
+      title: "\u00A0\u00A0\u00A0Create stunning, responsive websites.",
+      details: [
+        "Automate repetitive queries to save time and resources.",
+        "Provide personalized recommendations based on customer data.",
+        "Seamlessly integrate with existing communication platforms for effortless engagement.",
+      ],
+    },
+    {
+      id: "panel4",
       title:
         "\u00A0\u00A0\u00A0Develop robust web and mobile applications tailored to your needs.",
       details: [
@@ -254,13 +273,12 @@ const ProductDevelopment = () => {
                 }}
               >
                 <AccordionSummary
-                  expandIcon={<ChevronDown style={{ color: "#fff" }} />}
                   sx={{
                     "&.Mui-expanded": {
                       minHeight: 105,
                       margin: 0,
                     },
-                    minHeight: 105,
+                    minHeight: 145,
                   }}
                 >
                   <Typography
@@ -276,36 +294,6 @@ const ProductDevelopment = () => {
                     {service.title}
                   </Typography>
                 </AccordionSummary>
-                <AccordionDetails
-                  sx={{
-                    padding: "0 16px 8px 16px",
-                    maxWidth: "120%",
-                    ml: "1%",
-                  }}
-                >
-                  <List
-                    sx={{
-                      padding: 0,
-                      "& .MuiListItem-root": {
-                        padding: "4px 0",
-                      },
-                    }}
-                  >
-                    {service.details.map((detail, index) => (
-                      <ListItem key={index}>
-                        <ListItemIcon sx={{ minWidth: 25 }}>
-                          <Circle size={8} color="#fff" />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={detail}
-                          primaryTypographyProps={{
-                            sx: { fontSize: "0.9rem" },
-                          }}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                </AccordionDetails>
               </Accordion>
               {index < services.length && <GradientDivider />}
             </React.Fragment>

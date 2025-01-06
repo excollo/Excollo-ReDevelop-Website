@@ -28,8 +28,8 @@ const SalesChannelDevelopment = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentDotIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % services.length;
+      setCurrentDotIndex(() => {
+        const newIndex = Math.floor(Math.random() * services.length);
         console.log("Current Dot Index:", newIndex);
         return newIndex;
       });
@@ -152,6 +152,25 @@ const SalesChannelDevelopment = () => {
         "Build automation workflows to streamline operations within the WhatsApp channel.",
       ],
     },
+    {
+      id: "panel3",
+      title: "\u00A0\u00A0\u00A0Launch or optimize your e-commerce platforms.",
+      details: [
+        "Set up and configure your e-commerce store seamlessly on Shopify.",
+        "Design visually appealing and user-friendly interfaces tailored to your brand.",
+        "Provide comprehensive support, including user training, SEO optimization, integrations, and more.",
+      ],
+    },
+    {
+      id: "panel4",
+      title:
+        "\u00A0\u00A0\u00A0Set up WhatsApp sales channels to enhance customer engagement and convenience.",
+      details: [
+        "Use machine learning algorithms to retarget customers effectively.",
+        "Design high-conversion templates tailored to customer needs.",
+        "Build automation workflows to streamline operations within the WhatsApp channel.",
+      ],
+    },
   ];
 
   const GradientDivider = () => (
@@ -260,7 +279,7 @@ const SalesChannelDevelopment = () => {
                       minHeight: 105,
                       margin: 0,
                     },
-                    minHeight: 105,
+                    minHeight: 145,
                   }}
                 >
                   <Typography
