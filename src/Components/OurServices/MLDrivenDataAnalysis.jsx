@@ -40,6 +40,9 @@ const MLDrivenDataAnalysis = () => {
 
   useEffect(() => {
     updateCirclePosition();
+    console.log("Circle position updated");
+
+    // Update position on resize
     window.addEventListener("resize", updateCirclePosition);
     return () => window.removeEventListener("resize", updateCirclePosition);
   }, [currentDotIndex]);
@@ -49,67 +52,85 @@ const MLDrivenDataAnalysis = () => {
       const symbol = symbolRefs.current[currentDotIndex];
       const rect = symbol.getBoundingClientRect();
       const parentRect = symbol
-        .closest(".services-container-5")
+        .closest(".services-container")
         .getBoundingClientRect();
 
-      console.log("Updating circle position for index:", currentDotIndex);
+      console.log("Updating circle position for index:", currentDotIndex); // Debug log
       gsap.to(circleRef.current, {
         top: rect.top - parentRect.top + rect.height / 2 - 30,
-        left: rect.left - parentRect.left + rect.width / 2 - 150,
+        left: rect.left - parentRect.left + rect.width / 2 - 150, // Adjusted left position
         duration: 0.8,
         ease: "power2.inOut",
       });
+    } else {
+      console.log("Conditions not met for updating circle position"); // Debug log
     }
   };
 
   useEffect(() => {
-    gsap.set(".animate-content-5", {
+    gsap.set(".animate-content-3", {
       x: "100%",
       opacity: 0,
     });
 
-    gsap.set(".services-title-5", {
+    gsap.set(".services-title-3", {
       opacity: 0,
       y: 20,
     });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".services-container-5",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-      },
-    });
+    const tl = gsap.timeline();
 
     tl.fromTo(
-      ".fade-in-heading-5",
+      ".fade-in-heading3",
       {
-        opacity: 0,
+        opacity: 1,
         y: 200,
       },
       {
         opacity: 1,
-        y: 0,
+        y: 200,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading3",
+          start: "top 100%",
+          end: "top 60%",
+          scrub: 1,
+        },
       }
     )
-      .to(".fade-in-heading-5", {
+      .to(".fade-in-heading3", {
         x: "-100%",
-        opacity: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading3",
+          start: "top 40%",
+          end: "top 60%",
+          scrub: 1,
+          duration: 2,
+        },
       })
-      .to(".animate-content-5", {
+      .to(".animate-content-3", {
         x: "0%",
         opacity: 1,
-        duration: 1.5,
+        delay: 1,
+        scrollTrigger: {
+          trigger: ".animate-content-3",
+          start: "top 10%",
+          end: "top 30%",
+          scrub: 1,
+        },
       })
-      .to(".services-title-5", {
+      .to(".services-title-3", {
         opacity: 1,
         y: 0,
         duration: 0.5,
         delay: 0.3,
+        scrollTrigger: {
+          trigger: ".services-title-3",
+          start: "top 10%",
+          end: "top 10%",
+          scrub: 1,
+        },
       });
 
     // Animate service items
@@ -119,6 +140,7 @@ const MLDrivenDataAnalysis = () => {
           trigger: item,
           start: "top bottom-=100",
           toggleActions: "play none none reverse",
+          markers: true,
         },
         opacity: 0,
         y: 50,
@@ -135,42 +157,38 @@ const MLDrivenDataAnalysis = () => {
   const services = [
     {
       id: "panel1",
-      title:
-        "\u00A0\u00A0\u00A0Analyze large datasets to uncover patterns and trends.",
+      title: "\u00A0\u00A0\u00A0Uncover hidden patterns.",
       details: [
-        "Set up and configure your e-commerce store seamlessly on Shopify.",
-        "Design visually appealing and user-friendly interfaces tailored to your brand.",
-        "Provide comprehensive support, including user training, SEO optimization, integrations, and more.",
+        "Analyze vast datasets to identify trends and correlations.",
+        "Use clustering algorithms to segment data effectively.",
+        "Employ anomaly detection for identifying outliers and potential issues.",
       ],
     },
     {
       id: "panel2",
-      title:
-        "\u00A0\u00A0\u00A0Predict consumer behavior with advanced analytics.",
+      title: "\u00A0\u00A0\u00A0Predict future outcomes.",
       details: [
-        "Use machine learning algorithms to retarget customers effectively.",
-        "Design high-conversion templates tailored to customer needs.",
-        "Build automation workflows to streamline operations within the WhatsApp channel.",
+        "Leverage predictive modeling to forecast customer behaviors.",
+        "Use time-series analysis for trend predictions.",
+        "Apply decision trees for scenario-based outcomes.",
       ],
     },
     {
       id: "panel3",
-      title:
-        "\u00A0\u00A0\u00A0Enhance decision-making with data-driven strategies.",
+      title: "\u00A0\u00A0\u00A0Improve operational efficiency.",
       details: [
-        "Use machine learning algorithms to retarget customers effectively.",
-        "Design high-conversion templates tailored to customer needs.",
-        "Build automation workflows to streamline operations within the WhatsApp channel.",
+        "Optimize resource allocation through data insights.",
+        "Automate data-driven decision-making processes.",
+        "Implement reinforcement learning for continuous improvement.",
       ],
     },
     {
       id: "panel4",
-      title:
-        "\u00A0\u00A0\u00A0Enhance decision-making with data-driven strategies.",
+      title: "\u00A0\u00A0\u00A0Enhance decision-making.",
       details: [
-        "Use machine learning algorithms to retarget customers effectively.",
-        "Design high-conversion templates tailored to customer needs.",
-        "Build automation workflows to streamline operations within the WhatsApp channel.",
+        "Provide actionable, data-backed recommendations.",
+        "Develop custom dashboards for real-time insights.",
+        "Use sentiment analysis to inform business strategies.",
       ],
     },
   ];
@@ -191,7 +209,7 @@ const MLDrivenDataAnalysis = () => {
 
   return (
     <Box
-      className="services-container-5"
+      className="services-container"
       sx={{
         width: "100%",
         minHeight: "100vh",
@@ -200,31 +218,40 @@ const MLDrivenDataAnalysis = () => {
       }}
     >
       <Box
-        className="fade-in-heading-5"
+        className="fade-in-heading3"
         sx={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100vh",
-          display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Typography
-          variant="h1"
-          sx={{
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          ML Driven Data Analysis
-        </Typography>
+        <Box>
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            ML Driven Data Analysis
+          </Typography>
+        </Box>
+        <Box>
+          <Typography
+            variant="h4"
+            sx={{ textAlign: "center", fontWeight: "500", mt: 2 }}
+          >
+            Gain actionable insights
+          </Typography>
+        </Box>
       </Box>
 
       <Box
-        className="animate-content-5"
+        className="animate-content-3"
         sx={{
           position: "absolute",
           top: 0,
@@ -256,7 +283,7 @@ const MLDrivenDataAnalysis = () => {
           <Typography
             variant="h6"
             sx={{ color: "gray" }}
-            className="services-title-5"
+            className="services-title-3"
           >
             ML Driven Data Analysis
           </Typography>
@@ -278,7 +305,7 @@ const MLDrivenDataAnalysis = () => {
                   expandIcon={<ChevronDown style={{ color: "#fff" }} />}
                   sx={{
                     "&.Mui-expanded": {
-                      minHeight: 105,
+                      minHeight: 145,
                       margin: 0,
                     },
                     minHeight: 145,

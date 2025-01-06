@@ -78,47 +78,59 @@ const AIAutomation = () => {
       y: 20,
     });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".services-container",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        markers: true,
-      },
-    });
+    const tl = gsap.timeline();
 
     tl.fromTo(
       ".fade-in-heading",
       {
-        opacity: 0,
+        opacity: 1,
         y: 200,
       },
       {
         opacity: 1,
         y: 200,
         duration: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading",
+          start: "top 100%",
+          end: "top 60%",
+          scrub: 1,
+        },
       }
     )
       .to(".fade-in-heading", {
         x: "-100%",
-        opacity: 0,
-        duration: 1.5,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading",
+          start: "top 40%",
+          end: "top 60%",
+          scrub: 1,
+          duration: 2,
+        },
       })
       .to(".animate-content", {
         x: "0%",
         opacity: 1,
-        duration: 1.5,
-        delay: 5,
+        delay: 1,
+        scrollTrigger: {
+          trigger: ".animate-content",
+          start: "top 10%",
+          end: "top 30%",
+          scrub: 1,
+        },
       })
       .to(".services-title", {
         opacity: 1,
         y: 0,
         duration: 0.5,
         delay: 0.3,
+        scrollTrigger: {
+          trigger: ".services-title",
+          start: "top 10%",
+          end: "top 10%",
+          scrub: 1,
+        },
       });
 
     // Animate service items
@@ -128,6 +140,7 @@ const AIAutomation = () => {
           trigger: item,
           start: "top bottom-=100",
           toggleActions: "play none none reverse",
+          markers: true,
         },
         opacity: 0,
         y: 50,

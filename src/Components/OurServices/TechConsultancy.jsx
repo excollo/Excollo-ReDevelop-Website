@@ -40,6 +40,9 @@ const TechConsultancy = () => {
 
   useEffect(() => {
     updateCirclePosition();
+    console.log("Circle position updated");
+
+    // Update position on resize
     window.addEventListener("resize", updateCirclePosition);
     return () => window.removeEventListener("resize", updateCirclePosition);
   }, [currentDotIndex]);
@@ -49,7 +52,7 @@ const TechConsultancy = () => {
       const symbol = symbolRefs.current[currentDotIndex];
       const rect = symbol.getBoundingClientRect();
       const parentRect = symbol
-        .closest(".services-container-3")
+        .closest(".services-container")
         .getBoundingClientRect();
 
       console.log("Updating circle position for index:", currentDotIndex);
@@ -59,65 +62,85 @@ const TechConsultancy = () => {
         duration: 0.8,
         ease: "power2.inOut",
       });
+    } else {
+      console.log("Conditions not met for updating circle position");
     }
   };
 
   useEffect(() => {
-    gsap.set(".animate-content-3", {
+    gsap.set(".animate-content-5", {
       x: "100%",
       opacity: 0,
     });
 
-    gsap.set(".services-title-3", {
+    gsap.set(".services-title-5", {
       opacity: 0,
       y: 20,
     });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".services-container-3",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-      },
-    });
+    const tl = gsap.timeline();
 
     tl.fromTo(
-      ".fade-in-heading-3",
+      ".fade-in-heading-5",
       {
-        opacity: 0,
+        opacity: 1,
         y: 200,
       },
       {
         opacity: 1,
-        y: 0,
+        y: 200,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading-5",
+          start: "top 100%",
+          end: "top 60%",
+          scrub: 1,
+        },
       }
     )
-      .to(".fade-in-heading-3", {
+      .to(".fade-in-heading-5", {
         x: "-100%",
-        opacity: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading-5",
+          start: "top 40%",
+          end: "top 60%",
+          scrub: 1,
+          duration: 2,
+        },
       })
-      .to(".animate-content-3", {
+      .to(".animate-content-5", {
         x: "0%",
         opacity: 1,
-        duration: 1.5,
+        delay: 1,
+        scrollTrigger: {
+          trigger: ".animate-content-5",
+          start: "top 10%",
+          end: "top 30%",
+          scrub: 1,
+        },
       })
-      .to(".services-title-3", {
+      .to(".services-title-5", {
         opacity: 1,
         y: 0,
         duration: 0.5,
         delay: 0.3,
+        scrollTrigger: {
+          trigger: ".services-title-5",
+          start: "top 10%",
+          end: "top 10%",
+          scrub: 1,
+        },
       });
 
+    // Animate service items
     gsap.utils.toArray(".service-item").forEach((item, index) => {
       gsap.from(item, {
         scrollTrigger: {
           trigger: item,
           start: "top bottom-=100",
           toggleActions: "play none none reverse",
+          markers: true,
         },
         opacity: 0,
         y: 50,
@@ -134,22 +157,42 @@ const TechConsultancy = () => {
   const services = [
     {
       id: "panel1",
-      title: "\u00A0\u00A0\u00A0We understand your business and identify gaps.",
+      title: "\u00A0\u00A0\u00A0Understand your business and identify gaps.",
+      details: [
+        "Conduct comprehensive workflow analyses.",
+        "Uncover inefficiencies and areas for improvement.",
+        "Tailor recommendations to align with business objectives.",
+      ],
     },
     {
       id: "panel2",
       title:
-        "\u00A0\u00A0\u00A0We assess your tech stack to implement solutions that drive efficiency.",
+        "\u00A0\u00A0\u00A0Assess your tech stack to implement solutions that drive efficiency.",
+      details: [
+        "Audit current systems for compatibility and scalability.",
+        "Recommend upgrades or replacements based on performance needs.",
+        "Ensure smooth transition with minimal disruption.",
+      ],
     },
     {
       id: "panel3",
       title:
-        "\u00A0\u00A0\u00A0We identify both tools and technologies to bridge gaps effectively.",
+        "\u00A0\u00A0\u00A0Identify tools and technologies to bridge gaps effectively.",
+      details: [
+        "Explore emerging technologies relevant to your industry.",
+        "Provide cost-benefit analyses for proposed solutions.",
+        "Plan and execute seamless tool integrations.",
+      ],
     },
     {
       id: "panel4",
       title:
-        "\u00A0\u00A0\u00A0Guide your digital transformation journey with expert insights. We understand your business and identify gaps.",
+        "\u00A0\u00A0\u00A0Guide your digital transformation journey with expert insights.",
+      details: [
+        "Develop a roadmap for digital transformation.",
+        "Provide ongoing support and training for new systems.",
+        "Ensure alignment with long-term strategic goals.",
+      ],
     },
   ];
 
@@ -169,7 +212,7 @@ const TechConsultancy = () => {
 
   return (
     <Box
-      className="services-container-3"
+      className="services-container"
       sx={{
         width: "100%",
         minHeight: "100vh",
@@ -178,31 +221,40 @@ const TechConsultancy = () => {
       }}
     >
       <Box
-        className="fade-in-heading-3"
+        className="fade-in-heading-5"
         sx={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100vh",
-          display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Typography
-          variant="h1"
-          sx={{
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          Tech Consultancy
-        </Typography>
+        <Box>
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            Tech Consultancy
+          </Typography>
+        </Box>
+        <Box>
+          <Typography
+            variant="h4"
+            sx={{ textAlign: "center", fontWeight: "500", mt: 2 }}
+          >
+            Transformative strategies
+          </Typography>
+        </Box>
       </Box>
 
       <Box
-        className="animate-content-3"
+        className="animate-content-5"
         sx={{
           position: "absolute",
           top: 0,
@@ -234,7 +286,7 @@ const TechConsultancy = () => {
           <Typography
             variant="h6"
             sx={{ color: "gray" }}
-            className="services-title-3"
+            className="services-title-5"
           >
             Tech Consultancy
           </Typography>
@@ -253,9 +305,10 @@ const TechConsultancy = () => {
                 }}
               >
                 <AccordionSummary
+                  expandIcon={<ChevronDown style={{ color: "#fff" }} />}
                   sx={{
                     "&.Mui-expanded": {
-                      minHeight: 15,
+                      minHeight: 145,
                       margin: 0,
                     },
                     minHeight: 145,
@@ -274,6 +327,36 @@ const TechConsultancy = () => {
                     {service.title}
                   </Typography>
                 </AccordionSummary>
+                <AccordionDetails
+                  sx={{
+                    padding: "0 16px 8px 16px",
+                    maxWidth: "120%",
+                    ml: "1%",
+                  }}
+                >
+                  <List
+                    sx={{
+                      padding: 0,
+                      "& .MuiListItem-root": {
+                        padding: "4px 0",
+                      },
+                    }}
+                  >
+                    {service.details.map((detail, index) => (
+                      <ListItem key={index}>
+                        <ListItemIcon sx={{ minWidth: 25 }}>
+                          <Circle size={8} color="#fff" />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={detail}
+                          primaryTypographyProps={{
+                            sx: { fontSize: "0.9rem" },
+                          }}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </AccordionDetails>
               </Accordion>
               {index < services.length && <GradientDivider />}
             </React.Fragment>

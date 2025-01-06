@@ -40,6 +40,9 @@ const ProductDevelopment = () => {
 
   useEffect(() => {
     updateCirclePosition();
+    console.log("Circle position updated");
+
+    // Update position on resize
     window.addEventListener("resize", updateCirclePosition);
     return () => window.removeEventListener("resize", updateCirclePosition);
   }, [currentDotIndex]);
@@ -49,67 +52,85 @@ const ProductDevelopment = () => {
       const symbol = symbolRefs.current[currentDotIndex];
       const rect = symbol.getBoundingClientRect();
       const parentRect = symbol
-        .closest(".services-container-2")
+        .closest(".services-container")
         .getBoundingClientRect();
 
-      console.log("Updating circle position for index:", currentDotIndex);
+      console.log("Updating circle position for index:", currentDotIndex); // Debug log
       gsap.to(circleRef.current, {
         top: rect.top - parentRect.top + rect.height / 2 - 30,
-        left: rect.left - parentRect.left + rect.width / 2 - 150,
+        left: rect.left - parentRect.left + rect.width / 2 - 150, // Adjusted left position
         duration: 0.8,
         ease: "power2.inOut",
       });
+    } else {
+      console.log("Conditions not met for updating circle position"); // Debug log
     }
   };
 
   useEffect(() => {
-    gsap.set(".animate-content-2", {
+    gsap.set(".animate-content-4", {
       x: "100%",
       opacity: 0,
     });
 
-    gsap.set(".services-title-2", {
+    gsap.set(".services-title-4", {
       opacity: 0,
       y: 20,
     });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".services-container-2",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-      },
-    });
+    const tl = gsap.timeline();
 
     tl.fromTo(
-      ".fade-in-heading-2",
+      ".fade-in-heading-4",
       {
-        opacity: 0,
+        opacity: 1,
         y: 200,
       },
       {
         opacity: 1,
-        y: 0,
+        y: 200,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading-4",
+          start: "top 100%",
+          end: "top 60%",
+          scrub: 1,
+        },
       }
     )
-      .to(".fade-in-heading-2", {
+      .to(".fade-in-heading-4", {
         x: "-100%",
-        opacity: 0,
+        opacity: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading-4",
+          start: "top 40%",
+          end: "top 60%",
+          scrub: 1,
+          duration: 2,
+        },
       })
-      .to(".animate-content-2", {
+      .to(".animate-content-4", {
         x: "0%",
         opacity: 1,
-        duration: 1.5,
+        delay: 1,
+        scrollTrigger: {
+          trigger: ".animate-content-4",
+          start: "top 10%",
+          end: "top 30%",
+          scrub: 1,
+        },
       })
-      .to(".services-title-2", {
+      .to(".services-title-4", {
         opacity: 1,
         y: 0,
         duration: 0.5,
         delay: 0.3,
+        scrollTrigger: {
+          trigger: ".services-title-4",
+          start: "top 10%",
+          end: "top 10%",
+          scrub: 1,
+        },
       });
 
     // Animate service items
@@ -135,40 +156,41 @@ const ProductDevelopment = () => {
   const services = [
     {
       id: "panel1",
-      title: "\u00A0\u00A0\u00A0Create stunning, responsive websites.",
+      title:
+        "\u00A0\u00A0\u00A0Develop robust web applications tailored to your needs.",
       details: [
-        "Automate repetitive queries to save time and resources.",
-        "Provide personalized recommendations based on customer data.",
-        "Seamlessly integrate with existing communication platforms for effortless engagement.",
+        "Leverage modern frameworks for scalability and performance.",
+        "Ensure seamless integration with third-party services.",
+        "Optimize for security and reliability.",
       ],
     },
     {
       id: "panel2",
       title:
-        "\u00A0\u00A0\u00A0Develop robust web and mobile applications tailored to your needs.",
+        "\u00A0\u00A0\u00A0Build intuitive and engaging mobile applications.",
       details: [
-        "Enable faster access to critical business insights.",
-        "Integrate with existing systems for seamless data sharing.",
-        "Enhance productivity by simplifying complex information retrieval processes.",
+        "Design for both iOS and Android platforms.",
+        "Enhance user engagement with intuitive interfaces.",
+        "Ensure optimal performance with efficient coding practices.",
       ],
     },
     {
       id: "panel3",
       title: "\u00A0\u00A0\u00A0Create stunning, responsive websites.",
       details: [
-        "Automate repetitive queries to save time and resources.",
-        "Provide personalized recommendations based on customer data.",
-        "Seamlessly integrate with existing communication platforms for effortless engagement.",
+        "Prioritize user experience across all devices.",
+        "Use cutting-edge design principles to reflect your brand.",
+        "Optimize for speed and accessibility.",
       ],
     },
     {
       id: "panel4",
       title:
-        "\u00A0\u00A0\u00A0Develop robust web and mobile applications tailored to your needs.",
+        "\u00A0\u00A0\u00A0Craft exceptional UI/UX designs for a seamless user experience.",
       details: [
-        "Enable faster access to critical business insights.",
-        "Integrate with existing systems for seamless data sharing.",
-        "Enhance productivity by simplifying complex information retrieval processes.",
+        "Conduct user research to inform design decisions.",
+        "Develop wireframes and prototypes for feedback.",
+        "Focus on accessibility and aesthetic consistency.",
       ],
     },
   ];
@@ -189,7 +211,7 @@ const ProductDevelopment = () => {
 
   return (
     <Box
-      className="services-container-2"
+      className="services-container"
       sx={{
         width: "100%",
         minHeight: "100vh",
@@ -198,31 +220,40 @@ const ProductDevelopment = () => {
       }}
     >
       <Box
-        className="fade-in-heading-2"
+        className="fade-in-heading-4"
         sx={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100vh",
-          display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Typography
-          variant="h1"
-          sx={{
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          Product Development
-        </Typography>
+        <Box>
+          <Typography
+            variant="h1"
+            sx={{
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            Product Development
+          </Typography>
+        </Box>
+        <Box>
+          <Typography
+            variant="h4"
+            sx={{ textAlign: "center", fontWeight: "500", mt: 2 }}
+          >
+            Scalable and reliable development
+          </Typography>
+        </Box>
       </Box>
 
       <Box
-        className="animate-content-2"
+        className="animate-content-4"
         sx={{
           position: "absolute",
           top: 0,
@@ -254,7 +285,7 @@ const ProductDevelopment = () => {
           <Typography
             variant="h6"
             sx={{ color: "gray" }}
-            className="services-title-2"
+            className="services-title-4"
           >
             Product Development
           </Typography>
@@ -273,9 +304,10 @@ const ProductDevelopment = () => {
                 }}
               >
                 <AccordionSummary
+                  expandIcon={<ChevronDown style={{ color: "#fff" }} />}
                   sx={{
                     "&.Mui-expanded": {
-                      minHeight: 105,
+                      minHeight: 145,
                       margin: 0,
                     },
                     minHeight: 145,
@@ -294,6 +326,36 @@ const ProductDevelopment = () => {
                     {service.title}
                   </Typography>
                 </AccordionSummary>
+                <AccordionDetails
+                  sx={{
+                    padding: "0 16px 8px 16px",
+                    maxWidth: "120%",
+                    ml: "1%",
+                  }}
+                >
+                  <List
+                    sx={{
+                      padding: 0,
+                      "& .MuiListItem-root": {
+                        padding: "4px 0",
+                      },
+                    }}
+                  >
+                    {service.details.map((detail, index) => (
+                      <ListItem key={index}>
+                        <ListItemIcon sx={{ minWidth: 25 }}>
+                          <Circle size={8} color="#fff" />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={detail}
+                          primaryTypographyProps={{
+                            sx: { fontSize: "0.9rem" },
+                          }}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </AccordionDetails>
               </Accordion>
               {index < services.length && <GradientDivider />}
             </React.Fragment>
