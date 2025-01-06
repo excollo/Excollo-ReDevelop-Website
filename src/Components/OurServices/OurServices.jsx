@@ -3,6 +3,9 @@ import { Box, Typography } from "@mui/material";
 import ThreeDE from "../ThreeDE";
 import AIAutomation from "./AIAutomation";
 import ProductDevelopment from "./ProductDevelopment";
+import TechConsultancy from "./TechConsultancy";
+import SalesChannelDevelopment from "./SalesChannelDevelopment";
+import MLDrivenDataAnalysis from "./MLDrivenDataAnalysis";
 
 const OurServices = () => {
   return (
@@ -35,7 +38,10 @@ const OurServices = () => {
         </Box>
       </Box>
       <AIAutomation />
+      <SalesChannelDevelopment />
+      <MLDrivenDataAnalysis />
       <ProductDevelopment />
+      <TechConsultancy />
     </Box>
   );
 };

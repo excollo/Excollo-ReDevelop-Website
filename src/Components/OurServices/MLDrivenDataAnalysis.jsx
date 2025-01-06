@@ -16,7 +16,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TechConsultancy = () => {
+const MLDrivenDataAnalysis = () => {
   const [expanded, setExpanded] = useState(false);
   const [currentDotIndex, setCurrentDotIndex] = useState(0);
   const symbolRefs = useRef([]);
@@ -49,7 +49,7 @@ const TechConsultancy = () => {
       const symbol = symbolRefs.current[currentDotIndex];
       const rect = symbol.getBoundingClientRect();
       const parentRect = symbol
-        .closest(".services-container-3")
+        .closest(".services-container-5")
         .getBoundingClientRect();
 
       console.log("Updating circle position for index:", currentDotIndex);
@@ -63,19 +63,19 @@ const TechConsultancy = () => {
   };
 
   useEffect(() => {
-    gsap.set(".animate-content-3", {
+    gsap.set(".animate-content-5", {
       x: "100%",
       opacity: 0,
     });
 
-    gsap.set(".services-title-3", {
+    gsap.set(".services-title-5", {
       opacity: 0,
       y: 20,
     });
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: ".services-container-3",
+        trigger: ".services-container-5",
         start: "top top",
         end: "bottom bottom",
         scrub: 1,
@@ -86,7 +86,7 @@ const TechConsultancy = () => {
     });
 
     tl.fromTo(
-      ".fade-in-heading-3",
+      ".fade-in-heading-5",
       {
         opacity: 0,
         y: 200,
@@ -96,22 +96,23 @@ const TechConsultancy = () => {
         y: 0,
       }
     )
-      .to(".fade-in-heading-3", {
+      .to(".fade-in-heading-5", {
         x: "-100%",
         opacity: 0,
       })
-      .to(".animate-content-3", {
+      .to(".animate-content-5", {
         x: "0%",
         opacity: 1,
         duration: 1.5,
       })
-      .to(".services-title-3", {
+      .to(".services-title-5", {
         opacity: 1,
         y: 0,
         duration: 0.5,
         delay: 0.3,
       });
 
+    // Animate service items
     gsap.utils.toArray(".service-item").forEach((item, index) => {
       gsap.from(item, {
         scrollTrigger: {
@@ -134,41 +135,32 @@ const TechConsultancy = () => {
   const services = [
     {
       id: "panel1",
-      title: "\u00A0\u00A0\u00A0We understand your business and identify gaps.",
+      title:
+        "\u00A0\u00A0\u00A0Analyze large datasets to uncover patterns and trends.",
       details: [
-        "Automate repetitive queries to save time and resources.",
-        "Provide personalized recommendations based on customer data.",
-        "Seamlessly integrate with existing communication platforms for effortless engagement.",
+        "Set up and configure your e-commerce store seamlessly on Shopify.",
+        "Design visually appealing and user-friendly interfaces tailored to your brand.",
+        "Provide comprehensive support, including user training, SEO optimization, integrations, and more.",
       ],
     },
     {
       id: "panel2",
       title:
-        "\u00A0\u00A0\u00A0We assess your tech stack to implement solutions that drive efficiency.",
+        "\u00A0\u00A0\u00A0Predict consumer behavior with advanced analytics.",
       details: [
-        "Enable faster access to critical business insights.",
-        "Integrate with existing systems for seamless data sharing.",
-        "Enhance productivity by simplifying complex information retrieval processes.",
+        "Use machine learning algorithms to retarget customers effectively.",
+        "Design high-conversion templates tailored to customer needs.",
+        "Build automation workflows to streamline operations within the WhatsApp channel.",
       ],
     },
     {
       id: "panel3",
       title:
-        "\u00A0\u00A0\u00A0We identify both tools and technologies to bridge gaps effectively.",
+        "\u00A0\u00A0\u00A0Enhance decision-making with data-driven strategies.",
       details: [
-        "Enable faster access to critical business insights.",
-        "Integrate with existing systems for seamless data sharing.",
-        "Enhance productivity by simplifying complex information retrieval processes.",
-      ],
-    },
-    {
-      id: "panel4",
-      title:
-        "\u00A0\u00A0\u00A0Guide your digital transformation journey with expert insights. We understand your business and identify gaps.",
-      details: [
-        "Enable faster access to critical business insights.",
-        "Integrate with existing systems for seamless data sharing.",
-        "Enhance productivity by simplifying complex information retrieval processes.",
+        "Use machine learning algorithms to retarget customers effectively.",
+        "Design high-conversion templates tailored to customer needs.",
+        "Build automation workflows to streamline operations within the WhatsApp channel.",
       ],
     },
   ];
@@ -189,7 +181,7 @@ const TechConsultancy = () => {
 
   return (
     <Box
-      className="services-container-3"
+      className="services-container-5"
       sx={{
         width: "100%",
         minHeight: "100vh",
@@ -198,7 +190,7 @@ const TechConsultancy = () => {
       }}
     >
       <Box
-        className="fade-in-h eading-3"
+        className="fade-in-heading-5"
         sx={{
           position: "absolute",
           top: 0,
@@ -217,12 +209,12 @@ const TechConsultancy = () => {
             textAlign: "center",
           }}
         >
-          Tech Consultancy
+          ML Driven Data Analysis
         </Typography>
       </Box>
 
       <Box
-        className="animate-content-3"
+        className="animate-content-5"
         sx={{
           position: "absolute",
           top: 0,
@@ -254,9 +246,9 @@ const TechConsultancy = () => {
           <Typography
             variant="h6"
             sx={{ color: "gray" }}
-            className="services-title-3"
+            className="services-title-5"
           >
-            Tech Consultancy
+            ML Driven Data Analysis
           </Typography>
           {services.map((service, index) => (
             <React.Fragment key={service.id}>
@@ -349,4 +341,4 @@ const TechConsultancy = () => {
   );
 };
 
-export default TechConsultancy;
+export default MLDrivenDataAnalysis;
