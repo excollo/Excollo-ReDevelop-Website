@@ -69,11 +69,12 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
       ref={sectionRef}
       sx={{
         color: "#fff",
-        height: "100vh",
+        minHeight: "70vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        width: "85%",
         padding: "4rem",
         fontFamily: '"Inter", sans-serif',
         position: "relative",
@@ -85,11 +86,11 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         ref={gradientRef}
         sx={{
           position: "absolute",
-          top: "30%",
+          top: "8%",
           left: 0,
           right: 0,
           bottom: 0,
-          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
+          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
           zIndex: 1, // Set consistent z-index
           pointerEvents: "none",
           transformOrigin: "center center",
@@ -114,8 +115,8 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
             marginBottom: "2rem",
             position: "relative",
             zIndex: 2, // Set consistent z-index
-            marginTop: "30rem",
-            marginLeft: "45%",
+            marginLeft: "60%",
+            marginTop: "20%",
           }}
         >
           <Box>
@@ -126,11 +127,12 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 fontWeight: 400,
                 fontSize: { xs: "1.5rem" },
                 lineHeight: 1.3,
-                mb: 10,
+                maxWidth: "100%",
+                mb: 6,
               }}
             >
-              Excollo delivers outcomes, leveraging AI to make <br /> businesses
-              future-ready, boosting productivity and <br /> efficiency at every
+              Excollo delivers outcomes, leveraging AI to make businesses
+              future-ready, boosting productivity and efficiency at every
               step.
             </Typography>
 
