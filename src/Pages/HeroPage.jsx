@@ -221,6 +221,7 @@ const HeroPage = () => {
           display: "flex",
           position: "relative",
           zIndex: 3,
+          marginTop: "-6rem",
           opacity: 1,
           transform: "translateX(-100px)",
         }}

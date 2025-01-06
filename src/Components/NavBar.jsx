@@ -9,7 +9,7 @@ const NavBar = () => {
       sx={{
         backgroundColor: "transparent",
         boxShadow: "none",
-        position: "fixed",
+        position: "relative", // Change this to relative
         zIndex: 10,
       }}
     >
@@ -18,8 +18,7 @@ const NavBar = () => {
           display="flex"
           alignItems="center"
           padding={4}
-          mb={2}
-          ml={-10}
+          ml={-11}
           sx={{ position: "relative", zIndex: 0 }}
         >
           <img
@@ -34,7 +33,7 @@ const NavBar = () => {
             component={Link}
             to="/about"
             sx={{
-              display: "inline-block", // Ensures the button behaves like a block
+              display: "inline-block",
               color: "#ffffff",
               textDecoration: "none",
               fontSize: "16px",
@@ -42,7 +41,7 @@ const NavBar = () => {
               padding: "10px 20px",
               "&:hover": {
                 background:
-                  "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",
+                  "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
                 color: "#ffffff",
                 border: "1px solid transparent",
                 borderRadius: "40px",
@@ -53,18 +52,17 @@ const NavBar = () => {
           </Typography>
           <Typography
             component={Link}
-            to="/about"
+            to="/services"
             sx={{
-              display: "inline-block", // Ensures the button behaves like a block
+              display: "inline-block",
               color: "#ffffff",
               textDecoration: "none",
               fontSize: "16px",
-              zIndex: 3, // Ensure the button is above other elements
               position: "relative",
               padding: "10px 20px",
               "&:hover": {
                 background:
-                  "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",
+                  "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
                 color: "#ffffff",
                 border: "1px solid transparent",
                 borderRadius: "40px",
