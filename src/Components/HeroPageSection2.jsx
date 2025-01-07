@@ -143,7 +143,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                        display: "inline-block", // Ensures the button behaves like a block
                        color: "#ffffff",
                        textDecoration: "none",
-                       fontSize: "16px",
+                       fontSize: "18px",
                        border: "1px solid transparent",
                        padding: "20px 60px",
                        borderRadius: "40px",
