@@ -2,33 +2,19 @@ import React from "react";
 import { Box, Typography, Grid, Link, Divider } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+
 const Footer = () => {
   return (
     <Box
       position="relative"
       zIndex={1}
       sx={{
-        color: "#FFFFFF", // White text
+        color: "#ffffff", // White text
         padding: "4rem 3rem",
-        lineHeight: 1.8,
         fontFamily: '"Inter", sans-serif',
       }}
     >
-      {/* Gradient Effect */}
-      {scrollY > 100 && ( // Adjust scroll threshold as needed
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "12%",
-            background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 1) 0%, rgba(0, 0, 0, 0) 60%)`,
-            zIndex: -1,
-          }}
-        />
-      )}
-      <Grid container justifyContent="space-between" sx={{ paddingTop: 5 }}>
+      <Grid container justifyContent="space-between">
         {/* Company Info */}
         <Grid item xs={12} md={4}>
           <Box sx={{ display: "flex", alignItems: "center", mb: 2, ml: 8 }}>
@@ -54,7 +40,7 @@ const Footer = () => {
           <Box sx={{ ml: 12 }}>
             <Typography
               variant="body2"
-              color="#fff"
+              color="grey.400"
               gutterBottom
               position="relative"
               zIndex={1}
@@ -66,12 +52,13 @@ const Footer = () => {
               position="relative"
               zIndex={1}
               sx={{
-                color: "#fff",
+                color: "grey.400",
               }}
             >
               Hanuman Nagar, Vaishali Nagar
               <br /> Jaipur
             </Typography>
+
             {/* Social Media Icons */}
             <Box sx={{ display: "flex", gap: "1rem", mt: 2 }}>
               <Link href="#" color="inherit" underline="none">
@@ -83,6 +70,7 @@ const Footer = () => {
             </Box>
           </Box>
         </Grid>
+
         {/* Product Links */}
         <Grid ml={40}>
           <Typography
@@ -109,8 +97,8 @@ const Footer = () => {
                 zIndex={1}
                 mb={1}
                 sx={{
-                  color: "#fff",
-                  "&:hover": { color: "#A693C1" },
+                  color: "grey.400",
+                  "&:hover": { color: "white" },
                   cursor: "pointer",
                 }}
               >
@@ -119,6 +107,7 @@ const Footer = () => {
             ))}
           </Box>
         </Grid>
+
         {/* Company Links */}
         <Grid item md={2}>
           <Typography
@@ -138,8 +127,8 @@ const Footer = () => {
                 position="relative"
                 zIndex={1}
                 sx={{
-                  color: "#fff",
-                  "&:hover": { color: "#A693C1" },
+                  color: "grey.400",
+                  "&:hover": { color: "white" },
                   cursor: "pointer",
                 }}
               >
@@ -149,35 +138,35 @@ const Footer = () => {
           </Box>
         </Grid>
       </Grid>
+
       <Divider sx={{ backgroundColor: "grey.800", my: 3, mx: 11 }} />
+
       {/* Bottom Footer */}
       <Box
         sx={{
           display: "flex",
-          width: "88%",
-          margin: "auto",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           alignItems: "center",
           flexWrap: "wrap",
           fontSize: "0.875rem",
-          color: "#fff",
-          // gap: "25rem",
+          color: "grey.500",
+          gap: "25rem",
         }}
       >
         <Typography variant="caption" position="relative" zIndex={1}>
           © {new Date().getFullYear()} Bhiwal Infotech Pvt Ltd. All Rights
           Reserved.
         </Typography>
+
         <Box>
           <Link
             href="#"
             position="relative"
             zIndex={1}
             sx={{
-              color: "#fff",
-              textDecoration: "none",
+              color: "grey.400",
               mx: 1,
-              "&:hover": { color: "#A693C1" },
+              "&:hover": { color: "white" },
             }}
           >
             Privacy Policy
@@ -187,10 +176,9 @@ const Footer = () => {
             position="relative"
             zIndex={1}
             sx={{
-              color: "#fff",
-              textDecoration: "none",
+              color: "grey.400",
               mx: 1,
-              "&:hover": { color: "#A693C1" },
+              "&:hover": { color: "white" },
             }}
           >
             Terms of Service
@@ -200,4 +188,5 @@ const Footer = () => {
     </Box>
   );
 };
+
 export default Footer;

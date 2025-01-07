@@ -25,7 +25,7 @@ const MarqueeCarousel5 = () => {
           <img
             src={github_copilot}
             alt="Logo"
-            style={{ height: 40, width: "auto" }}
+            style={{ height: 30, width: "auto" }}
           />
         </Box>
       ),

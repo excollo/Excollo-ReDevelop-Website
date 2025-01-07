@@ -30,7 +30,7 @@ const HeroPageSection1 = () => {
             fontWeight: 200,
             fontSize: { xs: "2rem", sm: "3rem" },
             lineHeight: 1.2,
-            mt: 27,
+            mt: 42,
           }}
         >
           Shaping the Future With

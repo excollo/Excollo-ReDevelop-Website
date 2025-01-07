@@ -11,7 +11,6 @@ const NavBar = () => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
-      // Make navbar visible when scrolling up
       setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
 
       setPrevScrollPos(currentScrollPos);

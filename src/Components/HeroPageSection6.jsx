@@ -128,7 +128,7 @@ const HeroPageSection6 = () => {
         marginLeft: "10.5%",
         marginBottom: "-2rem",
         color: "#fff",
-        gap: "10rem",
+        gap: "12rem",
         paddingBottom: "5rem",
       }}
     >

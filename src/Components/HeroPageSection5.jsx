@@ -3,29 +3,25 @@ import { Box, Typography } from "@mui/material";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./HeroPageSection5.css";
-
 gsap.registerPlugin(ScrollTrigger);
-
 const HeroPageSection5 = () => {
-  const textRef = useRef(null);
+  // const textRef = useRef(null);
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
-
   useEffect(() => {
-    gsap.fromTo(
-      textRef.current,
-      { fontSize: "7rem" },
-      {
-        fontSize: "3.5rem",
-        scrollTrigger: {
-          trigger: textRef.current,
-          start: "top 90%",
-          end: "bottom 10%",
-          scrub: true,
-        },
-      }
-    );
-
+    // gsap.fromTo(
+    //   textRef.current,
+    //   { fontSize: "7rem" },
+    //   {
+    //     fontSize: "3.5rem",
+    //     scrollTrigger: {
+    //       trigger: textRef.current,
+    //       start: "top 90%",
+    //       end: "bottom 10%",
+    //       scrub: true,
+    //     },
+    //   }
+    // );
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start: "top top",
@@ -33,7 +29,6 @@ const HeroPageSection5 = () => {
       pin: true,
       pinSpacing: false,
     });
-
     cardRefs.current.forEach((card, index) => {
       gsap.fromTo(
         card,
@@ -53,9 +48,11 @@ const HeroPageSection5 = () => {
       );
     });
   }, []);
-
   return (
-    <Box ref={sectionRef} sx={{ minHeight: "95vh" }}>
+    <Box
+      ref={sectionRef}
+      sx={{ minHeight: "95vh", fontFamily: '"Inter", sans-serif' }}
+    >
       <Box sx={{ marginBottom: "2rem" }}>
         <Typography
           sx={{
@@ -63,13 +60,12 @@ const HeroPageSection5 = () => {
           }}
           variant="h2"
           fontWeight="bold"
-          ref={textRef}
         >
           How We{" "}
           <Box
             component="span"
             sx={{
-              background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}
@@ -113,5 +109,4 @@ const HeroPageSection5 = () => {
     </Box>
   );
 };
-
 export default HeroPageSection5;

@@ -54,12 +54,7 @@
 
 .gradientCardBox .box:before,
 .gradientCardBox .box:after {
-  background: linear-gradient(
-    180deg,
-    #3283b8,
-    #a97fea,
-    #a97fea
-  );
+  background: linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)
 }
 
 @keyframes animate {
@@ -126,7 +121,7 @@
   padding: 10px;
   border-radius: 4px;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 500;
   margin-top: 5px;
 }
 

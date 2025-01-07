@@ -106,7 +106,7 @@ const AIAutomation = () => {
           start: "top 40%",
           end: "top 60%",
           scrub: 1,
-          duration: 2,
+          duration: 2
         },
       })
       .to(".animate-content", {

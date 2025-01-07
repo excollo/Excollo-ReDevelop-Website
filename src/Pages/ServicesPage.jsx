@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import OurServices from "../Components/OurServices/OurServices";
 import NavBar from "../Components/NavBar";
+import Footer from "../Components/OurServices/Footer";
 
 const ServicesPage = () => {
   return (
@@ -38,6 +39,9 @@ const ServicesPage = () => {
       </Box>
       <Box>
         <OurServices />
+      </Box>
+      <Box>
+        <Footer />
       </Box>
     </Box>
   );

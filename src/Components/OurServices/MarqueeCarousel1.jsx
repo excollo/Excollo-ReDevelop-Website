@@ -27,7 +27,7 @@ const MarqueeCarousel1 = () => {
           <img
             src={botpress}
             alt="Logo"
-            style={{ height: 40, width: "auto", marginRight: "3rem" }}
+            style={{ height: 70, width: "auto", marginRight: "3rem" }}
           />
         </Box>
       ),
@@ -49,7 +49,7 @@ const MarqueeCarousel1 = () => {
             <img
               src={github_copilot}
               alt="Logo"
-              style={{ height: 40, width: "auto", marginRight: "3rem" }}
+              style={{ height: 30, width: "auto", marginRight: "3rem" }}
             />
         </Box>
       ),
@@ -71,7 +71,7 @@ const MarqueeCarousel1 = () => {
           <img
             src={microsoft_azure}
             alt="Logo"
-            style={{ height: 40, width: "auto" }}
+            style={{ height: 90, width: "auto" }}
           />
         </Box>
       ),
@@ -90,7 +90,7 @@ const MarqueeCarousel1 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={n8n} alt="Logo" style={{ height: 40, width: "auto", marginLeft: "-2rem" }} />
+          <img src={n8n} alt="Logo" style={{ height: 60, width: "auto", marginLeft: "-2rem" }} />
         </Box>
       ),
     },
