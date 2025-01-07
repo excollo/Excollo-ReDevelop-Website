@@ -13,6 +13,7 @@ import {
 import { ChevronDown, Circle } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import MarqueeCarousel5 from "./MarqueeCarousel5";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,7 +60,6 @@ const TechConsultancy = () => {
       gsap.to(circleRef.current, {
         top: rect.top - parentRect.top + rect.height / 2 - 30,
         left: rect.left - parentRect.left + rect.width / 2 - 150,
-        duration: 0.8,
         ease: "power2.inOut",
       });
     } else {
@@ -215,9 +215,11 @@ const TechConsultancy = () => {
       className="services-container"
       sx={{
         width: "100%",
-        minHeight: "100vh",
+        minHeight: "120vh",
+        marginTop: "5rem",
         position: "relative",
         overflow: "hidden",
+        marginBottom: "5rem",
       }}
     >
       <Box
@@ -261,7 +263,6 @@ const TechConsultancy = () => {
           left: 0,
           width: "100%",
           height: "100vh",
-          overflowY: "auto",
           padding: "2rem",
           "&::-webkit-scrollbar": {
             width: "8px",
@@ -375,6 +376,9 @@ const TechConsultancy = () => {
               transform: "translate(-50%, -50%)",
             }}
           />
+        </Box>
+        <Box sx={{ mt: 10, ml: "-5%" }}>
+          <MarqueeCarousel5 />
         </Box>
       </Box>
     </Box>

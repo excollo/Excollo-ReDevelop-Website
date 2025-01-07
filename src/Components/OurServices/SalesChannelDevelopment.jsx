@@ -13,6 +13,7 @@ import {
 import { ChevronDown, Circle } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import MarqueeCarousel2 from "./MarqueeCarousel2";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,7 +60,6 @@ const SalesChannelDevelopment = () => {
       gsap.to(circleRef.current, {
         top: rect.top - parentRect.top + rect.height / 2 - 30,
         left: rect.left - parentRect.left + rect.width / 2 - 150, // Adjusted left position
-        duration: 0.8,
         ease: "power2.inOut",
       });
     } else {
@@ -212,9 +212,11 @@ const SalesChannelDevelopment = () => {
       className="services-container"
       sx={{
         width: "100%",
-        minHeight: "100vh",
+        minHeight: "120vh",
+        marginTop: "5rem",
         position: "relative",
         overflow: "hidden",
+        marginBottom: "5rem",
       }}
     >
       <Box
@@ -258,7 +260,6 @@ const SalesChannelDevelopment = () => {
           left: 0,
           width: "100%",
           height: "100vh",
-          overflowY: "auto",
           padding: "2rem",
           "&::-webkit-scrollbar": {
             width: "8px",
@@ -372,6 +373,9 @@ const SalesChannelDevelopment = () => {
               transform: "translate(-50%, -50%)",
             }}
           />
+        </Box>
+        <Box sx={{ mt: 10, ml: "-5%" }}>
+          <MarqueeCarousel2 />
         </Box>
       </Box>
     </Box>

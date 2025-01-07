@@ -10,7 +10,7 @@ import MLDrivenDataAnalysis from "./MLDrivenDataAnalysis";
 const OurServices = () => {
   return (
     <Box className="services-section">
-      <Box sx={{ minHeight: "50vh", display: "flex" }}>
+      <Box sx={{ minHeight: "50vh", display: "flex", maxWidth: "85%" }}>
         <Box>
           <Typography
             variant="h2"
@@ -19,13 +19,13 @@ const OurServices = () => {
               fontWeight: "500",
               justifyContent: "left",
               textAlign: "left",
-              ml: "23%",
+              ml: "17%",
               mt: 20,
             }}
           >
             Our Core <br /> Services
           </Typography>
-          <Typography sx={{ ml: "23%", mt: 5, maxWidth: "70%" }}>
+          <Typography sx={{ ml: "17%", mt: 5, maxWidth: "60%" }}>
             Excollo is future-ready, offering unparalleled expertise to
             enterprises seeking to transform their digital stack. By leveraging
             cutting-edge AI, automation, and innovative consultancy, we identify
@@ -33,7 +33,7 @@ const OurServices = () => {
             businesses to achieve scalable success.
           </Typography>
         </Box>
-        <Box sx={{ marginRight: "18%", marginTop: "-6%" }}>
+        <Box sx={{ marginTop: "-6%", marginRight: "-3%" }}>
           <ThreeDE />
         </Box>
       </Box>
