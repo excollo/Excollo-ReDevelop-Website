@@ -12,8 +12,8 @@ const HeroPage1 = () => {
 
   return (
     <div>
-      <HeroPageSection4 />
-      <HeroPageSection5 />
+      <HeroPageSection2 />
+      <HeroPageSection3 />
       <HeroPageSection6 />
     </div>
   );

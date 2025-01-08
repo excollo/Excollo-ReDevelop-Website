@@ -15,6 +15,16 @@ const carouselContent = [
   {
     title: "AI & Automation",
     description:
+      " Identify gaps in processes, align technology to bridge those gaps, and implement transformative solutions tailored for success.",
+  },
+  {
+    title: "Sales Channel Development",
+    description:
+      "Scalable websites, web apps, and mobile apps tailored to your business’s unique needs.",
+  },
+  {
+    title: "ML Driven Data Analysis",
+    description:
       "Harness cutting-edge machine learning to decode data, predict trends, and empower precise, forward-thinking business strategies.",
   },
   {
@@ -24,16 +34,6 @@ const carouselContent = [
   },
   {
     title: "Tech Consultancy",
-    description:
-      "Identify gaps in processes, align technology to bridge those gaps, and implement transformative solutions tailored for success.",
-  },
-  {
-    title: "Sales Channel Development",
-    description:
-      "Scalable websites, web apps, and mobile apps tailored to your business's unique needs.",
-  },
-  {
-    title: "ML Driven Data Analysis",
     description:
       "From intelligent chatbots to workflow automation, we bring AI solutions that optimize operations and reduce costs.",
   },
@@ -52,17 +52,31 @@ const Carousel = ({ isReverse, type = "title" }) => {
     setRotation,
   } = useContext(ScrollContext);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isOverCard, setIsOverCard] = useState(false);
   const lastScrollTime = useRef(Date.now());
   const initialScrollDirection = useRef(null);
 
   const handleMouseMove = (e, index) => {
-    if (type === "title") {
-      const { clientX, clientY, currentTarget } = e;
-      const rect = currentTarget.getBoundingClientRect();
-      const x = ((clientX - rect.left) / rect.width - 0.5) * 15;
-      const y = ((clientY - rect.top) / rect.height - 0.5) * -15;
-      setRotation({ x, y });
-      setHoveredIndex(index);
+    const { clientX, clientY, currentTarget } = e;
+    const rect = currentTarget.getBoundingClientRect();
+    const isCursorOverCard =
+      clientX >= rect.left &&
+      clientX <= rect.right &&
+      clientY >= rect.top &&
+      clientY <= rect.bottom;
+
+      setIsOverCard(isCursorOverCard);
+
+    if (isCursorOverCard) {
+      if (type === "title") {
+        const x = ((clientX - rect.left) / rect.width - 0.5) * 15;
+        const y = ((clientY - rect.top) / rect.height - 0.5) * -15;
+        setRotation({ x, y });
+        setHoveredIndex(index);
+      }
+    } else {
+      setRotation({ x: 0, y: 0 });
+      setHoveredIndex(null);
     }
   };
 
@@ -74,6 +88,16 @@ const Carousel = ({ isReverse, type = "title" }) => {
   };
 
   const handleWheelEvent = (e) => {
+    // If cursor is not over card, allow natural vertical scrolling
+    if (!isOverCard) {
+      // Only prevent horizontal scrolling
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault();
+      }
+      return;
+    }
+
+    // If over card, prevent all scrolling and handle carousel movement
     e.stopPropagation();
     e.preventDefault();
 
@@ -123,6 +147,27 @@ const Carousel = ({ isReverse, type = "title" }) => {
       }
     }
   };
+
+  const handleContainerMouseLeave = () => {
+    setIsOverCard(false);
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.addEventListener("wheel", handleWheelEvent, { passive: false });
+    container.addEventListener("touchmove", (e) => e.preventDefault(), {
+      passive: false,
+    });
+    container.addEventListener("mouseleave", handleContainerMouseLeave);
+
+    return () => {
+      container.removeEventListener("wheel", handleWheelEvent);
+      container.removeEventListener("touchmove", (e) => e.preventDefault());
+      container.removeEventListener("mouseleave", handleContainerMouseLeave);
+    };
+  }, [isScrolling, isOverCard]);
 
   const handleButtonClick = (direction) => {
     if (!containerRef.current || isScrolling) return;
@@ -260,6 +305,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
           left: "10px",
           zIndex: 3,
           color: "white",
+          marginLeft: "7rem",
         }}
       >
         <ArrowBackIosIcon />
@@ -337,6 +383,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
           right: "10px",
           zIndex: 3,
           color: "white",
+          marginRight: "7rem",
         }}
       >
         <ArrowForwardIosIcon />
