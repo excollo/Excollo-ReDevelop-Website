@@ -1,32 +1,54 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box } from "@mui/material";
+import { Box, Fade, Button } from "@mui/material";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { gsap } from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import ThreeDE from "../Components/ThreeDE";
 import NavBar from "../Components/NavBar";
-import HeroPageSection1 from "../Components/HeroPageSection1";
-import HeroPageSection2 from "../Components/HeroPageSection2";
-import HeroPageSection3 from "../Components/HeroPageSection3/HeroPageSection3";
-import HeroPageSection4 from "../Components/HeroPageSection4";
-import HeroPageSection5 from "../Components/HeroPageSection5";
-import Footer from "../Components/Footer";
-import HeroPageSection6 from "../Components/HeroPageSection6";
-import HeroPageSection7 from "../Components/HeroPageSection7";
+import HeroPageSection1 from "../Components/LandingPage/HeroPageSection1";
+import HeroPageSection2 from "../Components/LandingPage/HeroPageSection2";
+import HeroPageSection3 from "../Components/LandingPage/HeroPageSection3/HeroPageSection3";
+import HeroPageSection4 from "../Components/LandingPage/HeroPageSection4";
+import HeroPageSection5 from "../Components/LandingPage/HeroPageSection5";
+import Footer from "../Components/LandingPage/Footer";
+import HeroPageSection6 from "../Components/LandingPage/HeroPageSection6";
+import HeroPageSection7 from "../Components/LandingPage/HeroPageSection7";
 
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MotionPathPlugin);
 
 const HeroPage = () => {
   const [showThreeDE, setShowThreeDE] = useState(true);
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [showButton, setShowButton] = useState(false);
   const [hero1Complete, setHero1Complete] = useState(false);
   const [hero2Complete, setHero2Complete] = useState(false);
   const [hero4Complete, setHero4Complete] = useState(false);
   const threeDERef = useRef(null);
 
   useEffect(() => {
-    document.body.style.overflow =
-      !hero1Complete || showThreeDE ? "hidden" : "auto";
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!hero1Complete || showThreeDE) {
+      document.body.style.overflow = "hidden";
+    } else {
+      setTimeout(() => {
+        document.body.style.overflow = "auto";
+      }, 100);
+    }
 
     return () => {
       document.body.style.overflow = "auto";
@@ -68,7 +90,7 @@ const HeroPage = () => {
         gsap.to(".hero-content", {
           opacity: 1,
           x: 0,
-          duration: 0.5, // Match duration with navbar
+          duration: 0.5,
           ease: "power2.out",
           onComplete: () => {
             setAnimationComplete(true);
@@ -130,9 +152,9 @@ const HeroPage = () => {
   }, [hero1Complete]);
 
   useEffect(() => {
-    if (hero4Complete) {
+    if (hero2Complete) {
       gsap.fromTo(
-        ".hero-page-section-5",
+        ".hero-page-section-4",
         {
           opacity: 0,
           y: 100,
@@ -143,15 +165,37 @@ const HeroPage = () => {
           duration: 1,
           ease: "power2.out",
           scrollTrigger: {
-            trigger: ".hero-page-section-5",
+            trigger: ".hero-page-section-4",
             start: "top center",
             end: "bottom center",
             toggleActions: "play none none reverse",
+            onEnter: () => {
+              setHero4Complete(true);
+            },
+            preventOverlaps: true,
+            fastScrollEnd: true,
           },
         }
       );
     }
-  }, [hero4Complete]);
+  }, [hero2Complete]);
+
+  const handleScrollToTop = () => {
+    const section4 = document.querySelector(".hero-page-section-4");
+    const section4Bounds = section4?.getBoundingClientRect();
+
+    if (
+      !section4Bounds ||
+      section4Bounds.top < 0 ||
+      section4Bounds.bottom > window.innerHeight
+    ) {
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: 0,
+        ease: "power2.inOut",
+      });
+    }
+  };
 
   return (
     <Box
@@ -163,6 +207,37 @@ const HeroPage = () => {
         background: "#000000",
       }}
     >
+      <Fade in={showButton}>
+        <Button
+          onClick={handleScrollToTop}
+          variant="contained"
+          color="primary"
+          sx={{
+            position: "fixed",
+            bottom: 50,
+            height: 60,
+            right: 50,
+            zIndex: 1000,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.1)",
+            "&:hover": {
+              background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+            },
+            "@media (max-width: 768px)": {
+              position: "fixed",
+              bottom: 50,
+              right: 50,
+            },
+            "@media (max-width: 480px)": {
+              position: "fixed",
+              bottom: 50,
+              right: 50,
+            },
+          }}
+        >
+          <ArrowUpwardIcon />
+        </Button>
+      </Fade>
       <Box
         className="threeDE"
         ref={threeDERef}
@@ -199,7 +274,7 @@ const HeroPage = () => {
           width: "90%",
           height: "5%",
           background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
-          zIndex: 1, // Set consistent z-index
+          zIndex: 1,
           opacity: 0,
         }}
       />
@@ -207,7 +282,7 @@ const HeroPage = () => {
         className="navbar"
         sx={{
           position: "relative",
-          zIndex: 10, 
+          zIndex: 10,
           marginTop: "1rem",
           opacity: 0,
           transform: "translateX(-100px)",
@@ -244,7 +319,7 @@ const HeroPage = () => {
         <Box className="hero-page-section-3" sx={{ opacity: 1 }}>
           <HeroPageSection3 />
         </Box>
-        <Box>
+        <Box className="hero-page-section-4">
           <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
         </Box>
         <Box>

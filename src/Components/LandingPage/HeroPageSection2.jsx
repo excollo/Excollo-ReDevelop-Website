@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Typography } from "@mui/material";
 import { gsap } from "gsap";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,6 +10,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
   const sectionRef = useRef(null);
   const gradientRef = useRef(null);
   const contentRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -64,6 +65,12 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
     };
   }, [onAnimationComplete]);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate("/services");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <Box
       ref={sectionRef}
@@ -114,7 +121,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
             justifyContent: "right",
             marginBottom: "2rem",
             position: "relative",
-            zIndex: 2, // Set consistent z-index
+            zIndex: 2,
             marginLeft: "60%",
             marginTop: "20%",
           }}
@@ -126,7 +133,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
               sx={{
                 fontWeight: 200,
                 fontSize: { xs: "1.3rem" },
-                lineHeight: 1.2,
+                lineHeight: 1.5,
                 marginLeft: "0.5%",
                 mb: 6,
               }}
@@ -137,7 +144,8 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
 
             <Typography
               component={Link}
-              to="/about"
+              to="/services"
+              onClick={handleClick}
               sx={{
                 display: "inline-block", // Ensures the button behaves like a block
                 color: "#ffffff",

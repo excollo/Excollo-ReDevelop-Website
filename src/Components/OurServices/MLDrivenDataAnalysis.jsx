@@ -239,7 +239,7 @@ const MLDrivenDataAnalysis = () => {
               textAlign: "center",
             }}
           >
-            ML Driven Data Analysis
+            ML Driven Analysis
           </Typography>
         </Box>
         <Box>
@@ -286,7 +286,7 @@ const MLDrivenDataAnalysis = () => {
             sx={{ color: "gray" }}
             className="services-title-3"
           >
-            ML Driven Data Analysis
+            ML Driven Analysis
           </Typography>
           {services.map((service, index) => (
             <React.Fragment key={service.id}>

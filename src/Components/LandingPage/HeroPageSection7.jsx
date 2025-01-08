@@ -1,6 +1,6 @@
 import { Box, Divider } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Logo from "../assets/logo/excollo3d.png";
+import Logo from "../../assets/logo/excollo3d.png"
 
 const HeroPageSection7 = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -30,7 +30,7 @@ const HeroPageSection7 = () => {
     setRotation({ x: 0, y: 0 });
   };
 
-  const translateYImage = Math.max(1830 - scrollY * 0.5, 0);
+  const translateYImage = Math.max(1870 - scrollY * 0.5, 0);
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
 

@@ -43,7 +43,7 @@ const HeroPageSection5 = () => {
       <Box
         sx={{
           position: "absolute",
-          top: "-37%",
+          top: "-35%",
           left: "0",
           right: "0%",
           bottom: 0,

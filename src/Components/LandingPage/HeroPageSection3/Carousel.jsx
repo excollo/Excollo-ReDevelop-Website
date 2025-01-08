@@ -3,6 +3,7 @@ import { Box, Typography, IconButton } from "@mui/material";
 import { ScrollContext } from "./ScrollProvider";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Link, useNavigate } from "react-router-dom";
 
 const CARD_WIDTH = 620;
 const CARD_HEIGHT = 400;
@@ -16,26 +17,31 @@ const carouselContent = [
     title: "AI & Automation",
     description:
       " Identify gaps in processes, align technology to bridge those gaps, and implement transformative solutions tailored for success.",
+    link: "/services",
   },
   {
     title: "Sales Channel Development",
     description:
       "Scalable websites, web apps, and mobile apps tailored to your business’s unique needs.",
+    link: "/services",
   },
   {
     title: "ML Driven Analysis",
     description:
       "Harness cutting-edge machine learning to decode data, predict trends, and empower precise, forward-thinking business strategies.",
+    link: "/services",
   },
   {
     title: "Product Development",
     description:
       "Set up or enhance e-commerce and WhatsApp sales channels to unlock new growth avenues.",
+    link: "/services",
   },
   {
     title: "Tech Consultancy",
     description:
       "From intelligent chatbots to workflow automation, we bring AI solutions that optimize operations and reduce costs.",
+    link: "/services",
   },
 ];
 
@@ -55,6 +61,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
   const [isOverCard, setIsOverCard] = useState(false);
   const lastScrollTime = useRef(Date.now());
   const initialScrollDirection = useRef(null);
+  const navigate = useNavigate();
 
   const handleMouseMove = (e, index) => {
     const { clientX, clientY, currentTarget } = e;
@@ -65,7 +72,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
       clientY >= rect.top &&
       clientY <= rect.bottom;
 
-      setIsOverCard(isCursorOverCard);
+    setIsOverCard(isCursorOverCard);
 
     if (isCursorOverCard) {
       if (type === "title") {
@@ -168,6 +175,13 @@ const Carousel = ({ isReverse, type = "title" }) => {
       container.removeEventListener("mouseleave", handleContainerMouseLeave);
     };
   }, [isScrolling, isOverCard]);
+
+  useEffect(() => {
+    if (!isOverCard) {
+      setRotation({ x: 0, y: 0 });
+      setHoveredIndex(null);
+    }
+  }, [isOverCard]);
 
   const handleButtonClick = (direction) => {
     if (!containerRef.current || isScrolling) return;
@@ -305,10 +319,10 @@ const Carousel = ({ isReverse, type = "title" }) => {
           position: "absolute",
           left: "10px",
           zIndex: 3,
-          color: "white", // Default color
+          color: "white",
           marginLeft: "7rem",
           "&.Mui-disabled": {
-            color: "#716b6b", // Custom color for the disabled state
+            color: "#716b6b",
           },
         }}
       >
@@ -337,27 +351,32 @@ const Carousel = ({ isReverse, type = "title" }) => {
             sx={getCardStyle(index)}
             onMouseMove={(e) => handleMouseMove(e, index)}
             onMouseLeave={handleMouseLeave}
-            onClick={() =>
-              type === "title" && console.log(`Card ${item.title} clicked`)
-            }
+            onClick={() => {
+              if (type === "title") {
+                navigate(item.link, { replace: true });
+                window.scrollTo(0, 0);
+              }
+            }}
           >
             {type === "title" ? (
-              <Typography
-                variant="h3"
-                fontWeight="500"
-                sx={{
-                  background:
-                    "linear-gradient(to bottom right, #2579e3, #8e54f7)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  marginTop: "-12rem",
-                  display: "inline-block",
-                  transform: "translateZ(60px)",
-                  textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
-                }}
-              >
-                {item.title}
-              </Typography>
+              <Link to={item.link || "#"} style={{ marginTop: "-8rem" }}>
+                <Typography
+                  variant="h3"
+                  fontWeight="400"
+                  sx={{
+                    background:
+                      "linear-gradient(180deg, #2579e3, #8e54f7)",
+                    fontSize: "2.8rem",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    display: "inline-block",
+                    transform: "translateZ(60px)",
+                    textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  {item.title}
+                </Typography>
+              </Link>
             ) : (
               <Typography
                 variant="h5"
@@ -388,9 +407,9 @@ const Carousel = ({ isReverse, type = "title" }) => {
           position: "absolute",
           right: "10px",
           zIndex: 3,
-          color: "white", // Default color
+          color: "white",
           "&.Mui-disabled": {
-            color: "#716b6b", // Custom color for the disabled state
+            color: "#716b6b",
           },
           marginRight: "7rem",
         }}

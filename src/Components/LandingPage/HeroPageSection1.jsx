@@ -30,7 +30,7 @@ const HeroPageSection1 = () => {
             fontWeight: 200,
             fontSize: { xs: "2rem", sm: "3rem" },
             lineHeight: 1.2,
-            mt: 42,
+            mt: 30,
           }}
         >
           Shaping the Future With
@@ -74,9 +74,8 @@ const HeroPageSection1 = () => {
           sx={{
             fontWeight: 200,
             fontSize: { xs: "1.3rem" },
-            lineHeight: 1.2,
+            lineHeight: 1.5,
             marginLeft: "0.5%",
-            mb: 1.5,
           }}
         >
           Unlock the potential of AI to transform your business and

@@ -37,7 +37,7 @@ const FeatureCard = ({
       }}
     >
       <Typography
-        fontWeight="bold"
+        fontWeight="400"
         gutterBottom
         className="feature-title"
         sx={{
@@ -45,7 +45,7 @@ const FeatureCard = ({
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           display: "inline-block",
-          marginBottom: "2rem",
+          marginBottom: "1rem",
           marginTop: isFinalState ? "0" : "2rem",
           transition: "margin-top 0.5s ease",
           fontSize: isMainCard ? "3rem" : "2rem",
@@ -55,9 +55,11 @@ const FeatureCard = ({
       </Typography>
       <Typography
         variant="body1"
+        fontWeight={300}
         color="white"
         className="feature-description"
         sx={{
+          fontSize: "1.170rem",
           fontFamily: '"Inter", sans-serif',
           maxWidth: "80%",
           opacity: showDescription ? 1 : 0,
@@ -87,7 +89,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         x: (index) => (index === 0 ? -100 : 100),
       });
 
-      // Create the scroll trigger for the title
+      // Title scroll trigger
       ScrollTrigger.create({
         trigger: ".hero-page-section-4",
         start: "top top",
@@ -97,13 +99,13 @@ const HeroPageSection4 = ({ onComplete }) => {
         pinSpacing: false,
       });
 
-      // Create the main scroll trigger for the cards
+      // Main animation trigger
       const mainCardTrigger = ScrollTrigger.create({
         trigger: ".hero-page-section-4",
         start: "top 20%",
         end: "top 20%",
         scrub: 0.5,
-        pin: true, // Pin the entire section
+        pin: true,
         pinSpacing: true,
         snap: {
           snapTo: (value) => Math.round(value * 10) / 10,
@@ -114,12 +116,14 @@ const HeroPageSection4 = ({ onComplete }) => {
           const progress = self.progress;
           const scale = Math.pow(progress, 1.5);
 
+          // Animate main card width
           gsap.to(".main-card", {
             width: `${80 - scale * 60}%`,
             duration: 0.3,
             ease: "power2.out",
           });
 
+          // Animate side cards
           gsap.to(".side-cards-container", {
             opacity: scale,
             x: 0,
@@ -127,6 +131,7 @@ const HeroPageSection4 = ({ onComplete }) => {
             ease: "power2.out",
           });
 
+          // Animate container gap
           gsap.to(".cards-container", {
             gap: `${2 + scale * 8}rem`,
             duration: 0.3,
@@ -134,28 +139,26 @@ const HeroPageSection4 = ({ onComplete }) => {
             marginLeft: `-${scale * 2}%`,
           });
 
+          // Animate title font size
           gsap.to(".main-card .feature-title", {
             fontSize: `${Math.max(3 - scale * 2, 2)}rem`,
             duration: 1,
             ease: "power2.out",
           });
 
+          // Animate description opacity
           gsap.to(".main-card .feature-description", {
             opacity: scale > 0.9 ? 1 : 0,
-            duration: scale > 0.9 ? 0.2 : 0,
-            ease: "none",
+            duration: 0.3,
+            ease: "power2.out",
           });
 
           setIsCardShrunk(scale > 0.1);
         },
         onLeave: () => {
+          // Only call onComplete without forcing scroll
           if (onComplete) {
-            gsap.to(window, {
-              scrollTo: ".hero-page-section-5",
-              duration: 1,
-              ease: "power2.inOut",
-              onComplete,
-            });
+            onComplete();
           }
         },
       });
@@ -191,7 +194,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         }}
       >
         <Typography variant="h2" fontWeight="bold">
-          Why Choose {" "}
+          Why Choose{" "}
           <Box
             component="span"
             sx={{
@@ -245,7 +248,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         >
           <FeatureCard
             title="Outcome as a Service"
-            description="We deliver tangible results-like increased sales or operational efficiency-not just products"
+            description="We deliver tangible results not just digital products."
             showDescription={isCardShrunk}
             isFinalState={isCardShrunk}
             isMainCard={true}

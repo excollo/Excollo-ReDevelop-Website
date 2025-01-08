@@ -37,11 +37,21 @@ const OurServices = () => {
           <ThreeDE />
         </Box>
       </Box>
-      <AIAutomation />
-      <SalesChannelDevelopment />
-      <MLDrivenDataAnalysis />
-      <ProductDevelopment />
-      <TechConsultancy />
+      <Box>
+        <AIAutomation />
+      </Box>
+      <Box>
+        <SalesChannelDevelopment />
+      </Box>
+      <Box>
+        <MLDrivenDataAnalysis />
+      </Box>
+      <Box>
+        <ProductDevelopment />
+      </Box>
+      <Box>
+        <TechConsultancy />
+      </Box>
     </Box>
   );
 };

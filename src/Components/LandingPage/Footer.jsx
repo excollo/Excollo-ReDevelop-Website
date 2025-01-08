@@ -23,7 +23,7 @@ const Footer = () => {
             left: 0,
             right: 0,
             height: "12%",
-            background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 1) 0%, rgba(0, 0, 0, 0) 60%)`,
+            background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 1) 0%, rgba(0, 0, 0, 0) 50%)`,
             zIndex: -1,
           }}
         />
