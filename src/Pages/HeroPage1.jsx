@@ -14,6 +14,7 @@ const HeroPage1 = () => {
     <div>
       <HeroPageSection2 />
       <HeroPageSection3 />
+      <HeroPageSection4 />
       <HeroPageSection6 />
     </div>
   );

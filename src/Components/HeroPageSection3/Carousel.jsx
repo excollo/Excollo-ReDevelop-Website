@@ -23,7 +23,7 @@ const carouselContent = [
       "Scalable websites, web apps, and mobile apps tailored to your business’s unique needs.",
   },
   {
-    title: "ML Driven Data Analysis",
+    title: "ML Driven Analysis",
     description:
       "Harness cutting-edge machine learning to decode data, predict trends, and empower precise, forward-thinking business strategies.",
   },
@@ -300,12 +300,16 @@ const Carousel = ({ isReverse, type = "title" }) => {
     >
       <IconButton
         onClick={() => handleButtonClick(-1)}
+        disabled={scrollPosition === 0}
         sx={{
           position: "absolute",
           left: "10px",
           zIndex: 3,
-          color: "white",
+          color: "white", // Default color
           marginLeft: "7rem",
+          "&.Mui-disabled": {
+            color: "#716b6b", // Custom color for the disabled state
+          },
         }}
       >
         <ArrowBackIosIcon />
@@ -340,7 +344,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
             {type === "title" ? (
               <Typography
                 variant="h3"
-                fontWeight="600"
+                fontWeight="500"
                 sx={{
                   background:
                     "linear-gradient(to bottom right, #2579e3, #8e54f7)",
@@ -357,6 +361,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
             ) : (
               <Typography
                 variant="h5"
+                fontWeight="300"
                 sx={{
                   color: "#ddd",
                   marginLeft: "auto",
@@ -378,11 +383,15 @@ const Carousel = ({ isReverse, type = "title" }) => {
       </Box>
       <IconButton
         onClick={() => handleButtonClick(1)}
+        disabled={scrollPosition === (carouselContent.length - 1) * TOTAL_WIDTH}
         sx={{
           position: "absolute",
           right: "10px",
           zIndex: 3,
-          color: "white",
+          color: "white", // Default color
+          "&.Mui-disabled": {
+            color: "#716b6b", // Custom color for the disabled state
+          },
           marginRight: "7rem",
         }}
       >
