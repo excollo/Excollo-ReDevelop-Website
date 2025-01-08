@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HeroPage from "./Pages/HeroPage";
-import AboutUsPage from "./Pages/AboutUs";
+import AboutUsPage from "./Pages/AboutUsPage";
 import { Box } from "@mui/material";
 import "./App.css";
 import ServicesPage from "./Pages/ServicesPage";

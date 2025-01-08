@@ -14,8 +14,6 @@ const Footer = () => {
         fontFamily: '"Inter", sans-serif',
       }}
     >
-      {/* Gradient Effect */}
-      {scrollY > 100 && ( // Adjust scroll threshold as needed
         <Box
           sx={{
             position: "absolute",
@@ -27,7 +25,6 @@ const Footer = () => {
             zIndex: -1,
           }}
         />
-      )}
       <Grid container justifyContent="space-between" sx={{ paddingTop: 5 }}>
         {/* Company Info */}
         <Grid item xs={12} md={4}>

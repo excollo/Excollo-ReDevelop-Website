@@ -12,7 +12,7 @@ import HeroPageSection2 from "../Components/LandingPage/HeroPageSection2";
 import HeroPageSection3 from "../Components/LandingPage/HeroPageSection3/HeroPageSection3";
 import HeroPageSection4 from "../Components/LandingPage/HeroPageSection4";
 import HeroPageSection5 from "../Components/LandingPage/HeroPageSection5";
-import Footer from "../Components/LandingPage/Footer";
+import Footer from "../Components/Footer";
 import HeroPageSection6 from "../Components/LandingPage/HeroPageSection6";
 import HeroPageSection7 from "../Components/LandingPage/HeroPageSection7";
 
