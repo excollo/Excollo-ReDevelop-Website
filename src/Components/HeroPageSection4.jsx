@@ -37,7 +37,6 @@ const FeatureCard = ({
       }}
     >
       <Typography
-        variant="h5"
         fontWeight="bold"
         gutterBottom
         className="feature-title"
@@ -49,7 +48,7 @@ const FeatureCard = ({
           marginBottom: "2rem",
           marginTop: isFinalState ? "0" : "2rem",
           transition: "margin-top 0.5s ease",
-          fontSize: isMainCard ? "3rem" : "1.6rem",
+          fontSize: isMainCard ? "3rem" : "2rem",
         }}
       >
         {title}
@@ -136,7 +135,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           });
 
           gsap.to(".main-card .feature-title", {
-            fontSize: `${Math.max(3 - scale * 1.5, 1.6)}rem`,
+            fontSize: `${Math.max(3 - scale * 2, 2)}rem`,
             duration: 1,
             ease: "power2.out",
           });
@@ -191,8 +190,8 @@ const HeroPageSection4 = ({ onComplete }) => {
           zIndex: 2,
         }}
       >
-        <Typography variant="h3" fontWeight="bold">
-          Why Choose <br />
+        <Typography variant="h2" fontWeight="bold">
+          Why Choose {" "}
           <Box
             component="span"
             sx={{

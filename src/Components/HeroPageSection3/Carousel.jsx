@@ -82,12 +82,16 @@ const Carousel = ({ isReverse, type = "title" }) => {
     const currentTime = Date.now();
     if (currentTime - lastScrollTime.current < SCROLL_COOLDOWN) return;
 
-    if (!isScrolling && Math.abs(e.deltaY) > INITIAL_SCROLL_THRESHOLD) {
+    if (
+      !isScrolling &&
+      (Math.abs(e.deltaY) > INITIAL_SCROLL_THRESHOLD ||
+        Math.abs(e.deltaX) > INITIAL_SCROLL_THRESHOLD)
+    ) {
       const direction = isReverse
-        ? e.deltaY > 0
+        ? e.deltaY > 0 || e.deltaX > 0
           ? -1
           : 1
-        : e.deltaY > 0
+        : e.deltaY > 0 || e.deltaX > 0
         ? 1
         : -1;
       initialScrollDirection.current = direction;

@@ -9,19 +9,6 @@ const HeroPageSection5 = () => {
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
   useEffect(() => {
-    // gsap.fromTo(
-    //   textRef.current,
-    //   { fontSize: "7rem" },
-    //   {
-    //     fontSize: "3.5rem",
-    //     scrollTrigger: {
-    //       trigger: textRef.current,
-    //       start: "top 90%",
-    //       end: "bottom 10%",
-    //       scrub: true,
-    //     },
-    //   }
-    // );
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start: "top top",
@@ -51,8 +38,22 @@ const HeroPageSection5 = () => {
   return (
     <Box
       ref={sectionRef}
-      sx={{ minHeight: "95vh", fontFamily: '"Inter", sans-serif' }}
+      sx={{ minHeight: "70vh", fontFamily: '"Inter", sans-serif' }}
     >
+      <Box
+        sx={{
+          position: "absolute",
+          top: "-37%",
+          left: "0",
+          right: "0%",
+          bottom: 0,
+          height: "80%",
+          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
+          zIndex: -1,
+          pointerEvents: "none",
+          transformOrigin: "center center",
+        }}
+      />
       <Box sx={{ marginBottom: "2rem" }}>
         <Typography
           sx={{

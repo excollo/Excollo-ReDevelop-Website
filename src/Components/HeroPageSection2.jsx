@@ -121,46 +121,45 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         >
           <Box>
             <Typography
-              variant="h3"
-              color="white"
+              variant="h5"
+              component="h5"
               sx={{
-                fontWeight: 400,
-                fontSize: { xs: "1.5rem" },
-                lineHeight: 1.3,
-                maxWidth: "100%",
+                fontWeight: 200,
+                fontSize: { xs: "1.3rem" },
+                lineHeight: 1.2,
+                marginLeft: "0.5%",
                 mb: 6,
               }}
             >
               Excollo delivers outcomes, leveraging AI to make businesses
-              future-ready, boosting productivity and efficiency at every
-              step.
+              future-ready, boosting productivity and efficiency at every step.
             </Typography>
 
-                   <Typography
-                     component={Link}
-                     to="/about"
-                     sx={{
-                       display: "inline-block", // Ensures the button behaves like a block
-                       color: "#ffffff",
-                       textDecoration: "none",
-                       fontSize: "18px",
-                       border: "1px solid transparent",
-                       padding: "20px 60px",
-                       borderRadius: "40px",
-                       background:
-                         "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
-                       zIndex: 3, // Ensure the button is above other elements
-                       "&:hover": {
-                         background:
-                           "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",
-                         color: "#ffffff",
-                       },
-                     }}
-                   >
-                     What we do
-                   </Typography>
-               </Box>
+            <Typography
+              component={Link}
+              to="/about"
+              sx={{
+                display: "inline-block", // Ensures the button behaves like a block
+                color: "#ffffff",
+                textDecoration: "none",
+                fontSize: "18px",
+                border: "1px solid transparent",
+                padding: "20px 60px",
+                borderRadius: "40px",
+                background:
+                  "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
+                zIndex: 3, // Ensure the button is above other elements
+                "&:hover": {
+                  background:
+                    "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%);",
+                  color: "#ffffff",
+                },
+              }}
+            >
+              What we do
+            </Typography>
           </Box>
+        </Box>
       </Box>
     </Box>
   );

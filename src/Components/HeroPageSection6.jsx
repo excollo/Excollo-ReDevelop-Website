@@ -5,11 +5,10 @@ import gsap from "gsap";
 const HeroPageSection6 = () => {
   const circleRef = useRef(null);
   const containerRef = useRef(null);
-  const textRef1 = useRef(null); // Ref for "Ready for your"
-  const textRef2 = useRef(null); // Ref for "digital-transformation?"
-  const targetLetters = ["e", "a", "d", "y", "o", "f", "n", "s", "i"];
+  const textRef1 = useRef(null);
+  const textRef2 = useRef(null);
+  const targetLetters = ["e", "a", "d", "y", "o", "n", "s"];
 
-  // Helper function to shuffle an array
   const shuffleArray = (array) => {
     return array
       .map((item) => ({ item, sort: Math.random() }))
@@ -26,7 +25,6 @@ const HeroPageSection6 = () => {
     )
       return;
 
-    // Split both text contents into spans
     const splitTextIntoSpans = (textRef) => {
       const text = textRef.textContent;
       textRef.innerHTML = text
@@ -43,10 +41,11 @@ const HeroPageSection6 = () => {
     splitTextIntoSpans(textRef1.current);
     splitTextIntoSpans(textRef2.current);
 
-    // Collect all target letters from both refs
     const letters1 = textRef1.current.querySelectorAll(".target-letter");
     const letters2 = textRef2.current.querySelectorAll(".target-letter");
     const allLetters = [...letters1, ...letters2];
+
+    const offsetY = 8;
 
     const containerRect = containerRef.current.getBoundingClientRect();
     let letterPositions = allLetters.map((letter) => {
@@ -62,28 +61,30 @@ const HeroPageSection6 = () => {
           rect.top -
           containerRect.top +
           containerRef.current.scrollTop +
-          rect.height / 2,
+          rect.height / 2 +
+          offsetY,
       };
     });
 
     if (letterPositions.length === 0) return;
 
-    // Shuffle letter positions
     letterPositions = shuffleArray(letterPositions);
 
-    // Create timeline
     const tl = gsap.timeline({
       repeat: -1,
-      defaults: { duration: 0.8, ease: "power10.inOut" },
+      defaults: { ease: "power2.inOut" },
     });
 
     letterPositions.forEach((pos, index) => {
       const prevPos = index > 0 ? letterPositions[index - 1] : null;
+
+      // Move to position
       tl.to(circleRef.current, {
         x: pos.x,
         y: pos.y,
+        duration: 0.8,
         onStart: () => {
-          gsap.to(pos.element, { opacity: 0, duration: 0.8 }); // Make the letter invisible
+          gsap.to(pos.element, { opacity: 0, duration: 0.4 });
           if (prevPos) {
             gsap.to(prevPos.element, {
               opacity: 1,
@@ -93,6 +94,30 @@ const HeroPageSection6 = () => {
           }
         },
       });
+
+      // Add pulse animation
+      tl.to(
+        circleRef.current,
+        {
+          scale: 1.3,
+          duration: 0.3,
+          ease: "power2.out",
+        },
+        ">"
+      );
+
+      tl.to(
+        circleRef.current,
+        {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        ">"
+      );
+
+      // Pause for remaining time to complete 1 second
+      tl.to({}, { duration: 0.4 });
 
       if (index === letterPositions.length - 1) {
         tl.add(() => {
@@ -111,7 +136,6 @@ const HeroPageSection6 = () => {
       y: letterPositions[0].y,
     });
 
-    // Cleanup
     return () => {
       tl.kill();
     };
@@ -121,26 +145,27 @@ const HeroPageSection6 = () => {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "flex-start",
-        textAlign: "left",
-        marginLeft: "10.5%",
-        marginBottom: "-2rem",
+        justifyContent: "center",
+        textAlign: "center",
+        padding: "5rem 2rem",
         color: "#fff",
-        gap: "12rem",
-        paddingBottom: "5rem",
       }}
     >
       <Box
         ref={containerRef}
-        sx={{ flex: "1", maxWidth: "670px", position: "relative" }}
+        sx={{
+          position: "relative",
+          width: "100%",
+          marginBottom: "4rem",
+        }}
       >
         <Box
           ref={circleRef}
           sx={{
-            width: "40px",
-            height: "40px",
+            width: "50px",
+            height: "50px",
             background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             borderRadius: "50%",
             position: "absolute",
@@ -150,11 +175,10 @@ const HeroPageSection6 = () => {
           }}
         />
         <Typography
-          variant="h2"
-          component="h1"
+          variant="h1"
+          fontWeight="500"
           sx={{
-            fontWeight: "400",
-            marginBottom: "1rem",
+            letterSpacing: "0.01em",
             "& .letter": {
               display: "inline-block",
               position: "relative",
@@ -169,57 +193,54 @@ const HeroPageSection6 = () => {
           }}
         >
           <Box
-            variant="h3"
-            fontWeight="bold"
+            variant="h1"
             ref={textRef1}
             sx={{
-              display: "flex",
+              display: "block",
+              marginBottom: "0.5rem",
             }}
           >
             Ready&nbsp;for&nbsp;your
           </Box>
           <Box
             ref={textRef2}
-            component="span"
-            variant="h3"
+            variant="h1"
             sx={{
-              color: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)", // Set the text color to a gradient
+              maxWidth: "100%",
+              color: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor:
-                "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)", // Set the text fill color to the end color of the gradient
-              fontWeight: "bold",
+                "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             }}
           >
             digital&nbsp;Transformation?
           </Box>
         </Typography>
       </Box>
-      <Box>
-        <Typography
-          component="a"
-          href="#scheduleaconsultation"
-          sx={{
-            display: "inline-block",
-            color: "#ffffff",
-            textDecoration: "none",
-            fontSize: "16px",
-            border: "1px solid transparent",
-            padding: "20px 60px",
-            borderRadius: "40px",
+      <Typography
+        component="a"
+        href="#scheduleaconsultation"
+        sx={{
+          display: "inline-block",
+          color: "#ffffff",
+          textDecoration: "none",
+          fontSize: "18px",
+          border: "1px solid transparent",
+          padding: "20px 70px",
+          borderRadius: "40px",
+          background:
+            "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
+          zIndex: 3,
+          position: "relative",
+          "&:hover": {
             background:
-              "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
-            zIndex: 3,
-            position: "relative",
-            "&:hover": {
-              background:
-                "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-              color: "#ffffff",
-            },
-          }}
-        >
-          Talk to Us
-        </Typography>
-      </Box>
+              "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
+            color: "#ffffff",
+          },
+        }}
+      >
+        Talk to Us
+      </Typography>
     </Box>
   );
 };

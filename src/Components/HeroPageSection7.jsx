@@ -43,6 +43,7 @@ const HeroPageSection7 = () => {
         position="relative"
         zIndex={2}
         marginTop={-7}
+        marginBottom={-6}
         sx={{
           height: "400px",
           overflow: "hidden",

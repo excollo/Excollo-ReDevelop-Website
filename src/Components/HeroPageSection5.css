@@ -54,7 +54,9 @@
 
 .gradientCardBox .box:before,
 .gradientCardBox .box:after {
-  background: linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)
+  background: linear-gradient(180deg,
+    rgba(170, 63, 255, 0.9) 0%,
+    rgba(94, 129, 235, 0.9) 100%)
 }
 
 @keyframes animate {
@@ -96,13 +98,15 @@
 }
 
 .gradientCardBox .box .content h2 {
-  font-size: 26px !important;
+  font-size: 26px;
   color: #fff;
   margin-bottom: 10px;
+  font-weight: 400;
 }
 
 .gradientCardBox .box:hover .content p {
   display: block;
+  font-weight: 300;
 }
 
 .gradientCardBox .box .content p {
@@ -121,7 +125,6 @@
   padding: 10px;
   border-radius: 4px;
   text-decoration: none;
-  font-weight: 500;
   margin-top: 5px;
 }
 
