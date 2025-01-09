@@ -306,7 +306,7 @@ const AboutUs = () => {
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
-            mt: { xs: 0, md: "-15%" },
+            mt: { xs: 0, md: "-15%", lg: "30" },
             mb: { xs: 0, md: "-15%" },
           }}
         >

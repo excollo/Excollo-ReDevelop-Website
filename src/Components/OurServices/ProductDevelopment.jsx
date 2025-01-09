@@ -351,7 +351,7 @@ const ProductDevelopment = () => {
                         <ListItemText
                           primary={detail}
                           primaryTypographyProps={{
-                            sx: { fontSize: "0.9rem" },
+                            sx: { fontSize: "1.1rem" },
                           }}
                         />
                       </ListItem>

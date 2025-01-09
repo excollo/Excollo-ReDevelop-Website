@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Box, Typography, styled } from "@mui/material";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import zIndex from "@mui/material/styles/zIndex";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,11 +20,11 @@ const WorkTable = styled("section")({
 const LineBox = styled("div")({
   position: "relative",
   top: 0,
+  marginTop: "12.5%",
   width: "100.1%",
   height: "250px",
   zIndex: 1,
   backgroundColor: "#000",
-  borderTop: "1.5px solid #7e22ce",
   "@media (max-width: 768px)": {
     width: "100%",
     display: "none",
@@ -36,6 +37,7 @@ const TableGrid = styled("div")({
   flexWrap: "wrap",
   width: "100%",
   margin: "auto",
+  maxHeight: "300px",
   position: "relative",
   "@media (max-width: 768px)": {
     flexDirection: "column",
@@ -54,6 +56,13 @@ const TableContent = styled("div")({
   opacity: 0,
   transform: "translateY(100%)",
   visibility: "hidden",
+  transition: "border-color 0.3s ease",
+  position: "relative",
+  "&:hover": {
+    borderColor: "#7e22ce !important",
+    border: "1px solid #7e22ce",
+    zIndex: 1000, // Added !important to override GSAP inline styles
+  },
   "& h3": {
     fontFamily: "Inter, sans-serif",
     fontSize: "32px",
@@ -77,7 +86,6 @@ const TableContent = styled("div")({
     border: "none",
     textAlign: "center",
     padding: "30px",
-
     marginBottom: "20px",
     opacity: 1,
     transform: "none",
@@ -104,7 +112,6 @@ const TableContent = styled("div")({
     visibility: "visible",
     "& h3": {
       fontSize: "30px",
-      // marginTop: "-15px",
       margin: "25px 10px",
     },
     "& p": {
@@ -126,7 +133,7 @@ const HowWeWork = () => {
     const mainTl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
-        start: "top top",
+        start: "top -10%",
         end: "+=400%",
         pin: true,
         scrub: 1,
@@ -144,6 +151,7 @@ const HowWeWork = () => {
         opacity: 0,
         y: 400,
         visibility: "hidden",
+        borderColor: "#7e22ce",
       });
 
       tl.to(content, {
@@ -157,7 +165,15 @@ const HowWeWork = () => {
           ease: "power2.out",
         })
         .to(content, {
-          duration: 5,
+          borderColor: "#ffffff",
+          duration: 2,
+          ease: "power2.out",
+          "&:hover": {
+            borderColor: "#7e22ce",
+          },
+        })
+        .to(content, {
+          duration: 3,
         });
       mainTl.add(tl, index * 3);
     });

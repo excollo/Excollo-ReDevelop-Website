@@ -20,10 +20,10 @@ const OurServices = () => {
               justifyContent: "left",
               textAlign: "left",
               ml: "17%",
-              mt: 17,
+              mt: 10,
             }}
           >
-            Our Core <br />
+            Our Core
             <Typography
               variant="h2"
               sx={{
@@ -63,7 +63,7 @@ const OurServices = () => {
             businesses to achieve scalable success.
           </Typography>
         </Box>
-        <Box sx={{ marginTop: "-6%", marginRight: "-3%" }}>
+        <Box sx={{ marginTop: "-11%", marginRight: "-3%" }}>
           <ThreeDE />
         </Box>
       </Box>
