@@ -283,7 +283,6 @@ const HeroPage = () => {
         sx={{
           position: "relative",
           zIndex: 10,
-          marginTop: "1rem",
           opacity: 0,
           transform: "translateX(-100px)",
         }}

@@ -5,6 +5,8 @@ import microsoft365 from "../../../assets/marqueelogo5/microsoft365.png";
 import openai from "../../../assets/marqueelogo5/openai.png";
 import shopify from "../../../assets/marqueelogo5/shopify.png";
 import zoho from "../../../assets/marqueelogo5/zoho.png";
+import claude from "../../../assets/marqueelogo5/claude.png";
+import microsoft_azure from "../../../assets/marqueelogo5/microsoft_azure.png";
 
 const MarqueeCarousel5 = () => {
   const technologies = [
@@ -25,7 +27,7 @@ const MarqueeCarousel5 = () => {
           <img
             src={github_copilot}
             alt="Logo"
-            style={{ height: 30, width: "auto" }}
+            style={{ height: 20, width: "auto" }}
           />
         </Box>
       ),
@@ -48,7 +50,7 @@ const MarqueeCarousel5 = () => {
             <img
               src={microsoft365}
               alt="Logo"
-              style={{ height: 40, width: "auto" }}
+              style={{ height: 100, width: "auto" }}
             />
           </Typography>
         </Box>
@@ -86,7 +88,7 @@ const MarqueeCarousel5 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={shopify} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={shopify} alt="Logo" style={{ height: 70, width: "auto" }} />
         </Box>
       ),
     },
@@ -105,6 +107,42 @@ const MarqueeCarousel5 = () => {
           }}
         >
           <img src={zoho} alt="Logo" style={{ height: 40, width: "auto" }} />
+        </Box>
+      ),
+    },
+    {
+      name: "Technology 6",
+      content: (
+        <Box
+          sx={{
+            backgroundColor: "gray.700",
+            height: 48,
+            width: 96,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 1,
+          }}
+        >
+          <img src={claude} alt="Logo" style={{ height: 30, width: "auto" }} />
+        </Box>
+      ),
+    },
+    {
+      name: "Technology 7",
+      content: (
+        <Box
+          sx={{
+            backgroundColor: "gray.700",
+            height: 48,
+            width: 96,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 1,
+          }}
+        >
+          <img src={microsoft_azure} alt="Logo" style={{ height: 70, width: "auto" }} />
         </Box>
       ),
     },

@@ -49,7 +49,7 @@ const MarqueeCarousel1 = () => {
             <img
               src={github_copilot}
               alt="Logo"
-              style={{ height: 30, width: "auto", marginRight: "3rem" }}
+              style={{ height: 20, width: "auto" }}
             />
         </Box>
       ),
@@ -144,7 +144,7 @@ const MarqueeCarousel1 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={LLama} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={LLama} alt="Logo" style={{ height: 30, width: "auto" }} />
         </Box>
       ),
     },

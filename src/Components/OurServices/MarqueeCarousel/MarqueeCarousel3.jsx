@@ -138,7 +138,7 @@ const MarqueeCarousel3 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={pytorch} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={pytorch} alt="Logo" style={{ height: 30, width: "auto" }} />
         </Box>
       ),
     },

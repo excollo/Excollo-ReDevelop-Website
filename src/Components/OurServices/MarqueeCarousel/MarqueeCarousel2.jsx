@@ -7,6 +7,7 @@ import meta from "../../../assets/marqueelogo2/meta.png";
 import shopify from "../../../assets/marqueelogo2/shopify.png";
 import whatsapp from "../../../assets/marqueelogo2/whatsapp.png";
 import zoho from "../../../assets/marqueelogo2/zoho.png";
+import aisensy from "../../../assets/marqueelogo2/aisensy.png";
 
 const MarqueeCarousel2 = () => {
   const technologies = [
@@ -24,7 +25,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={canva} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={canva} alt="Logo" style={{ height: 45, width: "auto" }} />
         </Box>
       ),
     },
@@ -42,11 +43,11 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-            <img
-              src={google_analytics}
-              alt="Logo"
-              style={{ height: 40, width: "auto" }}
-            />
+          <img
+            src={google_analytics}
+            alt="Logo"
+            style={{ height: 40, width: "auto" }}
+          />
         </Box>
       ),
     },
@@ -82,7 +83,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={meta} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={meta} alt="Logo" style={{ height: 60, width: "auto" }} />
         </Box>
       ),
     },
@@ -100,7 +101,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={shopify} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={shopify} alt="Logo" style={{ height: 80, width: "auto" }} />
         </Box>
       ),
     },
@@ -141,6 +142,24 @@ const MarqueeCarousel2 = () => {
           }}
         >
           <img src={zoho} alt="Logo" style={{ height: 40, width: "auto" }} />
+        </Box>
+      ),
+    },
+    {
+      name: "Technology 8",
+      content: (
+        <Box
+          sx={{
+            backgroundColor: "gray.700",
+            height: 48,
+            width: 96,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 1,
+          }}
+        >
+          <img src={aisensy} alt="Logo" style={{ height: 60, width: "auto" }} />
         </Box>
       ),
     },

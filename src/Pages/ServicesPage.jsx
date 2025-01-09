@@ -21,7 +21,7 @@ const ServicesPage = () => {
           top: 0,
           left: 0,
           width: "100%",
-          height: "15%",
+          height: "4%",
           background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 1,
           opacity: 1,
