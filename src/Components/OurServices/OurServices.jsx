@@ -1,5 +1,6 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Typography, Button, Fade } from "@mui/material";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ThreeDE from "../ThreeDE";
 import AIAutomation from "./AIAutomation";
 import ProductDevelopment from "./ProductDevelopment";
@@ -8,6 +9,26 @@ import SalesChannelDevelopment from "./SalesChannelDevelopment";
 import MLDrivenDataAnalysis from "./MLDrivenDataAnalysis";
 
 const OurServices = () => {
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <Box className="services-section">
       <Box sx={{ minHeight: "50vh", display: "flex", maxWidth: "85%" }}>
@@ -82,6 +103,37 @@ const OurServices = () => {
       <Box>
         <TechConsultancy />
       </Box>
+      <Fade in={showButton}>
+        <Button
+          onClick={handleScrollToTop}
+          variant="contained"
+          color="primary"
+          sx={{
+            position: "fixed",
+            bottom: 50,
+            height: 60,
+            right: 50,
+            zIndex: 1000,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.1)",
+            "&:hover": {
+              background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+            },
+            "@media (max-width: 768px)": {
+              position: "fixed",
+              bottom: 50,
+              right: 50,
+            },
+            "@media (max-width: 480px)": {
+              position: "fixed",
+              bottom: 50,
+              right: 50,
+            },
+          }}
+        >
+          <ArrowUpwardIcon />
+        </Button>
+      </Fade>
     </Box>
   );
 };
