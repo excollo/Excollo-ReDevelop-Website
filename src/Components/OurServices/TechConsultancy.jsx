@@ -84,7 +84,7 @@ const TechConsultancy = () => {
       ".fade-in-heading-5",
       {
         opacity: 1,
-        y: 200,
+        y: 300,
       },
       {
         opacity: 1,
@@ -93,7 +93,7 @@ const TechConsultancy = () => {
         scrollTrigger: {
           trigger: ".fade-in-heading-5",
           start: "top 100%",
-          end: "top 60%",
+          end: "top 50%",
           scrub: 1,
         },
       }
@@ -103,7 +103,7 @@ const TechConsultancy = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".fade-in-heading-5",
-          start: "top 60%",
+          start: "top 50%",
           end: "top 40%",
           scrub: 1,
           duration: 2,
@@ -115,8 +115,8 @@ const TechConsultancy = () => {
         delay: 1,
         scrollTrigger: {
           trigger: ".animate-content-5",
-          start: "top 30%",
-          end: "top 25%",
+          start: "top 8%",
+          end: "top 5%",
           scrub: 1,
         },
       })
@@ -127,8 +127,8 @@ const TechConsultancy = () => {
         delay: 0.3,
         scrollTrigger: {
           trigger: ".services-title-5",
-          start: "top 22%",
-          end: "top 15%",
+          start: "top 10%",
+          end: "top 10%",
           scrub: 1,
         },
       });

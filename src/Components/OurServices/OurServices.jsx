@@ -41,20 +41,27 @@ const OurServices = () => {
               justifyContent: "left",
               textAlign: "left",
               ml: "17%",
-              mt: 10,
+              mt: 15,
+              display: "flex",
             }}
           >
-            Our Core
+            <Typography
+              variant="h2"
+              sx={{
+                backgroundColor: "#000",
+                fontWeight: "600",
+                justifyContent: "left",
+                textAlign: "left",
+                display: "flex",
+                marginRight: "2%",
+              }}
+            >
+              Our 
+            </Typography>
             <Typography
               variant="h2"
               sx={{
                 textAlign: { xs: "center", md: "left" },
-                fontSize: {
-                  xs: "2.5rem",
-                  sm: "3rem",
-                  md: "3.5rem",
-                  lg: "4rem",
-                },
                 fontFamily: '"Inter", sans-serif',
                 fontWeight: "600",
                 background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",

@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState , useCallback} from "react";
 import {
   Box,
   Typography,
   styled,
   useTheme,
   useMediaQuery,
+  Button,
+  Fade,
 } from "@mui/material";
-import { motion } from "framer-motion";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import HowWeWork from "./HowWeWork";
 import NavBar from "../../Components/NavBar";
 import ThreeDE from "../../Components/ThreeDE";
@@ -36,7 +38,7 @@ const ContentSection = styled("section")(({ theme }) => ({
   },
 }));
 
-const TitleContainer = styled(motion.div)(({ theme }) => ({
+const TitleContainer = styled("div")(({ theme }) => ({
   flex: "0 0 480px",
   display: "flex",
   flexDirection: "column",
@@ -61,7 +63,6 @@ const TitleContainer = styled(motion.div)(({ theme }) => ({
     flex: "0 0 400px",
     "& h2": {
       fontSize: "3.5rem",
-      // padding: "40px",
       paddingBottom: "-50px",
     },
   },
@@ -70,7 +71,6 @@ const TitleContainer = styled(motion.div)(({ theme }) => ({
     marginBottom: "-300px",
     "& h2": {
       fontSize: "2.5rem",
-      // padding: "20px",
       paddingBottom: "-50px",
       textAlign: "center",
       "& br": {
@@ -86,7 +86,7 @@ const TitleContainer = styled(motion.div)(({ theme }) => ({
   },
 }));
 
-const Card = styled(motion.div)(
+const Card = styled("div")(
   ({ theme, direction = "90deg", isMobile = false }) => ({
     width: "50%",
     height: "350px",
@@ -99,7 +99,6 @@ const Card = styled(motion.div)(
     position: "relative",
     border: "10px solid #090101",
 
-    // Create a gradient border effect that blends with background
     "&::before": {
       content: '""',
       position: "absolute",
@@ -107,10 +106,10 @@ const Card = styled(motion.div)(
       left: -1,
       right: -1,
       bottom: -1,
-      borderRadius: "61px", // Slightly larger to account for the blur
+      borderRadius: "61px",
       background: `linear-gradient(${direction}, rgba(142, 84, 247, 0.3), rgba(51, 46, 108, 0.4), rgba(0, 0, 0, 0.5))`,
       zIndex: -1,
-      filter: "blur(1px)", // Add slight blur for better blending
+      filter: "blur(1px)",
     },
 
     "& p": {
@@ -141,7 +140,7 @@ const Card = styled(motion.div)(
         : `linear-gradient(${direction}, rgba(142, 84, 247, 0.5), rgba(51, 46, 108, 0.8), rgba(0, 0, 0, 1))`,
       padding: isMobile ? "0" : "30px",
       "&::before": {
-        display: isMobile ? "none" : "block", // Hide border effect on mobile if no background
+        display: isMobile ? "none" : "block",
       },
       "& p": {
         fontSize: "1.4rem",
@@ -157,7 +156,7 @@ const Card = styled(motion.div)(
       borderRadius: "30px",
       padding: isMobile ? "0" : "20px",
       "&::before": {
-        borderRadius: "31px", // Match the smaller border radius
+        borderRadius: "31px",
       },
       "& p": {
         fontSize: "1.2rem",
@@ -171,104 +170,101 @@ const Card = styled(motion.div)(
 const AboutUs = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          } else {
-            entry.target.classList.remove("visible");
-          }
-        });
-      },
-      {
-        threshold: 0.5,
-        rootMargin: "-60px",
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
       }
-    );
-
-    const elements = document.querySelectorAll(".animate");
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  const VisionSection = () => (
-    <ContentSection>
-      <TitleContainer className="animate">
-        <h2>Our {!isMobile && <br />} Vision</h2>
-      </TitleContainer>
-      <Box
-                          sx={{
-                            position: "absolute",
-                            top: "70%",
-                            left: "0",
-                            right: "80%",
-                            bottom: 0,
-                            height: "90%",
-                            background: `radial-gradient(ellipse at left, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
-                            zIndex: 1,
-                            pointerEvents: "none",
-                            transformOrigin: "center center",
-                          }}
-    />
-      <Card className="animate" isMobile={isMobile}>
-        <p>
-          To empower businesses with future-ready technology that drives
-          measurable results and lasting partnerships.
-        </p>
-      </Card>
-    </ContentSection>
-  );
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-  const MissionSection = () => {
-    if (isMobile) {
-      return (
+  const VisionSection = useCallback(
+    () => (
+      <div>
         <ContentSection>
-          <TitleContainer className="animate">
-            <h2>Our Mission</h2>
+          <TitleContainer>
+            <h2>Our {!isMobile && <br />} Vision</h2>
           </TitleContainer>
-          <Card className="animate" isMobile={true}>
+          <Card>
             <p>
-              To bridge the gap between technology and business objectives by
-              delivering cutting-edge solutions that guarantee outcomes.
+              To empower businesses with future-ready technology that drives
+              measurable results and lasting partnerships.
             </p>
           </Card>
         </ContentSection>
-      );
-    }
+      </div>
+    ),
+    [isMobile]
+  );
 
-    return (
-      <ContentSection>
-        <Card direction="270deg" className="animate">
-          <p>
-            To bridge the gap between technology and business objectives by
-            delivering cutting-edge solutions that guarantee outcomes.
-          </p>
-        </Card>
-        <TitleContainer className="animate">
-          <h2>
-            Our <br /> Mission
-          </h2>
-        </TitleContainer>
-      </ContentSection>
-    );
-  };
+  const MissionSection = useCallback(
+    () => (
+      <div>
+        <ContentSection>
+          {isMobile ? (
+            <>
+              <TitleContainer>
+                <h2>Our Mission</h2>
+              </TitleContainer>
+              <Card isMobile={true}>
+                <p>
+                  To bridge the gap between technology and business objectives
+                  by delivering cutting-edge solutions that guarantee outcomes.
+                </p>
+              </Card>
+            </>
+          ) : (
+            <>
+              <Card direction="270deg">
+                <p>
+                  To bridge the gap between technology and business objectives
+                  by delivering cutting-edge solutions that guarantee outcomes.
+                </p>
+              </Card>
+              <TitleContainer>
+                <h2>
+                  Our <br /> Mission
+                </h2>
+              </TitleContainer>
+            </>
+          )}
+        </ContentSection>
+      </div>
+    ),
+    [isMobile]
+  );
 
-  const PhilosophySection = () => (
-    <ContentSection>
-      <TitleContainer className="animate">
-        <h2>Our {!isMobile && <br />} Philosophy</h2>
-      </TitleContainer>
-      <Card className="animate" isMobile={isMobile}>
-        <p>
-          At Excollo, we commit to results, not just solutions. Our "Outcome as
-          a Service" (OaaS) approach ensures every strategy, technology, and
-          action is aligned to achieve measurable success for our clients.
-        </p>
-      </Card>
-    </ContentSection>
+  const PhilosophySection = useCallback(
+    () => (
+      <div>
+        <ContentSection>
+          <TitleContainer>
+            <h2>Our {!isMobile && <br />} Philosophy</h2>
+          </TitleContainer>
+          <Card isMobile={isMobile}>
+            <p>
+              At Excollo, we commit to results, not just solutions. Our "Outcome
+              as a Service" (OaaS) approach ensures every strategy, technology,
+              and action is aligned to achieve measurable success for our
+              clients.
+            </p>
+          </Card>
+        </ContentSection>
+      </div>
+    ),
+    [isMobile]
   );
 
   return (
@@ -315,14 +311,18 @@ const AboutUs = () => {
               variant="h2"
               sx={{
                 textAlign: { xs: "center", md: "left" },
-                fontSize: { xs: "2.5rem", sm: "3rem", md: "3.5rem", lg: "4rem" },
+                fontSize: {
+                  xs: "2.5rem",
+                  sm: "3rem",
+                  md: "3.5rem",
+                  lg: "4rem",
+                },
                 fontFamily: '"Inter", sans-serif',
                 fontWeight: "600",
                 background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 ml: { xs: 0, md: "2%", lg: "6%" },
-                // mt: { xs: 3, md: 25 },
               }}
             >
               <span className="highlight">About Us</span>
@@ -372,6 +372,37 @@ const AboutUs = () => {
       <HowWeWork />
       <Excollo3D />
       <Footer />
+      <Fade in={showButton}>
+        <Button
+          onClick={handleScrollToTop}
+          variant="contained"
+          color="primary"
+          sx={{
+            position: "fixed",
+            bottom: 50,
+            height: 60,
+            right: 50,
+            zIndex: 1000,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.1)",
+            "&:hover": {
+              background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+            },
+            "@media (max-width: 768px)": {
+              position: "fixed",
+              bottom: 50,
+              right: 50,
+            },
+            "@media (max-width: 480px)": {
+              position: "fixed",
+              bottom: 50,
+              right: 50,
+            },
+          }}
+        >
+          <ArrowUpwardIcon />
+        </Button>
+      </Fade>
     </Box>
   );
 };

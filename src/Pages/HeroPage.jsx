@@ -302,7 +302,6 @@ const HeroPage = () => {
       >
         <HeroPageSection1 animationComplete={animationComplete} />
       </Box>
-      <Box sx={{ visibility: hero1Complete ? "visible" : "hidden" }}>
         <Box
           className="hero-section-2"
           sx={{
@@ -332,7 +331,6 @@ const HeroPage = () => {
         </Box>
         <Footer />
       </Box>
-    </Box>
   );
 };
 
