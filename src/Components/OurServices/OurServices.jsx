@@ -16,11 +16,11 @@ const OurServices = () => {
             variant="h2"
             sx={{
               backgroundColor: "#000",
-              fontWeight: "500",
+              fontWeight: "600",
               justifyContent: "left",
               textAlign: "left",
               ml: "17%",
-              mt: 20,
+              mt: 17,
             }}
           >
             Our Core <br /> Services

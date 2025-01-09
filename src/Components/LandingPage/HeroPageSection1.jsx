@@ -36,11 +36,9 @@ const HeroPageSection1 = () => {
           Shaping the Future With
         </Typography>
         <Typography
-          variant="h2"
-          component="h2"
+          variant="h3"
           sx={{
             fontWeight: 600,
-            fontSize: { xs: "2rem", sm: "3rem" },
             lineHeight: 1.2,
           }}
         >

@@ -315,7 +315,7 @@ const AboutUs = () => {
               variant="h2"
               sx={{
                 textAlign: { xs: "center", md: "left" },
-                fontSize: { xs: "2.5rem", sm: "3rem", md: "4rem", lg: "5rem" },
+                fontSize: { xs: "2.5rem", sm: "3rem", md: "3.5rem", lg: "4rem" },
                 fontFamily: '"Inter", sans-serif',
                 fontWeight: "bold",
                 letterSpacing: "-0.00833em",
