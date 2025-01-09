@@ -169,7 +169,7 @@ const ThreeDE = ({ onComplete }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "transparent", // Ensure the container has a transparent background
+        backgroundColor: "transparent",
       }}
     />
   );

@@ -13,7 +13,7 @@ import {
 import { ChevronDown, Circle } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import MarqueeCarousel2 from "./MarqueeCarousel2";
+import MarqueeCarousel2 from "./MarqueeCarousel/MarqueeCarousel2";
 
 gsap.registerPlugin(ScrollTrigger);
 

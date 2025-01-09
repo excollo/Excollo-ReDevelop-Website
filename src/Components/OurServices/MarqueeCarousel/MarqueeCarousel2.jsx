@@ -1,15 +1,14 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import figma from "../../assets/marqueelogo4/figma.png";
-import nextjs from "../../assets/marqueelogo4/nextjs.png";
-import nodejs from "../../assets/marqueelogo4/nodejs.png";
-import postgresql from "../../assets/marqueelogo4/postgresql.png";
-import react from "../../assets/marqueelogo4/react.png";
-import reactnative from "../../assets/marqueelogo4/reactnative.png";
-import webflow from "../../assets/marqueelogo4/webflow.png";
-import wix from "../../assets/marqueelogo4/wix.png";
+import canva from "../../../assets/marqueelogo2/canva-seeklogo.png";
+import google_analytics from "../../../assets/marqueelogo2/google_analytics.png";
+import hubspot from "../../../assets/marqueelogo2/hubspot.png";
+import meta from "../../../assets/marqueelogo2/meta.png";
+import shopify from "../../../assets/marqueelogo2/shopify.png";
+import whatsapp from "../../../assets/marqueelogo2/whatsapp.png";
+import zoho from "../../../assets/marqueelogo2/zoho.png";
 
-const MarqueeCarousel4 = () => {
+const MarqueeCarousel2 = () => {
   const technologies = [
     {
       name: "Technology 1",
@@ -25,7 +24,7 @@ const MarqueeCarousel4 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={figma} alt="Logo" style={{ height: 90, width: "auto" }} />
+          <img src={canva} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -44,9 +43,9 @@ const MarqueeCarousel4 = () => {
           }}
         >
             <img
-              src={nextjs}
+              src={google_analytics}
               alt="Logo"
-              style={{ height: 50, width: "auto", marginLeft: "-2rem", marginRight: "-2rem" }}
+              style={{ height: 40, width: "auto" }}
             />
         </Box>
       ),
@@ -65,11 +64,7 @@ const MarqueeCarousel4 = () => {
             borderRadius: 1,
           }}
         >
-          <img
-            src={postgresql}
-            alt="Logo"
-            style={{ height: 50, width: "auto" }}
-          />
+          <img src={hubspot} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -87,7 +82,7 @@ const MarqueeCarousel4 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={react} alt="Logo" style={{ height: 50, width: "auto" }} />
+          <img src={meta} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -105,7 +100,7 @@ const MarqueeCarousel4 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={nodejs} alt="Logo" style={{ height: 50, width: "auto" }} />
+          <img src={shopify} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -124,9 +119,9 @@ const MarqueeCarousel4 = () => {
           }}
         >
           <img
-            src={reactnative}
+            src={whatsapp}
             alt="Logo"
-            style={{ height: 50, width: "auto" }}
+            style={{ height: 40, width: "auto" }}
           />
         </Box>
       ),
@@ -145,29 +140,7 @@ const MarqueeCarousel4 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={webflow} alt="Logo" style={{ height: 30, width: "auto", marginRight: "2rem" }} />
-        </Box>
-      ),
-    },
-    {
-      name: "Technology 8",
-      content: (
-        <Box
-          sx={{
-            backgroundColor: "gray.700",
-            height: 48,
-            width: 96,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 1,
-          }}
-        >
-          <img
-            src={wix}
-            alt="Logo"
-            style={{ height: 30, width: "auto" }}
-          />
+          <img src={zoho} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -219,4 +192,4 @@ const MarqueeCarousel4 = () => {
   );
 };
 
-export default MarqueeCarousel4;
+export default MarqueeCarousel2;

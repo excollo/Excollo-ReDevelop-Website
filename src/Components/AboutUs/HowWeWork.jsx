@@ -185,7 +185,21 @@ const HowWeWork = () => {
       }}
     >
       <WorkTable>
-        <Box sx={{ marginBottom: "3rem", marginTop: "3.5rem" }}>
+        <Box sx={{ marginBottom: "10rem", marginTop: "10rem" }}>
+            <Box
+                    sx={{
+                      position: "absolute",
+                      top: "-10%",
+                      left: "0",
+                      right: "0%",
+                      bottom: 0,
+                      height: "60%",
+                      background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
+                      zIndex: -1,
+                      pointerEvents: "none",
+                      transformOrigin: "center center",
+                    }}
+                  />
           <Typography
             sx={{
               textAlign: "center",

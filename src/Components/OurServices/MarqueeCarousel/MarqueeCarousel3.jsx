@@ -1,14 +1,14 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import canva from "../../assets/marqueelogo2/canva-seeklogo.png";
-import google_analytics from "../../assets/marqueelogo2/google_analytics.png";
-import hubspot from "../../assets/marqueelogo2/hubspot.png";
-import meta from "../../assets/marqueelogo2/meta.png";
-import shopify from "../../assets/marqueelogo2/shopify.png";
-import whatsapp from "../../assets/marqueelogo2/whatsapp.png";
-import zoho from "../../assets/marqueelogo2/zoho.png";
+import apache from "../../../assets/marqueelogo3/apache.png";
+import metabase from "../../../assets/marqueelogo3/metabase.png";
+import mongodb from "../../../assets/marqueelogo3/mongodb.png";
+import mysql from "../../../assets/marqueelogo3/mysql.png";
+import powerbi from "../../../assets/marqueelogo3/powerbi.png";
+import python from "../../../assets/marqueelogo3/python.png";
+import pytorch from "../../../assets/marqueelogo3/pytorch.png";
 
-const MarqueeCarousel2 = () => {
+const MarqueeCarousel3 = () => {
   const technologies = [
     {
       name: "Technology 1",
@@ -24,7 +24,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={canva} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={apache} alt="Logo" style={{ height: 90, width: "auto" }} />
         </Box>
       ),
     },
@@ -42,11 +42,13 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
+          <Typography sx={{ color: "gray.300", fontSize: "0.875rem" }}>
             <img
-              src={google_analytics}
+              src={metabase}
               alt="Logo"
-              style={{ height: 40, width: "auto" }}
+              style={{ height: 70, width: "auto" }}
             />
+          </Typography>
         </Box>
       ),
     },
@@ -64,7 +66,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={hubspot} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={mongodb} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -82,7 +84,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={meta} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={mysql} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -100,7 +102,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={shopify} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={powerbi} alt="Logo" style={{ height: 70, width: "auto" }} />
         </Box>
       ),
     },
@@ -118,11 +120,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img
-            src={whatsapp}
-            alt="Logo"
-            style={{ height: 40, width: "auto" }}
-          />
+          <img src={python} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -140,7 +138,7 @@ const MarqueeCarousel2 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={zoho} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={pytorch} alt="Logo" style={{ height: 40, width: "auto" }} />
         </Box>
       ),
     },
@@ -192,4 +190,4 @@ const MarqueeCarousel2 = () => {
   );
 };
 
-export default MarqueeCarousel2;
+export default MarqueeCarousel3;

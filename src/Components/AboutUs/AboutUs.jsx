@@ -90,12 +90,29 @@ const Card = styled(motion.div)(
   ({ theme, direction = "90deg", isMobile = false }) => ({
     width: "50%",
     height: "350px",
-    background: `linear-gradient(${direction},#8E54F780, #332E6C, #0A0A17)`,
-    borderRadius: "50px",
+    background: `linear-gradient(${direction}, rgba(142, 84, 247, 0.5), rgba(51, 46, 108, 0.8), rgba(0, 0, 0, 1))`,
+    borderRadius: "60px",
     padding: "30px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    position: "relative",
+    border: "10px solid #090101",
+
+    // Create a gradient border effect that blends with background
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      top: -1,
+      left: -1,
+      right: -1,
+      bottom: -1,
+      borderRadius: "61px", // Slightly larger to account for the blur
+      background: `linear-gradient(${direction}, rgba(142, 84, 247, 0.3), rgba(51, 46, 108, 0.4), rgba(0, 0, 0, 0.5))`,
+      zIndex: -1,
+      filter: "blur(1px)", // Add slight blur for better blending
+    },
+
     "& p": {
       fontSize: "1.8rem",
       fontFamily: '"Inter", sans-serif',
@@ -106,22 +123,26 @@ const Card = styled(motion.div)(
       padding: 20,
       margin: 15,
     },
+
     [theme.breakpoints.down("lg")]: {
       height: "200px",
       "& p": {
         fontSize: "1.6rem",
       },
     },
+
     [theme.breakpoints.down("md")]: {
       width: "90%",
       height: "auto",
-      // marginBottom: "-300px",
       minHeight: isMobile ? "auto" : "250px",
       marginBottom: "20px",
       background: isMobile
         ? "none"
-        : `linear-gradient(${direction},#8E54F780, #332E6C, #0A0A17)`,
+        : `linear-gradient(${direction}, rgba(142, 84, 247, 0.5), rgba(51, 46, 108, 0.8), rgba(0, 0, 0, 1))`,
       padding: isMobile ? "0" : "30px",
+      "&::before": {
+        display: isMobile ? "none" : "block", // Hide border effect on mobile if no background
+      },
       "& p": {
         fontSize: "1.4rem",
         padding: "15px",
@@ -129,11 +150,15 @@ const Card = styled(motion.div)(
         textAlign: "center",
       },
     },
+
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       marginBottom: "-30px",
       borderRadius: "30px",
       padding: isMobile ? "0" : "20px",
+      "&::before": {
+        borderRadius: "31px", // Match the smaller border radius
+      },
       "& p": {
         fontSize: "1.2rem",
         padding: "10px",
@@ -174,6 +199,20 @@ const AboutUs = () => {
       <TitleContainer className="animate">
         <h2>Our {!isMobile && <br />} Vision</h2>
       </TitleContainer>
+      <Box
+                          sx={{
+                            position: "absolute",
+                            top: "70%",
+                            left: "0",
+                            right: "80%",
+                            bottom: 0,
+                            height: "90%",
+                            background: `radial-gradient(ellipse at left, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
+                            zIndex: 1,
+                            pointerEvents: "none",
+                            transformOrigin: "center center",
+                          }}
+    />
       <Card className="animate" isMobile={isMobile}>
         <p>
           To empower businesses with future-ready technology that drives
@@ -240,8 +279,18 @@ const AboutUs = () => {
         fontFamily: '"Inter", sans-serif',
       }}
     >
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "90%",
+          height: "30%",
+          background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
+          zIndex: 1,
+        }}
+      />
       <NavBar />
-
       <Box
         sx={{
           maxWidth: { xs: "95%", sm: "90%", md: "85%" },

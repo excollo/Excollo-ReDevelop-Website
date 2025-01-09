@@ -13,7 +13,7 @@ import {
 import { ChevronDown, Circle } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import MarqueeCarousel1 from "./MarqueeCarousel1";
+import MarqueeCarousel1 from "./MarqueeCarousel/MarqueeCarousel1";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,7 +106,7 @@ const AIAutomation = () => {
           start: "top 40%",
           end: "top 60%",
           scrub: 1,
-          duration: 2
+          duration: 2,
         },
       })
       .to(".animate-content", {

@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import github_copilot from "../../assets/marqueelogo5/github_copilot.png";
-import microsoft365 from "../../assets/marqueelogo5/microsoft365.png";
-import openai from "../../assets/marqueelogo5/openai.png";
-import shopify from "../../assets/marqueelogo5/shopify.png";
-import zoho from "../../assets/marqueelogo5/zoho.png";
+import github_copilot from "../../../assets/marqueelogo5/github_copilot.png";
+import microsoft365 from "../../../assets/marqueelogo5/microsoft365.png";
+import openai from "../../../assets/marqueelogo5/openai.png";
+import shopify from "../../../assets/marqueelogo5/shopify.png";
+import zoho from "../../../assets/marqueelogo5/zoho.png";
 
 const MarqueeCarousel5 = () => {
   const technologies = [

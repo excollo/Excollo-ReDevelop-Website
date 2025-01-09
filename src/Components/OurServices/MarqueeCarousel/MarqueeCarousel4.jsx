@@ -1,14 +1,15 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import apache from "../../assets/marqueelogo3/apache.png";
-import metabase from "../../assets/marqueelogo3/metabase.png";
-import mongodb from "../../assets/marqueelogo3/mongodb.png";
-import mysql from "../../assets/marqueelogo3/mysql.png";
-import powerbi from "../../assets/marqueelogo3/powerbi.png";
-import python from "../../assets/marqueelogo3/python.png";
-import pytorch from "../../assets/marqueelogo3/pytorch.png";
+import figma from "../../../assets/marqueelogo4/figma.png";
+import nextjs from "../../../assets/marqueelogo4/nextjs.png";
+import nodejs from "../../../assets/marqueelogo4/nodejs.png";
+import postgresql from "../../../assets/marqueelogo4/postgresql.png";
+import react from "../../../assets/marqueelogo4/react.png";
+import reactnative from "../../../assets/marqueelogo4/reactnative.png";
+import webflow from "../../../assets/marqueelogo4/webflow.png";
+import wix from "../../../assets/marqueelogo4/wix.png";
 
-const MarqueeCarousel3 = () => {
+const MarqueeCarousel4 = () => {
   const technologies = [
     {
       name: "Technology 1",
@@ -24,7 +25,7 @@ const MarqueeCarousel3 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={apache} alt="Logo" style={{ height: 90, width: "auto" }} />
+          <img src={figma} alt="Logo" style={{ height: 90, width: "auto" }} />
         </Box>
       ),
     },
@@ -42,13 +43,11 @@ const MarqueeCarousel3 = () => {
             borderRadius: 1,
           }}
         >
-          <Typography sx={{ color: "gray.300", fontSize: "0.875rem" }}>
             <img
-              src={metabase}
+              src={nextjs}
               alt="Logo"
-              style={{ height: 70, width: "auto" }}
+              style={{ height: 50, width: "auto", marginLeft: "-2rem", marginRight: "-2rem" }}
             />
-          </Typography>
         </Box>
       ),
     },
@@ -66,7 +65,11 @@ const MarqueeCarousel3 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={mongodb} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img
+            src={postgresql}
+            alt="Logo"
+            style={{ height: 50, width: "auto" }}
+          />
         </Box>
       ),
     },
@@ -84,7 +87,7 @@ const MarqueeCarousel3 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={mysql} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={react} alt="Logo" style={{ height: 50, width: "auto" }} />
         </Box>
       ),
     },
@@ -102,7 +105,7 @@ const MarqueeCarousel3 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={powerbi} alt="Logo" style={{ height: 70, width: "auto" }} />
+          <img src={nodejs} alt="Logo" style={{ height: 50, width: "auto" }} />
         </Box>
       ),
     },
@@ -120,7 +123,11 @@ const MarqueeCarousel3 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={python} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img
+            src={reactnative}
+            alt="Logo"
+            style={{ height: 50, width: "auto" }}
+          />
         </Box>
       ),
     },
@@ -138,7 +145,29 @@ const MarqueeCarousel3 = () => {
             borderRadius: 1,
           }}
         >
-          <img src={pytorch} alt="Logo" style={{ height: 40, width: "auto" }} />
+          <img src={webflow} alt="Logo" style={{ height: 30, width: "auto", marginRight: "2rem" }} />
+        </Box>
+      ),
+    },
+    {
+      name: "Technology 8",
+      content: (
+        <Box
+          sx={{
+            backgroundColor: "gray.700",
+            height: 48,
+            width: 96,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 1,
+          }}
+        >
+          <img
+            src={wix}
+            alt="Logo"
+            style={{ height: 30, width: "auto" }}
+          />
         </Box>
       ),
     },
@@ -190,4 +219,4 @@ const MarqueeCarousel3 = () => {
   );
 };
 
-export default MarqueeCarousel3;
+export default MarqueeCarousel4;

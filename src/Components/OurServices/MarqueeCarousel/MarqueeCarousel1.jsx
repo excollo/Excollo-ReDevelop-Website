@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import botpress from "../../assets/marqueelogo1/botpress.png";
-import github_copilot from "../../assets/marqueelogo1/github_copilot.png";
-import microsoft_azure from "../../assets/marqueelogo1/microsoft_azure.png";
-import n8n from "../../assets/marqueelogo1/n8n.png";
-import openai from "../../assets/marqueelogo1/openai.png";
-import Zapier from "../../assets/marqueelogo1/Zapier.png";
-import LLama from "../../assets/marqueelogo1/LLama.png";
+import botpress from "../../../assets/marqueelogo1/botpress.png";
+import github_copilot from "../../../assets/marqueelogo1/github_copilot.png";
+import microsoft_azure from "../../../assets/marqueelogo1/microsoft_azure.png";
+import n8n from "../../../assets/marqueelogo1/n8n.png";
+import openai from "../../../assets/marqueelogo1/openai.png";
+import Zapier from "../../../assets/marqueelogo1/Zapier.png";
+import LLama from "../../../assets/marqueelogo1/LLama.png";
 
 const MarqueeCarousel1 = () => {
   const technologies = [

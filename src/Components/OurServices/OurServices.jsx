@@ -25,7 +25,7 @@ const OurServices = () => {
           >
             Our Core <br /> Services
           </Typography>
-          <Typography sx={{ ml: "17%", mt: 5, maxWidth: "60%" }}>
+          <Typography sx={{ ml: "17.5%", mt: 5, maxWidth: "60%" }}>
             Excollo is future-ready, offering unparalleled expertise to
             enterprises seeking to transform their digital stack. By leveraging
             cutting-edge AI, automation, and innovative consultancy, we identify
