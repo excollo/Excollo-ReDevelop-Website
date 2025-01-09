@@ -103,10 +103,9 @@ const AIAutomation = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".fade-in-heading",
-          start: "top 40%",
-          end: "top 60%",
+          start: "top 60%",
+          end: "top 40%",
           scrub: 1,
-          duration: 2,
         },
       })
       .to(".animate-content", {
@@ -115,8 +114,8 @@ const AIAutomation = () => {
         delay: 1,
         scrollTrigger: {
           trigger: ".animate-content",
-          start: "top 10%",
-          end: "top 30%",
+          start: "top 30%",
+          end: "top 25%",
           scrub: 1,
         },
       })
@@ -127,8 +126,8 @@ const AIAutomation = () => {
         delay: 0.3,
         scrollTrigger: {
           trigger: ".services-title",
-          start: "top 10%",
-          end: "top 10%",
+          start: "top 22%",
+          end: "top 15%",
           scrub: 1,
         },
       });

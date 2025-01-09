@@ -342,7 +342,7 @@ const AboutUs = () => {
                 textAlign: { xs: "center", md: "left" },
                 ml: { xs: 0, md: "2%", lg: "6%" },
                 px: { xs: 2, md: 0 },
-                mt: { xs: 3, md: 5 },
+                mt: { xs: 3, md: 3 },
               }}
             >
               Excollo is future-ready, offering unparalleled expertise to

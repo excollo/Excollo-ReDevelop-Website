@@ -104,8 +104,8 @@ const ProductDevelopment = () => {
         opacity: 1,
         scrollTrigger: {
           trigger: ".fade-in-heading-4",
-          start: "top 40%",
-          end: "top 60%",
+          start: "top 60%",
+          end: "top 40%",
           scrub: 1,
           duration: 2,
         },
@@ -116,8 +116,8 @@ const ProductDevelopment = () => {
         delay: 1,
         scrollTrigger: {
           trigger: ".animate-content-4",
-          start: "top 10%",
-          end: "top 30%",
+          start: "top 30%",
+          end: "top 25%",
           scrub: 1,
         },
       })
@@ -128,8 +128,8 @@ const ProductDevelopment = () => {
         delay: 0.3,
         scrollTrigger: {
           trigger: ".services-title-4",
-          start: "top 10%",
-          end: "top 10%",
+          start: "top 22%",
+          end: "top 15%",
           scrub: 1,
         },
       });
