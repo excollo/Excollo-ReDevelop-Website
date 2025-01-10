@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { Box, Typography, styled } from "@mui/material";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import zIndex from "@mui/material/styles/zIndex";
-import { text } from "framer-motion/client";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,12 +36,15 @@ const TableGrid = styled("div")({
   flexWrap: "wrap",
   width: "100%",
   margin: "auto",
-  maxHeight: "300px",
   position: "relative",
+  justifyContent: "space-evenly", // Keep spacing even on larger screens
   "@media (max-width: 768px)": {
-    flexDirection: "column",
-    width: "85%",
+    flexDirection: "column", // Stack vertically on small screens
+    width: "100%", // Take up full width
     margin: "auto",
+    overflowY: "scroll", // Make it scrollable vertically on mobile
+    alignItems: "center", // Center horizontally
+    maxHeight: "none", // Remove height limit on mobile
   },
 });
 
@@ -52,23 +53,21 @@ const TableContent = styled("div")({
   border: "1px solid #7e22ce",
   margin: "0 0",
   padding: "30px",
-  height: "100%",
   width: "77.5%",
   opacity: 0,
   transform: "translateY(100%)",
   visibility: "hidden",
   transition: "border-color 0.3s ease",
   position: "relative",
-  display: "flex", // Added for Flexbox layout
-  flexDirection: "column", // Ensures vertical stacking of content
-  alignItems: "center", // Horizontally centers content
-  alignContent: "justify", // Vertically distributes content
-  justifyContent: "center", // Vertically centers content
+  display: "flex", // Flexbox layout
+  flexDirection: "column", // Vertical stacking
+  alignItems: "center", // Horizontally center content
+  alignContent: "justify", // Distribute content vertically
+  justifyContent: "center", // Vertically center content
   "&:hover": {
     borderColor: "#7e22ce !important",
-    border: "1px solid #7e22ce",
-    zIndex: 1000, // Added !important to override GSAP inline styles
     background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
+    zIndex: 1000, // Added !important to override GSAP inline styles
   },
   "& h3": {
     fontFamily: "Inter, sans-serif",
@@ -89,47 +88,26 @@ const TableContent = styled("div")({
     textAlign: "center", // Center-align paragraph text
   },
   "@media (max-width: 768px)": {
-    width: "100%",
-    height: "40vh",
-    borderRadius: "60px",
-    border: "none",
+    width: "90%", // Make it 90% of the width for mobile
+    height: "auto", // Let the height adjust dynamically
+    borderRadius: "20px", // Modern rounded corners
+    border: "none", // Remove border for a cleaner look
     textAlign: "center",
-    padding: "30px",
-    marginBottom: "20px",
+    padding: "20px", // Adjust padding for mobile
+    marginBottom: "20px", // Add margin between cards on mobile
     opacity: 1,
     transform: "none",
     visibility: "visible",
     "& h3": {
-      fontSize: "35px",
-      margin: "30px  5px",
+      fontSize: "28px",
+      margin: "20px 0",
     },
     "& p": {
-      fontSize: "18px",
-      margin: "5px",
-    },
-  },
-  "@media (max-width: 480px)": {
-    width: "95%",
-    height: "50vh",
-    borderRadius: "60px",
-    textAlign: "center",
-    padding: "20px",
-    marginBottom: "30px",
-    background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
-    opacity: 1,
-    transform: "none",
-    visibility: "visible",
-    "& h3": {
-      fontSize: "30px",
-      margin: "25px 10px",
-    },
-    "& p": {
-      fontSize: "18px",
+      fontSize: "16px", // Adjust font size for mobile
       margin: "5px",
     },
   },
 });
-
 
 const HowWeWork = () => {
   const containerRef = useRef(null);
@@ -178,9 +156,6 @@ const HowWeWork = () => {
           borderColor: "#ffffff",
           duration: 2,
           ease: "power2.out",
-          "&:hover": {
-            borderColor: "#7e22ce",
-          },
         })
         .to(content, {
           duration: 3,
@@ -299,7 +274,9 @@ const HowWeWork = () => {
                 className="table-content"
               >
                 <Typography variant="h3">{step.title}</Typography>
-                <Typography variant="body1" sx={{ fontSize: "2rem"}}>{step.content}</Typography>
+                <Typography variant="body1" sx={{ fontSize: "2rem" }}>
+                  {step.content}
+                </Typography>
               </TableContent>
             </Box>
           ))}
