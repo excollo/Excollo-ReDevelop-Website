@@ -539,7 +539,11 @@ useEffect(() => {
            >
              <Typography
                variant="h6"
-               sx={{ textAlign: "center", fontSize: "1.2rem", width: "100%" }}
+               sx={{
+                 textAlign: expanded ? "left" : "center",
+                 fontSize: "1.2rem",
+                 width: "100%",
+               }}
              >
                {services[0].title}
              </Typography>
@@ -571,7 +575,7 @@ useEffect(() => {
                </List>
                {services.slice(1).map((service, index) => (
                  <Box key={index} sx={{ mt: 2, width: "100%" }}>
-                   <Typography variant="h6" sx={{ textAlign: "center" }}>
+                   <Typography variant="h6" sx={{ textAlign: "left" }}>
                      {service.title}
                    </Typography>
                    <List>
@@ -624,6 +628,9 @@ useEffect(() => {
              </Box>
            </CardContent>
          </Card>
+         <Box sx={{ mt: 5 }}>
+           <MarqueeCarousel1 />
+         </Box>
        </Box>
      );
    }

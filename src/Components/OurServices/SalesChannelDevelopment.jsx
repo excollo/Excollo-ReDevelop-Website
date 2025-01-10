@@ -489,130 +489,141 @@ const SalesChannelDevelopment = () => {
     );
   }
 
-  if (isMobile) {
-      return (
-        <Box sx={{ padding: "1rem", width: "95%" }}>
-          <Card
-            sx={{
-              background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
-              color: "#fff",
-              m: 2,
-              border: "2px solid rgba(255, 255, 255, 0.1)",
-              borderRadius: "30px",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <Typography
-              variant="h3"
-              sx={{
-                textAlign: "center",
-                m: 3,
-                mb: 1,
-                fontSize: "2rem",
-                background: "linear-gradient(90deg,#2579e3, #8e54f7)",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              Sales Channel Development
-            </Typography>
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Typography
-                variant="h6"
-                sx={{ textAlign: "center", fontSize: "1.2rem", width: "100%" }}
-              >
-                {services[0].title}
-              </Typography>
-              <Collapse in={expanded}>
-                <List sx={{ width: "100%" }}>
-                  {services[0].details.map((detail, index) => (
-                    <ListItem
-                      key={index}
-                      sx={{
-                        alignItems: "flex-start",
-                        py: 1,
-                      }}
-                    >
-                      <ListItemIcon sx={{ minWidth: "24px", mt: 1.5 }}>
-                        <Circle size={8} color="#8E54F7" />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={detail}
-                        primaryTypographyProps={{
-                          sx: {
-                            fontSize: "0.95rem",
-                            ml: -1,
-                            color: "rgba(255, 255, 255, 0.85)",
-                          },
-                        }}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-                {services.slice(1).map((service, index) => (
-                  <Box key={index} sx={{ mt: 2, width: "100%" }}>
-                    <Typography variant="h6" sx={{ textAlign: "center" }}>
-                      {service.title}
-                    </Typography>
-                    <List>
-                      {service.details.map((detail, index) => (
-                        <ListItem
-                          key={index}
-                          sx={{
-                            alignItems: "flex-start",
-                            py: 1,
-                          }}
-                        >
-                          <ListItemIcon sx={{ minWidth: "24px", mt: 1.5 }}>
-                            <Circle size={8} color="#8E54F7" />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={detail}
-                            primaryTypographyProps={{
-                              sx: {
-                                fontSize: "0.95rem",
-                                ml: -1,
-                                color: "rgba(255, 255, 255, 0.85)",
-                              },
-                            }}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </Box>
-                ))}
-              </Collapse>
-              <Box
-                sx={{ width: "100%", display: "flex", justifyContent: "center" }}
-              >
-                <Button
-                  onClick={() => setExpanded(!expanded)}
-                  sx={{
-                    color: "#8E54F7",
-                    textTransform: "none",
-                    fontSize: "1rem",
-                    p: 0,
-                    m: 2,
-                    "&:hover": {
-                      background: "transparent",
-                      opacity: 0.8,
-                    },
-                  }}
-                >
-                  {expanded ? "View Less" : "View More"}
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Box>
-      );
-    }
+   if (isMobile) {
+       return (
+         <Box sx={{ padding: "1rem", width: "95%" }}>
+           <Card
+             sx={{
+               background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+               color: "#fff",
+               m: 2,
+               border: "2px solid rgba(255, 255, 255, 0.1)",
+               borderRadius: "30px",
+               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+             }}
+           >
+             <Typography
+               variant="h3"
+               sx={{
+                 textAlign: "center",
+                 m: 3,
+                 mb: 1,
+                 fontSize: "2rem",
+                 background: "linear-gradient(90deg,#2579e3, #8e54f7)",
+                 WebkitBackgroundClip: "text",
+                 color: "transparent",
+               }}
+             >
+               Sales Channel Development
+             </Typography>
+             <CardContent
+               sx={{
+                 display: "flex",
+                 flexDirection: "column",
+                 alignItems: "center",
+               }}
+             >
+               <Typography
+                 variant="h6"
+                 sx={{
+                   textAlign: expanded ? "left" : "center",
+                   fontSize: "1.2rem",
+                   width: "100%",
+                 }}
+               >
+                 {services[0].title}
+               </Typography>
+               <Collapse in={expanded}>
+                 <List sx={{ width: "100%" }}>
+                   {services[0].details.map((detail, index) => (
+                     <ListItem
+                       key={index}
+                       sx={{
+                         alignItems: "flex-start",
+                         py: 1,
+                       }}
+                     >
+                       <ListItemIcon sx={{ minWidth: "24px", mt: 1.5 }}>
+                         <Circle size={8} color="#8E54F7" />
+                       </ListItemIcon>
+                       <ListItemText
+                         primary={detail}
+                         primaryTypographyProps={{
+                           sx: {
+                             fontSize: "0.95rem",
+                             ml: -1,
+                             color: "rgba(255, 255, 255, 0.85)",
+                           },
+                         }}
+                       />
+                     </ListItem>
+                   ))}
+                 </List>
+                 {services.slice(1).map((service, index) => (
+                   <Box key={index} sx={{ mt: 2, width: "100%" }}>
+                     <Typography variant="h6" sx={{ textAlign: "left" }}>
+                       {service.title}
+                     </Typography>
+                     <List>
+                       {service.details.map((detail, index) => (
+                         <ListItem
+                           key={index}
+                           sx={{
+                             alignItems: "flex-start",
+                             py: 1,
+                           }}
+                         >
+                           <ListItemIcon sx={{ minWidth: "24px", mt: 1.5 }}>
+                             <Circle size={8} color="#8E54F7" />
+                           </ListItemIcon>
+                           <ListItemText
+                             primary={detail}
+                             primaryTypographyProps={{
+                               sx: {
+                                 fontSize: "0.95rem",
+                                 ml: -1,
+                                 color: "rgba(255, 255, 255, 0.85)",
+                               },
+                             }}
+                           />
+                         </ListItem>
+                       ))}
+                     </List>
+                   </Box>
+                 ))}
+               </Collapse>
+               <Box
+                 sx={{
+                   width: "100%",
+                   display: "flex",
+                   justifyContent: "center",
+                 }}
+               >
+                 <Button
+                   onClick={() => setExpanded(!expanded)}
+                   sx={{
+                     color: "#8E54F7",
+                     textTransform: "none",
+                     fontSize: "1rem",
+                     p: 0,
+                     m: 2,
+                     "&:hover": {
+                       background: "transparent",
+                       opacity: 0.8,
+                     },
+                   }}
+                 >
+                   {expanded ? "View Less" : "View More"}
+                 </Button>
+               </Box>
+             </CardContent>
+           </Card>
+           <Box sx={{ mt: 5 }}>
+             <MarqueeCarousel2 />
+           </Box>
+         </Box>
+       );
+     }
 
   return (
     <Box

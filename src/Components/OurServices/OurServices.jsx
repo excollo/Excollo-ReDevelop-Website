@@ -63,12 +63,18 @@ const OurServices = () => {
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               alignItems: "center",
-              mt: { xs: 0, md: "-15%", lg: "30" },
-              mb: { xs: 0, md: "10%" },
+              mt: { xs: "10%", md: "-15%", lg: "-20%" },
+              mb: { xs: 0, md: 0 },
             }}
           >
             <Box>
-              <Box sx={{ display: "flex" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: { xs: "center", md: "flex-start" },
+                }}
+              >
                 <Typography
                   variant="h2"
                   sx={{
@@ -82,31 +88,21 @@ const OurServices = () => {
                     fontFamily: '"Inter", sans-serif',
                     fontWeight: "600",
                     color: "#fff",
+                    whiteSpace: "nowrap", // Prevent line break
                     ml: { xs: 0, md: "2%", lg: "10%" },
                   }}
                 >
-                  <span className="highlight">Our</span>
-                </Typography>
-                <Typography
-                  variant="h2"
-                  sx={{
-                    textAlign: { xs: "center", md: "left" },
-                    fontSize: {
-                      xs: "2.5rem",
-                      sm: "3rem",
-                      md: "3.5rem",
-                      lg: "4rem",
-                    },
-                    fontFamily: '"Inter", sans-serif',
-                    fontWeight: "600",
-                    background:
-                      "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    ml: { xs: 0, md: "2%", lg: "2%" },
-                  }}
-                >
-                  <span className="highlight">Services</span>
+                  <span className="highlight">Our </span>
+                  <span
+                    style={{
+                      background:
+                        "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    Services
+                  </span>
                 </Typography>
               </Box>
 
@@ -134,7 +130,7 @@ const OurServices = () => {
               </Typography>
             </Box>
 
-            {!isMobile && (
+            {!isMobile && !isTablet && (
               <Box
                 sx={{
                   width: { sm: "60%", md: "45%" },
@@ -147,7 +143,12 @@ const OurServices = () => {
           </Box>
         </Box>
       </Box>
-      <Box>
+      <Box
+        sx={{
+          mt: { xs: -35 }, // Adjust the margin-top for different screen sizes
+          paddingTop: { xs: 0, md: 0 }, // Remove padding if any
+        }}
+      >
         <AIAutomation />
       </Box>
       <Box>

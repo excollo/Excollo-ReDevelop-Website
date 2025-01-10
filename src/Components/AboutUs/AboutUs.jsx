@@ -171,7 +171,9 @@ const Card = styled("div")(
 
 const AboutUs = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
@@ -303,12 +305,18 @@ const AboutUs = () => {
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
-            mt: { xs: 0, md: "-15%", lg: "30" },
-            mb: { xs: 0, md: "-15%" },
+            mt: { xs: "10%", md: "-15%", lg: "-20%" },
+            mb: { xs: 0, md: 0 },
           }}
         >
           <Box>
-            <Box sx={{ display: "flex" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                alignItems: { xs: "center", md: "flex-start" },
+              }}
+            >
               <Typography
                 variant="h2"
                 sx={{
@@ -322,31 +330,21 @@ const AboutUs = () => {
                   fontFamily: '"Inter", sans-serif',
                   fontWeight: "600",
                   color: "#fff",
+                  whiteSpace: "nowrap", // Prevent line break
                   ml: { xs: 0, md: "2%", lg: "10%" },
                 }}
               >
-                <span className="highlight">About</span>
-              </Typography>
-              <Typography
-                variant="h2"
-                sx={{
-                  textAlign: { xs: "center", md: "left" },
-                  fontSize: {
-                    xs: "2.5rem",
-                    sm: "3rem",
-                    md: "3.5rem",
-                    lg: "4rem",
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: "600",
-                  background:
-                    "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  ml: { xs: 0, md: "2%", lg: "2%" },
-                }}
-              >
-                <span className="highlight">Excollo</span>
+                <span className="highlight">About </span>
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Excollo
+                </span>
               </Typography>
             </Box>
 
@@ -373,7 +371,7 @@ const AboutUs = () => {
             </Typography>
           </Box>
 
-          {!isMobile && (
+          {!isMobile && !isTablet && (
             <Box
               sx={{
                 width: { sm: "60%", md: "45%" },
