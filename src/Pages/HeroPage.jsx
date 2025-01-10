@@ -29,7 +29,8 @@ const HeroPage = () => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isSpecificSize = useMediaQuery("(max-width: 1024px) and (max-height: 652px)");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,12 +72,23 @@ const HeroPage = () => {
     if (!showThreeDE) {
       const timeline = gsap.timeline();
 
-      timeline.to(".threeDE", {
-        x: "28%",
-        y: "2%",
-        duration: 1,
-        ease: "power2.out",
-      });
+      if (isSpecificSize) {
+        // Specific movement for 1024x652 screen size
+        timeline.to(".threeDE", {
+          x: "36%",
+          y: "2%",
+          duration: 1,
+          ease: "power2.out",
+        });
+      } else {
+        // Default movement
+        timeline.to(".threeDE", {
+          x: "28%",
+          y: "2%",
+          duration: 1,
+          ease: "power2.out",
+        });
+      }
 
       timeline.to(".gradient-background", {
         opacity: 1,
@@ -105,7 +117,7 @@ const HeroPage = () => {
         }),
       ]);
     }
-  }, [showThreeDE]);
+  }, [showThreeDE, isSpecificSize]);
 
   useEffect(() => {
     if (hero1Complete) {
@@ -141,7 +153,7 @@ const HeroPage = () => {
           path: [
             { x: "28%", y: "2%" },
             { x: "12%", y: "50%" },
-            { x: "-23vw", y: "83vh" },
+            { x: "-23vw", y: "95vh" },
           ],
           curviness: 1.5,
         },

@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import { Box, Typography, styled } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Box,
+  Typography,
+  styled,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-
 gsap.registerPlugin(ScrollTrigger);
-
 const WorkTable = styled("section")({
   width: "95%",
   margin: "auto",
@@ -15,7 +19,6 @@ const WorkTable = styled("section")({
     padding: "10px",
   },
 });
-
 const LineBox = styled("div")({
   position: "relative",
   top: 0,
@@ -30,7 +33,6 @@ const LineBox = styled("div")({
     height: "150px",
   },
 });
-
 const TableGrid = styled("div")({
   display: "flex",
   flexWrap: "wrap",
@@ -47,13 +49,13 @@ const TableGrid = styled("div")({
     maxHeight: "none", // Remove height limit on mobile
   },
 });
-
 const TableContent = styled("div")({
   flex: "1 1",
-  border: "1px solid #7e22ce",
+  border: "1px solid #7E22CE",
   margin: "0 0",
   padding: "30px",
-  width: "77.5%",
+  width: "80.8%",
+  height: "400px",
   opacity: 0,
   transform: "translateY(100%)",
   visibility: "hidden",
@@ -65,7 +67,7 @@ const TableContent = styled("div")({
   alignContent: "justify", // Distribute content vertically
   justifyContent: "center", // Vertically center content
   "&:hover": {
-    borderColor: "#7e22ce !important",
+    borderColor: "#7E22CE !important",
     background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
     zIndex: 1000, // Added !important to override GSAP inline styles
   },
@@ -87,14 +89,14 @@ const TableContent = styled("div")({
     lineHeight: 1.6,
     textAlign: "center", // Center-align paragraph text
   },
-  "@media (max-width: 768px)": {
-    width: "90%", // Make it 90% of the width for mobile
-    height: "auto", // Let the height adjust dynamically
-    borderRadius: "20px", // Modern rounded corners
-    border: "none", // Remove border for a cleaner look
-    textAlign: "center",
-    padding: "20px", // Adjust padding for mobile
-    marginBottom: "20px", // Add margin between cards on mobile
+  "@media (min-width: 1025px) and (max-width:1440px)": {
+    width: "77.9%",
+    height: "400px",
+  },
+  "@media (min-width: 768px) and (max-width:1024px)": {
+    width: "68%",
+    height: "400px", // Make it 90% of the width for mobile
+    // Add margin between cards on mobile
     opacity: 1,
     transform: "none",
     visibility: "visible",
@@ -107,16 +109,69 @@ const TableContent = styled("div")({
       margin: "5px",
     },
   },
+  "@media (max-width: 768px)": {
+    width: "90%",
+    height: "200px", // Make it 90% of the width for mobile
+    // Let the height adjust dynamically
+    borderRadius: "20px", // Modern rounded corners
+    border: "1px solid #fff", // Remove border for a cleaner look
+    textAlign: "center",
+    padding: "20px", // Adjust padding for mobile
+    marginBottom: "20px", // Add margin between cards on mobile
+    opacity: 1,
+    transform: "none",
+    visibility: "visible",
+    "&:hover": {
+      border: "1px solid #7E22CE ",
+      // borderColor: "#7E22CE !important",
+      background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
+      zIndex: 1000, // Added !important to override GSAP inline styles
+    },
+    "& h3": {
+      fontSize: "28px",
+      margin: "20px 0",
+    },
+    "& p": {
+      fontSize: "16px", // Adjust font size for mobile
+      margin: "5px",
+    },
+  },
+  "@media (max-width: 480px)": {
+    width: "90%",
+    height: "150px", // Make it 90% of the width for mobile
+    border: "1px solid #fff",
+    textAlign: "center",
+    padding: "20px", // Adjust padding for mobile
+    marginBottom: "20px", // Add margin between cards on mobile
+    opacity: 1,
+    transform: "none",
+    visibility: "visible",
+    "&:hover": {
+      border: "1px solid #7E22CE ",
+      // borderColor: "#7E22CE !important",
+      background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
+      zIndex: 1000, // Added !important to override GSAP inline styles
+    },
+    "& h3": {
+      fontSize: "28px",
+      margin: "20px 0",
+    },
+    "& p": {
+      fontSize: "16px", // Adjust font size for mobile
+      margin: "5px",
+    },
+  },
 });
-
 const HowWeWork = () => {
   const containerRef = useRef(null);
   const contentRefs = useRef([]);
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   useEffect(() => {
+    if (isMobile || isTablet) return;
     const container = containerRef.current;
     const contents = contentRefs.current;
-
     // Create main timeline
     const mainTl = gsap.timeline({
       scrollTrigger: {
@@ -128,20 +183,16 @@ const HowWeWork = () => {
         anticipatePin: 1,
       },
     });
-
     // Create animations for each content box
     contents.forEach((content, index) => {
       if (!content) return;
-
       const tl = gsap.timeline();
-
       gsap.set(content, {
         opacity: 0,
         y: 400,
         visibility: "hidden",
-        borderColor: "#7e22ce",
+        borderColor: "#7E22CE",
       });
-
       tl.to(content, {
         visibility: "visible",
         duration: 1,
@@ -153,7 +204,7 @@ const HowWeWork = () => {
           ease: "power2.out",
         })
         .to(content, {
-          borderColor: "#ffffff",
+          borderColor: "#FFFFFF",
           duration: 2,
           ease: "power2.out",
         })
@@ -162,12 +213,10 @@ const HowWeWork = () => {
         });
       mainTl.add(tl, index * 3);
     });
-
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, []);
-
+  }, [isMobile, isTablet]);
   return (
     <Box
       ref={containerRef}
@@ -220,7 +269,7 @@ const HowWeWork = () => {
             <Box
               component="span"
               sx={{
-                background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+                background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -229,7 +278,6 @@ const HowWeWork = () => {
             </Box>
           </Typography>
         </Box>
-
         <TableGrid>
           {[
             {
@@ -286,5 +334,4 @@ const HowWeWork = () => {
     </Box>
   );
 };
-
 export default HowWeWork;
