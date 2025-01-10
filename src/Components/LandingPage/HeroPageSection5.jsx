@@ -96,10 +96,10 @@ const HeroPageSection5 = () => {
                   <h2>{title}</h2>
                   <p>
                     {index === 0
-                      ? "In-depth discovery to align with your business goals."
+                      ? "In-depth discovery to fully understand and align with your business objectives."
                       : index === 1
                       ? "Strategy, implementation, and optimization designed for measurable outcomes."
-                      : "Continuous improvement ensures solutions stay ahead of the curve."}
+                      : " Continuous improvement ensures solutions evolve to stay ahead of the curve."}
                   </p>
                 </div>
               </div>

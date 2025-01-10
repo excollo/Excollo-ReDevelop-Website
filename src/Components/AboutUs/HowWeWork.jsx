@@ -3,6 +3,7 @@ import { Box, Typography, styled } from "@mui/material";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import zIndex from "@mui/material/styles/zIndex";
+import { text } from "framer-motion/client";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,7 +48,7 @@ const TableGrid = styled("div")({
 });
 
 const TableContent = styled("div")({
-  flex: "1 1 ",
+  flex: "1 1",
   border: "1px solid #7e22ce",
   margin: "0 0",
   padding: "30px",
@@ -58,10 +59,16 @@ const TableContent = styled("div")({
   visibility: "hidden",
   transition: "border-color 0.3s ease",
   position: "relative",
+  display: "flex", // Added for Flexbox layout
+  flexDirection: "column", // Ensures vertical stacking of content
+  alignItems: "center", // Horizontally centers content
+  alignContent: "justify", // Vertically distributes content
+  justifyContent: "center", // Vertically centers content
   "&:hover": {
     borderColor: "#7e22ce !important",
     border: "1px solid #7e22ce",
     zIndex: 1000, // Added !important to override GSAP inline styles
+    background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
   },
   "& h3": {
     fontFamily: "Inter, sans-serif",
@@ -70,14 +77,16 @@ const TableContent = styled("div")({
     lineHeight: "37.5px",
     margin: "30px 0 0 10px",
     color: "#FFFFFF",
+    textAlign: "center", // Center-align h3 text
   },
   "& p": {
     fontFamily: "Inter, sans-serif",
     fontSize: "16px",
     fontWeight: 300,
     color: "#9EA4AA",
-    margin: 10,
+    margin: "10px",
     lineHeight: 1.6,
+    textAlign: "center", // Center-align paragraph text
   },
   "@media (max-width: 768px)": {
     width: "100%",
@@ -120,6 +129,7 @@ const TableContent = styled("div")({
     },
   },
 });
+
 
 const HowWeWork = () => {
   const containerRef = useRef(null);
@@ -250,27 +260,27 @@ const HowWeWork = () => {
             {
               title: "Discover",
               content:
-                "Every end-to-end project of ours begins with a bespoke pre-build strategy. From brand ID consultation to in-depth code reviews we're here to set the stage for success.",
+                "We start with a deep dive into your business to understand challenges, goals, and opportunities.",
             },
             {
               title: "Define",
               content:
-                "Every end-to-end project of ours begins with a bespoke pre-build strategy. From brand ID consultation to in-depth code reviews we're here to set the stage for success.",
+                "Identify gaps and align on the technologies needed to bridge them effectively.",
             },
             {
               title: "Design",
               content:
-                "After we have a comprehensive understanding of your brand, we'll be ready to move onto design. Each page or asset will be designed, reviewed, and given your stamp of approval.",
+                "Craft tailored solutions that address your unique needs and objectives.",
             },
             {
               title: "Develop",
               content:
-                "After we have a comprehensive understanding of your brand, we'll be ready to move onto design. Each page or asset will be designed, reviewed, and given your stamp of approval.",
+                "Implement cutting-edge technologies to bring the strategy to life.",
             },
             {
               title: "Deliver",
               content:
-                "After we have a comprehensive understanding of your brand, we'll be ready to move onto design. Each page or asset will be designed, reviewed, and given your stamp of approval.",
+                "Ensure seamless execution and measurable outcomes, with ongoing optimization for sustained success.",
             },
           ].map((step, index) => (
             <Box

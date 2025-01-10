@@ -113,12 +113,14 @@ const Card = styled("div")(
     },
 
     "& p": {
-      fontSize: "1.8rem",
+      fontSize: "1.5rem",
+      alignItems: "center",
+      justifyContent: "center",
+      alignText: "center",
       fontFamily: '"Inter", sans-serif',
       color: "#D1D1E2",
-      lineHeight: 1.4,
+      lineHeight: 1.6,
       textAlign: "left",
-      letterSpacing: "-0.00833em",
       padding: 20,
       margin: 15,
     },
@@ -253,12 +255,11 @@ const AboutUs = () => {
           <TitleContainer>
             <h2>Our {!isMobile && <br />} Philosophy</h2>
           </TitleContainer>
-          <Card isMobile={isMobile}>
+          <Card isMobile={isMobile} sx={{ fontWeight: 200 }}>
             <p>
               At Excollo, we commit to results, not just solutions. Our "Outcome
-              as a Service" (OaaS) approach ensures every strategy, technology,
-              and action is aligned to achieve measurable success for our
-              clients.
+              as a Service" (OaaS) approach ensures every action is aligned to
+              achieve measurable success for our clients.
             </p>
           </Card>
         </ContentSection>
@@ -289,7 +290,7 @@ const AboutUs = () => {
       <NavBar />
       <Box
         sx={{
-          maxWidth: { xs: "95%", sm: "90%", md: "85%" },
+          maxWidth: { xs: "95%", sm: "90%", md: "90%" },
           margin: { xs: "20px auto", md: "50px auto" },
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
@@ -307,26 +308,47 @@ const AboutUs = () => {
           }}
         >
           <Box>
-            <Typography
-              variant="h2"
-              sx={{
-                textAlign: { xs: "center", md: "left" },
-                fontSize: {
-                  xs: "2.5rem",
-                  sm: "3rem",
-                  md: "3.5rem",
-                  lg: "4rem",
-                },
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: "600",
-                background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                ml: { xs: 0, md: "2%", lg: "6%" },
-              }}
-            >
-              <span className="highlight">About Us</span>
-            </Typography>
+            <Box sx={{ display: "flex" }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  textAlign: { xs: "center", md: "left" },
+                  fontSize: {
+                    xs: "2.5rem",
+                    sm: "3rem",
+                    md: "3.5rem",
+                    lg: "4rem",
+                  },
+                  fontFamily: '"Inter", sans-serif',
+                  fontWeight: "600",
+                  color: "#fff",
+                  ml: { xs: 0, md: "2%", lg: "10%" },
+                }}
+              >
+                <span className="highlight">About</span>
+              </Typography>
+              <Typography
+                variant="h2"
+                sx={{
+                  textAlign: { xs: "center", md: "left" },
+                  fontSize: {
+                    xs: "2.5rem",
+                    sm: "3rem",
+                    md: "3.5rem",
+                    lg: "4rem",
+                  },
+                  fontFamily: '"Inter", sans-serif',
+                  fontWeight: "600",
+                  background:
+                    "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  ml: { xs: 0, md: "2%", lg: "2%" },
+                }}
+              >
+                <span className="highlight">Excollo</span>
+              </Typography>
+            </Box>
 
             <Typography
               sx={{
@@ -338,18 +360,16 @@ const AboutUs = () => {
                   lg: "1.3rem",
                 },
                 fontWeight: 200,
-                lineHeight: 1.5,
+                lineHeight: 1.7,
                 textAlign: { xs: "center", md: "left" },
-                ml: { xs: 0, md: "2%", lg: "6%" },
+                ml: { xs: 0, md: "2%", lg: "10%" },
                 px: { xs: 2, md: 0 },
-                mt: { xs: 3, md: 3 },
+                mt: { xs: 3, md: 5 },
               }}
             >
-              Excollo is future-ready, offering unparalleled expertise to
-              enterprises seeking to transform their digital stack. By
-              leveraging cutting-edge AI, automation, and innovative
-              consultancy, we identify opportunities, close gaps, and implement
-              strategies that empower businesses to achieve scalable success.
+              Excollo bridges today’s challenges and tomorrow’s opportunities.
+              We harness cutting-edge technology, AI, and tailored solutions to
+              deliver outcomes and make businesses future-ready.
             </Typography>
           </Box>
 
@@ -368,7 +388,7 @@ const AboutUs = () => {
 
       <VisionSection />
       <MissionSection />
-      <PhilosophySection />
+      <PhilosophySection sx={{ fontSize: "1rem" }} />
       <HowWeWork />
       <Excollo3D />
       <Footer />

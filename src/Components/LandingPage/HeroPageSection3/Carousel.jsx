@@ -22,7 +22,7 @@ const carouselContent = [
   {
     title: "Sales Channel Development",
     description:
-      "Scalable websites, web apps, and mobile apps tailored to your business’s unique needs.",
+      "Scalable websites, web apps, and mobile apps tailored to meet your business’s unique challenges and goals.",
     link: "/services",
   },
   {
@@ -34,7 +34,7 @@ const carouselContent = [
   {
     title: "Product Development",
     description:
-      "Set up or enhance e-commerce and WhatsApp sales channels to unlock new growth avenues.",
+      "Set up or enhance e-commerce and WhatsApp sales channels to unlock new growth opportunities and expand reach.",
     link: "/services",
   },
   {
@@ -366,7 +366,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
                   sx={{
                     background:
                       "linear-gradient(180deg, #2579e3, #8e54f7)",
-                    fontSize: "2.8rem",
+                    fontSize: "2.6rem",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     display: "inline-block",
