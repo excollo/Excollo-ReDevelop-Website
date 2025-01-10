@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Fade, Button } from "@mui/material";
+import { Box, Fade, Button, useTheme, useMediaQuery } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -26,6 +26,10 @@ const HeroPage = () => {
   const [hero2Complete, setHero2Complete] = useState(false);
   const [hero4Complete, setHero4Complete] = useState(false);
   const threeDERef = useRef(null);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -244,7 +248,7 @@ const HeroPage = () => {
         sx={{
           width: "100vw",
           height: "100vh",
-          display: "flex",
+          display: isMobile || isTablet ? "none" : "flex",
           justifyContent: "center",
           alignItems: "center",
           position: "absolute",
@@ -302,35 +306,33 @@ const HeroPage = () => {
       >
         <HeroPageSection1 animationComplete={animationComplete} />
       </Box>
-        <Box
-          className="hero-section-2"
-          sx={{
-            position: "relative",
-            zIndex: 3,
-            opacity: 1,
-          }}
-        >
-          <HeroPageSection2
-            onAnimationComplete={() => setHero2Complete(true)}
-          />
-        </Box>
-        <Box className="hero-page-section-3" sx={{ opacity: 1 }}>
-          <HeroPageSection3 />
-        </Box>
-        <Box className="hero-page-section-4">
-          <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
-        </Box>
-        <Box>
-          <HeroPageSection5 />
-        </Box>
-        <Box>
-          <HeroPageSection6 />
-        </Box>
-        <Box>
-          <HeroPageSection7 />
-        </Box>
-        <Footer />
+      <Box
+        className="hero-section-2"
+        sx={{
+          position: "relative",
+          zIndex: 3,
+          opacity: 1,
+        }}
+      >
+        <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
       </Box>
+      <Box className="hero-page-section-3" sx={{ opacity: 1 }}>
+        <HeroPageSection3 />
+      </Box>
+      <Box className="hero-page-section-4">
+        <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
+      </Box>
+      <Box>
+        <HeroPageSection5 />
+      </Box>
+      <Box>
+        <HeroPageSection6 />
+      </Box>
+      <Box>
+        <HeroPageSection7 />
+      </Box>
+      <Footer />
+    </Box>
   );
 };
 

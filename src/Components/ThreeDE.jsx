@@ -14,17 +14,17 @@ const ThreeDE = ({ onComplete }) => {
   useEffect(() => {
     if (!mountRef.current) return;
 
-    const WIDTH = 300;
-    const HEIGHT = 600;
+    const WIDTH = mountRef.current.offsetWidth || 300;
+    const HEIGHT = mountRef.current.offsetHeight || 600;
 
-    // Scene setup
     const scene = new THREE.Scene();
     scene.background = null;
     const camera = new THREE.PerspectiveCamera(75, WIDTH / HEIGHT, 0.1, 1000);
+    camera.position.z = 50;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(WIDTH, HEIGHT);
-    renderer.setClearColor(0x000000, 0); // Ensure the renderer has a transparent background
+    renderer.setClearColor(0x000000, 0);
     mountRef.current.appendChild(renderer.domElement);
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -35,16 +35,14 @@ const ThreeDE = ({ onComplete }) => {
       FONT_URL,
       (font) => {
         const textGeometry = new TextGeometry("e", {
-          font: font,
-          fontWeight: "900",
-          size: 40,
+          font,
+          size: 35,
           height: 2,
           bevelEnabled: true,
           bevelThickness: 3,
           bevelSize: 0.05,
           bevelSegments: 5,
         });
-
         textGeometry.center();
         textGeometry.computeBoundingBox();
         const bbox = textGeometry.boundingBox;
@@ -67,20 +65,15 @@ const ThreeDE = ({ onComplete }) => {
         const shaderMaterial = new THREE.ShaderMaterial({
           uniforms: {
             color1: { value: new THREE.Color(0x3283b8) },
-            color2: { value: new THREE.Color(0xa97fea) },
+            color2: { value: new THREE.Color(0x805bb2) },
             color3: { value: new THREE.Color(0xa97fea) },
-            gradientSplit: { value: 0.8 },
+            gradientSplit: { value: 1.1 },
           },
           vertexShader: `
             varying vec2 vUv;
-            varying vec3 vNormal;
-            uniform float time;
-
             void main() {
               vUv = uv;
-              vNormal = normal;
-              vec3 displacedPosition = position + normal * sin(time * 2.0) * 0.2;
-              gl_Position = projectionMatrix * modelViewMatrix * vec4(displacedPosition, 1.0);
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
             }
           `,
           fragmentShader: `
@@ -109,7 +102,7 @@ const ThreeDE = ({ onComplete }) => {
         textRef.current = textMesh;
         scene.add(textMesh);
 
-        const animate = (time) => {
+        const animate = () => {
           requestAnimationFrame(animate);
           textMesh.rotation.y += 0.02;
           renderer.render(scene, camera);
@@ -121,44 +114,42 @@ const ThreeDE = ({ onComplete }) => {
       (error) => console.error("Error loading font:", error)
     );
 
-    camera.position.z = 50;
-
     const handleResize = () => {
+      if (!mountRef.current) return;
+
       const newWidth = mountRef.current.offsetWidth;
       const newHeight = mountRef.current.offsetHeight;
-      renderer.setSize(newWidth, newHeight);
+
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
+      renderer.setSize(newWidth, newHeight);
     };
+
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      if (mountRef.current) mountRef.current.removeChild(renderer.domElement);
+
+      if (renderer) {
+        renderer.dispose();
+      }
+
+      if (scene) {
+        while (scene.children.length > 0) {
+          const child = scene.children[0];
+          if (child.geometry) child.geometry.dispose();
+          if (child.material) child.material.dispose();
+          scene.remove(child);
+        }
+      }
+
+      if (mountRef.current) {
+        while (mountRef.current.firstChild) {
+          mountRef.current.removeChild(mountRef.current.firstChild);
+        }
+      }
     };
   }, []);
-
-  useEffect(() => {
-    if (textRef.current) {
-      textRef.current.position.set(0, 0, 0); // Initial position at the center
-      const timeline = gsap.timeline({
-        onComplete: () => {
-          if (onComplete) onComplete();
-        },
-      });
-
-      timeline.to(textRef.current.rotation, {
-        y: Math.PI * 4,
-        duration: 2,
-        ease: "power2.inOut",
-      });
-      timeline.to(textRef.current.position, {
-        x: 10, // Move slightly to the right
-        duration: 1,
-        ease: "power2.out",
-      });
-    }
-  }, [onComplete]);
 
   return (
     <div

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -20,6 +20,11 @@ const OurServices = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+  const aiAutomationRef = useRef(null);
+  const salesChannelRef = useRef(null);
+  const mlDrivenDataAnalysisRef = useRef(null);
+  const productDevelopmentRef = useRef(null);
+  const techConsultancyRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +33,28 @@ const OurServices = () => {
       } else {
         setShowButton(false);
       }
+
+      if (aiAutomationRef.current) {
+        aiAutomationRef.current.collapsePanel();
+      }
+
+      if (salesChannelRef.current) {
+        salesChannelRef.current.collapsePanel();
+      }
+
+      if (mlDrivenDataAnalysisRef.current) {
+        mlDrivenDataAnalysisRef.current.collapsePanel();
+      }
+
+      if (productDevelopmentRef.current) {
+        productDevelopmentRef.current.collapsePanel();
+      }
+
+      if (techConsultancyRef.current) {
+        techConsultancyRef.current.collapsePanel();
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -40,7 +66,7 @@ const OurServices = () => {
   };
 
   return (
-    <Box className="services-section">
+    <Box className="services-section" sx={{ overflow: "hidden" }}>
       <Box
         sx={{
           minHeight: "100vh",
@@ -149,19 +175,19 @@ const OurServices = () => {
           paddingTop: { xs: 0, md: 0 }, // Remove padding if any
         }}
       >
-        <AIAutomation />
+        <AIAutomation ref={aiAutomationRef} />
       </Box>
       <Box>
-        <SalesChannelDevelopment />
+        <SalesChannelDevelopment ref={salesChannelRef}/>
       </Box>
       <Box>
-        <MLDrivenDataAnalysis />
+        <MLDrivenDataAnalysis ref={mlDrivenDataAnalysisRef}/>
       </Box>
       <Box>
-        <ProductDevelopment />
+        <ProductDevelopment ref={productDevelopmentRef}/>
       </Box>
       <Box>
-        <TechConsultancy />
+        <TechConsultancy ref={techConsultancyRef}/>
       </Box>
       <Fade in={showButton}>
         <Button

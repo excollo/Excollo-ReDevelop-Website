@@ -168,9 +168,9 @@ const Card = styled("div")(
       },
     },
 
-    "@media (min-width: 1024px) and (max-height: 652px)": {
+    "@media (min-width: 769px) and (max-width:1024px) ": {
       width: "60%",
-      height: "400px",
+      height: "450px",
       "& p": {
         fontSize: "1.8rem",
       },

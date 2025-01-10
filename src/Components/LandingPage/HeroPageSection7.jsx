@@ -1,6 +1,6 @@
 import { Box, Divider } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Logo from "../../assets/logo/excollo3d.png"
+import Logo from "../../assets/logo/excollo3d.png";
 
 const HeroPageSection7 = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -42,11 +42,23 @@ const HeroPageSection7 = () => {
         justifyContent="center"
         position="relative"
         zIndex={2}
-        marginTop={-7}
-        marginBottom={-6}
+        marginTop={-15}
         sx={{
           height: "400px",
+          width: "100%",
           overflow: "hidden",
+          "@media (max-width: 1200px)": {
+            width: "100%",
+            marginTop: "-5%",
+          },
+          "@media (max-width: 768px)": {
+            width: "100%",
+            margin: "-15% auto",
+          },
+          "@media (max-width: 480px)": {
+            width: "100%",
+            margin: "-35% auto",
+          },
         }}
       >
         <img
@@ -55,8 +67,8 @@ const HeroPageSection7 = () => {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{
-            height: "300px",
-            width: "auto",
+            height: "auto",
+            width: "80%",
             transform: `translateY(${Math.min(
               translateYImage,
               1300
@@ -64,6 +76,15 @@ const HeroPageSection7 = () => {
             transformStyle: "preserve-3d",
             willChange: "transform",
             transition: "transform 0.2s ease-out",
+            "@media (max-width: 1200px)": {
+              width: "80%",
+            },
+            "@media (max-width: 768px)": {
+              width: "80%",
+            },
+            "@media (max-width: 480px)": {
+              width: "80%",
+            },
           }}
         />
       </Box>
@@ -78,16 +99,28 @@ const HeroPageSection7 = () => {
           width: "100%",
           height: "0px",
           background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, ${gradientOpacity}) 0%, rgba(0, 0, 0, 0) 60%)`,
-          transition: "background 0.3s ease-in-out", 
+          transition: "background 0.3s ease-in-out",
+          "@media (max-width: 768px)": {
+            display: "none",
+          },
+          "@media (max-width: 480px)": {
+            display: "none",
+          },
         }}
       />
-      
+
       <Divider
         sx={{
           backgroundColor: "#000000",
           height: "2px",
           width: "100%",
           position: "relative",
+          "@media (max-width: 768px)": {
+            display: "none",
+          },
+          "@media (max-width: 480px)": {
+            display: "none",
+          },
         }}
       />
     </Box>

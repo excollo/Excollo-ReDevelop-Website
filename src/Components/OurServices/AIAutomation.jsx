@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import {
   Box,
   Typography,
@@ -23,7 +29,7 @@ import MarqueeCarousel1 from "./MarqueeCarousel/MarqueeCarousel1";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AIAutomation = () => {
+const AIAutomation = forwardRef((props, ref) => {
   const [expanded, setExpanded] = useState(false);
   const [currentDotIndex, setCurrentDotIndex] = useState(0);
   const symbolRefs = useRef([]);
@@ -37,18 +43,18 @@ const AIAutomation = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
- useEffect(() => {
-   if (!isMobile) {
-     const interval = setInterval(() => {
-       setCurrentDotIndex(() => {
-         const newIndex = Math.floor(Math.random() * services.length);
-         return newIndex;
-       });
-     }, 2000);
+  useEffect(() => {
+    if (!isMobile) {
+      const interval = setInterval(() => {
+        setCurrentDotIndex(() => {
+          const newIndex = Math.floor(Math.random() * services.length);
+          return newIndex;
+        });
+      }, 2000);
 
-     return () => clearInterval(interval);
-   }
- }, [isMobile]);
+      return () => clearInterval(interval);
+    }
+  }, [isMobile]);
 
   useEffect(() => {
     if (!isMobile) {
@@ -77,208 +83,215 @@ const AIAutomation = () => {
     }
   };
 
+  useImperativeHandle(ref, () => ({
+    collapsePanel: () => {
+      setExpanded(false);
+    },
+  }));
+
   useEffect(() => {
-    if(!isMobile && !isTablet) {
-    gsap.set(".animate-content", {
-      x: "100%",
-      opacity: 0,
-    });
-
-    gsap.set(".services-title", {
-      opacity: 0,
-      y: 20,
-    });
-
-    const tl = gsap.timeline();
-
-    tl.fromTo(
-      ".fade-in-heading",
-      {
-        opacity: 1,
-        y: 300,
-      },
-      {
-        opacity: 1,
-        y: 200,
-        duration: 1,
-        scrollTrigger: {
-          trigger: ".fade-in-heading",
-          start: "top 100%",
-          end: "top 50%",
-          scrub: 1,
-        },
-      }
-    )
-      .to(".fade-in-heading", {
-        x: "-100%",
-        opacity: 1,
-        scrollTrigger: {
-          trigger: ".fade-in-heading",
-          start: "top 50%",
-          end: "top 40%",
-          scrub: 1,
-        },
-      })
-      .to(".animate-content", {
-        x: "0%",
-        opacity: 1,
-        delay: 1,
-        scrollTrigger: {
-          trigger: ".animate-content",
-          start: "top 8%",
-          end: "top 5%",
-          scrub: 1,
-        },
-      })
-      .to(".services-title", {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        delay: 0.3,
-        scrollTrigger: {
-          trigger: ".services-title",
-          start: "top 10%",
-          end: "top 10%",
-          scrub: 1,
-        },
-      });
-
-    // Animate service items
-    gsap.utils.toArray(".service-item").forEach((item, index) => {
-      gsap.from(item, {
-        scrollTrigger: {
-          trigger: item,
-          start: "top bottom-=100",
-          toggleActions: "play none none reverse",
-          markers: true,
-        },
+    if (!isMobile && !isTablet) {
+      gsap.set(".animate-content", {
+        x: "100%",
         opacity: 0,
-        y: 50,
-        duration: 0.6,
-        delay: index * 0.1,
       });
-    });
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }
-}, [isMobile,isTablet]);
+      gsap.set(".services-title", {
+        opacity: 0,
+        y: 20,
+      });
 
-useEffect(() => {
-  if (isTablet) {
-    gsap.set(".tablet-heading", {
-      y: 100,
-      opacity: 0,
-    });
+      const tl = gsap.timeline();
 
-    gsap.set(".tablet-service-item", {
-      y: 10,
-      opacity: 0,
-    });
+      tl.fromTo(
+        ".fade-in-heading",
+        {
+          opacity: 1,
+          y: 300,
+        },
+        {
+          opacity: 1,
+          y: 200,
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".fade-in-heading",
+            start: "top 100%",
+            end: "top 50%",
+            scrub: 1,
+          },
+        }
+      )
+        .to(".fade-in-heading", {
+          x: "-100%",
+          opacity: 1,
+          scrollTrigger: {
+            trigger: ".fade-in-heading",
+            start: "top 50%",
+            end: "top 40%",
+            scrub: 1,
+          },
+        })
+        .to(".animate-content", {
+          x: "0%",
+          opacity: 1,
+          delay: 1,
+          scrollTrigger: {
+            trigger: ".animate-content",
+            start: "top 8%",
+            end: "top 5%",
+            scrub: 1,
+          },
+        })
+        .to(".services-title", {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          delay: 0.3,
+          scrollTrigger: {
+            trigger: ".services-title",
+            start: "top 10%",
+            end: "top 10%",
+            scrub: 1,
+          },
+        });
 
-    gsap.to(".tablet-heading", {
-      y: 0,
-      opacity: 1,
-      duration: 1.2,
-      scrollTrigger: {
-        trigger: ".tablet-heading",
-        start: "top 80%",
-        end: "top 60%",
-        scrub: 1,
-      },
-    });
+      // Animate service items
+      gsap.utils.toArray(".service-item").forEach((item, index) => {
+        gsap.from(item, {
+          scrollTrigger: {
+            trigger: item,
+            start: "top bottom-=100",
+            toggleActions: "play none none reverse",
+            markers: true,
+          },
+          opacity: 0,
+          y: 50,
+          duration: 0.6,
+          delay: index * 0.1,
+        });
+      });
 
-    gsap.utils.toArray(".tablet-service-item").forEach((item, index) => {
-      gsap.to(item, {
+      return () => {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
+    }
+  }, [isMobile, isTablet]);
+
+  useEffect(() => {
+    if (isTablet) {
+      gsap.set(".tablet-heading", {
+        y: 100,
+        opacity: 0,
+      });
+
+      gsap.set(".tablet-service-item", {
+        y: 10,
+        opacity: 0,
+      });
+
+      gsap.to(".tablet-heading", {
         y: 0,
         opacity: 1,
-        duration: 0.6,
-        delay: index * 0.5,
+        duration: 1.2,
         scrollTrigger: {
-          trigger: item,
+          trigger: ".tablet-heading",
           start: "top 80%",
           end: "top 60%",
           scrub: 1,
         },
       });
-    });
 
-    gsap.utils.toArray(".tablet-gradient-divider").forEach((divider, index) => {
-      gsap.to(divider, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        delay: index * 0.1 + 0.3,
-        scrollTrigger: {
-          trigger: divider,
-          start: "top 80%",
-          end: "top 60%",
-          scrub: 1,
-        },
+      gsap.utils.toArray(".tablet-service-item").forEach((item, index) => {
+        gsap.to(item, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          delay: index * 0.5,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+            end: "top 60%",
+            scrub: 1,
+          },
+        });
       });
-    });
-  }
-}, [isTablet]);
 
- const services = [
-   {
-     id: "panel1",
-     title: isMobile
-       ? "Intelligent conversational chatbots to enhance customer interactions."
-       : "\u00A0\u00A0\u00A0Intelligent conversational chatbots to enhance customer interactions.",
-     details: [
-       "Automate repetitive queries to save time and resources.",
-       "Provide personalized recommendations based on customer data.",
-       "Seamlessly integrate with existing communication platforms for effortless engagement.",
-     ],
-   },
-   {
-     id: "panel2",
-     title: isMobile
-       ? "Internal AI agents that streamline knowledge retrieval and boost efficiency."
-       : "\u00A0\u00A0\u00A0Internal AI agents that streamline knowledge retrieval and boost efficiency.",
-     details: [
-       "Enable faster access to critical business insights.",
-       "Integrate with existing systems for seamless data sharing.",
-       "Enhance productivity by simplifying complex information retrieval processes.",
-     ],
-   },
-   {
-     id: "panel3",
-     title: isMobile
-       ? "Automation workflows for better efficiency and reduced costs."
-       : "\u00A0\u00A0\u00A0Automation workflows for better efficiency and reduced costs.",
-     details: [
-       "Streamline repetitive tasks with minimal human intervention.",
-       "Ensure consistency and accuracy across all processes.",
-       "Reduce operational overhead by optimizing resource utilization.",
-     ],
-   },
-   {
-     id: "panel4",
-     title: isMobile
-       ? "Machine learning-driven data analysis to uncover useful insights."
-       : "\u00A0\u00A0\u00A0Machine learning-driven data analysis to uncover useful insights.",
-     details: [
-       "Analyze vast datasets to identify hidden patterns and trends.",
-       "Use predictive modeling to forecast outcomes and inform strategy.",
-       "Enhance decision-making with actionable, data-backed recommendations.",
-     ],
-   },
-   {
-     id: "panel5",
-     title: isMobile
-       ? "Advanced AI voice agents that redefine engagement and operations."
-       : "\u00A0\u00A0\u00A0Advanced AI voice agents that redefine engagement and operations.",
-     details: [
-       "Enable seamless, human-like customer interactions for better user experiences.",
-       "Integrate across multiple platforms to ensure consistent communication.",
-       "Automate call handling, freeing up resources for more complex tasks.",
-     ],
-   },
- ];
+      gsap.utils
+        .toArray(".tablet-gradient-divider")
+        .forEach((divider, index) => {
+          gsap.to(divider, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            delay: index * 0.1 + 0.3,
+            scrollTrigger: {
+              trigger: divider,
+              start: "top 80%",
+              end: "top 60%",
+              scrub: 1,
+            },
+          });
+        });
+    }
+  }, [isTablet]);
 
+  const services = [
+    {
+      id: "panel1",
+      title: isMobile
+        ? "Intelligent conversational chatbots to enhance customer interactions."
+        : "\u00A0\u00A0\u00A0Intelligent conversational chatbots to enhance customer interactions.",
+      details: [
+        "Automate repetitive queries to save time and resources.",
+        "Provide personalized recommendations based on customer data.",
+        "Seamlessly integrate with existing communication platforms for effortless engagement.",
+      ],
+    },
+    {
+      id: "panel2",
+      title: isMobile
+        ? "Internal AI agents that streamline knowledge retrieval and boost efficiency."
+        : "\u00A0\u00A0\u00A0Internal AI agents that streamline knowledge retrieval and boost efficiency.",
+      details: [
+        "Enable faster access to critical business insights.",
+        "Integrate with existing systems for seamless data sharing.",
+        "Enhance productivity by simplifying complex information retrieval processes.",
+      ],
+    },
+    {
+      id: "panel3",
+      title: isMobile
+        ? "Automation workflows for better efficiency and reduced costs."
+        : "\u00A0\u00A0\u00A0Automation workflows for better efficiency and reduced costs.",
+      details: [
+        "Streamline repetitive tasks with minimal human intervention.",
+        "Ensure consistency and accuracy across all processes.",
+        "Reduce operational overhead by optimizing resource utilization.",
+      ],
+    },
+    {
+      id: "panel4",
+      title: isMobile
+        ? "Machine learning-driven data analysis to uncover useful insights."
+        : "\u00A0\u00A0\u00A0Machine learning-driven data analysis to uncover useful insights.",
+      details: [
+        "Analyze vast datasets to identify hidden patterns and trends.",
+        "Use predictive modeling to forecast outcomes and inform strategy.",
+        "Enhance decision-making with actionable, data-backed recommendations.",
+      ],
+    },
+    {
+      id: "panel5",
+      title: isMobile
+        ? "Advanced AI voice agents that redefine engagement and operations."
+        : "\u00A0\u00A0\u00A0Advanced AI voice agents that redefine engagement and operations.",
+      details: [
+        "Enable seamless, human-like customer interactions for better user experiences.",
+        "Integrate across multiple platforms to ensure consistent communication.",
+        "Automate call handling, freeing up resources for more complex tasks.",
+      ],
+    },
+  ];
 
   const GradientDivider = () => (
     <Box
@@ -317,7 +330,7 @@ useEffect(() => {
     marginBottom: isTablet ? "2rem" : "3rem",
   };
 
-   if(isTablet) {
+  if (isTablet) {
     return (
       <Box className="services-container" sx={containerStyles}>
         {!isTablet && (
@@ -501,139 +514,139 @@ useEffect(() => {
         </Box>
       </Box>
     );
-   }
+  }
 
-   if (isMobile) {
-     return (
-       <Box sx={{ padding: "1rem", width: "95%" }}>
-         <Card
-           sx={{
-             background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
-             color: "#fff",
-             m: 2,
-             border: "2px solid rgba(255, 255, 255, 0.1)",
-             borderRadius: "30px",
-             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-           }}
-         >
-           <Typography
-             variant="h3"
-             sx={{
-               textAlign: "center",
-               m: 3,
-               mb: 1,
-               fontSize: "2rem",
-               background: "linear-gradient(90deg,#2579e3, #8e54f7)",
-               WebkitBackgroundClip: "text",
-               color: "transparent",
-             }}
-           >
-             AI and Automation
-           </Typography>
-           <CardContent
-             sx={{
-               display: "flex",
-               flexDirection: "column",
-               alignItems: "center",
-             }}
-           >
-             <Typography
-               variant="h6"
-               sx={{
-                 textAlign: expanded ? "left" : "center",
-                 fontSize: "1.2rem",
-                 width: "100%",
-               }}
-             >
-               {services[0].title}
-             </Typography>
-             <Collapse in={expanded}>
-               <List sx={{ width: "100%" }}>
-                 {services[0].details.map((detail, index) => (
-                   <ListItem
-                     key={index}
-                     sx={{
-                       alignItems: "flex-start",
-                       py: 1,
-                     }}
-                   >
-                     <ListItemIcon sx={{ minWidth: "24px", mt: 1.5 }}>
-                       <Circle size={8} color="#8E54F7" />
-                     </ListItemIcon>
-                     <ListItemText
-                       primary={detail}
-                       primaryTypographyProps={{
-                         sx: {
-                           fontSize: "0.95rem",
-                           ml: -1,
-                           color: "rgba(255, 255, 255, 0.85)",
-                         },
-                       }}
-                     />
-                   </ListItem>
-                 ))}
-               </List>
-               {services.slice(1).map((service, index) => (
-                 <Box key={index} sx={{ mt: 2, width: "100%" }}>
-                   <Typography variant="h6" sx={{ textAlign: "left" }}>
-                     {service.title}
-                   </Typography>
-                   <List>
-                     {service.details.map((detail, index) => (
-                       <ListItem
-                         key={index}
-                         sx={{
-                           alignItems: "flex-start",
-                           py: 1,
-                         }}
-                       >
-                         <ListItemIcon sx={{ minWidth: "24px", mt: 1.5 }}>
-                           <Circle size={8} color="#8E54F7" />
-                         </ListItemIcon>
-                         <ListItemText
-                           primary={detail}
-                           primaryTypographyProps={{
-                             sx: {
-                               fontSize: "0.95rem",
-                               ml: -1,
-                               color: "rgba(255, 255, 255, 0.85)",
-                             },
-                           }}
-                         />
-                       </ListItem>
-                     ))}
-                   </List>
-                 </Box>
-               ))}
-             </Collapse>
-             <Box
-               sx={{ width: "100%", display: "flex", justifyContent: "center" }}
-             >
-               <Button
-                 onClick={() => setExpanded(!expanded)}
-                 sx={{
-                   color: "#8E54F7",
-                   textTransform: "none",
-                   fontSize: "1rem",
-                   p: 0,
-                   m: 2,
-                   "&:hover": {
-                     background: "transparent",
-                     opacity: 0.8,
-                   },
-                 }}
-               >
-                 {expanded ? "View Less" : "View More"}
-               </Button>
-             </Box>
-           </CardContent>
-         </Card>
-         <Box sx={{ mt: 5 }}>
-           <MarqueeCarousel1 />
-         </Box>
-       </Box>
-     );
-   }
+  if (isMobile) {
+    return (
+      <Box sx={{ padding: "1rem", width: "95%" }}>
+        <Card
+          sx={{
+            background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+            color: "#fff",
+            m: 2,
+            border: "2px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "30px",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <Typography
+            variant="h3"
+            sx={{
+              textAlign: "center",
+              m: 3,
+              mb: 1,
+              fontSize: "2rem",
+              background: "linear-gradient(90deg,#2579e3, #8e54f7)",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            AI and Automation
+          </Typography>
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                textAlign: expanded ? "left" : "center",
+                fontSize: "1.2rem",
+                width: "100%",
+              }}
+            >
+              {services[0].title}
+            </Typography>
+            <Collapse in={expanded}>
+              <List sx={{ width: "100%" }}>
+                {services[0].details.map((detail, index) => (
+                  <ListItem
+                    key={index}
+                    sx={{
+                      alignItems: "flex-start",
+                      py: 1,
+                    }}
+                  >
+                    <ListItemIcon sx={{ minWidth: "24px", mt: 1.5 }}>
+                      <Circle size={8} color="#8E54F7" />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={detail}
+                      primaryTypographyProps={{
+                        sx: {
+                          fontSize: "0.95rem",
+                          ml: -1,
+                          color: "rgba(255, 255, 255, 0.85)",
+                        },
+                      }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+              {services.slice(1).map((service, index) => (
+                <Box key={index} sx={{ mt: 2, width: "100%" }}>
+                  <Typography variant="h6" sx={{ textAlign: "left" }}>
+                    {service.title}
+                  </Typography>
+                  <List>
+                    {service.details.map((detail, index) => (
+                      <ListItem
+                        key={index}
+                        sx={{
+                          alignItems: "flex-start",
+                          py: 1,
+                        }}
+                      >
+                        <ListItemIcon sx={{ minWidth: "24px", mt: 1.5 }}>
+                          <Circle size={8} color="#8E54F7" />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={detail}
+                          primaryTypographyProps={{
+                            sx: {
+                              fontSize: "0.95rem",
+                              ml: -1,
+                              color: "rgba(255, 255, 255, 0.85)",
+                            },
+                          }}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              ))}
+            </Collapse>
+            <Box
+              sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+            >
+              <Button
+                onClick={() => setExpanded(!expanded)}
+                sx={{
+                  color: "#8E54F7",
+                  textTransform: "none",
+                  fontSize: "1rem",
+                  p: 0,
+                  m: 2,
+                  "&:hover": {
+                    background: "transparent",
+                    opacity: 0.8,
+                  },
+                }}
+              >
+                {expanded ? "View Less" : "View More"}
+              </Button>
+            </Box>
+          </CardContent>
+        </Card>
+        <Box sx={{ mt: 5 }}>
+          <MarqueeCarousel1 />
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -806,6 +819,6 @@ useEffect(() => {
       </Box>
     </Box>
   );
-};
+});
 
 export default AIAutomation;
