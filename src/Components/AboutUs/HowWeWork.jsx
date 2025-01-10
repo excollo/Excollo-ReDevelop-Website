@@ -81,7 +81,7 @@ const TableContent = styled("div")({
   },
   "& p": {
     fontFamily: "Inter, sans-serif",
-    fontSize: "16px",
+    fontSize: "18px",
     fontWeight: 300,
     color: "#9EA4AA",
     margin: "10px",
@@ -212,20 +212,20 @@ const HowWeWork = () => {
     >
       <WorkTable>
         <Box sx={{ marginBottom: "10rem", marginTop: "10rem" }}>
-            <Box
-                    sx={{
-                      position: "absolute",
-                      top: "-10%",
-                      left: "0",
-                      right: "0%",
-                      bottom: 0,
-                      height: "60%",
-                      background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
-                      zIndex: -1,
-                      pointerEvents: "none",
-                      transformOrigin: "center center",
-                    }}
-                  />
+          <Box
+            sx={{
+              position: "absolute",
+              top: "-10%",
+              left: "0",
+              right: "0%",
+              bottom: 0,
+              height: "60%",
+              background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
+              zIndex: -1,
+              pointerEvents: "none",
+              transformOrigin: "center center",
+            }}
+          />
           <Typography
             sx={{
               textAlign: "center",
@@ -260,27 +260,27 @@ const HowWeWork = () => {
             {
               title: "Discover",
               content:
-                "We start with a deep dive into your business to understand challenges, goals, and opportunities.",
+                "We begin by exploring your business deeply to uncover challenges, goals, and opportunities.",
             },
             {
               title: "Define",
               content:
-                "Identify gaps and align on the technologies needed to bridge them effectively.",
+                "Pinpoint gaps, assess needs, and identify the technologies required to address them effectively.",
             },
             {
               title: "Design",
               content:
-                "Craft tailored solutions that address your unique needs and objectives.",
+                "Develop innovative, customized solutions specifically tailored to meet your needs and strategic objectives.",
             },
             {
               title: "Develop",
               content:
-                "Implement cutting-edge technologies to bring the strategy to life.",
+                " Implement advanced technologies and seamless processes to effectively turn strategies into reality.",
             },
             {
               title: "Deliver",
               content:
-                "Ensure seamless execution and measurable outcomes, with ongoing optimization for sustained success.",
+                "Execute flawlessly with measurable results and ongoing improvements for long-term success.",
             },
           ].map((step, index) => (
             <Box
@@ -299,7 +299,7 @@ const HowWeWork = () => {
                 className="table-content"
               >
                 <Typography variant="h3">{step.title}</Typography>
-                <Typography variant="body1">{step.content}</Typography>
+                <Typography variant="body1" sx={{ fontSize: "2rem"}}>{step.content}</Typography>
               </TableContent>
             </Box>
           ))}

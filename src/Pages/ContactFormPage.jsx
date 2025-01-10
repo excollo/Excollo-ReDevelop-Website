@@ -85,6 +85,7 @@ const ContactForm = () => {
               }}
       />
       <NavBar />
+      
       <Container maxWidth="lg" sx={{ paddingTop: theme.spacing(8) }}>
         <Box textAlign="center" mb={8}>
           <Typography

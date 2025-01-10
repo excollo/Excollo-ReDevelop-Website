@@ -113,13 +113,14 @@ const Card = styled("div")(
     },
 
     "& p": {
-      fontSize: "1.5rem",
+      fontSize: "1.8rem",
       alignItems: "center",
       justifyContent: "center",
       alignText: "center",
       fontFamily: '"Inter", sans-serif',
       color: "#D1D1E2",
       lineHeight: 1.6,
+      fontWeight: 200,
       textAlign: "left",
       padding: 20,
       margin: 15,
@@ -164,6 +165,14 @@ const Card = styled("div")(
         fontSize: "1.2rem",
         padding: "10px",
         margin: "5px",
+      },
+    },
+
+    "@media (min-width: 1024px) and (max-height: 652px)": {
+      width: "60%",
+      height: "400px",
+      "& p": {
+        fontSize: "1.8rem",
       },
     },
   })
@@ -217,12 +226,12 @@ const AboutUs = () => {
     () => (
       <div>
         <ContentSection>
-          {isMobile ? (
+          {isMobile || isTablet ? (
             <>
               <TitleContainer>
-                <h2>Our Mission</h2>
+                <h2>Our {!isMobile && <br />} Mission</h2>
               </TitleContainer>
-              <Card isMobile={true}>
+              <Card>
                 <p>
                   To bridge the gap between technology and business objectives
                   by delivering cutting-edge solutions that guarantee outcomes.
@@ -257,7 +266,7 @@ const AboutUs = () => {
           <TitleContainer>
             <h2>Our {!isMobile && <br />} Philosophy</h2>
           </TitleContainer>
-          <Card isMobile={isMobile} sx={{ fontWeight: 200 }}>
+          <Card>
             <p>
               At Excollo, we commit to results, not just solutions. Our "Outcome
               as a Service" (OaaS) approach ensures every action is aligned to
@@ -276,6 +285,7 @@ const AboutUs = () => {
         bgcolor: "#000",
         minHeight: "100vh",
         fontFamily: '"Inter", sans-serif',
+        overflow: "hidden", 
       }}
     >
       <Box
@@ -305,7 +315,7 @@ const AboutUs = () => {
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
-            mt: { xs: "10%", md: "-15%", lg: "-20%" },
+            mt: { xs: "10%", md: "-15%", lg: "-14%" },
             mb: { xs: 0, md: 0 },
           }}
         >
@@ -330,11 +340,30 @@ const AboutUs = () => {
                   fontFamily: '"Inter", sans-serif',
                   fontWeight: "600",
                   color: "#fff",
-                  whiteSpace: "nowrap", // Prevent line break
-                  ml: { xs: 0, md: "2%", lg: "10%" },
+                  whiteSpace: "nowrap", // Prevent line break on larger screens
+                  ml: { xs: 0, md: "13%", lg: "10%" },
                 }}
               >
-                <span className="highlight">About </span>
+                <span className="highlight">About</span>
+              </Typography>
+
+              <Typography
+                variant="h2"
+                sx={{
+                  textAlign: { xs: "center", md: "left" },
+                  fontSize: {
+                    xs: "2.5rem",
+                    sm: "3rem",
+                    md: "3.5rem",
+                    lg: "4rem",
+                  },
+                  fontFamily: '"Inter", sans-serif',
+                  fontWeight: "600",
+                  color: "#fff",
+                  whiteSpace: "nowrap", // Prevent line break on larger screens
+                  ml: { xs: 0, md: "2%", lg: "1.5%" },
+                }}
+              >
                 <span
                   style={{
                     background:
@@ -360,7 +389,7 @@ const AboutUs = () => {
                 fontWeight: 200,
                 lineHeight: 1.7,
                 textAlign: { xs: "center", md: "left" },
-                ml: { xs: 0, md: "2%", lg: "10%" },
+                ml: { xs: 0, md: "13%", lg: "10%" },
                 px: { xs: 2, md: 0 },
                 mt: { xs: 3, md: 5 },
               }}
