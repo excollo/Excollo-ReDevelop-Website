@@ -76,7 +76,7 @@ const HeroPage = () => {
         // Specific movement for 1024x652 screen size
         timeline.to(".threeDE", {
           x: "32%",
-          y: "0%",
+          y: "-2%",
           duration: 1,
           ease: "power2.out",
         });
@@ -173,7 +173,7 @@ const HeroPage = () => {
            path: [
              { x: "28%", y: "2%" },
              { x: "12%", y: "50%" },
-             { x: "-23vw", y: "90vh" },
+             { x: "-23vw", y: "87.5vh" },
            ],
            curviness: 1.5,
          },

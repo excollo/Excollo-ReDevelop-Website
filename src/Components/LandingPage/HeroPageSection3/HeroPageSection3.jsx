@@ -17,16 +17,15 @@ const HeroPageSection3 = () => {
       sx={{
         textAlign: "center",
         position: "relative",
-        overflow: "hidden",
         height: "auto",
         marginTop: "8rem",
         minHeight: isSpecificSize
-          ? "200vh"
+          ? "210vh"
           : isMobile
-          ? "170vh"
+          ? "180vh"
           : isTablet
-          ? "170vh"
-          : "100vh",
+          ? "180vh"
+          : "110vh",
       }}
     >
       <Box
