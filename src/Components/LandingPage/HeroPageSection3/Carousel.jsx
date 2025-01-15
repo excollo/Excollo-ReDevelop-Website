@@ -1,5 +1,11 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { ScrollContext } from "./ScrollProvider";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";

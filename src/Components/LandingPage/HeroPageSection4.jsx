@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -11,37 +11,63 @@ const FeatureCard = ({
   showDescription,
   isFinalState,
   isMainCard,
+  isMobile,
+  isTablet,
 }) => {
-  return (
-    <Paper
-      elevation={6}
-      sx={{
-        background: "#000000",
-        borderRadius: "12px",
-        textAlign: "center",
-        padding: "1rem",
-        height: "300px",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
-        border: isFinalState ? "1px solid #7e22ce" : "1px solid #7e22ce",
-        transition: "all 0.3s ease",
-        "&:hover": {
-          backgroundColor: "#000000",
-          transform: "translateY(-5px)",
+  const cardStyles =
+    isMobile || isTablet
+      ? {
+          background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+
+          borderRadius: "12px",
+          textAlign: "center",
+          padding: "1rem",
+          width: "100%",
+          minHeight: isMobile ? "150px" : "200px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "1rem",
+          marginLeft: -2,
+          // boxShadow: "rgba(133, 86, 245, 0.2) 0px 0px 50px 0px",
+        }
+      : {
+          background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+
+          borderRadius: "12px",
+          textAlign: "center",
+          padding: "1rem",
+          height: "300px",
+          width: "100%",
+          display: "flex",
+          marginLeft: -4,
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
-        },
-      }}
-    >
-      <Typography
-        fontWeight="400"
-        gutterBottom
-        className="feature-title"
-        sx={{
-          background: "linear-gradient(to bottom right, #2579e3, #8e54f7)",
+          border: isFinalState ? "1px solid #7e22ce" : "1px solid #7e22ce",
+          transition: "all 0.3s ease",
+          "&:hover": {
+            backgroundColor: "#000000",
+            transform: "translateY(-5px)",
+            boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
+          },
+        };
+
+  const titleStyles =
+    isMobile || isTablet
+      ? {
+          background: "linear-gradient(90deg, #2579e3, #8e54f7)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          display: "inline-block",
+          marginBottom: "0.5rem",
+          fontSize: isMobile ? "1.5rem" : "2rem",
+          fontWeight: 600,
+        }
+      : {
+          background: "linear-gradient(90deg, #2579e3, #8e54f7)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           display: "inline-block",
@@ -49,25 +75,33 @@ const FeatureCard = ({
           marginTop: isFinalState ? "0" : "2rem",
           transition: "margin-top 0.5s ease",
           fontSize: isMainCard ? "3rem" : "2rem",
-        }}
-      >
+          fontWeight: "400",
+        };
+
+  return (
+    <Paper elevation={6} sx={cardStyles}>
+      <Typography gutterBottom className="feature-title" sx={titleStyles}>
         {title}
       </Typography>
-      <Typography
-        variant="body1"
-        fontWeight={300}
-        color="white"
-        className="feature-description"
-        sx={{
-          fontSize: "1.170rem",
-          fontFamily: '"Inter", sans-serif',
-          maxWidth: "80%",
-          opacity: showDescription ? 1 : 0,
-          transition: "opacity 0.5s ease",
-        }}
-      >
-        {description}
-      </Typography>
+      {((!isMobile && !isTablet) ||
+        (isMobile && description) ||
+        (isTablet && description)) && (
+        <Typography
+          variant="body1"
+          fontWeight={300}
+          color="white"
+          className="feature-description"
+          sx={{
+            fontSize: isMobile ? "0.9rem" : "1.170rem",
+            fontFamily: '"Inter", sans-serif',
+            maxWidth: "80%",
+            opacity: isMobile || isTablet ? 1 : showDescription ? 1 : 0,
+            transition: "opacity 0.5s ease",
+          }}
+        >
+          {description}
+        </Typography>
+      )}
     </Paper>
   );
 };
@@ -75,21 +109,20 @@ const FeatureCard = ({
 const HeroPageSection4 = ({ onComplete }) => {
   const [isCardShrunk, setIsCardShrunk] = useState(false);
   const sectionRef = useRef(null);
-  const mainCardRef = useRef(null);
-  const sideCardsRef = useRef(null);
-  const cardsContainerRef = useRef(null);
-  const titleRef = useRef(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
   useEffect(() => {
+    if (isMobile || isTablet) return;
+
     let ctx = gsap.context(() => {
-      // Initial setup for side cards
       gsap.set(".side-cards-container", {
         opacity: 0,
         display: "block",
         x: (index) => (index === 0 ? -100 : 100),
       });
 
-      // Title scroll trigger
       ScrollTrigger.create({
         trigger: ".hero-page-section-4",
         start: "top top",
@@ -99,7 +132,6 @@ const HeroPageSection4 = ({ onComplete }) => {
         pinSpacing: false,
       });
 
-      // Main animation trigger
       const mainCardTrigger = ScrollTrigger.create({
         trigger: ".hero-page-section-4",
         start: "top 20%",
@@ -116,14 +148,12 @@ const HeroPageSection4 = ({ onComplete }) => {
           const progress = self.progress;
           const scale = Math.pow(progress, 1.5);
 
-          // Animate main card width
           gsap.to(".main-card", {
             width: `${80 - scale * 60}%`,
             duration: 0.3,
             ease: "power2.out",
           });
 
-          // Animate side cards
           gsap.to(".side-cards-container", {
             opacity: scale,
             x: 0,
@@ -131,7 +161,6 @@ const HeroPageSection4 = ({ onComplete }) => {
             ease: "power2.out",
           });
 
-          // Animate container gap
           gsap.to(".cards-container", {
             gap: `${2 + scale * 8}rem`,
             duration: 0.3,
@@ -139,14 +168,12 @@ const HeroPageSection4 = ({ onComplete }) => {
             marginLeft: `-${scale * 2}%`,
           });
 
-          // Animate title font size
           gsap.to(".main-card .feature-title", {
             fontSize: `${Math.max(3 - scale * 2, 2)}rem`,
             duration: 1,
             ease: "power2.out",
           });
 
-          // Animate description opacity
           gsap.to(".main-card .feature-description", {
             opacity: scale > 0.9 ? 1 : 0,
             duration: 0.3,
@@ -156,7 +183,6 @@ const HeroPageSection4 = ({ onComplete }) => {
           setIsCardShrunk(scale > 0.1);
         },
         onLeave: () => {
-          // Only call onComplete without forcing scroll
           if (onComplete) {
             onComplete();
           }
@@ -169,7 +195,73 @@ const HeroPageSection4 = ({ onComplete }) => {
     });
 
     return () => ctx.revert();
-  }, [onComplete]);
+  }, [onComplete, isMobile, isTablet]);
+
+  if (isMobile || isTablet) {
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          color: "#fff",
+          // marginLeft:-4,
+          padding: "2rem 1rem",
+          // marginBottom: "15rem",
+          fontFamily: '"Inter", sans-serif',
+        }}
+      >
+        <Typography
+          variant="h2"
+          fontWeight="bold"
+          textAlign="center"
+          sx={{
+            fontSize: isMobile ? "2rem" : "2.5rem",
+            marginBottom: "2rem",
+          }}
+        >
+          Why Choose{" "}
+          <Box
+            component="span"
+            sx={{
+              background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Excollo?
+          </Box>
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            maxWidth: isMobile ? "60%" : "600px",
+            margin: "auto",
+          }}
+        >
+          <FeatureCard
+            title="Outcome as a Service"
+            description="We deliver tangible results not just digital products."
+            isMobile={isMobile}
+            isTablet={isTablet}
+          />
+          <FeatureCard
+            title="Iterative Excellence"
+            description="Our solutions evolve with your business, ensuring long-term success."
+            isMobile={isMobile}
+            isTablet={isTablet}
+          />
+          <FeatureCard
+            title="Future-Forward Strategies"
+            description="Cutting-edge AI and automation drive scalable, innovative solutions."
+            isMobile={isMobile}
+            isTablet={isTablet}
+          />
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -184,7 +276,6 @@ const HeroPageSection4 = ({ onComplete }) => {
       }}
     >
       <Box
-        ref={titleRef}
         className="title-section"
         sx={{
           position: "sticky",
@@ -209,7 +300,6 @@ const HeroPageSection4 = ({ onComplete }) => {
       </Box>
 
       <Box
-        ref={cardsContainerRef}
         className="cards-container"
         sx={{
           position: "relative",
@@ -223,7 +313,6 @@ const HeroPageSection4 = ({ onComplete }) => {
         }}
       >
         <Box
-          ref={sideCardsRef}
           className="side-cards-container"
           sx={{
             width: "20%",
@@ -239,7 +328,6 @@ const HeroPageSection4 = ({ onComplete }) => {
         </Box>
 
         <Box
-          ref={mainCardRef}
           className="main-card"
           sx={{
             width: "80%",
