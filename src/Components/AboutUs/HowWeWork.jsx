@@ -48,6 +48,11 @@ const TableGrid = styled("div")({
     alignItems: "center", // Center horizontally
     maxHeight: "none", // Remove height limit on mobile
   },
+  "@media (max-width: 480px)": {
+    flexDirection: "column", // Stack vertically on small screens
+    width: "100%", // Take up full width
+    margin: "auto",
+  },
 });
 const TableContent = styled("div")({
   flex: "1 1",
@@ -76,7 +81,7 @@ const TableContent = styled("div")({
     fontSize: "32px",
     fontWeight: 600,
     lineHeight: "37.5px",
-    margin: "30px 0 0 10px",
+    margin: "10px auto",
     color: "#FFFFFF",
     textAlign: "center", // Center-align h3 text
   },
@@ -92,6 +97,9 @@ const TableContent = styled("div")({
   "@media (min-width: 1025px) and (max-width:1440px)": {
     width: "77.9%",
     height: "400px",
+    "& h3": {
+      fontSize: "28px",
+    },
   },
   "@media (min-width: 768px) and (max-width:1024px)": {
     width: "68%",
@@ -102,7 +110,6 @@ const TableContent = styled("div")({
     visibility: "visible",
     "& h3": {
       fontSize: "28px",
-      margin: "20px 0",
     },
     "& p": {
       fontSize: "16px", // Adjust font size for mobile
@@ -129,7 +136,7 @@ const TableContent = styled("div")({
     },
     "& h3": {
       fontSize: "28px",
-      margin: "20px 0",
+      // margin: "20px 0",
     },
     "& p": {
       fontSize: "16px", // Adjust font size for mobile
@@ -141,6 +148,7 @@ const TableContent = styled("div")({
     height: "150px", // Make it 90% of the width for mobile
     border: "1px solid #fff",
     textAlign: "center",
+    marginLeft: "-10px",
     padding: "20px", // Adjust padding for mobile
     marginBottom: "20px", // Add margin between cards on mobile
     opacity: 1,
@@ -154,12 +162,23 @@ const TableContent = styled("div")({
     },
     "& h3": {
       fontSize: "28px",
-      margin: "20px 0",
+      // margin: "20px 0",
     },
     "& p": {
       fontSize: "16px", // Adjust font size for mobile
       margin: "5px",
     },
+  },
+  "@media (max-width: 375px)": {
+    width: "85%",
+    margin: "auto",marginTop: "10px",
+    marginLeft: "-7px",
+  },
+  "@media (max-width: 320px)": {
+    width: "85%",
+    margin: "auto",
+    marginTop: "10px",
+    marginLeft: "-8px",
   },
 });
 const HowWeWork = () => {

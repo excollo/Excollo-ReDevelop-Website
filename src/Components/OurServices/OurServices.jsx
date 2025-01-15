@@ -34,24 +34,26 @@ const OurServices = () => {
         setShowButton(false);
       }
 
-      if (aiAutomationRef.current) {
-        aiAutomationRef.current.collapsePanel();
-      }
+      if (!isMobile) {
+        if (aiAutomationRef.current) {
+          aiAutomationRef.current.collapsePanel();
+        }
 
-      if (salesChannelRef.current) {
-        salesChannelRef.current.collapsePanel();
-      }
+        if (salesChannelRef.current) {
+          salesChannelRef.current.collapsePanel();
+        }
 
-      if (mlDrivenDataAnalysisRef.current) {
-        mlDrivenDataAnalysisRef.current.collapsePanel();
-      }
+        if (mlDrivenDataAnalysisRef.current) {
+          mlDrivenDataAnalysisRef.current.collapsePanel();
+        }
 
-      if (productDevelopmentRef.current) {
-        productDevelopmentRef.current.collapsePanel();
-      }
+        if (productDevelopmentRef.current) {
+          productDevelopmentRef.current.collapsePanel();
+        }
 
-      if (techConsultancyRef.current) {
-        techConsultancyRef.current.collapsePanel();
+        if (techConsultancyRef.current) {
+          techConsultancyRef.current.collapsePanel();
+        }
       }
     };
 
@@ -59,7 +61,7 @@ const OurServices = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isMobile]);
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -171,23 +173,23 @@ const OurServices = () => {
       </Box>
       <Box
         sx={{
-          mt: { xs: -35 }, // Adjust the margin-top for different screen sizes
+          mt: { xs: -20 }, // Adjust the margin-top for different screen sizes
           paddingTop: { xs: 0, md: 0 }, // Remove padding if any
         }}
       >
         <AIAutomation ref={aiAutomationRef} />
       </Box>
       <Box>
-        <SalesChannelDevelopment ref={salesChannelRef}/>
+        <SalesChannelDevelopment ref={salesChannelRef} />
       </Box>
       <Box>
-        <MLDrivenDataAnalysis ref={mlDrivenDataAnalysisRef}/>
+        <MLDrivenDataAnalysis ref={mlDrivenDataAnalysisRef} />
       </Box>
       <Box>
-        <ProductDevelopment ref={productDevelopmentRef}/>
+        <ProductDevelopment ref={productDevelopmentRef} />
       </Box>
       <Box>
-        <TechConsultancy ref={techConsultancyRef}/>
+        <TechConsultancy ref={techConsultancyRef} />
       </Box>
       <Fade in={showButton}>
         <Button
