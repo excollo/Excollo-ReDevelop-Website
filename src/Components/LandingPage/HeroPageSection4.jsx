@@ -18,7 +18,8 @@ const FeatureCard = ({
     isMobile || isTablet
       ? {
           background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
-
+          border: "1px solid #7e22ce",
+          boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 10px 0px",
           borderRadius: "12px",
           textAlign: "center",
           padding: "1rem",
