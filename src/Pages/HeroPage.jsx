@@ -30,7 +30,7 @@ const HeroPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isSpecificSize = useMediaQuery("(max-width: 1024px) and (max-height: 652px)");
+  const isSpecificSize = useMediaQuery("(max-width: 1024px) and (max-height: 725px)");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,8 +75,8 @@ const HeroPage = () => {
       if (isSpecificSize) {
         // Specific movement for 1024x652 screen size
         timeline.to(".threeDE", {
-          x: "36%",
-          y: "2%",
+          x: "32%",
+          y: "0%",
           duration: 1,
           ease: "power2.out",
         });
@@ -153,7 +153,7 @@ const HeroPage = () => {
           path: [
             { x: "28%", y: "2%" },
             { x: "12%", y: "50%" },
-            { x: "-23vw", y: "87vh" },
+            { x: "-23vw", y: "90vh" },
           ],
           curviness: 1.5,
         },

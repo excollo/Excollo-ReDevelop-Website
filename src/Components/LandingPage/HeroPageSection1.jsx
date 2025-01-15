@@ -14,7 +14,6 @@ const HeroPageSection1 = () => {
       sx={{
         color: "#fff",
         display: "flex",
-        minHeight: "90vh",
         textAlign: isTabletOrMobile ? "center" : "left",
         justifyContent: isTabletOrMobile ? "center" : "left",
         width: {
@@ -30,8 +29,8 @@ const HeroPageSection1 = () => {
         marginLeft: {
           xs: 0, // Mobile
           sm: "2.5%", // Tablet
-          md: "6.5%",
-          lg: "6.5%", // Desktop
+          md: "3%",
+          lg: "7%", // Desktop
         },
         marginRight: {
           xs: 0, // Mobile
@@ -39,9 +38,14 @@ const HeroPageSection1 = () => {
           md: "6%", // Desktop
         },
         position: "relative",
+        minHeight: "95vh",
         zIndex: 2,
         "--gradient-start": "#ff7e5f",
         "--gradient-end": "#feb47b",
+        "@media (min-width: 769px) and (max-width:1024px)": {
+          marginLeft: "6%",
+          marginTop: "-6%",
+        },
       }}
       className="gradient-background"
     >
@@ -80,6 +84,9 @@ const HeroPageSection1 = () => {
               md: 25,
               lg: 25,
             },
+            "@media (min-width: 769px) and (max-width:1024px)": {
+              fontSize: "2.2rem",
+            },
           }}
         >
           Shaping the Future With
@@ -95,6 +102,9 @@ const HeroPageSection1 = () => {
               sm: "2.25rem", // Tablet
               md: "2.75rem", // Desktop
               lg: "3.25rem", // Large Desktop
+            },
+            "@media (min-width: 769px) and (max-width:1024px)": {
+              fontSize: "2.5rem",
             },
           }}
         >
@@ -147,6 +157,9 @@ const HeroPageSection1 = () => {
               md: "2.5rem", // Desktop
               lg: "3rem", // Large Desktop
             },
+            "@media (min-width: 769px) and (max-width:1024px)": {
+              fontSize: "2.2rem",
+            },
             lineHeight: 1.5,
             mb: {
               xs: 2,
@@ -172,6 +185,9 @@ const HeroPageSection1 = () => {
             lineHeight: 1.5,
             marginLeft: isTabletOrMobile ? 0 : "0.5%",
             textAlign: isTabletOrMobile ? "center" : "left",
+            "@media (min-width: 769px) and (max-width:1024px)": {
+              fontSize: "1.2rem",
+            },
           }}
         >
           Unlock the potential of AI to transform your business and
