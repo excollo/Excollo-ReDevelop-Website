@@ -1,10 +1,17 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { TitleCarousel } from "./Carousel";
 import { DescriptionCarousel } from "./Carousel";
 import { ScrollProvider } from "./ScrollProvider";
 
 const HeroPageSection3 = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isSpecificSize = useMediaQuery(
+    "(max-width: 320px) and (max-height: 725px)"
+  );
+
   return (
     <Box
       sx={{
@@ -13,7 +20,13 @@ const HeroPageSection3 = () => {
         overflow: "hidden",
         height: "auto",
         marginTop: "8rem",
-        minHeight: "100vh",
+        minHeight: isSpecificSize
+          ? "200vh"
+          : isMobile
+          ? "170vh"
+          : isTablet
+          ? "170vh"
+          : "100vh",
       }}
     >
       <Box
@@ -23,14 +36,17 @@ const HeroPageSection3 = () => {
           left: "10%",
           right: "10%",
           bottom: "10%",
-          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
+          background:
+            isMobile || isTablet
+              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`
+              : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
           zIndex: 0, // Set consistent z-index
           pointerEvents: "none",
           transformOrigin: "center center",
         }}
       />
       <Typography
-        variant="h2"
+        variant={isMobile ? "h4" : isTablet ? "h3" : "h2"}
         sx={{
           color: "#fff",
           fontWeight: "bold",

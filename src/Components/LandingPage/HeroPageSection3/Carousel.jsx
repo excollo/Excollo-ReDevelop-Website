@@ -51,7 +51,84 @@ const carouselContent = [
   },
 ];
 
-const Carousel = ({ isReverse, type = "title" }) => {
+const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
+  return (
+    <Box
+      sx={{
+        width: "90%",
+        mb: 4,
+        p: 2,
+        ml: isTablet ? "50px" : "0",
+        borderRadius: 2,
+        fontFamily: '"Inter", sans-serif',
+        backgroundColor: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+        // backdropFilter: "blur(-10px)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+
+        alignItems: "center",
+        cursor: "pointer",
+        transition: "transform 0.3s",
+        ...(isTablet && {
+          width: "100%",
+          height: "auto",
+        }),
+      }}
+    >
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: 400,
+          fontSize: isTablet ? "2rem" : "1.5rem",
+          mb: 2,
+          textAlign: "center",
+          background: isTablet ? "linear-gradient(180deg, #2579e3, #8e54f7 100%)" : "linear-gradient(90deg, #2579e3, #8e54f7 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}
+      >
+        {title}
+      </Typography>
+      <Typography
+        variant="body1"
+        sx={{
+          color: "#ddd",
+          fontWeight: 200,
+          letterSpacing: "0.001em",
+          textAlign: "center",
+        }}
+      >
+        {description}
+      </Typography>
+    </Box>
+  );
+};
+
+const ResponsiveView = ({ type, isTablet }) => {
+  return (
+    <Box sx={{ p: 2, height: "150vh" }}>
+      <Box
+        sx={{
+          display: "grid",
+
+          gridTemplateColumns: isTablet ? "repeat(1, 600px)" : "repeat(1, 1fr)",
+          gridTemplateRows: isTablet ? "repeat(5, 200px)" : "repeat(5, 1fr)",
+          gap: 1,
+        }}
+      >
+        {carouselContent.map((item, index) => (
+          <ResponsiveCard
+            key={index}
+            {...item}
+            type={type}
+            isTablet={isTablet}
+          />
+        ))}
+      </Box>
+    </Box>
+  );
+};
+
+const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const containerRef = useRef(null);
   const {
     scrollPosition,
@@ -449,6 +526,18 @@ const Carousel = ({ isReverse, type = "title" }) => {
       </Box>
     </Box>
   );
+};
+
+const Carousel = ({ isReverse, type = "title" }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+
+  if (isMobile || isTablet) {
+    return <ResponsiveView type={type} isTablet={isTablet} />;
+  }
+
+  return <DesktopCarousel isReverse={isReverse} type={type} />;
 };
 
 export const TitleCarousel = () => <Carousel isReverse={false} type="title" />;

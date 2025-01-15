@@ -101,7 +101,7 @@ const HeroPageSection5 = () => {
           sx={{
             textAlign: "center",
           }}
-          variant={isMobile ? "h4" : "h2"}
+          variant={isMobile ? "h4" : isTablet ? "h3" : "h2"}
           fontWeight="bold"
         >
           How We{" "}
