@@ -142,6 +142,7 @@ const HeroPage = () => {
         }
       );
 
+      if(isSpecificSize){
       gsap.to(threeDERef.current, {
         scrollTrigger: {
           trigger: ".hero-section-2",
@@ -151,7 +152,7 @@ const HeroPage = () => {
         },
         motionPath: {
           path: [
-            { x: "28%", y: "2%" },
+            { x: "33%", y: "2%" },
             { x: "12%", y: "50%" },
             { x: "-23vw", y: "90vh" },
           ],
@@ -160,6 +161,26 @@ const HeroPage = () => {
         duration: 1.5,
         ease: "power2.out",
       });
+    } else {
+       gsap.to(threeDERef.current, {
+         scrollTrigger: {
+           trigger: ".hero-section-2",
+           start: "top center",
+           end: "bottom center",
+           scrub: true,
+         },
+         motionPath: {
+           path: [
+             { x: "28%", y: "2%" },
+             { x: "12%", y: "50%" },
+             { x: "-23vw", y: "90vh" },
+           ],
+           curviness: 1.5,
+         },
+         duration: 1.5,
+         ease: "power2.out",
+       });
+    }
 
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());

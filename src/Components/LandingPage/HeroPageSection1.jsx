@@ -117,6 +117,11 @@ const HeroPageSection1 = () => {
               WebkitTextFillColor: "transparent",
               display: "inline-block",
               wordBreak: "break-word",
+              mb: {
+                xs: 2,
+                sm: 2.5,
+                md: 3,
+              },
             }}
           >
             <span
@@ -146,7 +151,7 @@ const HeroPageSection1 = () => {
           </Box>
         </Typography>
 
-        <Typography
+        {/* <Typography
           variant="h3"
           component="h1"
           sx={{
@@ -169,7 +174,7 @@ const HeroPageSection1 = () => {
           }}
         >
           Software Solution
-        </Typography>
+        </Typography> */}
 
         <Typography
           variant="h5"

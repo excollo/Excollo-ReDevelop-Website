@@ -148,7 +148,14 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const initialScrollDirection = useRef(null);
   const navigate = useNavigate();
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isSpecificSize = useMediaQuery("(max-width: 1024px) and (max-height: 725px)");
+
   const handleMouseMove = (e, index) => {
+    if (isMobile || isTablet) return;
+
     const { clientX, clientY, currentTarget } = e;
     const rect = currentTarget.getBoundingClientRect();
     const isCursorOverCard =
@@ -180,16 +187,15 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   };
 
   const handleWheelEvent = (e) => {
-    // If cursor is not over card, allow natural vertical scrolling
+    if (isMobile || isTablet) return;
+
     if (!isOverCard) {
-      // Only prevent horizontal scrolling
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault();
       }
       return;
     }
 
-    // If over card, prevent all scrolling and handle carousel movement
     e.stopPropagation();
     e.preventDefault();
 
@@ -348,11 +354,11 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     const isHovered = hoveredIndex === index;
     const baseStyle = {
       flex: "0 0 auto",
-      width: "40%",
-      height: `${CARD_HEIGHT}px`,
-      marginTop: "3rem",
-      marginBottom: "3rem",
-      padding: "1rem",
+      width: isMobile || isTablet ? "80%" : "45%",
+      height: isMobile || isTablet ? "auto" : `${CARD_HEIGHT}px`,
+      marginTop: isMobile || isTablet ? "1rem" : "3rem",
+      marginBottom: isMobile || isTablet ? "1rem" : "3rem",
+      padding: isMobile || isTablet ? "1rem" : "1rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -390,6 +396,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     <Box
       sx={{
         display: "flex",
+
         justifyContent: "center",
         alignItems: "center",
         touchAction: "none",
@@ -397,22 +404,24 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
         perspective: "1000px",
       }}
     >
-      <IconButton
-        onClick={() => handleButtonClick(-1)}
-        disabled={scrollPosition === 0}
-        sx={{
-          position: "absolute",
-          left: "10px",
-          zIndex: 3,
-          color: "white",
-          marginLeft: "7rem",
-          "&.Mui-disabled": {
-            color: "#716b6b",
-          },
-        }}
-      >
-        <ArrowBackIosIcon />
-      </IconButton>
+      {!isMobile && !isTablet && (
+        <IconButton
+          onClick={() => handleButtonClick(-1)}
+          disabled={scrollPosition === 0}
+          sx={{
+            position: "absolute",
+            left: "10px",
+            zIndex: 3,
+            color: "white",
+            marginLeft: "7rem",
+            "&.Mui-disabled": {
+              color: "#716b6b",
+            },
+          }}
+        >
+          <ArrowBackIosIcon />
+        </IconButton>
+      )}
       <Box
         ref={containerRef}
         sx={{
@@ -426,7 +435,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
           "-ms-overflow-style": "none",
           "&::-webkit-scrollbar": { display: "none" },
           touchAction: "pan-x pinch-zoom",
-          gap: `${GAP}px`,
+          gap: isMobile || isTablet ? "1rem" : `${GAP}px`,
         }}
       >
         {carouselContent.map((item, index) => (
@@ -444,17 +453,21 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
             }}
           >
             {type === "title" ? (
-              <Link to={item.link || "#"} style={{ marginTop: "-8rem" }}>
+              <Link
+                to={item.link || "#"}
+                style={{ marginTop: isSpecificSize ? "-10rem" : "-8rem" }}
+              >
                 <Typography
                   variant="h3"
                   fontWeight="400"
                   sx={{
                     background: "linear-gradient(180deg, #2579e3, #8e54f7)",
-                    fontSize: "2.6rem",
+                    fontSize: isMobile || isTablet || isSpecificSize ? "2.5rem" : "3rem",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     display: "inline-block",
                     transform: "translateZ(60px)",
+                    marginBottom: "1rem",
                     textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
                   }}
                 >
@@ -469,11 +482,12 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
                   color: "#ddd",
                   marginLeft: "auto",
                   marginRight: "auto",
+                  // fontSize: isMobile || isTablet ? "2rem" : "inherit",
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  width: "90%",
-                  marginTop: "10%",
+                  width: "95%",
+                  marginTop: "12%",
                   transform: "translateZ(40px)",
                   transition: "transform 0.3s ease-out",
                 }}
@@ -484,22 +498,26 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
           </Box>
         ))}
       </Box>
-      <IconButton
-        onClick={() => handleButtonClick(1)}
-        disabled={scrollPosition === (carouselContent.length - 1) * TOTAL_WIDTH}
-        sx={{
-          position: "absolute",
-          right: "10px",
-          zIndex: 3,
-          color: "white",
-          "&.Mui-disabled": {
-            color: "#716b6b",
-          },
-          marginRight: "7rem",
-        }}
-      >
-        <ArrowForwardIosIcon />
-      </IconButton>
+      {!isMobile && !isTablet && (
+        <IconButton
+          onClick={() => handleButtonClick(1)}
+          disabled={
+            scrollPosition === (carouselContent.length - 1) * TOTAL_WIDTH
+          }
+          sx={{
+            position: "absolute",
+            right: "10px",
+            zIndex: 3,
+            color: "white",
+            "&.Mui-disabled": {
+              color: "#716b6b",
+            },
+            marginRight: "7rem",
+          }}
+        >
+          <ArrowForwardIosIcon />
+        </IconButton>
+      )}
       <Box
         sx={{
           position: "absolute",
