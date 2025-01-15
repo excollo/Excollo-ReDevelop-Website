@@ -20,6 +20,7 @@ const HeroPageSection5 = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const is1024px = useMediaQuery("(max-width: 1024px)");
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const cards = [
@@ -41,14 +42,7 @@ const HeroPageSection5 = () => {
 
   useEffect(() => {
     if (isDesktop) {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        pin: true,
-        pinSpacing: false,
-      });
-
+      // Only keep the card animations
       cardRefs.current.forEach((card, index) => {
         gsap.fromTo(
           card,
@@ -107,6 +101,8 @@ const HeroPageSection5 = () => {
           How We{" "}
           <Box
             component="span"
+            variant={isMobile ? "h4" : isTablet ? "h3" : "h2"}
+            fontWeight="bold"
             sx={{
               background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
               WebkitBackgroundClip: "text",
