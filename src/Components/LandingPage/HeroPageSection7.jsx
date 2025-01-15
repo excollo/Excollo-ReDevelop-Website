@@ -5,16 +5,29 @@ import Logo from "../../assets/logo/excollo3d.png";
 const HeroPageSection7 = () => {
   const [scrollY, setScrollY] = useState(0);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -30,7 +43,14 @@ const HeroPageSection7 = () => {
     setRotation({ x: 0, y: 0 });
   };
 
-  const translateYImage = Math.max(1870 - scrollY * 0.5, 0);
+  const calculateTranslation = () => {
+    if (windowSize.width <= 425) {
+      return 0; // No translation for mobile
+    }
+    return Math.min(Math.max(2100 - scrollY * 0.5, 0), 1300);
+  };
+
+  const translateYImage = calculateTranslation();
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
 
@@ -42,7 +62,7 @@ const HeroPageSection7 = () => {
         justifyContent="center"
         position="relative"
         zIndex={2}
-        marginTop={-15}
+        marginTop={-5}
         sx={{
           height: "400px",
           width: "100%",
@@ -54,10 +74,14 @@ const HeroPageSection7 = () => {
           "@media (max-width: 768px)": {
             width: "100%",
             margin: "-15% auto",
+            height: "350px",
           },
-          "@media (max-width: 480px)": {
+          "@media (max-width: 425px)": {
             width: "100%",
-            margin: "-35% auto",
+            margin: "0 auto",
+            height: "250px",
+            position: "relative",
+            overflow: "visible",
           },
         }}
       >
@@ -68,23 +92,17 @@ const HeroPageSection7 = () => {
           onMouseLeave={handleMouseLeave}
           style={{
             height: "auto",
-            width: "80%",
-            transform: `translateY(${Math.min(
-              translateYImage,
-              1300
-            )}px) rotateX(${rotation.y}deg) rotateY(${rotation.x}deg)`,
+            width: windowSize.width <= 425 ? "90%" : "80%",
             transformStyle: "preserve-3d",
             willChange: "transform",
             transition: "transform 0.2s ease-out",
-            "@media (max-width: 1200px)": {
-              width: "80%",
-            },
-            "@media (max-width: 768px)": {
-              width: "80%",
-            },
-            "@media (max-width: 480px)": {
-              width: "80%",
-            },
+            position: windowSize.width <= 425 ? "absolute" : "relative",
+            top: windowSize.width <= 425 ? "50%" : "auto",
+            left: windowSize.width <= 425 ? "50%" : "auto",
+            transform:
+              windowSize.width <= 425
+                ? `translate(-50%, -50%) rotateX(${rotation.y}deg) rotateY(${rotation.x}deg)`
+                : `translateY(${translateYImage}px) rotateX(${rotation.y}deg) rotateY(${rotation.x}deg)`,
           }}
         />
       </Box>
@@ -100,12 +118,7 @@ const HeroPageSection7 = () => {
           height: "0px",
           background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, ${gradientOpacity}) 0%, rgba(0, 0, 0, 0) 60%)`,
           transition: "background 0.3s ease-in-out",
-          "@media (max-width: 768px)": {
-            display: "none",
-          },
-          "@media (max-width: 480px)": {
-            display: "none",
-          },
+          display: windowSize.width <= 768 ? "none" : "block",
         }}
       />
 
@@ -115,12 +128,7 @@ const HeroPageSection7 = () => {
           height: "2px",
           width: "100%",
           position: "relative",
-          "@media (max-width: 768px)": {
-            display: "none",
-          },
-          "@media (max-width: 480px)": {
-            display: "none",
-          },
+          display: windowSize.width <= 768 ? "none" : "block",
         }}
       />
     </Box>
