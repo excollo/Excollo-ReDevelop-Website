@@ -61,7 +61,7 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
         ml: isTablet ? "50px" : "0",
         borderRadius: 2,
         fontFamily: '"Inter", sans-serif',
-        backgroundColor: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+        backgroundColor: "linear-gradient(180deg, #2579e3, #8e54f7 100%)",
         // backdropFilter: "blur(-10px)",
         border: "1px solid rgba(255, 255, 255, 0.1)",
 
@@ -81,7 +81,9 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
           fontSize: isTablet ? "2rem" : "1.5rem",
           mb: 2,
           textAlign: "center",
-          background: isTablet ? "linear-gradient(180deg, #2579e3, #8e54f7 100%)" : "linear-gradient(90deg, #2579e3, #8e54f7 100%)",
+          background: isTablet
+            ? "linear-gradient(180deg, #2579e3, #8e54f7 100%)"
+            : "linear-gradient(90deg, #2579e3, #8e54f7 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}

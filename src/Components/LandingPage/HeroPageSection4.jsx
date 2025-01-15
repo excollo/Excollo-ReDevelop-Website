@@ -58,7 +58,9 @@ const FeatureCard = ({
   const titleStyles =
     isMobile || isTablet
       ? {
-          background: "linear-gradient(90deg, #2579e3, #8e54f7)",
+          background: isMobile
+            ? "linear-gradient(90deg, #2579e3, #8e54f7)"
+            : "linear-gradient(180deg, #2579e3, #8e54f7)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           display: "inline-block",
