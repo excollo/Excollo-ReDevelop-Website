@@ -84,7 +84,7 @@ const HeroPage = () => {
         // Default movement
         timeline.to(".threeDE", {
           x: "28%",
-          y: "2%",
+          y: "0%",
           duration: 1,
           ease: "power2.out",
         });
@@ -153,7 +153,7 @@ const HeroPage = () => {
           path: [
             { x: "28%", y: "2%" },
             { x: "12%", y: "50%" },
-            { x: "-23vw", y: "85vh" },
+            { x: "-23vw", y: "87vh" },
           ],
           curviness: 1.5,
         },

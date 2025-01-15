@@ -36,7 +36,7 @@ const ThreeDE = ({ onComplete }) => {
       (font) => {
         const textGeometry = new TextGeometry("e", {
           font,
-          size: 35,
+          size: 33,
           height: 2,
           bevelEnabled: true,
           bevelThickness: 3,
