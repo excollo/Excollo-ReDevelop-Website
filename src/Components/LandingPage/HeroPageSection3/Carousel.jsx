@@ -370,8 +370,7 @@ const Carousel = ({ isReverse, type = "title" }) => {
                   variant="h3"
                   fontWeight="400"
                   sx={{
-                    background:
-                      "linear-gradient(180deg, #2579e3, #8e54f7)",
+                    background: "linear-gradient(180deg, #2579e3, #8e54f7)",
                     fontSize: "2.6rem",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",

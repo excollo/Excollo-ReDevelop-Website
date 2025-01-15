@@ -14,6 +14,7 @@ const HeroPageSection1 = () => {
       sx={{
         color: "#fff",
         display: "flex",
+        minHeight: "90vh",
         textAlign: isTabletOrMobile ? "center" : "left",
         justifyContent: isTabletOrMobile ? "center" : "left",
         width: {
