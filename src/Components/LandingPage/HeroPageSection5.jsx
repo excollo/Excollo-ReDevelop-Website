@@ -8,6 +8,8 @@ import {
   CardContent,
 } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
+import AutorenewRoundedIcon from "@mui/icons-material/AutorenewRounded";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./HeroPageSection5.css";
@@ -27,22 +29,24 @@ const HeroPageSection5 = () => {
     {
       title: "Discover Your Needs",
       description: "In-depth discovery to align with your business goals.",
+      icon: SearchRoundedIcon,
     },
     {
       title: "Craft a Tailored Plan",
       description:
         "Strategy, implementation, and optimization designed for measurable outcomes.",
+      icon: AssignmentRoundedIcon,
     },
     {
       title: "Deliver and Iterate",
       description:
         "Continuous improvement ensures solutions stay ahead of the curve.",
+      icon: AutorenewRoundedIcon,
     },
   ];
 
   useEffect(() => {
     if (isDesktop) {
-      // Only keep the card animations
       cardRefs.current.forEach((card, index) => {
         gsap.fromTo(
           card,
@@ -76,20 +80,22 @@ const HeroPageSection5 = () => {
         pb: { xs: 4, sm: 6, md: 8 },
       }}
     >
+      {/* Background gradient */}
       <Box
         sx={{
-          position: "absolute",
-          top: "-20%",
+          position: "relative",
+          top: "20%",
           left: "0",
           right: "0%",
           bottom: 0,
           height: "60%",
-          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
+          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 100%)`,
           zIndex: -1,
           pointerEvents: "none",
           transformOrigin: "center center",
         }}
       />
+      {/* Title Section */}
       <Box sx={{ marginBottom: "3rem" }}>
         <Typography
           sx={{
@@ -97,6 +103,7 @@ const HeroPageSection5 = () => {
           }}
           variant={isMobile ? "h4" : isTablet ? "h3" : "h2"}
           fontWeight="bold"
+          fontSize="4.5rem"
         >
           How We{" "}
           <Box
@@ -113,6 +120,7 @@ const HeroPageSection5 = () => {
           </Box>
         </Typography>
       </Box>
+      {/* Mobile/Tablet Cards */}
       <Box
         sx={{
           display: { xs: "flex", md: "none" },
@@ -133,7 +141,6 @@ const HeroPageSection5 = () => {
               maxWidth: { xs: "350px", md: "400px" },
               background: "transparent",
               backdropFilter: "blur(10px)",
-              // border: "1px solid rgba(255, 255, 255, 0.1)",
               borderRadius: 2,
               overflow: "visible",
             }}
@@ -148,13 +155,13 @@ const HeroPageSection5 = () => {
                 "&:last-child": { pb: { xs: 3, sm: 4 } },
               }}
             >
-              <SearchRoundedIcon
-                sx={{
+              {React.createElement(card.icon, {
+                sx: {
                   color: "#8E54F7",
                   fontSize: { xs: 40, sm: 48 },
                   mb: 2,
-                }}
-              />
+                },
+              })}
               <Typography
                 variant="h6"
                 sx={{
@@ -179,15 +186,11 @@ const HeroPageSection5 = () => {
         ))}
       </Box>
 
-      {/* Existing layout for desktop */}
+      {/* Desktop Layout */}
       <Box className="row" sx={{ display: { xs: "none", md: "block" } }}>
         <div className="col-md-12">
           <div className="gradientCardBox">
-            {[
-              "Understand Your Needs",
-              "Craft a Tailored Plan",
-              "Deliver and Iterate",
-            ].map((title, index) => (
+            {cards.map((card, index) => (
               <div
                 className="box aos-init aos-animate"
                 data-aos="fade-left"
@@ -198,14 +201,8 @@ const HeroPageSection5 = () => {
               >
                 <span></span>
                 <div className="content">
-                  <h2>{title}</h2>
-                  <p>
-                    {index === 0
-                      ? "In-depth discovery to align with your business goals."
-                      : index === 1
-                      ? "Strategy, implementation, and optimization designed for measurable outcomes."
-                      : "Continuous improvement ensures solutions stay ahead of the curve."}
-                  </p>
+                  <h2>{card.title}</h2>
+                  <p>{card.description}</p>
                 </div>
               </div>
             ))}

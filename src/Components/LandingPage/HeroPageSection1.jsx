@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 
-const HeroPageSection1 = () => {
+const HeroPageSection1 = ({ animationComplete }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
-  const isTabletOrMobile = isMobile || isTablet; // Helper for shared mobile/tablet styles
+  const isTabletOrMobile = isMobile || isTablet;
 
   return (
     <Box
@@ -17,25 +17,25 @@ const HeroPageSection1 = () => {
         textAlign: isTabletOrMobile ? "center" : "left",
         justifyContent: isTabletOrMobile ? "center" : "left",
         width: {
-          xs: "100%", // Mobile
-          sm: "95%", // Tablet
-          md: "80%", // Desktop
+          xs: "100%",
+          sm: "95%",
+          md: "80%",
         },
         px: {
-          xs: 2, // Mobile
-          sm: 4, // Tablet
-          md: 3, // Desktop
+          xs: 2,
+          sm: 4,
+          md: 3,
         },
         marginLeft: {
-          xs: 0, // Mobile
-          sm: "2.5%", // Tablet
+          xs: 0,
+          sm: "2.5%",
           md: "3%",
-          lg: "7%", // Desktop
+          lg: "7%",
         },
         marginRight: {
-          xs: 0, // Mobile
-          sm: "2.5%", // Tablet
-          md: "6%", // Desktop
+          xs: 0,
+          sm: "2.5%",
+          md: "6%",
         },
         position: "relative",
         minHeight: "95vh",
@@ -47,18 +47,21 @@ const HeroPageSection1 = () => {
           marginTop: "-6%",
         },
       }}
-      className="gradient-background"
     >
       <Box
-        className="hero-content"
         sx={{
           maxWidth: {
             xs: "100%",
             sm: "95%",
             md: "80%",
           },
-          opacity: 0,
-          transform: "translateX(50px)",
+          opacity: isTabletOrMobile ? 1 : animationComplete ? 1 : 0,
+          transform: isTabletOrMobile
+            ? "none"
+            : animationComplete
+            ? "none"
+            : "translateX(50px)",
+          transition: "opacity 0.5s ease, transform 0.5s ease",
           padding: {
             xs: 2,
             sm: 4,
@@ -72,10 +75,10 @@ const HeroPageSection1 = () => {
           sx={{
             fontWeight: 200,
             fontSize: {
-              xs: "1.5rem", // Mobile
-              sm: "2.2rem", // Tablet
-              md: "2.5rem", // Desktop
-              lg: "3rem", // Large Desktop
+              xs: "1.5rem",
+              sm: "2.2rem",
+              md: "2.5rem",
+              lg: "3rem",
             },
             lineHeight: 1.5,
             mt: {
@@ -98,10 +101,10 @@ const HeroPageSection1 = () => {
             fontWeight: 600,
             lineHeight: 1.2,
             fontSize: {
-              xs: "1.75rem", // Mobile
-              sm: "2.25rem", // Tablet
-              md: "2.75rem", // Desktop
-              lg: "3.25rem", // Large Desktop
+              xs: "1.75rem",
+              sm: "2.25rem",
+              md: "2.75rem",
+              lg: "3.25rem",
             },
             "@media (min-width: 769px) and (max-width:1024px)": {
               fontSize: "2.5rem",
@@ -151,41 +154,16 @@ const HeroPageSection1 = () => {
           </Box>
         </Typography>
 
-        {/* <Typography
-          variant="h3"
-          component="h1"
-          sx={{
-            fontWeight: 200,
-            fontSize: {
-              xs: "1.5rem", // Mobile
-              sm: "2.2rem", // Tablet
-              md: "2.5rem", // Desktop
-              lg: "3rem", // Large Desktop
-            },
-            "@media (min-width: 769px) and (max-width:1024px)": {
-              fontSize: "2.2rem",
-            },
-            lineHeight: 1.5,
-            mb: {
-              xs: 2,
-              sm: 2.5,
-              md: 3,
-            },
-          }}
-        >
-          Software Solution
-        </Typography> */}
-
         <Typography
           variant="h5"
           component="h5"
           sx={{
             fontWeight: 200,
             fontSize: {
-              xs: "1rem", // Mobile
-              sm: "1.15rem", // Tablet
-              md: "1.2rem", // Desktop
-              lg: "1.3rem", // Large Desktop
+              xs: "1rem",
+              sm: "1.15rem",
+              md: "1.2rem",
+              lg: "1.3rem",
             },
             lineHeight: 1.5,
             marginLeft: isTabletOrMobile ? 0 : "0.5%",

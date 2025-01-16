@@ -25,10 +25,10 @@ const StyledFormContainer = styled(Box)(({ theme }) => ({
   boxShadow: "0px 0px 100px 0px rgba(133, 86, 245, 0.4)",
   margin: "0 auto",
   maxWidth: "1000px",
-  maxHeight: "1200px", // Increased to accommodate the new form fields
+  maxHeight: "auto", // Increased to accommodate the new form fields
   "@media (min-width: 320px) and (max-width:480px)": {
     padding: theme.spacing(4),
-    maxHeight: "900px",
+    maxHeight: "950px",
   },
 }));
 const StyledTextField = styled(TextField)(({ theme }) => ({

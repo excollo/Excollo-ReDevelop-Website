@@ -30,7 +30,10 @@ const HeroPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isSpecificSize = useMediaQuery("(max-width: 1024px) and (max-height: 725px)");
+  const isSpecificSize = useMediaQuery(
+    "(max-width: 1024px) and (max-height: 725px)"
+  );
+  const isDesktop = !isMobile && !isTablet;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,19 +72,17 @@ const HeroPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!showThreeDE) {
+    if (!showThreeDE && isDesktop) {
       const timeline = gsap.timeline();
 
       if (isSpecificSize) {
-        // Specific movement for 1024x652 screen size
         timeline.to(".threeDE", {
           x: "32%",
-          y: "-2%",
+          y: "-4%",
           duration: 1,
           ease: "power2.out",
         });
       } else {
-        // Default movement
         timeline.to(".threeDE", {
           x: "28%",
           y: "0%",
@@ -97,13 +98,7 @@ const HeroPage = () => {
       });
 
       timeline.add([
-        gsap.to(".navbar", {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        }),
-        gsap.to(".hero-content", {
+        gsap.to([".navbar", ".hero-content"], {
           opacity: 1,
           x: 0,
           duration: 0.5,
@@ -116,11 +111,34 @@ const HeroPage = () => {
           },
         }),
       ]);
+    } else if (!showThreeDE && !isDesktop) {
+      // For mobile and tablet, set states immediately without animations
+      setAnimationComplete(true);
+      setHero1Complete(true);
+
+      // Set initial styles without animations
+      const navbar = document.querySelector(".navbar");
+      const heroContent = document.querySelector(".hero-content");
+      const gradientBackground = document.querySelector(".gradient-background");
+
+      if (navbar) {
+        navbar.style.opacity = "1";
+        navbar.style.transform = "translateX(0)";
+      }
+
+      if (heroContent) {
+        heroContent.style.opacity = "1";
+        heroContent.style.transform = "translateX(0)";
+      }
+
+      if (gradientBackground) {
+        gradientBackground.style.opacity = "1";
+      }
     }
-  }, [showThreeDE, isSpecificSize]);
+  }, [showThreeDE, isSpecificSize, isDesktop]);
 
   useEffect(() => {
-    if (hero1Complete) {
+    if (hero1Complete && isDesktop) {
       gsap.fromTo(
         ".hero-section-2",
         {
@@ -142,54 +160,64 @@ const HeroPage = () => {
         }
       );
 
-      if(isSpecificSize){
-      gsap.to(threeDERef.current, {
-        scrollTrigger: {
-          trigger: ".hero-section-2",
-          start: "top center",
-          end: "bottom center",
-          scrub: true,
-        },
-        motionPath: {
-          path: [
-            { x: "33%", y: "2%" },
-            { x: "12%", y: "50%" },
-            { x: "-23vw", y: "90vh" },
-          ],
-          curviness: 1.5,
-        },
-        duration: 1.5,
-        ease: "power2.out",
-      });
-    } else {
-       gsap.to(threeDERef.current, {
-         scrollTrigger: {
-           trigger: ".hero-section-2",
-           start: "top center",
-           end: "bottom center",
-           scrub: true,
-         },
-         motionPath: {
-           path: [
-             { x: "28%", y: "2%" },
-             { x: "12%", y: "50%" },
-             { x: "-23vw", y: "87.5vh" },
-           ],
-           curviness: 1.5,
-         },
-         duration: 1.5,
-         ease: "power2.out",
-       });
-    }
+      if (isSpecificSize) {
+        gsap.to(threeDERef.current, {
+          scrollTrigger: {
+            trigger: ".hero-section-2",
+            start: "top center",
+            end: "bottom center",
+            scrub: true,
+          },
+          motionPath: {
+            path: [
+              { x: "33%", y: "2%" },
+              { x: "12%", y: "50%" },
+              { x: "-23vw", y: "90vh" },
+            ],
+            curviness: 1.5,
+          },
+          duration: 1.5,
+          ease: "power2.out",
+        });
+      } else {
+        gsap.to(threeDERef.current, {
+          scrollTrigger: {
+            trigger: ".hero-section-2",
+            start: "top center",
+            end: "bottom center",
+            scrub: true,
+          },
+          motionPath: {
+            path: [
+              { x: "28%", y: "2%" },
+              { x: "12%", y: "50%" },
+              { x: "-23vw", y: "89vh" },
+            ],
+            curviness: 1.5,
+          },
+          duration: 1.5,
+          ease: "power2.out",
+        });
+      }
 
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
+    } else if (hero1Complete && !isDesktop) {
+      // Set hero2Complete immediately for mobile/tablet
+      setHero2Complete(true);
+
+      // Set initial styles for hero-section-2
+      const heroSection2 = document.querySelector(".hero-section-2");
+      if (heroSection2) {
+        heroSection2.style.opacity = "1";
+        heroSection2.style.transform = "translateX(0)";
+      }
     }
-  }, [hero1Complete]);
+  }, [hero1Complete, isDesktop, isSpecificSize]);
 
   useEffect(() => {
-    if (hero2Complete) {
+    if (hero2Complete && isDesktop) {
       gsap.fromTo(
         ".hero-page-section-4",
         {
@@ -214,8 +242,18 @@ const HeroPage = () => {
           },
         }
       );
+    } else if (hero2Complete && !isDesktop) {
+      // Set hero4Complete immediately for mobile/tablet
+      setHero4Complete(true);
+
+      // Set initial styles for hero-page-section-4
+      const heroSection4 = document.querySelector(".hero-page-section-4");
+      if (heroSection4) {
+        heroSection4.style.opacity = "1";
+        heroSection4.style.transform = "translateY(0)";
+      }
     }
-  }, [hero2Complete]);
+  }, [hero2Complete, isDesktop]);
 
   const handleScrollToTop = () => {
     const section4 = document.querySelector(".hero-page-section-4");
@@ -312,7 +350,7 @@ const HeroPage = () => {
           height: "5%",
           background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 1,
-          opacity: 0,
+          opacity: isMobile || isTablet ? 1 : 0,
         }}
       />
       <Box
@@ -320,8 +358,9 @@ const HeroPage = () => {
         sx={{
           position: "relative",
           zIndex: 10,
-          opacity: 0,
-          transform: "translateX(-100px)",
+          opacity: isMobile || isTablet ? 1 : 0,
+          transform:
+            isMobile || isTablet ? "translateX(0)" : "translateX(-100px)",
         }}
       >
         <NavBar />
@@ -333,8 +372,9 @@ const HeroPage = () => {
           position: "relative",
           zIndex: 3,
           marginTop: "-6rem",
-          opacity: 1,
-          transform: "translateX(-100px)",
+          opacity: isMobile || isTablet ? 1 : 0,
+          transform:
+            isMobile || isTablet ? "translateX(0)" : "translateX(-100px)",
         }}
       >
         <HeroPageSection1 animationComplete={animationComplete} />
@@ -344,7 +384,8 @@ const HeroPage = () => {
         sx={{
           position: "relative",
           zIndex: 3,
-          opacity: 1,
+          opacity: isMobile || isTablet ? 1 : 0,
+          transform: isMobile || isTablet ? "translateX(0)" : "translateX(50%)",
         }}
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
@@ -352,7 +393,14 @@ const HeroPage = () => {
       <Box className="hero-page-section-3" sx={{ opacity: 1 }}>
         <HeroPageSection3 />
       </Box>
-      <Box className="hero-page-section-4">
+      <Box
+        className="hero-page-section-4"
+        sx={{
+          opacity: isMobile || isTablet ? 1 : 0,
+          transform:
+            isMobile || isTablet ? "translateY(0)" : "translateY(0)",
+        }}
+      >
         <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
       </Box>
       <Box>

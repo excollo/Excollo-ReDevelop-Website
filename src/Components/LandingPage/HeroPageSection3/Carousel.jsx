@@ -374,10 +374,6 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       transformStyle: "preserve-3d",
       backgroundColor:
         type === "description" ? "rgba(255, 255, 255, 0.1)" : "transparent",
-      backgroundImage:
-        type === "description"
-          ? "radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%)"
-          : "none",
       boxShadow:
         type === "description" ? "0 10px 30px -15px rgba(0,0,0,0.3)" : "none",
       transform: isHovered

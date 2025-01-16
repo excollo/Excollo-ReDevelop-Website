@@ -11,6 +11,7 @@ const HeroPageSection3 = () => {
   const isSpecificSize = useMediaQuery(
     "(max-width: 320px) and (max-height: 725px)"
   );
+  const isSpecified = useMediaQuery("(max-width: 1024px)")
 
   return (
     <Box
@@ -31,14 +32,15 @@ const HeroPageSection3 = () => {
       <Box
         sx={{
           position: "absolute",
-          top: "25%",
+          top: isSpecified ? "10%" : "2%",
           left: "10%",
           right: "10%",
-          bottom: "10%",
+          bottom: isSpecified ? "0" : "13%",
           background:
             isMobile || isTablet
-              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`
-              : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 75%)`,
+              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)` : 
+            isSpecified ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)` 
+              : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 0, // Set consistent z-index
           pointerEvents: "none",
           transformOrigin: "center center",

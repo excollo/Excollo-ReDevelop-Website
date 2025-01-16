@@ -174,7 +174,7 @@ const OurServices = () => {
       </Box>
       <Box
         sx={{
-          mt: { xs: -20 }, // Adjust the margin-top for different screen sizes
+          mt: { xs: -40 }, // Adjust the margin-top for different screen sizes
           paddingTop: { xs: 0, md: 0 }, // Remove padding if any
         }}
       >

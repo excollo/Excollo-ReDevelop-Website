@@ -1,7 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Paper, Typography, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Typography,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, AnimatePresence } from "framer-motion";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,8 +28,6 @@ const FeatureCard = ({
     isMobile || isTablet
       ? {
           background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
-          border: "1px solid #7e22ce",
-          boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 10px 0px",
           borderRadius: "12px",
           textAlign: "center",
           padding: "1rem",
@@ -30,19 +38,15 @@ const FeatureCard = ({
           alignItems: "center",
           justifyContent: "center",
           marginBottom: "1rem",
-          marginLeft: -2,
-          // boxShadow: "rgba(133, 86, 245, 0.2) 0px 0px 50px 0px",
         }
       : {
           background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
-
           borderRadius: "12px",
           textAlign: "center",
           padding: "1rem",
           height: "300px",
           width: "100%",
           display: "flex",
-          marginLeft: -4,
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
@@ -111,10 +115,41 @@ const FeatureCard = ({
 
 const HeroPageSection4 = ({ onComplete }) => {
   const [isCardShrunk, setIsCardShrunk] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
   const sectionRef = useRef(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+
+  const cards = [
+    {
+      title: "Outcome as a Service",
+      description: "We deliver tangible results not just digital products.",
+    },
+    {
+      title: "Iterative Excellence",
+      description:
+        "Our solutions evolve with your business, ensuring long-term success.",
+    },
+    {
+      title: "Future-Forward Strategies",
+      description:
+        "Cutting-edge AI and automation drive scalable, innovative solutions.",
+    },
+  ];
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + cards.length) % cards.length
+    );
+  };
 
   useEffect(() => {
     if (isMobile || isTablet) return;
@@ -206,10 +241,9 @@ const HeroPageSection4 = ({ onComplete }) => {
         sx={{
           minHeight: "100vh",
           color: "#fff",
-          // marginLeft:-4,
           padding: "2rem 1rem",
-          // marginBottom: "15rem",
           fontFamily: '"Inter", sans-serif',
+          position: "relative",
         }}
       >
         <Typography
@@ -238,29 +272,67 @@ const HeroPageSection4 = ({ onComplete }) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "1rem",
-            maxWidth: isMobile ? "60%" : "600px",
-            margin: "auto",
+            alignItems: "center",
+            position: "relative",
           }}
         >
-          <FeatureCard
-            title="Outcome as a Service"
-            description="We deliver tangible results not just digital products."
-            isMobile={isMobile}
-            isTablet={isTablet}
-          />
-          <FeatureCard
-            title="Iterative Excellence"
-            description="Our solutions evolve with your business, ensuring long-term success."
-            isMobile={isMobile}
-            isTablet={isTablet}
-          />
-          <FeatureCard
-            title="Future-Forward Strategies"
-            description="Cutting-edge AI and automation drive scalable, innovative solutions."
-            isMobile={isMobile}
-            isTablet={isTablet}
-          />
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              initial={{ opacity: 0, x: direction > 0 ? 100 : -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: direction > 0 ? -100 : 100 }}
+              transition={{ duration: 0.5 }}
+              style={{ width: "90%", marginLeft: -30, position: "absolute" }}
+            >
+              <FeatureCard
+                title={cards[currentIndex].title}
+                description={cards[currentIndex].description}
+                isMobile={isMobile}
+                isTablet={isTablet}
+              />
+            </motion.div>
+          </AnimatePresence>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "30%",
+              mt: isMobile ? 25 : 32,
+            }}
+          >
+            <Box
+              sx={{
+                borderRadius: "50%",
+                border: "1px solid rgb(206, 84, 247)",
+                height: "40px",
+                width: "40px",
+              }}
+            >
+              <IconButton
+                onClick={handlePrev}
+                sx={{ ml: 0.5, p: 1, color: "white" }}
+              >
+                <ArrowBackIosIcon />
+              </IconButton>
+            </Box>
+            <Box
+              sx={{
+                borderRadius: "50%",
+                border: "1px solid rgb(206, 84, 247)",
+                height: "40px",
+                width: "40px",
+              }}
+            >
+              <IconButton
+                onClick={handleNext}
+                sx={{ ml: 0.2, p: 1, color: "white" }}
+              >
+                <ArrowForwardIosIcon />
+              </IconButton>
+            </Box>
+          </Box>
         </Box>
       </Box>
     );
@@ -282,7 +354,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         className="title-section"
         sx={{
           position: "sticky",
-          top: "5%",
+          top: "2%",
           textAlign: "center",
           zIndex: 2,
         }}
