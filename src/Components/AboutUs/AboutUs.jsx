@@ -341,7 +341,7 @@ const AboutUs = () => {
                   fontWeight: "600",
                   color: "#fff",
                   whiteSpace: "nowrap", // Prevent line break on larger screens
-                  ml: { xs: 0, md: "13%", lg: "10%" },
+                  ml: { xs: 0, md: "13%", lg: "12%" },
                 }}
               >
                 <span className="highlight">About</span>
@@ -389,7 +389,7 @@ const AboutUs = () => {
                 fontWeight: 200,
                 lineHeight: 1.7,
                 textAlign: { xs: "center", md: "left" },
-                ml: { xs: 0, md: "13%", lg: "10%" },
+                ml: { xs: 0, md: "13%", lg: "12.5%" },
                 px: { xs: 2, md: 0 },
                 mt: { xs: 3, md: 5 },
               }}
@@ -403,8 +403,8 @@ const AboutUs = () => {
           {!isMobile && !isTablet && (
             <Box
               sx={{
-                width: { sm: "60%", md: "45%" },
-                mr: { md: "2%", lg: "6%" },
+                width: { sm: "60%", md: "80%" },
+                mr: { md: "2%", lg: "0%" },
               }}
             >
               <ThreeDE />
