@@ -20,6 +20,7 @@ const OurServices = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+  const isSpecified = useMediaQuery("(min-width: 1024px) and (max-width: 1199px)")
   const aiAutomationRef = useRef(null);
   const salesChannelRef = useRef(null);
   const mlDrivenDataAnalysisRef = useRef(null);
@@ -117,7 +118,7 @@ const OurServices = () => {
                     fontWeight: "600",
                     color: "#fff",
                     whiteSpace: "nowrap", // Prevent line break
-                    ml: { xs: 0, md: "2%", lg: "10%" },
+                    ml: isSpecified ? "11.5%" : { xs: 0, md: "2%", lg: "11%" },
                   }}
                 >
                   <span className="highlight">Our </span>
@@ -146,7 +147,7 @@ const OurServices = () => {
                   fontWeight: 200,
                   lineHeight: 1.7,
                   textAlign: { xs: "center", md: "left" },
-                  ml: { xs: 0, md: "2%", lg: "10%" },
+                  ml: isSpecified ? "12.5%" : { xs: 0, md: "2%", lg: "12%" },
                   px: { xs: 2, md: 0 },
                   mt: { xs: 3, md: 5 },
                 }}
@@ -161,7 +162,7 @@ const OurServices = () => {
             {!isMobile && !isTablet && (
               <Box
                 sx={{
-                  width: { sm: "60%", md: "45%" },
+                  width: { sm: "60%", md: "80%" },
                   mr: { md: "2%", lg: "6%" },
                 }}
               >
