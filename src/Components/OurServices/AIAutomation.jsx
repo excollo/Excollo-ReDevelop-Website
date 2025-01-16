@@ -38,6 +38,9 @@ const AIAutomation = forwardRef((props, ref) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isSpecified = useMediaQuery(
+    "(min-width: 1024px) and (max-width: 1199px)"
+  );
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -178,7 +181,7 @@ const AIAutomation = forwardRef((props, ref) => {
   }, [isMobile, isTablet]);
 
   useEffect(() => {
-    if (isTablet) {
+    if (isSpecified || isTablet) {
       gsap.set(".tablet-heading", {
         y: 100,
         opacity: 0,
@@ -233,7 +236,7 @@ const AIAutomation = forwardRef((props, ref) => {
           });
         });
     }
-  }, [isTablet]);
+  }, [isTablet, isSpecified]);
 
   const services = [
     {
@@ -309,26 +312,214 @@ const AIAutomation = forwardRef((props, ref) => {
 
   const containerStyles = {
     width: "100%",
-    minHeight: isTablet ? "auto" : "120vh",
+    minHeight: isTablet || isSpecified ? "auto" : "120vh",
     position: "relative",
     marginBottom: "5rem",
-    padding: isTablet ? "1rem" : 0,
-    ml: isTablet ? -5 : "-5%",
+    padding: isTablet || isSpecified ? "1rem" : 0,
+    ml: isTablet || isSpecified ? -5 : "-5%",
   };
 
   const contentStyles = {
-    maxWidth: isTablet ? "90%" : "1200px",
+    maxWidth: isTablet || isSpecified ? "90%" : "1200px",
     margin: "0 auto",
     position: "relative",
-    padding: isTablet ? "1rem" : "2rem",
+    padding: isTablet || isSpecified ? "1rem" : "2rem",
   };
 
   const titleStyles = {
-    fontSize: isTablet ? "2rem" : "3rem",
+    fontSize: isTablet || isSpecified ? "2rem" : "3rem",
     textAlign: "center",
     ml: isTablet ? 0 : "5%",
-    marginBottom: isTablet ? "2rem" : "3rem",
+    marginBottom: isTablet || isSpecified ? "2rem" : "3rem",
   };
+
+  if (isSpecified) {
+    return (
+      <Box className="services-container" sx={containerStyles}>
+        {!isSpecified && (
+          <Box
+            className="fade-in-heading"
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100vh",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Box>
+              <Typography
+                variant="h1"
+                sx={{ fontWeight: "500", textAlign: "center" }}
+              >
+                AI & Automation
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                variant="h4"
+                sx={{ textAlign: "center", fontWeight: "500", mt: 2 }}
+              >
+                Empower your business with AI
+              </Typography>
+            </Box>
+          </Box>
+        )}
+
+        <Box
+          className={isSpecified ? "" : "animate-content"}
+          sx={{
+            position: isSpecified ? "relative" : "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: isSpecified ? "auto" : "100vh",
+            padding: "2rem",
+            "&::-webkit-scrollbar": {
+              width: "8px",
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "rgba(0, 0, 0, 0.1)",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "rgba(37, 121, 227, 0.5)",
+              borderRadius: "4px",
+            },
+          }}
+        >
+          <Box sx={contentStyles}>
+            {isSpecified && (
+              <Typography
+                variant="h2"
+                sx={{
+                  ...titleStyles,
+                  background: "linear-gradient(180deg, #2579e3, #8e54f7)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  textFillColor: "transparent",
+                  textAlign: "center",
+                  fontSize: "2.8rem",
+                  fontWeight: 500,
+                  mb: 4,
+                }}
+                className="tablet-heading"
+              >
+                AI & Automation
+              </Typography>
+            )}
+            {services.map((service, index) => (
+              <Box className="tablet-service-item" key={service.id}>
+                <Accordion
+                  expanded={expanded === service.id}
+                  onChange={handleChange(service.id)}
+                  sx={{
+                    backgroundColor: "#000",
+                    color: "#fff",
+                    boxShadow: "none",
+                    "&.Mui-expanded": {
+                      margin: 0,
+                    },
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ChevronDown style={{ color: "#fff" }} />}
+                    sx={{
+                      "&.Mui-expanded": {
+                        minHeight: isSpecified ? 80 : 105,
+                        margin: 0,
+                      },
+                      minHeight: isSpecified ? 80 : 105,
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontSize: isSpecified ? "1.1rem" : "1.7rem",
+                        position: "relative",
+                        ml: isSpecified ? -5 : "1%",
+                      }}
+                      className={isSpecified ? "tablet-service-item" : ""}
+                    >
+                      <span
+                        ref={(el) => (symbolRefs.current[index] = el)}
+                        style={{ display: "inline-block" }}
+                      >
+                        ✤
+                      </span>
+                      {service.title}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    sx={{
+                      padding: "0 16px 8px 16px",
+                      maxWidth: "120%",
+                      ml: "1%",
+                    }}
+                  >
+                    <List
+                      sx={{
+                        padding: 0,
+                        "& .MuiListItem-root": {
+                          padding: "4px 0",
+                        },
+                      }}
+                    >
+                      {service.details.map((detail, index) => (
+                        <ListItem
+                          key={index}
+                          className={isSpecified ? "tablet-service-item" : ""}
+                        >
+                          <ListItemIcon sx={{ minWidth: 25 }}>
+                            <Circle size={6} color="#fff" />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={detail}
+                            primaryTypographyProps={{
+                              sx: {
+                                fontSize: isSpecified ? "0.8rem" : "0.9rem",
+                              },
+                            }}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </AccordionDetails>
+                </Accordion>
+                <GradientDivider
+                  className={
+                    isSpecified ? "tablet-gradient-divider" : "gradient-divider"
+                  }
+                />
+              </Box>
+            ))}
+
+            {!isSpecified && (
+              <Box
+                ref={circleRef}
+                sx={{
+                  position: "absolute",
+                  width: 20,
+                  height: 30,
+                  background:
+                    "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                  borderRadius: "50%",
+                  zIndex: 2,
+                  boxShadow: "0 0 20px rgba(255, 87, 34, 0.5)",
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+            )}
+          </Box>
+          <Box sx={{ mt: 10 }}>
+            <MarqueeCarousel1 />
+          </Box>
+        </Box>
+      </Box>
+    );
+  }
 
   if (isTablet) {
     return (

@@ -118,7 +118,7 @@ const OurServices = () => {
                     fontWeight: "600",
                     color: "#fff",
                     whiteSpace: "nowrap", // Prevent line break
-                    ml: isSpecified ? "11.5%" : { xs: 0, md: "2%", lg: "11%" },
+                    ml: isSpecified ? "13%" : { xs: 0, md: "2%", lg: "11%" },
                   }}
                 >
                   <span className="highlight">Our </span>
@@ -147,7 +147,7 @@ const OurServices = () => {
                   fontWeight: 200,
                   lineHeight: 1.7,
                   textAlign: { xs: "center", md: "left" },
-                  ml: isSpecified ? "12.5%" : { xs: 0, md: "2%", lg: "12%" },
+                  ml: isSpecified ? "14%" : { xs: 0, md: "2%", lg: "12%" },
                   px: { xs: 2, md: 0 },
                   mt: { xs: 3, md: 5 },
                 }}
@@ -163,7 +163,7 @@ const OurServices = () => {
               <Box
                 sx={{
                   width: { sm: "60%", md: "80%" },
-                  mr: { md: "2%", lg: "6%" },
+                  mr: { md: "0%", lg: "0%" },
                 }}
               >
                 <ThreeDE />
