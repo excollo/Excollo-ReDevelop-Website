@@ -38,7 +38,7 @@ const Footer = () => {
           flexWrap: "wrap",
           "@media (max-width: 320px)": {
             paddingLeft: 0,
-            marginLeft: 0,
+            marginLeft: -2,
           },
         }}
       >
@@ -342,6 +342,10 @@ const Footer = () => {
           color: "grey.400",
           px: { xs: 2, sm: 3 },
           gap: { xs: 2, sm: 0 },
+          "@media (max-width: 320px)": {
+            paddingLeft: 0,
+            marginLeft: -0.5,
+          },
         }}
       >
         <Typography
@@ -357,7 +361,7 @@ const Footer = () => {
         <Box
           sx={{
             display: "flex",
-            gap: "1rem",
+            gap: "5rem",
             flexWrap: "wrap",
             justifyContent: "center",
             mr: { md: 6, xs: 6 },
@@ -371,6 +375,10 @@ const Footer = () => {
               textDecoration: "none",
               "&:hover": { color: "#a693c1" },
               fontSize: { xs: "0.75rem", sm: "0.875rem" },
+              "@media (max-width: 320px)": {
+                paddingLeft: 0,
+                marginLeft: 1
+              },
             }}
           >
             Privacy Policy
@@ -383,6 +391,11 @@ const Footer = () => {
               textDecoration: "none",
               "&:hover": { color: "#a693c1" },
               fontSize: { xs: "0.75rem", sm: "0.875rem" },
+              "@media (max-width: 320px)": {
+                paddingLeft: 0,
+                marginRight: -5
+            
+              },
             }}
           >
             Terms of Service
