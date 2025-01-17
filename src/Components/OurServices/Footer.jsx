@@ -429,24 +429,29 @@ const Footer = () => {
                   margin: { xs: "0 auto", md: 0 },
                 }}
               >
-                <LocationOnIcon
-                  sx={{
-                    fontSize: { xs: 18, sm: 20 },
-                    color: "grey.400",
-                    mt: 0.5,
-                  }}
-                />
-                <Typography
-                  variant="body2"
-                  color="grey.400"
-                  sx={{
-                    fontSize: { xs: "0.875rem", sm: "1rem" },
-                    textAlign: { xs: "center", md: "left" },
-                  }}
+                <Link
+                  href="https://www.google.co.in/maps/place/230,+Bharat+Marg,+Singh+Bhoomi,+Khatipura,+Jaipur,+Rajasthan+302012/@26.9221888,75.7497856,14z/data=!4m5!3m4!1s0x396db368ef4a6f2f:0x8183d4a0e877ec15!8m2!3d26.9268325!4d75.7413077?entry=ttu&g_ep=EgoyMDI1MDExMC4wIKXMDSoJLDEwMjExMjMzSAFQAw%3D%3D"
+                  sx={{ textDecoration: "none" }}
                 >
-                  C-230 Bharat Marg, Hanuman Nagar, Vaishali, Jaipur, Rajasthan
-                  - 302021
-                </Typography>
+                  <Typography
+                    variant="body2"
+                    color="grey.400"
+                    sx={{
+                      fontSize: { xs: "0.875rem", sm: "1rem" },
+                      textAlign: { xs: "center", md: "left" },
+                    }}
+                  >
+                    <LocationOnIcon
+                      sx={{
+                        fontSize: { xs: 14, sm: 20 },
+                        color: "grey.400",
+                        mr: 0.5,
+                      }}
+                    />
+                    C-230 Bharat Marg, Hanuman Nagar, Vaishali, Jaipur,
+                    Rajasthan - 302021
+                  </Typography>
+                </Link>
               </Box>
             </Box>
           </Grid>
@@ -589,7 +594,7 @@ const Footer = () => {
         >
           <Link
             variant="caption"
-            href="#"
+            href="/privacy&policy"
             sx={{
               color: "grey.400",
               textDecoration: "none",
@@ -601,7 +606,7 @@ const Footer = () => {
           </Link>
           <Link
             variant="caption"
-            href="#"
+            href="/termsofservice"
             sx={{
               color: "grey.400",
               textDecoration: "none",
