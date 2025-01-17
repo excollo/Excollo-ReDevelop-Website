@@ -397,8 +397,7 @@ const HeroPage = () => {
         className="hero-page-section-4"
         sx={{
           opacity: isMobile || isTablet ? 1 : 0,
-          transform:
-            isMobile || isTablet ? "translateY(0)" : "translateY(0)",
+          transform: isMobile || isTablet ? "translateY(0)" : "translateY(0)",
         }}
       >
         <HeroPageSection4 onComplete={() => setHero4Complete(true)} />

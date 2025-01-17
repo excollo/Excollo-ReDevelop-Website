@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 
 const HeroPageSection6 = () => {
@@ -11,6 +12,7 @@ const HeroPageSection6 = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+   const navigate = useNavigate();
 
   const shuffleArray = (array) => {
     return array
@@ -140,6 +142,12 @@ const HeroPageSection6 = () => {
     };
   }, []);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate("/contact");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <Box
       sx={{
@@ -217,8 +225,9 @@ const HeroPageSection6 = () => {
         </Typography>
       </Box>
       <Typography
-        component="a"
-        href="#scheduleaconsultation"
+        component={Link}
+        to="/contact"
+        onClick={handleClick}
         sx={{
           display: "inline-block",
           color: "#ffffff",

@@ -63,7 +63,8 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
         fontFamily: '"Inter", sans-serif',
         backgroundColor: "linear-gradient(180deg, #2579e3, #8e54f7 100%)",
         // backdropFilter: "blur(-10px)",
-        border: "1px solid rgba(255, 255, 255, 0.1)",
+        boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 10px 0px",
+        border: "1px solid #7e22ce",
 
         alignItems: "center",
         cursor: "pointer",
