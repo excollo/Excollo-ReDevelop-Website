@@ -1,4 +1,4 @@
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Logo from "../../assets/logo/excollo3d.png";
 import { m } from "framer-motion";
@@ -7,6 +7,8 @@ const HeroPageSection7 = () => {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+
+  const isSpecified = useMediaQuery("(max-width: 1024px)");
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 480);
@@ -41,7 +43,9 @@ const HeroPageSection7 = () => {
     if (isMobile || isTablet) return;
     setRotation({ x: 0, y: 0 });
   };
-  const translateYImage = Math.max(2470 - scrollY * 0.5, 0);
+  const translateYImage = isSpecified
+    ? Math.max(2200 - scrollY * 0.5, 0)
+    : Math.max(2400 - scrollY * 0.5, 0); ;
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
   return (
