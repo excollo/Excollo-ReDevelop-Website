@@ -97,19 +97,27 @@ const HeroPage = () => {
         ease: "power2.out",
       });
 
+      // Modified animation to have both elements come from left
       timeline.add([
-        gsap.to([".navbar", ".hero-content"], {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          onComplete: () => {
-            setAnimationComplete(true);
-            setTimeout(() => {
-              setHero1Complete(true);
-            }, 500);
+        gsap.fromTo(
+          [".navbar", ".hero-content"],
+          {
+            opacity: 0,
+            x: -100, // Both start from -100px (left side)
           },
-        }),
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            ease: "power2.out",
+            onComplete: () => {
+              setAnimationComplete(true);
+              setTimeout(() => {
+                setHero1Complete(true);
+              }, 500);
+            },
+          }
+        ),
       ]);
     } else if (!showThreeDE && !isDesktop) {
       // For mobile and tablet, set states immediately without animations
@@ -385,7 +393,7 @@ const HeroPage = () => {
           position: "relative",
           zIndex: 3,
           opacity: isMobile || isTablet ? 1 : 0,
-          transform: isMobile || isTablet ? "translateX(0)" : "translateX(50%)",
+          transform: "translateX(50%)",
         }}
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
