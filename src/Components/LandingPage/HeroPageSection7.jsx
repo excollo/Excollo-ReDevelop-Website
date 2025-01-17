@@ -41,7 +41,7 @@ const HeroPageSection7 = () => {
     if (isMobile || isTablet) return;
     setRotation({ x: 0, y: 0 });
   };
-  const translateYImage = Math.max(2170 - scrollY * 0.5, 0);
+  const translateYImage = Math.max(2470 - scrollY * 0.5, 0);
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
   return (

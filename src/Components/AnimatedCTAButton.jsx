@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,6 +11,9 @@ const AnimatedCTAButton = ({ onClick }) => {
   const circleRef = useRef(null);
   const textRef = useRef(null);
   const containerRef = useRef(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
   useEffect(() => {
     const circle = circleRef.current;
@@ -22,8 +25,8 @@ const AnimatedCTAButton = ({ onClick }) => {
     gsap.set(circle, {
       scale: 0,
       opacity: 0,
-      width: "80px",
-      height: "80px",
+      width: isMobile ? "40px" : "80px",
+      height: isMobile ? "40px" : "80px",
       borderRadius: "50%",
       border: "2px solid #7e22ce",
       background:
@@ -137,12 +140,12 @@ const AnimatedCTAButton = ({ onClick }) => {
           ref={textRef}
           sx={{
             color: "#ffffff",
-            fontSize: { xs: "14px", md: "18px", lg: "22px" },
+            fontSize: { xs: "14px", md: "19px", lg: "22px" },
             fontWeight: 500,
             zIndex: 2,
             whiteSpace: "nowrap",
             position: "relative",
-            marginTop: "2rem"
+            marginTop: isMobile ? "-0.5rem" : "2rem"
           }}
         >
           Talk to Us
