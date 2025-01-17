@@ -4,7 +4,7 @@ import HeroPage from "./Pages/HeroPage";
 import AboutUsPage from "./Pages/AboutUsPage";
 import ContactForm from "./Pages/ContactFormPage";
 import PrivacyPolicy from "./Components/PrivacyPolicy";
-import TermsOfService from "./Components/TermsofService";
+import TermsOfService from "./Components/TermsOfService";
 import { Box } from "@mui/material";
 import "./App.css";
 import ServicesPage from "./Pages/ServicesPage";
