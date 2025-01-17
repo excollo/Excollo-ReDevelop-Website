@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
+import AnimatedCTAButton from "../AnimatedCTAButton";
 
 const HeroPageSection6 = () => {
   const circleRef = useRef(null);
@@ -156,6 +157,7 @@ const HeroPageSection6 = () => {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
+        minHeight: "30vh",
         padding: { xs: "2rem 1rem", md: "5rem 2rem" },
         color: "#fff",
       }}
@@ -224,31 +226,7 @@ const HeroPageSection6 = () => {
           </Box>
         </Typography>
       </Box>
-      <Typography
-        component={Link}
-        to="/contact"
-        onClick={handleClick}
-        sx={{
-          display: "inline-block",
-          color: "#ffffff",
-          textDecoration: "none",
-          fontSize: { xs: "14px", md: "18px" },
-          border: "1px solid transparent",
-          padding: { xs: "10px 40px", md: "20px 70px" },
-          borderRadius: "40px",
-          background:
-            "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
-          zIndex: 3,
-          position: "relative",
-          "&:hover": {
-            background:
-              "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-            color: "#ffffff",
-          },
-        }}
-      >
-        Talk to Us
-      </Typography>
+      <AnimatedCTAButton onClick={handleClick} />
     </Box>
   );
 };

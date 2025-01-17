@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple-style Button Animation</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            height: 300vh;
+            background: linear-gradient(to bottom, #fff, #F4F4F4);
+        }
+
+        .button-container {
+            position: fixed;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .morph-button {
+            position: relative;
+            background-color: #000;
+            border: none;
+            border-radius: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translate(0, 0) scale(0);
+            opacity: 0;
+            width: 80px;
+            height: 80px;
+            pointer-events: auto;
+            will-change: transform, width, opacity, background-color;
+            overflow: hidden;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Separate transitions for different states */
+        .morph-button {
+            transition:
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .morph-button.gliding {
+            transition:
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .morph-button.morphing {
+            transition:
+                width 1s cubic-bezier(0.16, 1, 0.3, 1),
+                height 1s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .morph-button.active {
+            transform: translate(0, 0) scale(1);
+            opacity: 1;
+        }
+
+        .morph-button.gliding {
+            transform: translate(-120px, 0) scale(1);
+        }
+
+        .morph-button.expanded {
+            width: 160px;
+            height: 50px;
+            background-color: #000;
+        }
+
+        .morph-button .arrow {
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            font-weight: 300;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 1;
+        }
+
+        .morph-button .text {
+            position: absolute;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+        }
+
+        .morph-button.expanded .arrow {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .morph-button.expanded .text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .morph-button:hover .arrow {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="button-container">
+        <button class="morph-button" id="morphButton">
+            <span class="arrow">↑</span>
+            <span class="text">Scroll to top</span>
+        </button>
+    </div>
+    <script>
+        const morphButton = document.getElementById('morphButton');
+        let isAnimating = false;
+        let scrollTimer;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(() => {
+                const currentScroll = window.scrollY;
+                const maxScroll = document.body.scrollHeight - window.innerHeight;
+                const scrollPercentage = (currentScroll / maxScroll) * 100;
+                if (scrollPercentage > 10 && scrollPercentage < 90) {
+                    // Initial appearance
+                    if (!morphButton.classList.contains('active')) {
+                        setTimeout(() => {
+                            morphButton.classList.add('active');
+                        }, 100);
+                    }
+                    // Animation sequence
+                    if (scrollPercentage > 30 && scrollPercentage < 70) {
+                        if (!isAnimating) {
+                            isAnimating = true;
+                            // First: Glide to the left
+                            setTimeout(() => {
+                                morphButton.classList.add('gliding');
+                                // Then: Morph into cylinder
+                                setTimeout(() => {
+                                    morphButton.classList.add('morphing');
+                                    morphButton.classList.add('expanded');
+                                }, 800); // Delay before morphing
+                            }, 600); // Initial delay before gliding
+                        }
+                    } else {
+                        // Reverse sequence
+                        if (isAnimating) {
+                            isAnimating = false;
+                            morphButton.classList.remove('morphing');
+                            morphButton.classList.remove('expanded');
+                            setTimeout(() => {
+                                morphButton.classList.remove('gliding');
+                            }, 300);
+                        }
+                    }
+                } else {
+                    // Reset everything
+                    isAnimating = false;
+                    morphButton.classList.remove('morphing', 'expanded', 'gliding');
+                    setTimeout(() => {
+                        morphButton.classList.remove('active');
+                    }, 200);
+                }
+            }, 50);
+        });
+        morphButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
