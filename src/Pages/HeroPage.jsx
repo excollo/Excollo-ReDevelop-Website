@@ -75,7 +75,6 @@ const HeroPage = () => {
   useEffect(() => {
     if (!showThreeDE && isDesktop) {
       const timeline = gsap.timeline();
-
       if (isSpecificSize) {
         timeline.to(".threeDE", {
           x: "32%",
@@ -91,13 +90,11 @@ const HeroPage = () => {
           ease: "power2.out",
         });
       }
-
       timeline.to(".gradient-background", {
         opacity: 1,
         duration: 0.5,
         ease: "power2.out",
       });
-
       // Modified animation to have both elements come from left
       timeline.add([
         gsap.fromTo(
@@ -124,28 +121,23 @@ const HeroPage = () => {
       // For mobile and tablet, set states immediately without animations
       setAnimationComplete(true);
       setHero1Complete(true);
-
       // Set initial styles without animations
       const navbar = document.querySelector(".navbar");
       const heroContent = document.querySelector(".hero-content");
       const gradientBackground = document.querySelector(".gradient-background");
-
       if (navbar) {
         navbar.style.opacity = "1";
         navbar.style.transform = "translateX(0)";
       }
-
       if (heroContent) {
         heroContent.style.opacity = "1";
         heroContent.style.transform = "translateX(0)";
       }
-
       if (gradientBackground) {
         gradientBackground.style.opacity = "1";
       }
     }
   }, [showThreeDE, isSpecificSize, isDesktop]);
-
   useEffect(() => {
     if (hero1Complete && isDesktop) {
       gsap.fromTo(
@@ -168,7 +160,6 @@ const HeroPage = () => {
           },
         }
       );
-
       if (isSpecificSize) {
         gsap.to(threeDERef.current, {
           scrollTrigger: {
@@ -208,14 +199,12 @@ const HeroPage = () => {
           ease: "power2.out",
         });
       }
-
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     } else if (hero1Complete && !isDesktop) {
       // Set hero2Complete immediately for mobile/tablet
       setHero2Complete(true);
-
       // Set initial styles for hero-section-2
       const heroSection2 = document.querySelector(".hero-section-2");
       if (heroSection2) {
@@ -224,7 +213,6 @@ const HeroPage = () => {
       }
     }
   }, [hero1Complete, isDesktop, isSpecificSize]);
-
   useEffect(() => {
     if (hero2Complete && isDesktop) {
       gsap.fromTo(
@@ -254,7 +242,6 @@ const HeroPage = () => {
     } else if (hero2Complete && !isDesktop) {
       // Set hero4Complete immediately for mobile/tablet
       setHero4Complete(true);
-
       // Set initial styles for hero-page-section-4
       const heroSection4 = document.querySelector(".hero-page-section-4");
       if (heroSection4) {
@@ -263,11 +250,9 @@ const HeroPage = () => {
       }
     }
   }, [hero2Complete, isDesktop]);
-
   const handleScrollToTop = () => {
     const section4 = document.querySelector(".hero-page-section-4");
     const section4Bounds = section4?.getBoundingClientRect();
-
     if (
       !section4Bounds ||
       section4Bounds.top < 0 ||
@@ -282,7 +267,6 @@ const HeroPage = () => {
   };
   const getLandscapeStyles = (component) => {
     if (!isLandscape || isDesktop) return {};
-
     const landscapeStyles = {
       navbar: {
         padding: "0.5rem 1rem",
@@ -350,10 +334,8 @@ const HeroPage = () => {
         padding: "1rem",
       },
     };
-
     return landscapeStyles[component] || {};
   };
-
   return (
     <Box
       sx={{
@@ -390,7 +372,6 @@ const HeroPage = () => {
           <ArrowUpwardIcon />
         </Button>
       </Fade>
-
       <Box
         className="threeDE"
         ref={threeDERef}
@@ -418,7 +399,6 @@ const HeroPage = () => {
           <ThreeDE />
         </Box>
       </Box>
-
       <Box
         className="gradient-background"
         sx={{
@@ -427,12 +407,11 @@ const HeroPage = () => {
           left: 0,
           width: "90%",
           height: isLandscape ? "10%" : "5%",
-         // background: radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%),
+          background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 1,
           opacity: isMobile || isTablet ? 1 : 0,
         }}
       />
-
       <Box
         className="navbar"
         sx={{
@@ -446,7 +425,6 @@ const HeroPage = () => {
       >
         <NavBar />
       </Box>
-
       <Box
         className="hero-content"
         sx={{
@@ -474,7 +452,6 @@ const HeroPage = () => {
       >
         <HeroPageSection1 animationComplete={animationComplete} />
       </Box>
-
       <Box
         className="hero-section-2"
         sx={{
@@ -494,17 +471,16 @@ const HeroPage = () => {
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
       </Box>
-
       <Box
         className="hero-page-section-3"
         sx={{
           opacity: 1,
           "@media (min-width: 300px) and (max-width: 480px)": {
-            minHeight: "160vh",
+            minHeight: "auto",
             marginTop: isLandscape ? 0 : -16,
           },
           "@media (min-width: 481px) and (max-width: 768px)": {
-            minHeight: "140vh",
+            minHeight: "auto",
             marginTop: isLandscape ? 0 : -2,
           },
           ...getLandscapeStyles("heroSection3"),
@@ -512,18 +488,18 @@ const HeroPage = () => {
       >
         <HeroPageSection3 />
       </Box>
-
       <Box
         className="hero-page-section-4"
         sx={{
+          minHeight: "fit-content",
           opacity: isMobile || isTablet ? 1 : 0,
           transform: isMobile || isTablet ? "translateY(0)" : "translateY(0)",
           "@media (min-width: 320px) and (max-width:370px)": {
-            minHeight: "50vh",
+            minHeight: "60vh",
             marginTop: isLandscape ? 0 : 20,
           },
           "@media (min-width: 371px) and (max-width:399px)": {
-            minHeight: "50vh",
+            minHeight: "60vh",
             marginTop: isLandscape ? 0 : 5,
           },
           "@media (min-width: 400px) and (max-width: 480px)": {
@@ -539,18 +515,17 @@ const HeroPage = () => {
       >
         <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
       </Box>
-
       <Box
         sx={{
           zIndex: 1,
           "@media (min-width: 320px) and (max-width:370px)": {
-            marginTop: isLandscape ? 0 : -10,
+            marginTop: isLandscape ? 0 : 0,
           },
           "@media (min-width: 371px) and (max-width:399px)": {
-            marginTop: isLandscape ? 0 : -10,
+            marginTop: isLandscape ? 0 : 0,
           },
           "@media (min-width: 400px) and (max-width: 480px)": {
-            marginTop: isLandscape ? 0 : -10,
+            marginTop: isLandscape ? 0 : 0,
           },
           "@media (min-width: 481px) and (max-width: 768px)": {
             marginTop: isLandscape ? 0 : 0,
@@ -560,18 +535,14 @@ const HeroPage = () => {
       >
         <HeroPageSection5 />
       </Box>
-
       <Box sx={getLandscapeStyles("heroSection6")}>
         <HeroPageSection6 />
       </Box>
-
       <Box sx={getLandscapeStyles("heroSection7")}>
         <HeroPageSection7 />
       </Box>
-
       <Footer />
     </Box>
   );
 };
-
 export default HeroPage;

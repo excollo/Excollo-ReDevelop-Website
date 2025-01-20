@@ -239,11 +239,11 @@ const HeroPageSection4 = ({ onComplete }) => {
     return (
       <Box
         sx={{
+          minHeight: "auto",
           color: "#fff",
           padding: "1rem 1rem",
           fontFamily: '"Inter", sans-serif',
           // position: "relative",
-       
         }}
       >
         <Typography
@@ -300,7 +300,7 @@ const HeroPageSection4 = ({ onComplete }) => {
               display: "flex",
               justifyContent: "space-between",
               width: "30%",
-              mt: isMobile ? 0 : 32,
+              mt: isMobile ? 25 : 32,
             }}
           >
             <Box
