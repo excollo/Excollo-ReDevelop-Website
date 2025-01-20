@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { gsap } from "gsap";
 import { Link, useNavigate } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,26 +12,20 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
   const contentRef = useRef(null);
   const navigate = useNavigate();
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-
   useEffect(() => {
-    // Skip animations for mobile and tablet devices
-    if (isMobile || isTablet) {
-      if (gradientRef.current) {
-        gsap.set(gradientRef.current, { opacity: 1, scale: 1 });
-      }
-      if (contentRef.current) {
-        gsap.set(contentRef.current, { opacity: 1, x: 0 });
-      }
-      onAnimationComplete?.();
-      return;
-    }
-
     const section = sectionRef.current;
     const gradient = gradientRef.current;
     const content = contentRef.current;
+
+    // Check if device is mobile/tablet using matchMedia
+    const isMobileDevice = window.matchMedia("(max-width: 768px)").matches;
+
+    if (isMobileDevice) {
+      gsap.set(gradient, { opacity: 1, scale: 1 });
+      gsap.set(content, { opacity: 1, x: 0 });
+      onAnimationComplete?.();
+      return;
+    }
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -79,7 +73,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
     return () => {
       tl.kill();
     };
-  }, [onAnimationComplete, isMobile, isTablet]);
+  }, [onAnimationComplete]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -92,41 +86,54 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
       ref={sectionRef}
       sx={{
         color: "#fff",
-        minHeight: {
-          xs: "50vh",
-          sm: isTablet ? "50vh" : "70vh",
-          md: "70vh",
-        },
+        minHeight: "60vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        width: {
-          xs: "90%",
-          sm: isTablet ? "90%" : "90%",
-          md: "85%",
-        },
-        margin: "0 auto",
-        padding: {
-          xs: "1rem",
-          sm: isTablet ? "1.5rem" : "2rem",
-          md: "4rem",
-        },
+        width: "85%",
+        margin: "-4% auto 0",
+        ml: "2%",
+        padding: "4rem",
         fontFamily: '"Inter", sans-serif',
-        position: "relative",
+        // position: "relative",
         zIndex: 2,
         overflow: "hidden",
+
+        "@media (max-width: 1024px)": {
+          minHeight: "60vh",
+          padding: "3rem",
+          width: "90%",
+        },
+
+        "@media (max-width: 768px)": {
+          minHeight: "50vh",
+          padding: "1rem",
+          width: "90%",
+        },
+
+        "@media (max-width: 480px)": {
+          minHeight: "40vh",
+          // padding: "1rem",
+          width: "90%",
+        },
+
+        "@media screen and (orientation: landscape) and (max-height: 600px)": {
+          minHeight: "auto",
+          paddingTop: "3rem",
+          paddingBottom: "3rem",
+        },
+
+        "@media screen and (orientation: portrait)": {
+          minHeight: "60vh",
+        },
       }}
     >
       <Box
         ref={gradientRef}
         sx={{
           position: "absolute",
-          top: {
-            xs: "-10%",
-            sm: isTablet ? "-10%" : "8%",
-            md: "8%",
-          },
+          top: "8%",
           left: 0,
           right: 0,
           bottom: 0,
@@ -134,8 +141,17 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
           zIndex: 1,
           pointerEvents: "none",
           transformOrigin: "center center",
-          opacity: isMobile || isTablet ? 1 : undefined,
-          transform: isMobile || isTablet ? "scale(1)" : undefined,
+
+          "@media (max-width: 768px)": {
+            top: "-10%",
+            opacity: 1,
+            transform: "scale(1)",
+          },
+
+          "@media screen and (orientation: landscape) and (max-height: 600px)":
+            {
+              top: "0%",
+            },
         }}
       />
 
@@ -148,63 +164,70 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
           flexDirection: "column",
           alignItems: "center",
           width: "100%",
-          opacity: isMobile || isTablet ? 1 : undefined,
-          transform: isMobile || isTablet ? "translateX(0)" : undefined,
+
+          "@media (max-width: 768px)": {
+            opacity: 1,
+            transform: "translateX(0)",
+          },
         }}
       >
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
-            marginBottom: {
-              xs: "1.5rem",
-              sm: isTablet ? "1.75rem" : "2rem",
-              md: "2rem",
-            },
+            marginBottom: "2rem",
             position: "relative",
             zIndex: 2,
-            marginLeft: {
-              xs: 0,
-              sm: isTablet ? 0 : "60%",
-              md: "60%",
+            marginLeft: "60%",
+            marginTop: "15%",
+            width: "auto",
+
+            "@media (max-width: 1024px)": {
+              marginLeft: "40%",
+              marginTop: "15%",
             },
-            marginTop: {
-              xs: "5%",
-              sm: isTablet ? "7%" : "10%",
-              md: "20%",
+
+            "@media (max-width: 768px)": {
+              marginLeft: 0,
+              marginTop: "7%",
+              width: "100%",
             },
-            width: {
-              xs: "100%",
-              sm: isTablet ? "100%" : "auto",
-              md: "auto",
+
+            "@media (max-width: 480px)": {
+              marginTop: "5%",
+            },
+
+            "@media screen and (orientation: landscape) and (max-height: 600px)":
+              {
+                marginTop: "5%",
+                marginLeft: "30%",
+              },
+
+            "@media screen and (orientation: portrait)": {
+              marginLeft: 0,
+              marginTop: "8%",
             },
           }}
         >
           <Box
             sx={{
-              width: {
-                xs: "100%",
-                sm: isTablet ? "100%" : "auto",
-                md: "auto",
-              },
+              width: "auto",
               display: "flex",
               flexDirection: "column",
-              mt: {
-                xs: 5,
-                sm: isTablet ? 8 : 0,
-                md: 0,
-                lg: -20,
+              alignItems: "flex-start",
+              textAlign: "left",
+
+              "@media (max-width: 768px)": {
+                width: "100%",
+                alignItems: "center",
+                textAlign: "center",
+                marginTop: "2rem",
               },
-              alignItems: {
-                xs: "center",
-                sm: isTablet ? "center" : "flex-start",
-                md: "flex-start",
-              },
-              textAlign: {
-                xs: "center",
-                sm: isTablet ? "center" : "left",
-                md: "left",
-              },
+
+              "@media screen and (orientation: landscape) and (max-height: 600px)":
+                {
+                  marginTop: 0,
+                },
             }}
           >
             <Typography
@@ -212,32 +235,24 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
               component="h5"
               sx={{
                 fontWeight: 200,
-                fontSize: {
-                  xs: "1.2rem",
-                  sm: isTablet ? "1.4rem" : "1.3rem",
-                  md: "1.5rem",
-                  lg: "1.7rem",
-                },
+                fontSize: "1.7rem",
                 lineHeight: 1.5,
-                marginLeft: {
-                  xs: 0,
-                  sm: isTablet ? 0 : "0.5%",
-                  md: "0.5%",
+                marginLeft: "0.5%",
+                marginBottom: "2rem",
+                maxWidth: "100%",
+
+                "@media (max-width: 1024px)": {
+                  fontSize: "1.5rem",
                 },
-                mb: {
-                  xs: 4,
-                  sm: isTablet ? 5 : 6,
-                  md: 6,
+
+                "@media (max-width: 768px)": {
+                  fontSize: "1.4rem",
+                  margin: "0 auto 2rem auto",
+                  maxWidth: "90%",
                 },
-                maxWidth: {
-                  xs: "90%",
-                  sm: isTablet ? "90%" : "100%",
-                  md: "100%",
-                },
-                margin: {
-                  xs: "0 auto 2rem auto",
-                  sm: isTablet ? "0 auto 2rem auto" : "0 0 2rem 0.5%",
-                  md: "0 0 2rem 0.5%",
+
+                "@media (max-width: 480px)": {
+                  fontSize: "1.2rem",
                 },
               }}
             >
@@ -253,17 +268,9 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 display: "inline-block",
                 color: "#ffffff",
                 textDecoration: "none",
-                fontSize: {
-                  xs: "16px",
-                  sm: "17px",
-                  md: "18px",
-                },
+                fontSize: "18px",
                 border: "1px solid transparent",
-                padding: {
-                  xs: "15px 30px",
-                  sm: "16px 32px",
-                  md: "20px 60px",
-                },
+                padding: "20px 60px",
                 borderRadius: "40px",
                 background:
                   "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
@@ -276,6 +283,16 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                     "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
                   color: "#ffffff",
                   transform: "scale(1.05)",
+                },
+
+                "@media (max-width: 768px)": {
+                  fontSize: "17px",
+                  padding: "16px 32px",
+                },
+
+                "@media (max-width: 480px)": {
+                  fontSize: "16px",
+                  padding: "15px 30px",
                 },
               }}
             >

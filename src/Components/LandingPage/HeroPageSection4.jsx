@@ -241,9 +241,9 @@ const HeroPageSection4 = ({ onComplete }) => {
         sx={{
           minHeight: "70vh",
           color: "#fff",
-          padding: "2rem 1rem",
+          padding: "1rem 1rem",
           fontFamily: '"Inter", sans-serif',
-          position: "relative",
+          // position: "relative",
        
         }}
       >

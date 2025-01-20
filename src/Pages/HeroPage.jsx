@@ -28,8 +28,9 @@ const HeroPage = () => {
   const threeDERef = useRef(null);
 
   const theme = useTheme();
-  const isMobile = useMediaQuery("(min-width: 300px) and (max-width: 450px)");
-  const isTablet = useMediaQuery("(min-width: 451px) and (max-width: 768px)");
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isLandscape = useMediaQuery("(orientation: landscape)");
   const isSpecificSize = useMediaQuery(
     "(max-width: 1024px) and (max-height: 725px)"
   );
@@ -279,15 +280,93 @@ const HeroPage = () => {
       });
     }
   };
+  const getLandscapeStyles = (component) => {
+    if (!isLandscape || isDesktop) return {};
+
+    const landscapeStyles = {
+      navbar: {
+        padding: "0.5rem 1rem",
+        height: "auto",
+      },
+      heroContent: {
+        marginTop: 0,
+        padding: "1rem",
+        flexDirection: "row",
+        alignItems: "center",
+        "& > *": {
+          flex: 1,
+        },
+      },
+      heroSection2: {
+        marginTop: 0,
+        padding: "1rem",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        "& > *": {
+          flex: 1,
+          padding: "0.5rem",
+        },
+      },
+      heroSection3: {
+        padding: "1rem",
+        // height: "400vh",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        "& > *": {
+          flex: "1 1 300px",
+          minHeight: "250px",
+        },
+      },
+      heroSection4: {
+        position: "relative",
+        top: 0,
+        padding: "1rem",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        "& > *": {
+          flex: 1,
+          padding: "0.5rem",
+        },
+      },
+      heroSection5: {
+        padding: "1rem",
+        "& > *": {
+          maxWidth: "100%",
+        },
+      },
+      heroSection6: {
+        padding: "1rem",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        "& > *": {
+          flex: "1 1 300px",
+        },
+      },
+      heroSection7: {
+        padding: "1rem",
+      },
+    };
+
+    return landscapeStyles[component] || {};
+  };
 
   return (
     <Box
       sx={{
-        minHeight: isMobile || isTablet ? "auto" : "100vh",
+        minHeight: "100vh",
         position: "relative",
         overflowX: "hidden",
         overflowY: "auto",
         background: "#000000",
+        ...(isLandscape &&
+          !isDesktop && {
+            height: "auto",
+            minHeight: "100vh",
+          }),
       }}
     >
       <Fade in={showButton}>
@@ -297,30 +376,21 @@ const HeroPage = () => {
           color="primary"
           sx={{
             position: "fixed",
-            bottom: 50,
-            height: 60,
-            right: 50,
+            bottom: isLandscape ? 20 : 50,
+            right: isLandscape ? 20 : 50,
+            height: isLandscape ? 40 : 60,
             zIndex: 1000,
             borderRadius: "50%",
             background: "rgba(255, 255, 255, 0.1)",
             "&:hover": {
               background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
             },
-            "@media (max-width: 768px)": {
-              position: "fixed",
-              bottom: 50,
-              right: 50,
-            },
-            "@media (max-width: 480px)": {
-              position: "fixed",
-              bottom: 50,
-              right: 50,
-            },
           }}
         >
           <ArrowUpwardIcon />
         </Button>
       </Fade>
+
       <Box
         className="threeDE"
         ref={threeDERef}
@@ -348,6 +418,7 @@ const HeroPage = () => {
           <ThreeDE />
         </Box>
       </Box>
+
       <Box
         className="gradient-background"
         sx={{
@@ -355,12 +426,13 @@ const HeroPage = () => {
           top: 0,
           left: 0,
           width: "90%",
-          height: "5%",
+          height: isLandscape ? "10%" : "5%",
           background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 1,
           opacity: isMobile || isTablet ? 1 : 0,
         }}
       />
+
       <Box
         className="navbar"
         sx={{
@@ -369,65 +441,128 @@ const HeroPage = () => {
           opacity: isMobile || isTablet ? 1 : 0,
           transform:
             isMobile || isTablet ? "translateX(0)" : "translateX(-100px)",
+          ...getLandscapeStyles("navbar"),
         }}
       >
         <NavBar />
       </Box>
+
       <Box
         className="hero-content"
         sx={{
           display: "flex",
+          justifyContent: "start",
+          width: "100%",
           position: "relative",
           zIndex: 3,
           marginTop: "-6rem",
           opacity: isMobile || isTablet ? 1 : 0,
           transform:
             isMobile || isTablet ? "translateX(0)" : "translateX(-100px)",
+          "@media (min-width: 481px) and (max-width: 768px)": {
+            height: "50vh",
+            marginBottom: isLandscape ? 0 : 0,
+          },
+          "@media (min-width:769px) and (max-width: 1024px)": {
+            ml: -5,
+          },
+          "@media (min-width:1025px) and (max-width: 1440px)": {
+            ml: -25,
+          },
+          ...getLandscapeStyles("heroContent"),
         }}
       >
         <HeroPageSection1 animationComplete={animationComplete} />
       </Box>
+
       <Box
         className="hero-section-2"
         sx={{
           position: "relative",
           zIndex: 3,
-          marginTop: isMobile || isTablet ? "-9rem" : "0rem",
           opacity: isMobile || isTablet ? 1 : 0,
           transform: "translateX(50%)",
+          "@media (min-width: 300px) and (max-width: 480px)": {
+            marginTop: isLandscape ? 0 : -8,
+            marginBottom: isLandscape ? 0 : -8,
+          },
+          "@media (min-width: 481px) and (max-width: 768px)": {
+            marginTop: isLandscape ? 0 : 0,
+          },
+          ...getLandscapeStyles("heroSection2"),
         }}
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
       </Box>
+
       <Box
         className="hero-page-section-3"
         sx={{
-          marginTop: isMobile || isTablet ? "-9rem" : "0rem",
           opacity: 1,
+          "@media (min-width: 300px) and (max-width: 480px)": {
+            marginTop: isLandscape ? 0 : -16,
+          },
+          "@media (min-width: 481px) and (max-width: 768px)": {
+            marginTop: isLandscape ? 0 : -2,
+          },
+          ...getLandscapeStyles("heroSection3"),
         }}
       >
         <HeroPageSection3 />
       </Box>
+
       <Box
         className="hero-page-section-4"
         sx={{
-          height: isTablet || isMobile ? "65vh" : "100vh",
-          // marginTop: isMobile || isTablet ? "-2rem" : "0rem",
           opacity: isMobile || isTablet ? 1 : 0,
           transform: isMobile || isTablet ? "translateY(0)" : "translateY(0)",
+          "@media (min-width: 320px) and (max-width:370px)": {
+            marginTop: isLandscape ? 0 : 20,
+          },
+          "@media (min-width: 371px) and (max-width:399px)": {
+            marginTop: isLandscape ? 0 : 5,
+          },
+          "@media (min-width: 400px) and (max-width: 480px)": {
+            marginTop: isLandscape ? 0 : -10,
+          },
+          "@media (min-width: 481px) and (max-width: 768px)": {
+            marginTop: isLandscape ? 0 : -15,
+          },
+          ...getLandscapeStyles("heroSection4"),
         }}
       >
         <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
       </Box>
-      <Box>
+
+      <Box
+        sx={{
+          zIndex: 1,
+          "@media (min-width: 320px) and (max-width:370px)": {
+            marginTop: isLandscape ? 0 : -10,
+          },
+          "@media (min-width: 371px) and (max-width:399px)": {
+            marginTop: isLandscape ? 0 : -10,
+          },
+          "@media (min-width: 400px) and (max-width: 480px)": {
+            marginTop: isLandscape ? 0 : -10,
+          },
+          "@media (min-width: 481px) and (max-width: 768px)": {
+            marginTop: isLandscape ? 0 : 0,
+          },
+          ...getLandscapeStyles("heroSection5"),
+        }}
+      >
         <HeroPageSection5 />
       </Box>
-      <Box>
+
+      <Box sx={getLandscapeStyles("heroSection6")}>
         <HeroPageSection6 />
       </Box>
-      <Box>
+
+      <Box sx={getLandscapeStyles("heroSection7")}>
         <HeroPageSection7 />
       </Box>
+
       <Footer />
     </Box>
   );

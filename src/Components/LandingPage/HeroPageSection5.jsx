@@ -103,7 +103,7 @@ const HeroPageSection5 = () => {
           }}
           variant={isMobile ? "h4" : isTablet ? "h3" : "h2"}
           fontWeight="bold"
-          fontSize= {isMobile ? "2rem" : isTablet ? "3rem" : "4.5rem"}
+          fontSize={isMobile ? "2rem" : isTablet ? "3rem" : "4.5rem"}
         >
           How We{" "}
           <Box
