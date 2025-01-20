@@ -56,7 +56,7 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
     <Box
       sx={{
         width: "90%",
-        mb: 4,
+        mb: 6,
         p: 2,
         ml: isTablet ? "50px" : "0",
         borderRadius: 2,
