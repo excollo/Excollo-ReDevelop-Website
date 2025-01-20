@@ -119,8 +119,8 @@ const HeroPageSection4 = ({ onComplete }) => {
   const [direction, setDirection] = useState(0);
   const sectionRef = useRef(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isMobile = useMediaQuery("(min-width: 300px) and (max-width: 450px) ");
+  const isTablet = useMediaQuery("(min-width: 451px) and (max-width: 768px)");
 
   const cards = [
     {
@@ -244,6 +244,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           padding: "2rem 1rem",
           fontFamily: '"Inter", sans-serif',
           position: "relative",
+       
         }}
       >
         <Typography
@@ -253,6 +254,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           sx={{
             fontSize: isMobile ? "2rem" : "2.5rem",
             marginBottom: "2rem",
+            // marginTop:5,
           }}
         >
           Why Choose{" "}

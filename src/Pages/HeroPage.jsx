@@ -28,8 +28,8 @@ const HeroPage = () => {
   const threeDERef = useRef(null);
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isMobile = useMediaQuery("(min-width: 300px) and (max-width: 450px)");
+  const isTablet = useMediaQuery("(min-width: 451px) and (max-width: 768px)");
   const isSpecificSize = useMediaQuery(
     "(max-width: 1024px) and (max-height: 725px)"
   );
@@ -283,7 +283,7 @@ const HeroPage = () => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: isMobile || isTablet ? "auto" : "100vh",
         position: "relative",
         overflowX: "hidden",
         overflowY: "auto",
@@ -392,18 +392,27 @@ const HeroPage = () => {
         sx={{
           position: "relative",
           zIndex: 3,
+          marginTop: isMobile || isTablet ? "-9rem" : "0rem",
           opacity: isMobile || isTablet ? 1 : 0,
           transform: "translateX(50%)",
         }}
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
       </Box>
-      <Box className="hero-page-section-3" sx={{ opacity: 1 }}>
+      <Box
+        className="hero-page-section-3"
+        sx={{
+          marginTop: isMobile || isTablet ? "-9rem" : "0rem",
+          opacity: 1,
+        }}
+      >
         <HeroPageSection3 />
       </Box>
       <Box
         className="hero-page-section-4"
         sx={{
+          height: isTablet || isMobile ? "65vh" : "100vh",
+          // marginTop: isMobile || isTablet ? "-2rem" : "0rem",
           opacity: isMobile || isTablet ? 1 : 0,
           transform: isMobile || isTablet ? "translateY(0)" : "translateY(0)",
         }}
