@@ -495,19 +495,15 @@ const HeroPage = () => {
           opacity: isMobile || isTablet ? 1 : 0,
           transform: isMobile || isTablet ? "translateY(0)" : "translateY(0)",
           "@media (min-width: 320px) and (max-width:370px)": {
-            minHeight: "60vh",
             marginTop: isLandscape ? 0 : 20,
           },
           "@media (min-width: 371px) and (max-width:399px)": {
-            minHeight: "60vh",
             marginTop: isLandscape ? 0 : 5,
           },
           "@media (min-width: 400px) and (max-width: 480px)": {
-            minHeight: "60vh",
             marginTop: isLandscape ? 0 : -10,
           },
           "@media (min-width: 481px) and (max-width: 768px)": {
-            minHeight: "40vh",
             marginTop: isLandscape ? 0 : 0,
           },
           ...getLandscapeStyles("heroSection4"),
