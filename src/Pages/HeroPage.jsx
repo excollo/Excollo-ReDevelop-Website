@@ -30,7 +30,7 @@ const HeroPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isLandscape = useMediaQuery("(orientation: landscape)");
+   const isLandscape = useMediaQuery('(orientation: landscape)');
   const isSpecificSize = useMediaQuery(
     "(max-width: 1024px) and (max-height: 725px)"
   );
@@ -310,7 +310,7 @@ const HeroPage = () => {
       },
       heroSection3: {
         padding: "1rem",
-        // height: "400vh",
+        height: "200vh",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
@@ -427,7 +427,7 @@ const HeroPage = () => {
           left: 0,
           width: "90%",
           height: isLandscape ? "10%" : "5%",
-          background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
+         // background: radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%),
           zIndex: 1,
           opacity: isMobile || isTablet ? 1 : 0,
         }}
@@ -500,9 +500,11 @@ const HeroPage = () => {
         sx={{
           opacity: 1,
           "@media (min-width: 300px) and (max-width: 480px)": {
+            minHeight: "160vh",
             marginTop: isLandscape ? 0 : -16,
           },
           "@media (min-width: 481px) and (max-width: 768px)": {
+            minHeight: "140vh",
             marginTop: isLandscape ? 0 : -2,
           },
           ...getLandscapeStyles("heroSection3"),
@@ -517,16 +519,20 @@ const HeroPage = () => {
           opacity: isMobile || isTablet ? 1 : 0,
           transform: isMobile || isTablet ? "translateY(0)" : "translateY(0)",
           "@media (min-width: 320px) and (max-width:370px)": {
+            minHeight: "50vh",
             marginTop: isLandscape ? 0 : 20,
           },
           "@media (min-width: 371px) and (max-width:399px)": {
+            minHeight: "50vh",
             marginTop: isLandscape ? 0 : 5,
           },
           "@media (min-width: 400px) and (max-width: 480px)": {
+            minHeight: "60vh",
             marginTop: isLandscape ? 0 : -10,
           },
           "@media (min-width: 481px) and (max-width: 768px)": {
-            marginTop: isLandscape ? 0 : -15,
+            minHeight: "40vh",
+            marginTop: isLandscape ? 0 : 0,
           },
           ...getLandscapeStyles("heroSection4"),
         }}
