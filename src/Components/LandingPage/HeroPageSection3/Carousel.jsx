@@ -108,7 +108,7 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
 
 const ResponsiveView = ({ type, isTablet }) => {
   return (
-    <Box sx={{ p: 2, height: "120vh" }}>
+    <Box sx={{ p: 2, height: "80vh" }}>
       <Box
         sx={{
           display: "grid",
