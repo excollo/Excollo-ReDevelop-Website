@@ -239,7 +239,6 @@ const HeroPageSection4 = ({ onComplete }) => {
     return (
       <Box
         sx={{
-          minHeight: "65vh",
           color: "#fff",
           padding: "1rem 1rem",
           fontFamily: '"Inter", sans-serif',
