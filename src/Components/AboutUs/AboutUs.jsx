@@ -181,9 +181,54 @@ const Card = styled("div")(
 const AboutUs = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSpecificSize = useMediaQuery(
+    "(min-width: 600px) and (max-width: 900px)"
+  );
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
 
   const [showButton, setShowButton] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [shouldRefresh, setShouldRefresh] = useState(false);
+
+  // Handle window resize and trigger refresh if needed
+  useEffect(() => {
+    let resizeTimer;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      const newWidth = window.innerWidth;
+
+      // Check if we're crossing major breakpoints
+      const oldBreakpoint = getBreakpoint(windowWidth);
+      const newBreakpoint = getBreakpoint(newWidth);
+
+      if (oldBreakpoint !== newBreakpoint) {
+        setShouldRefresh(true);
+      }
+
+      setWindowWidth(newWidth);
+
+      // Debounce the refresh
+      resizeTimer = setTimeout(() => {
+        if (shouldRefresh) {
+          window.location.reload();
+        }
+      }, 1000);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimer);
+    };
+  }, [windowWidth, shouldRefresh]);
+
+  // Helper function to determine breakpoint category
+  const getBreakpoint = (width) => {
+    if (width < 600) return "xs";
+    if (width < 900) return "sm";
+    if (width < 1200) return "md";
+    return "lg";
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -226,10 +271,10 @@ const AboutUs = () => {
     () => (
       <div>
         <ContentSection>
-          {isMobile || isTablet ? (
+          {isMobile || isTablet || isSpecificSize ? (
             <>
               <TitleContainer>
-                <h2>Our {!isMobile && <br />} Mission</h2>
+                <h2>Our {!isMobile || (isSpecificSize && <br />)} Mission</h2>
               </TitleContainer>
               <Card>
                 <p>
@@ -256,7 +301,7 @@ const AboutUs = () => {
         </ContentSection>
       </div>
     ),
-    [isMobile]
+    [isMobile, isTablet, isSpecificSize]
   );
 
   const PhilosophySection = useCallback(
@@ -340,7 +385,7 @@ const AboutUs = () => {
                   fontFamily: '"Inter", sans-serif',
                   fontWeight: "600",
                   color: "#fff",
-                  whiteSpace: "nowrap", // Prevent line break on larger screens
+                  whiteSpace: "nowrap",
                   ml: { xs: 0, md: "13%", lg: "12%" },
                 }}
               >
@@ -360,7 +405,7 @@ const AboutUs = () => {
                   fontFamily: '"Inter", sans-serif',
                   fontWeight: "600",
                   color: "#fff",
-                  whiteSpace: "nowrap", // Prevent line break on larger screens
+                  whiteSpace: "nowrap",
                   ml: { xs: 0, md: "2%", lg: "1.5%" },
                 }}
               >
@@ -394,7 +439,7 @@ const AboutUs = () => {
                 mt: { xs: 3, md: 5 },
               }}
             >
-              Excollo bridges today’s challenges and tomorrow’s opportunities.
+              Excollo bridges today's challenges and tomorrow's opportunities.
               We harness cutting-edge technology, AI, and tailored solutions to
               deliver outcomes and make businesses future-ready.
             </Typography>
