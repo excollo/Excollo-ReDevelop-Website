@@ -269,10 +269,10 @@ const HeroPageSection4 = ({ onComplete }) => {
           "@media (min-width: 355px) and (max-width: 374px)": {
             pt: "300px", // Specific padding for 321-374px
           },
-          "@media (min-width: 375px) and (max-width: 394px)": {
+          "@media (min-width: 375px) and (max-width: 392px)": {
             pt: "280px",
           },
-          "@media (min-width: 395px) and (max-width: 599px)": {
+          "@media (min-width: 393px) and (max-width: 599px)": {
             pt: "180px", // Maintain consistent padding for larger mobile screens
           },
         }}
