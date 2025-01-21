@@ -3,7 +3,6 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { TitleCarousel } from "./Carousel";
 import { DescriptionCarousel } from "./Carousel";
 import { ScrollProvider } from "./ScrollProvider";
-
 const HeroPageSection3 = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -11,8 +10,29 @@ const HeroPageSection3 = () => {
   const isSpecificSize = useMediaQuery(
     "(max-width: 320px) and (max-height: 725px)"
   );
-  const isSpecified = useMediaQuery("(max-width: 1024px)")
-
+  const isSpecified = useMediaQuery("(max-width: 1024px)");
+  // Custom breakpoint checks for specific margins
+  const is600to640 = useMediaQuery("(min-width:600px) and (max-width:640px)");
+  const is640to670 = useMediaQuery("(min-width:640px) and (max-width:670px)");
+  const is670to685 = useMediaQuery("(min-width:670px) and (max-width:685px)");
+  const is685to720 = useMediaQuery("(min-width:685px) and (max-width:720px)");
+  const is720to768 = useMediaQuery("(min-width:720px) and (max-width:768px)");
+  const is768to800 = useMediaQuery("(min-width:768px) and (max-width:800px)");
+  const is800to850 = useMediaQuery("(min-width:800px) and (max-width:850px)");
+  const is850to900 = useMediaQuery("(min-width:850px) and (max-width:900px)");
+  // Function to get margin values based on breakpoints
+  const getMargins = () => {
+    if (is600to640) return { mr: 0, ml: -8 };
+    if (is640to670) return { mr: 0, ml: -7 };
+    if (is670to685) return { mr: 15, ml: -5 };
+    if (is685to720) return { mr: 15, ml: -3 };
+    if (is720to768) return { mr: 15, ml: -1 };
+    if (is768to800) return { mr: "auto", ml: 3.5 };
+    if (is800to850) return { mr: "auto", ml: 4.5 };
+    if (is850to900) return { mr: "auto", ml: 6 };
+    return { mr: 0, ml: 0 }; // default margins
+  };
+  const margins = getMargins();
   return (
     <Box
       sx={{
@@ -20,14 +40,14 @@ const HeroPageSection3 = () => {
         position: "relative",
         height: "auto",
         marginTop: {
-          xs: "0px", // Fixed pixel value for all mobile
-          sm: "0px", // Fixed pixel value for tablets
-          md: "8rem", // Keep rem for desktop
+          xs: "0px",
+          sm: "0px",
+          md: "8rem",
         },
         minHeight: {
-          xs: isSpecificSize ? "1200px" : "1000px", // Fixed height for mobile
-          sm: "1000px", // Fixed height for tablet
-          md: "110vh", // Keep vh for desktop
+          xs: isSpecificSize ? "1200px" : "1000px",
+          sm: "1000px",
+          md: "110vh",
         },
       }}
     >
@@ -44,7 +64,7 @@ const HeroPageSection3 = () => {
               : isSpecified
               ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`
               : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
-          zIndex: 0, // Set consistent z-index
+          zIndex: 0,
           pointerEvents: "none",
           transformOrigin: "center center",
         }}
@@ -64,7 +84,7 @@ const HeroPageSection3 = () => {
           component="span"
           fontWeight="bold"
           sx={{
-            background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+            background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
@@ -78,32 +98,8 @@ const HeroPageSection3 = () => {
             position: "relative",
             marginTop: "5rem",
             zIndex: 0,
-            "@media (min-width: 601px) and (max-width: 650px)": {
-              marginTop: "5rem",
-              mr: 0,
-              ml: -7.5,
-            },
-            "@media (min-width: 651px) and (max-width: 685px)": {
-              marginTop: "5rem",
-              mr: 15,
-              ml: -5,
-            },
-            "@media (min-width: 686px) and (max-width: 720px)": {
-              marginTop: "5rem",
-              mr: 15,
-              ml: -3,
-            },
-            "@media (min-width: 721px) and (max-width: 768px)": {
-              marginTop: "5rem",
-              mr: 15,
-              ml: -1,
-            },
-            "@media (min-width: 769px) and (max-width: 900px)": {
-              marginTop: "5rem",
-              // margin: "auto",
-              mr: "auto",
-              ml: 4,
-            },
+            marginRight: margins.mr,
+            marginLeft: margins.ml,
           }}
         >
           <Box
@@ -137,5 +133,4 @@ const HeroPageSection3 = () => {
     </Box>
   );
 };
-
 export default HeroPageSection3;

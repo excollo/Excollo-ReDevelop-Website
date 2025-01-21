@@ -71,6 +71,23 @@ const HeroPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     window.location.reload();
+  //   };
+
+  //   window.addEventListener("resize", handleResize);
+
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
+
+  // // Ensure the page scrolls to the top on reload
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
   useEffect(() => {
     if (!showThreeDE && isDesktop) {
       const timeline = gsap.timeline();
