@@ -272,7 +272,10 @@ const HeroPageSection4 = ({ onComplete }) => {
           "@media (min-width: 375px) and (max-width: 392px)": {
             pt: "280px",
           },
-          "@media (min-width: 393px) and (max-width: 599px)": {
+          "@media (min-width: 393px) and (max-width: 395)": {
+            pt: "200px", // Maintain consistent padding for larger mobile screens
+          },
+          "@media (min-width: 396px) and (max-width: 599px)": {
             pt: "180px", // Maintain consistent padding for larger mobile screens
           },
         }}
