@@ -19,14 +19,16 @@ const HeroPageSection3 = () => {
         textAlign: "center",
         position: "relative",
         height: "auto",
-        marginTop: "8rem",
-        minHeight: isSpecificSize
-          ? "210vh"
-          : isMobile
-          ? "180vh"
-          : isTablet
-          ? "180vh"
-          : "110vh",
+        marginTop: {
+          xs: "0px", // Fixed pixel value for all mobile
+          sm: "0px", // Fixed pixel value for tablets
+          md: "8rem", // Keep rem for desktop
+        },
+        minHeight: {
+          xs: isSpecificSize ? "1200px" : "1000px", // Fixed height for mobile
+          sm: "1000px", // Fixed height for tablet
+          md: "110vh", // Keep vh for desktop
+        },
       }}
     >
       <Box
@@ -38,8 +40,9 @@ const HeroPageSection3 = () => {
           bottom: isSpecified ? "0" : "13%",
           background:
             isMobile || isTablet
-              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)` : 
-            isSpecified ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)` 
+              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`
+              : isSpecified
+              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`
               : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 0, // Set consistent z-index
           pointerEvents: "none",
