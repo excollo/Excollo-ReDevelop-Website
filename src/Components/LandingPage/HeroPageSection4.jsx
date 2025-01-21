@@ -239,11 +239,39 @@ const HeroPageSection4 = ({ onComplete }) => {
     return (
       <Box
         sx={{
-          minHeight: "70vh",
+          minHeight: {
+            xs: "30vh",
+            sm: isTablet ? "50vh" : "50vh",
+            md: "70vh",
+          },
           color: "#fff",
           padding: "2rem 1rem",
           fontFamily: '"Inter", sans-serif',
           position: "relative",
+          marginTop: {
+            xs: "0", // Consistent spacing for mobile devices
+            md: "0", // Desktop spacing
+          },
+          pt: {
+            xs: "220px", // For screens up to 392px
+            sm: "60px", // For small tablets
+            md: "0", // For desktop
+          },
+          maxWidth: {
+            xs: "100%",
+            sm: "90%",
+            md: "85%",
+          },
+          mx: "auto", // Center the content
+          "@media (min-width: 321px) and (max-width: 354px)": {
+            pt: "400px", // Specific padding for 321-374px
+          },
+          "@media (min-width: 355px) and (max-width: 374px)": {
+            pt: "300px", // Specific padding for 321-374px
+          },
+          "@media (min-width: 393px) and (max-width: 599px)": {
+            pt: "100px", // Maintain consistent padding for larger mobile screens
+          },
         }}
       >
         <Typography
