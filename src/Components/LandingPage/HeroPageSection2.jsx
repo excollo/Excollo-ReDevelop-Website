@@ -116,8 +116,8 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         position: "relative",
         zIndex: 2,
         marginTop: {
-          xs: "-15rem !important", // Force the margin to take effect
-          sm: "-15rem !important",
+          xs: "-18rem !important", // Force the margin to take effect
+          sm: "-18rem !important",
         },
       }}
     >
