@@ -78,6 +78,32 @@ const HeroPageSection3 = () => {
             position: "relative",
             marginTop: "5rem",
             zIndex: 0,
+            "@media (min-width: 601px) and (max-width: 650px)": {
+              marginTop: "5rem",
+              mr: 0,
+              ml: -7.5,
+            },
+            "@media (min-width: 651px) and (max-width: 685px)": {
+              marginTop: "5rem",
+              mr: 15,
+              ml: -5,
+            },
+            "@media (min-width: 686px) and (max-width: 720px)": {
+              marginTop: "5rem",
+              mr: 15,
+              ml: -3,
+            },
+            "@media (min-width: 721px) and (max-width: 768px)": {
+              marginTop: "5rem",
+              mr: 15,
+              ml: -1,
+            },
+            "@media (min-width: 769px) and (max-width: 900px)": {
+              marginTop: "5rem",
+              // margin: "auto",
+              mr: "auto",
+              ml: 4,
+            },
           }}
         >
           <Box

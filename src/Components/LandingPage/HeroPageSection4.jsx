@@ -278,6 +278,14 @@ const HeroPageSection4 = ({ onComplete }) => {
           "@media (min-width: 396px) and (max-width: 599px)": {
             pt: "180px", // Maintain consistent padding for larger mobile screens
           },
+          "@media (min-width: 600px) and (max-width: 768px)": {
+            mt: 22,
+            mb: -4,
+          },
+          "@media (min-width: 769px) and (max-width: 900px)": {
+            mt: 22,
+            mb: -4,
+          },
         }}
       >
         <Typography
