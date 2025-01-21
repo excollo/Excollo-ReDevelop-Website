@@ -39,8 +39,8 @@ const HeroPageSection1 = ({ animationComplete }) => {
         },
         position: "relative",
         minHeight: {
-        xs: "400px",  // Fixed pixel height for mobile
-        sm: "400px",
+        xs: "500px",  // Fixed pixel height for mobile
+        sm: "500px",
         md: "95vh"    // Keep vh units for larger screens
 },
         zIndex: 2,
