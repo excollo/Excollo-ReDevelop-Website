@@ -115,7 +115,10 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         fontFamily: '"Inter", sans-serif',
         position: "relative",
         zIndex: 2,
-        overflow: "hidden",
+        marginTop: {
+          xs: "-15rem !important", // Force the margin to take effect
+          sm: "-15rem !important",
+        },
       }}
     >
       <Box
