@@ -264,13 +264,13 @@ const HeroPageSection4 = ({ onComplete }) => {
           },
           mx: "auto", // Center the content
           "@media (min-width: 321px) and (max-width: 354px)": {
-            pt: "400px", // Specific padding for 321-374px
+            pt: "500px", // Specific padding for 321-374px
           },
           "@media (min-width: 355px) and (max-width: 374px)": {
-            pt: "300px", // Specific padding for 321-374px
+            pt: "400px", // Specific padding for 321-374px
           },
           "@media (min-width: 393px) and (max-width: 599px)": {
-            pt: "100px", // Maintain consistent padding for larger mobile screens
+            pt: "200px", // Maintain consistent padding for larger mobile screens
           },
         }}
       >
