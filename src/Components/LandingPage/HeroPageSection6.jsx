@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
@@ -9,11 +9,17 @@ const HeroPageSection6 = () => {
   const containerRef = useRef(null);
   const textRef1 = useRef(null);
   const textRef2 = useRef(null);
+  const timelineRef = useRef(null);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
   const targetLetters = ["e", "a", "d", "y", "o", "n", "s"];
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const shuffleArray = (array) => {
     return array
@@ -22,7 +28,7 @@ const HeroPageSection6 = () => {
       .map(({ item }) => item);
   };
 
-  useEffect(() => {
+  const createAnimation = () => {
     if (
       !textRef1.current ||
       !textRef2.current ||
@@ -30,6 +36,11 @@ const HeroPageSection6 = () => {
       !containerRef.current
     )
       return;
+
+    // Kill previous timeline if it exists
+    if (timelineRef.current) {
+      timelineRef.current.kill();
+    }
 
     const splitTextIntoSpans = (textRef) => {
       const text = textRef.textContent;
@@ -80,6 +91,8 @@ const HeroPageSection6 = () => {
       repeat: -1,
       defaults: { ease: "power2.inOut" },
     });
+
+    timelineRef.current = tl;
 
     letterPositions.forEach((pos, index) => {
       const prevPos = index > 0 ? letterPositions[index - 1] : null;
@@ -137,9 +150,41 @@ const HeroPageSection6 = () => {
       x: letterPositions[0].x,
       y: letterPositions[0].y,
     });
+  };
+
+  useEffect(() => {
+    // Initial animation creation
+    createAnimation();
+
+    // Debounce function to prevent too many rapid updates
+    const debounce = (func, wait) => {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    };
+
+    // Handle resize with debounce
+    const handleResize = debounce(() => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+      createAnimation();
+    }, 250);
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      tl.kill();
+      window.removeEventListener("resize", handleResize);
+      if (timelineRef.current) {
+        timelineRef.current.kill();
+      }
     };
   }, []);
 
@@ -174,8 +219,8 @@ const HeroPageSection6 = () => {
           ref={circleRef}
           sx={{
             marginTop: "-0.3rem",
-            width: { xs: "17px", sm: "25px", md: "35px", lg: "50px" }, // Updated width for tablet mode
-            height: { xs: "17px", sm: "25px", md: "35px", lg: "50px" }, // Updated height for tablet mode
+            width: { xs: "17px", sm: "25px", md: "35px", lg: "50px" },
+            height: { xs: "17px", sm: "25px", md: "35px", lg: "50px" },
             background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             borderRadius: "50%",
             position: "absolute",
@@ -189,8 +234,8 @@ const HeroPageSection6 = () => {
           fontWeight="500"
           sx={{
             letterSpacing: "0.001em",
-            fontSize: { xs: "2rem", sm: "3rem", md: "5rem", lg: "7rem" }, // Updated fontSize for tablet mode
-            lineHeight: { xs: "2.5rem", sm: "4rem", md: "6rem", lg: "10rem" }, // Updated lineHeight for tablet mode
+            fontSize: { xs: "2rem", sm: "3rem", md: "5rem", lg: "7rem" },
+            lineHeight: { xs: "2.5rem", sm: "4rem", md: "6rem", lg: "10rem" },
             "& .letter": {
               display: "inline-block",
               position: "relative",

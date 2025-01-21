@@ -53,7 +53,7 @@ const AnimatedCTAButton = ({ onClick }) => {
     })
       .to(button, {
         width: isMobile ? "120px" : "200px",
-        marginLeft: isMobile ? "-35px" : "0",
+        marginLeft: isMobile ? "-70px" : "0",
         duration: 0.4,
         ease: "power2.inOut",
       })
@@ -137,7 +137,7 @@ const AnimatedCTAButton = ({ onClick }) => {
           sx={{
             position: "absolute",
             top: 0,
-            left: { xs: "25%", sm: 0 }, // Adjusted left position for mobile
+            left: { xs: "35%", sm: 0 }, // Adjusted left position for mobile
             height: "100%",
             width: "50px",
             zIndex: 1,
@@ -153,7 +153,7 @@ const AnimatedCTAButton = ({ onClick }) => {
             whiteSpace: "nowrap",
             position: "relative",
             marginTop: { xs: "-5px", sm: "2rem" }, // Adjusted margin for mobile
-            marginLeft: {xs: "60px", sm: "0"}, // Adjusted margin for mobile
+            marginLeft: {xs: "80px", sm: "0"}, // Adjusted margin for mobile
           }}
         >
           Talk to Us
