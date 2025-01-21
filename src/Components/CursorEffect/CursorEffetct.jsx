@@ -8,7 +8,7 @@ const CursorContainer = styled(Box)({
   pointerEvents: "none",
   zIndex: 9999,
   mixBlendMode: "difference", // This helps with visibility on different backgrounds
-  "@media (min-width: 200px) and (max-width: 800px)": {
+  "@media (min-width: 200px) and (max-width: 900px)": {
     display: "none",
   }
 });

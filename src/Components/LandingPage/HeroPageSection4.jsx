@@ -272,7 +272,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           "@media (min-width: 375px) and (max-width: 392px)": {
             pt: "280px",
           },
-          "@media (min-width: 393px) and (max-width: 393px)": {
+          "@media (min-width: 394px) and (max-width: 394px)": {
             pt: "280px",
           },
           "@media (min-width: 394px) and (max-width: 599px)": {
