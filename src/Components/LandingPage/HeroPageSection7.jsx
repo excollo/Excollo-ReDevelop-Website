@@ -56,8 +56,8 @@ const HeroPageSection7 = () => {
   };
 
   const translateYImage = isSpecified
-    ? Math.max(2200 - scrollY * 0.5, 0)
-    : Math.max(2400 - scrollY * 0.5, 0);
+    ? Math.max(1800 - scrollY * 0.5, 0)
+    : Math.max(2200 - scrollY * 0.5, 0);
 
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
