@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useCallback} from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Box,
   Typography,
@@ -169,8 +169,8 @@ const Card = styled("div")(
     },
 
     "@media (min-width: 769px) and (max-width:1024px) ": {
-      width: "60%",
-      height: "450px",
+      width: "95%",
+      height: "fit-content",
       "& p": {
         fontSize: "1.8rem",
       },
@@ -285,7 +285,7 @@ const AboutUs = () => {
         bgcolor: "#000",
         minHeight: "100vh",
         fontFamily: '"Inter", sans-serif',
-        overflow: "hidden", 
+        overflow: "hidden",
       }}
     >
       <Box
@@ -405,6 +405,9 @@ const AboutUs = () => {
               sx={{
                 width: { sm: "60%", md: "80%" },
                 mr: { md: "2%", lg: "0%" },
+                "@media (min-width: 200px) and (max-width:900px) ": {
+                  display: "none",
+                },
               }}
             >
               <ThreeDE />

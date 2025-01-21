@@ -101,8 +101,8 @@ const TableContent = styled("div")({
       fontSize: "28px",
     },
   },
-  "@media (min-width: 768px) and (max-width:1024px)": {
-    width: "68%",
+  "@media (min-width: 769px) and (max-width:1024px)": {
+    width: "62%",
     height: "400px", // Make it 90% of the width for mobile
     // Add margin between cards on mobile
     opacity: 1,
@@ -110,10 +110,11 @@ const TableContent = styled("div")({
     visibility: "visible",
     "& h3": {
       fontSize: "28px",
+      margin: "4px",
     },
     "& p": {
       fontSize: "16px", // Adjust font size for mobile
-      margin: "5px",
+      margin: "4px",
     },
   },
   "@media (max-width: 768px)": {
@@ -121,7 +122,9 @@ const TableContent = styled("div")({
     height: "200px", // Make it 90% of the width for mobile
     // Let the height adjust dynamically
     borderRadius: "20px", // Modern rounded corners
-    border: "1px solid #fff", // Remove border for a cleaner look
+    border: "1px solid #7E22CE ",
+    // borderColor: "#7E22CE !important",
+    background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)", // Remove border for a cleaner look
     textAlign: "center",
     padding: "20px", // Adjust padding for mobile
     marginBottom: "20px", // Add margin between cards on mobile
@@ -146,7 +149,9 @@ const TableContent = styled("div")({
   "@media (max-width: 480px)": {
     width: "90%",
     height: "150px", // Make it 90% of the width for mobile
-    border: "1px solid #fff",
+    border: "1px solid #7E22CE ",
+    // borderColor: "#7E22CE !important",
+    background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
     textAlign: "center",
     marginLeft: "-10px",
     padding: "20px", // Adjust padding for mobile
@@ -171,7 +176,8 @@ const TableContent = styled("div")({
   },
   "@media (max-width: 375px)": {
     width: "85%",
-    margin: "auto",marginTop: "10px",
+    margin: "auto",
+    marginTop: "10px",
     marginLeft: "-7px",
   },
   "@media (max-width: 320px)": {
