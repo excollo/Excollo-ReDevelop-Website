@@ -19,12 +19,6 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
   useEffect(() => {
     // Skip animations for mobile and tablet devices
     if (isMobile || isTablet) {
-      if (gradientRef.current) {
-        gsap.set(gradientRef.current, { opacity: 1, scale: 1 });
-      }
-      if (contentRef.current) {
-        gsap.set(contentRef.current, { opacity: 1, x: 0 });
-      }
       onAnimationComplete?.();
       return;
     }
@@ -138,8 +132,12 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
           zIndex: 1,
           pointerEvents: "none",
           transformOrigin: "center center",
-          opacity: isMobile || isTablet ? 1 : undefined,
-          transform: isMobile || isTablet ? "scale(1)" : undefined,
+          ...(isMobile || isTablet
+            ? {
+                opacity: 1,
+                transform: "scale(1)",
+              }
+            : {}),
         }}
       />
 
@@ -152,8 +150,12 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
           flexDirection: "column",
           alignItems: "center",
           width: "100%",
-          opacity: isMobile || isTablet ? 1 : undefined,
-          transform: isMobile || isTablet ? "translateX(0)" : undefined,
+          ...(isMobile || isTablet
+            ? {
+                opacity: 1,
+                transform: "translateX(0)",
+              }
+            : {}),
         }}
       >
         <Box

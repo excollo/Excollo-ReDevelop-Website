@@ -392,8 +392,15 @@ const HeroPage = () => {
         sx={{
           position: "relative",
           zIndex: 3,
-          opacity: isMobile || isTablet ? 1 : 0,
-          transform: "translateX(50%)",
+          ...(isMobile || isTablet
+            ? {
+                opacity: 1,
+                transform: "none",
+              }
+            : {
+                opacity: 0,
+                transform: "translateX(50%)",
+              }),
         }}
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />

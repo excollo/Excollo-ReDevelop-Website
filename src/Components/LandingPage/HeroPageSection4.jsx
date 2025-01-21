@@ -269,13 +269,13 @@ const HeroPageSection4 = ({ onComplete }) => {
           "@media (min-width: 355px) and (max-width: 374px)": {
             pt: "300px", // Specific padding for 321-374px
           },
-          "@media (min-width: 375px) and (max-width: 393px)": {
+          "@media (min-width: 375px) and (max-width: 394px)": {
             pt: "280px",
           },
-          "@media (min-width: 394px) and (max-width: 394px)": {
+          "@media (min-width: 395px) and (max-width: 395px)": {
             pt: "280px",
           },
-          "@media (min-width: 395px) and (max-width: 599px)": {
+          "@media (min-width: 396px) and (max-width: 599px)": {
             pt: "180px", // Maintain consistent padding for larger mobile screens
           },
         }}
