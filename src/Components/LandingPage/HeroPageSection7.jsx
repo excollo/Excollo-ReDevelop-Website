@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
 import { Box, Divider, useMediaQuery } from "@mui/material";
-
+import React, { useEffect, useState } from "react";
+import Logo from "../../assets/logo/excollo3d.png";
+import { m } from "framer-motion";
 const HeroPageSection7 = () => {
+  
   const [scrollY, setScrollY] = useState(0);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
@@ -84,50 +86,59 @@ const HeroPageSection7 = () => {
         }}
       >
         <img
-          src="/api/placeholder/400/320"
+          src={Logo}
           alt="Logo"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className={`w-4/5 transition-transform duration-200 ease-out ${
-            isLandscape && isMobile ? "transform-none" : ""
-          }`}
           style={{
             height: "auto",
+            width: "80%",
             transform:
-              isMobile || isTablet || isLandscape
+              isMobile || isTablet
                 ? "none"
                 : `translateY(${Math.min(translateYImage, 1300)}px) rotateX(${
                     rotation.y
                   }deg) rotateY(${rotation.x}deg)`,
             transformStyle: "preserve-3d",
             willChange: "transform",
+            transition: "transform 0.2s ease-out",
+            "@media (max-width: 1200px)": {
+              width: "80%",
+            },
+            "@media (max-width: 768px)": {
+              width: "80%",
+            },
+            "@media (max-width: 480px)": {
+              width: "80%",
+            },
           }}
         />
       </Box>
-
-      {!isMobile && !isTablet && !isLandscape && (
+      {/* Gradient Animation Section */}
+      {!isMobile && !isTablet && (
         <Box
           position="relative"
           zIndex={0}
-          className="w-full h-0"
           sx={{
+            left: 0,
+            right: 0,
+            width: "100%",
+            height: "0px",
             background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, ${gradientOpacity}) 0%, rgba(0, 0, 0, 0) 60%)`,
             transition: "background 0.3s ease-in-out",
           }}
         />
       )}
-
       <Divider
         sx={{
           backgroundColor: "#000000",
           height: "2px",
           width: "100%",
           position: "relative",
-          display: isMobile || isTablet || isLandscape ? "none" : "block",
+          display: isMobile || isTablet ? "none" : "block",
         }}
       />
     </Box>
   );
 };
-
 export default HeroPageSection7;
