@@ -9,8 +9,3 @@
 button, input, textarea, select {
   cursor: auto !important;
 }
-@media screen and (min-width: 320px) and (max-width: 768px) {
-   * {
-  cursor: auto !important;
-}
-}

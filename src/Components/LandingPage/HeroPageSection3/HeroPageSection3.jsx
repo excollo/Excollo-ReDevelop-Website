@@ -1,107 +1,66 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { TitleCarousel } from "./Carousel";
 import { DescriptionCarousel } from "./Carousel";
 import { ScrollProvider } from "./ScrollProvider";
 
 const HeroPageSection3 = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isSpecificSize = useMediaQuery(
+    "(max-width: 320px) and (max-height: 725px)"
+  );
+  const isSpecified = useMediaQuery("(max-width: 1024px)")
+
   return (
     <Box
       sx={{
         textAlign: "center",
         position: "relative",
         height: "auto",
-        
-        minHeight: "110vh",
-
-        "@media (max-width: 1024px)": {
-          minHeight: "120vh",
-        },
-
-        "@media (max-width: 768px)": {
-          minHeight: "180vh",
-        },
-
-        "@media (max-width: 480px)": {
-          minHeight: "180vh",
-        },
-
-        "@media (max-width: 320px) and (max-height: 725px)": {
-          minHeight: "210vh",
-        },
-
-        "@media screen and (orientation: landscape) and (max-height: 600px)": {
-          minHeight: "200vh",
-          marginTop: "4rem",
-        },
-
-        "@media screen and (orientation: portrait)": {
-          minHeight: "180vh",
-          marginTop: "6rem",
-        }
+        marginTop: "8rem",
+        minHeight: isSpecificSize
+          ? "210vh"
+          : isMobile
+          ? "180vh"
+          : isTablet
+          ? "180vh"
+          : "110vh",
       }}
     >
       <Box
         sx={{
           position: "absolute",
-          top: "2%",
+          top: isSpecified ? "10%" : "2%",
           left: "10%",
           right: "10%",
-          bottom: "13%",
-          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
-          zIndex: 0,
+          bottom: isSpecified ? "0" : "13%",
+          background:
+            isMobile || isTablet
+              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)` : 
+            isSpecified ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)` 
+              : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
+          zIndex: 0, // Set consistent z-index
           pointerEvents: "none",
           transformOrigin: "center center",
-
-          "@media (max-width: 1024px)": {
-            top: "10%",
-            bottom: "0",
-          },
-
-          "@media (max-width: 768px)": {
-            background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`,
-          },
-
-          "@media screen and (orientation: landscape) and (max-height: 600px)": {
-            top: "5%",
-            bottom: "5%",
-          },
-
-          "@media screen and (orientation: portrait)": {
-            top: "5%",
-            bottom: "10%",
-          }
         }}
       />
-
       <Typography
-        variant="h2"
+        variant={isMobile ? "h4" : isTablet ? "h3" : "h2"}
         sx={{
           color: "#fff",
           fontWeight: "bold",
           position: "relative",
           top: "20px",
           background: "black",
-
-          "@media (max-width: 768px)": {
-            fontSize: "h3.fontSize",
-          },
-
-          "@media (max-width: 480px)": {
-            fontSize: "h4.fontSize",
-          },
-
-          "@media screen and (orientation: landscape) and (max-height: 600px)": {
-            fontSize: "h3.fontSize",
-            top: "10px",
-          }
         }}
       >
         Our{" "}
         <Box
           component="span"
+          fontWeight="bold"
           sx={{
-            fontWeight: "bold",
             background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -110,25 +69,12 @@ const HeroPageSection3 = () => {
           Services
         </Box>
       </Typography>
-
       <ScrollProvider>
         <Box
           sx={{
             position: "relative",
             marginTop: "5rem",
             zIndex: 0,
-
-            "@media (max-width: 768px)": {
-              marginTop: "3rem",
-            },
-
-            "@media screen and (orientation: landscape) and (max-height: 600px)": {
-              marginTop: "2rem",
-            },
-
-            "@media screen and (orientation: portrait)": {
-              marginTop: "4rem",
-            }
           }}
         >
           <Box
@@ -140,21 +86,10 @@ const HeroPageSection3 = () => {
               right: 0,
               bottom: 0,
               zIndex: 2,
-
-              "@media screen and (orientation: landscape) and (max-height: 600px)": {
-                position: "relative",
-                marginBottom: "2rem",
-              },
-
-              "@media screen and (orientation: portrait)": {
-                position: "relative",
-                marginBottom: "3rem",
-              }
             }}
           >
             <TitleCarousel />
           </Box>
-
           <Box
             className="carousel-container"
             sx={{
@@ -164,14 +99,6 @@ const HeroPageSection3 = () => {
               right: 0,
               bottom: 0,
               zIndex: 1,
-
-              "@media screen and (orientation: landscape) and (max-height: 600px)": {
-                position: "relative",
-              },
-
-              "@media screen and (orientation: portrait)": {
-                // position: "relative",
-              }
             }}
           >
             <DescriptionCarousel />
