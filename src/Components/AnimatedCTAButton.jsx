@@ -3,7 +3,6 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 gsap.registerPlugin(ScrollTrigger);
 
 const AnimatedCTAButton = ({ onClick }) => {
@@ -21,21 +20,21 @@ const AnimatedCTAButton = ({ onClick }) => {
     const button = buttonRef.current;
     const container = containerRef.current;
 
-    // Initial styles
+    // Initial styles with responsive widths
     gsap.set(circle, {
       scale: 0,
       opacity: 0,
-      width: isMobile ? "40px" : "80px",
-      height: isMobile ? "40px" : "80px",
+      width: isMobile ? "30px" : "80px",
+      height: isMobile ? "30px" : "80px",
       borderRadius: "50%",
       border: "2px solid #7e22ce",
       background:
         "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
     });
     gsap.set(text, { opacity: 0 });
-    gsap.set(button, { width: "80px" });
+    gsap.set(button, { width: isMobile ? "80px" : "80px" });
 
-    // Main animation timeline
+    // Main animation timeline with responsive final widths
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
@@ -53,7 +52,8 @@ const AnimatedCTAButton = ({ onClick }) => {
       ease: "power2.out",
     })
       .to(button, {
-        width: "200px",
+        width: isMobile ? "120px" : "200px",
+        marginLeft: isMobile ? "-35px" : "0",
         duration: 0.4,
         ease: "power2.inOut",
       })
@@ -98,17 +98,24 @@ const AnimatedCTAButton = ({ onClick }) => {
     button.addEventListener("mouseenter", handleMouseEnter);
     button.addEventListener("mouseleave", handleMouseLeave);
 
-    // Cleanup
     return () => {
       if (tl.scrollTrigger) tl.scrollTrigger.kill();
       tl.kill();
       button.removeEventListener("mouseenter", handleMouseEnter);
       button.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
-    <Box ref={containerRef} sx={{ padding: "20px 60px" }}>
+    <Box
+      ref={containerRef}
+      sx={{
+        padding: {
+          xs: "20px 20px", // Reduced padding for mobile
+          sm: "20px 60px", // Original padding for larger screens
+        },
+      }}
+    >
       <Box
         ref={buttonRef}
         component={Link}
@@ -119,7 +126,7 @@ const AnimatedCTAButton = ({ onClick }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          height: "50px",
+          height: isMobile ? "40px" : "50px", // Reduced height for mobile
           textDecoration: "none",
           cursor: "pointer",
           transition: "transform 0.3s ease",
@@ -130,7 +137,7 @@ const AnimatedCTAButton = ({ onClick }) => {
           sx={{
             position: "absolute",
             top: 0,
-            left: 0,
+            left: { xs: "25%", sm: 0 }, // Adjusted left position for mobile
             height: "100%",
             width: "50px",
             zIndex: 1,
@@ -145,7 +152,8 @@ const AnimatedCTAButton = ({ onClick }) => {
             zIndex: 2,
             whiteSpace: "nowrap",
             position: "relative",
-            marginTop: isMobile ? "-0.5rem" : "2rem"
+            marginTop: { xs: "-5px", sm: "2rem" }, // Adjusted margin for mobile
+            marginLeft: {xs: "60px", sm: "0"}, // Adjusted margin for mobile
           }}
         >
           Talk to Us
