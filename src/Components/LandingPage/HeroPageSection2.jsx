@@ -112,7 +112,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         marginTop: {
           xs: "-60px",
           sm: "-60px",
-          md: "-18rem",
+          md: "0rem",
         },
       }}
     >

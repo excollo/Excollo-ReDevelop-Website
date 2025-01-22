@@ -3,32 +3,23 @@ import React, { useEffect, useState } from "react";
 import Logo from "../../assets/logo/excollo3d.png";
 import { m } from "framer-motion";
 const HeroPageSection7 = () => {
-  
   const [scrollY, setScrollY] = useState(0);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
-  const [isLandscape, setIsLandscape] = useState(false);
 
   const isSpecified = useMediaQuery("(max-width: 1024px)");
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 480);
       setIsTablet(window.innerWidth > 480 && window.innerWidth <= 768);
-      setIsLandscape(window.innerHeight < window.innerWidth);
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
     };
   }, []);
-
   useEffect(() => {
     if (!isMobile && !isTablet) {
       const handleScroll = () => {
@@ -40,28 +31,23 @@ const HeroPageSection7 = () => {
       };
     }
   }, [isMobile, isTablet]);
-
   const handleMouseMove = (e) => {
-    if (isMobile || isTablet || isLandscape) return;
+    if (isMobile || isTablet) return;
     const { clientX, clientY, currentTarget } = e;
     const rect = currentTarget.getBoundingClientRect();
     const x = ((clientX - rect.left) / rect.width - 0.5) * 30;
     const y = ((clientY - rect.top) / rect.height - 0.5) * -30;
     setRotation({ x, y });
   };
-
   const handleMouseLeave = () => {
-    if (isMobile || isTablet || isLandscape) return;
+    if (isMobile || isTablet) return;
     setRotation({ x: 0, y: 0 });
   };
-
   const translateYImage = isSpecified
-    ? Math.max(1800 - scrollY * 0.5, 0)
-    : Math.max(2200 - scrollY * 0.5, 0);
-
+    ? Math.max(2200 - scrollY * 0.5, 0)
+    : Math.max(2400 - scrollY * 0.5, 0); ;
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
-
   return (
     <Box>
       <Box
@@ -70,18 +56,22 @@ const HeroPageSection7 = () => {
         justifyContent="center"
         position="relative"
         zIndex={2}
-        className="w-full overflow-hidden"
         sx={{
-          height: isLandscape && isMobile ? "100vh" : "400px",
+          height: "400px",
+          width: "100%",
+          overflow: "hidden",
           "@media (max-width: 1200px)": {
+            width: "100%",
             marginTop: "-5%",
           },
           "@media (max-width: 768px)": {
+            width: "100%",
             margin: "-15% auto",
           },
           "@media (max-width: 480px)": {
-            height: isLandscape ? "100vh" : "400px",
-            margin: isLandscape ? "0" : "-25% 0 -25% 0",
+            width: "100%",
+            height: "400px",
+            margin: " -25% 0 -25%  0",
           },
         }}
       >
