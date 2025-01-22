@@ -78,7 +78,7 @@ const AIAutomation = forwardRef((props, ref) => {
       console.log("Updating circle position for index:", currentDotIndex); // Debug log
       gsap.to(circleRef.current, {
         top: rect.top - parentRect.top + rect.height / 2 - 30,
-        left: rect.left - parentRect.left + rect.width / 2 - 150, // Adjusted left position
+        left: rect.left - parentRect.left + rect.width / 2 - 1.2, // Adjusted left position
         ease: "power2.inOut",
       });
     } else {
@@ -317,6 +317,9 @@ const AIAutomation = forwardRef((props, ref) => {
     marginBottom: "5rem",
     padding: isTablet || isSpecified ? "1rem" : 0,
     ml: isTablet || isSpecified ? -5 : "-5%",
+    "@media (min-width: 1200px) and (max-width:2000px) ": {
+      padding: "0 2rem",
+    },
   };
 
   const contentStyles = {
@@ -848,6 +851,9 @@ const AIAutomation = forwardRef((props, ref) => {
         minHeight: "120vh",
         position: "relative",
         marginBottom: "5rem",
+        "@media (min-width: 1200px) and (max-width:2000px) ": {
+          width: "100vw",
+        },
       }}
     >
       <Box
@@ -858,6 +864,7 @@ const AIAutomation = forwardRef((props, ref) => {
           left: 0,
           width: "100%",
           height: "100vh",
+          marginTop: "10%",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -892,6 +899,7 @@ const AIAutomation = forwardRef((props, ref) => {
           width: "100%",
           height: "100vh",
           padding: "2rem",
+          marginTop: "10%",
           "&::-webkit-scrollbar": {
             width: "8px",
           },
@@ -906,15 +914,18 @@ const AIAutomation = forwardRef((props, ref) => {
       >
         <Box
           sx={{
-            maxWidth: "1200px",
+            maxWidth: "100%",
             margin: "0 auto",
             position: "relative",
+            backgroundColor: "#000",
+            zIndex: 1,
             pb: "2rem",
+            ml: "-2%",
           }}
         >
           <Typography
             variant="h6"
-            sx={{ color: "gray" }}
+            sx={{ color: "gray", ml: "2%" }}
             className="services-title"
           >
             AI & Automation
@@ -945,7 +956,11 @@ const AIAutomation = forwardRef((props, ref) => {
                 >
                   <Typography
                     variant="h5"
-                    sx={{ fontSize: "1.7rem", position: "relative" }}
+                    sx={{
+                      fontSize: "1.7rem",
+                      position: "relative",
+                      marginLeft: "2%",
+                    }}
                   >
                     <span
                       ref={(el) => (symbolRefs.current[index] = el)}
@@ -959,15 +974,15 @@ const AIAutomation = forwardRef((props, ref) => {
                 <AccordionDetails
                   sx={{
                     padding: "0 16px 8px 16px",
-                    maxWidth: "120%",
-                    ml: "1%",
+                    maxWidth: "100%",
+                    ml: "4%",
                   }}
                 >
                   <List
                     sx={{
                       padding: 0,
                       "& .MuiListItem-root": {
-                        padding: "4px 0",
+                        padding: "4px 0px",
                       },
                     }}
                   >
