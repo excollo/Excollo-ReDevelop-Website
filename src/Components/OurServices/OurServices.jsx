@@ -19,10 +19,11 @@ const OurServices = () => {
   const [showButton, setShowButton] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 899px)");
+  const isminiLaptop = useMediaQuery("(min-width: 900px) and (max-width: 1023px)");
   const isSpecified = useMediaQuery("(min-width: 1024px) and (max-width: 1199px)")
    const isLandscapeMedium = useMediaQuery(
-     "(min-width: 625px) and (max-width: 900px) and (orientation: landscape)"
+     "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
    );
   const aiAutomationRef = useRef(null);
   const salesChannelRef = useRef(null);
@@ -136,6 +137,8 @@ const OurServices = () => {
                       ? "5%"
                       : isSpecified
                       ? "13%"
+                      : isminiLaptop
+                      ? "13%"
                       : { xs: 0, md: "2%", lg: "11%" },
                   }}
                 >
@@ -173,6 +176,8 @@ const OurServices = () => {
                     ? "5%"
                     : isSpecified
                     ? "14%"
+                    : isminiLaptop
+                    ? "14%"
                     : { xs: 0, md: "2%", lg: "12%" },
                   px: { xs: 2, md: 0 },
                   mt: isLandscapeMedium ? 2 : { xs: 3, md: 5 },
@@ -190,7 +195,7 @@ const OurServices = () => {
                 sx={{
                   width: isLandscapeMedium ? "50%" : { sm: "60%", md: "80%" },
                   mr: { md: "0%", lg: "0%" },
-                  "@media (min-width: 200px) and (max-width: 900px)": {
+                  "@media (min-width: 200px) and (max-width: 899px)": {
                     display: "none",
                   },
                 }}

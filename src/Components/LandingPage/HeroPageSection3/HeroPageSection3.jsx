@@ -57,7 +57,7 @@ const HeroPageSection3 = () => {
           top: isSpecified ? "10%" : "2%",
           left: "10%",
           right: "10%",
-          bottom: isSpecified ? "0" : "13%",
+          bottom: isSpecified ? "0" : "0",
           background:
             isMobile || isTablet
               ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`

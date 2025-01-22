@@ -39,7 +39,7 @@ const AIAutomation = forwardRef((props, ref) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const isSpecified = useMediaQuery(
-    "(min-width: 1024px) and (max-width: 1199px)"
+    "(min-width: 900px) and (max-width: 1199px)"
   );
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -404,6 +404,7 @@ const AIAutomation = forwardRef((props, ref) => {
                   fontSize: "2.8rem",
                   fontWeight: 500,
                   mb: 4,
+                  mt: 30,
                 }}
                 className="tablet-heading"
               >
