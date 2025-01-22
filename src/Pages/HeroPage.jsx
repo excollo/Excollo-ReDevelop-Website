@@ -245,7 +245,7 @@ const HeroPage = () => {
             path: [
               { x: "28%", y: "2%" },
               { x: "12%", y: "50%" },
-              { x: "-23vw", y: "93vh" },
+              { x: "-23vw", y: "90vh" },
             ],
             curviness: 1.5,
           },

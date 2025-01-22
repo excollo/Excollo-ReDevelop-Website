@@ -56,6 +56,9 @@ const HeroPageSection1 = ({ animationComplete }) => {
           marginLeft: "6%",
           marginTop: "-3%",
         },
+        "@media (min-width: 1200px)": {
+          marginTop: "-3%",
+        },
       }}
     >
       <Box
