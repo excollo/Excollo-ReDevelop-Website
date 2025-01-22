@@ -39,8 +39,8 @@ const ProductDevelopment = forwardRef((props, ref) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const isSpecified = useMediaQuery(
-        "(min-width: 900px) and (max-width: 1199px)"
-      );
+    "(min-width: 900px) and (max-width: 1199px)"
+  );
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -84,7 +84,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
       console.log("Updating circle position for index:", currentDotIndex); // Debug log
       gsap.to(circleRef.current, {
         top: rect.top - parentRect.top + rect.height / 2 - 30,
-        left: rect.left - parentRect.left + rect.width / 2 - 150, // Adjusted left position
+        left: rect.left - parentRect.left + rect.width / 2 - 1, // Adjusted left position
         ease: "power2.inOut",
       });
     } else {
@@ -180,62 +180,62 @@ const ProductDevelopment = forwardRef((props, ref) => {
   }, [isMobile, isTablet]);
 
   useEffect(() => {
-        if (isSpecified || isTablet) {
-          gsap.set(".tablet-heading", {
-            y: 100,
-            opacity: 0,
-          });
-    
-          gsap.set(".tablet-service-item", {
-            y: 10,
-            opacity: 0,
-          });
-    
-          gsap.to(".tablet-heading", {
+    if (isSpecified || isTablet) {
+      gsap.set(".tablet-heading", {
+        y: 100,
+        opacity: 0,
+      });
+
+      gsap.set(".tablet-service-item", {
+        y: 10,
+        opacity: 0,
+      });
+
+      gsap.to(".tablet-heading", {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        scrollTrigger: {
+          trigger: ".tablet-heading",
+          start: "top 80%",
+          end: "top 60%",
+          scrub: 1,
+        },
+      });
+
+      gsap.utils.toArray(".tablet-service-item").forEach((item, index) => {
+        gsap.to(item, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          delay: index * 0.5,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+            end: "top 60%",
+            scrub: 1,
+          },
+        });
+      });
+
+      gsap.utils
+        .toArray(".tablet-gradient-divider")
+        .forEach((divider, index) => {
+          gsap.to(divider, {
             y: 0,
             opacity: 1,
-            duration: 1.2,
+            duration: 0.6,
+            delay: index * 0.1 + 0.3,
             scrollTrigger: {
-              trigger: ".tablet-heading",
+              trigger: divider,
               start: "top 80%",
               end: "top 60%",
               scrub: 1,
             },
           });
-    
-          gsap.utils.toArray(".tablet-service-item").forEach((item, index) => {
-            gsap.to(item, {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              delay: index * 0.5,
-              scrollTrigger: {
-                trigger: item,
-                start: "top 80%",
-                end: "top 60%",
-                scrub: 1,
-              },
-            });
-          });
-    
-          gsap.utils
-            .toArray(".tablet-gradient-divider")
-            .forEach((divider, index) => {
-              gsap.to(divider, {
-                y: 0,
-                opacity: 1,
-                duration: 0.6,
-                delay: index * 0.1 + 0.3,
-                scrollTrigger: {
-                  trigger: divider,
-                  start: "top 80%",
-                  end: "top 60%",
-                  scrub: 1,
-                },
-              });
-            });
-        }
-      }, [isTablet, isSpecified]);
+        });
+    }
+  }, [isTablet, isSpecified]);
 
   const services = [
     {
@@ -850,6 +850,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
           left: 0,
           width: "100%",
           height: "100vh",
+          marginTop: "25%",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -884,6 +885,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
           width: "100%",
           height: "100vh",
           padding: "2rem",
+          marginTop: "25%",
           "&::-webkit-scrollbar": {
             width: "8px",
           },
@@ -898,15 +900,18 @@ const ProductDevelopment = forwardRef((props, ref) => {
       >
         <Box
           sx={{
-            maxWidth: "1200px",
+            maxWidth: "100%",
             margin: "0 auto",
             position: "relative",
+            backgroundColor: "#000",
+            zIndex: 1,
+            ml: "-2%",
             pb: "2rem",
           }}
         >
           <Typography
             variant="h6"
-            sx={{ color: "gray" }}
+            sx={{ color: "gray", ml: "2%" }}
             className="services-title-4"
           >
             Product Development
@@ -921,12 +926,16 @@ const ProductDevelopment = forwardRef((props, ref) => {
                   color: "#fff",
                   boxShadow: "none",
                   "&.Mui-expanded": {
-                    margin: 0,
+                    marginRight: "50px",
                   },
                 }}
               >
                 <AccordionSummary
-                  expandIcon={<ChevronDown style={{ color: "#fff" }} />}
+                  expandIcon={
+                    <ChevronDown
+                      style={{ color: "#fff", marginRight: "50px" }}
+                    />
+                  }
                   sx={{
                     "&.Mui-expanded": {
                       minHeight: 145,
@@ -937,7 +946,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
                 >
                   <Typography
                     variant="h5"
-                    sx={{ fontSize: "1.7rem", position: "relative" }}
+                    sx={{ fontSize: "1.7rem", position: "relative", ml: "2%" }}
                   >
                     <span
                       ref={(el) => (symbolRefs.current[index] = el)}
@@ -952,7 +961,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
                   sx={{
                     padding: "0 16px 8px 16px",
                     maxWidth: "120%",
-                    ml: "1%",
+                    ml: "4%",
                   }}
                 >
                   <List

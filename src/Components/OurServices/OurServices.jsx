@@ -32,6 +32,25 @@ const OurServices = () => {
   const techConsultancyRef = useRef(null);
 
   useEffect(() => {
+    let resizeTimer;
+
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        window.location.reload();
+      }, 300); // Debounce timer (300ms)
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 250) {
         setShowButton(true);

@@ -68,7 +68,7 @@ const AIAutomation = forwardRef((props, ref) => {
   }, [currentDotIndex, isMobile]);
 
   const updateCirclePosition = () => {
-    if (symbolRefs.current[currentDotIndex] && circleRef.current) {
+    if (symbolRefs.current[currentDotIndex+1] && circleRef.current) {
       const symbol = symbolRefs.current[currentDotIndex];
       const rect = symbol.getBoundingClientRect();
       const parentRect = symbol
@@ -77,7 +77,7 @@ const AIAutomation = forwardRef((props, ref) => {
 
       console.log("Updating circle position for index:", currentDotIndex); // Debug log
       gsap.to(circleRef.current, {
-        top: rect.top - parentRect.top + rect.height / 2 - 30,
+        top: rect.top - parentRect.top + rect.height / 2 - 40,
         left: rect.left - parentRect.left + rect.width / 2 - 1.2, // Adjusted left position
         ease: "power2.inOut",
       });
@@ -940,16 +940,19 @@ const AIAutomation = forwardRef((props, ref) => {
                   color: "#fff",
                   boxShadow: "none",
                   "&.Mui-expanded": {
-                    margin: 0,
+                    marginRight: "50px",
                   },
                 }}
               >
                 <AccordionSummary
-                  expandIcon={<ChevronDown style={{ color: "#fff" }} />}
+                  expandIcon={
+                    <ChevronDown
+                      style={{ color: "#fff", marginRight: "50px" }}
+                    />
+                  }
                   sx={{
                     "&.Mui-expanded": {
                       minHeight: 105,
-                      margin: 0,
                     },
                     minHeight: 105,
                   }}
