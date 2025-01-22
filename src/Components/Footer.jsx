@@ -14,7 +14,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const Footer = () => {
-  const isTablet = useMediaQuery("(min-width:480px) and (max-width:900px)");
+  const isTablet = useMediaQuery("(min-width:480px) and (max-width:899px)");
 
   const navigationLinks = [
     { name: "Home", path: "/" },

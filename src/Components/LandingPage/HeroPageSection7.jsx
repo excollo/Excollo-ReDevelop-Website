@@ -7,7 +7,7 @@ const HeroPageSection7 = () => {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
-
+  const is900 = useMediaQuery("(min-width: 900) and (max-width: 1024px)");
   const isSpecified = useMediaQuery("(max-width: 1024px)");
   useEffect(() => {
     const handleResize = () => {
@@ -43,9 +43,9 @@ const HeroPageSection7 = () => {
     if (isMobile || isTablet) return;
     setRotation({ x: 0, y: 0 });
   };
-  const translateYImage = isSpecified
-    ? Math.max(2200 - scrollY * 0.5, 0)
-    : Math.max(2400 - scrollY * 0.5, 0); ;
+  const translateYImage = is900
+    ? Math.max(600 - scrollY * 0.5, 0)
+    : Math.max(2100 - scrollY * 0.5, 0); ;
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
   return (

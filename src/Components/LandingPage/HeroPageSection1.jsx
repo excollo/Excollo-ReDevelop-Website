@@ -54,7 +54,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
         },
         "@media (min-width: 1025px) and (max-width:1199px)": {
           marginLeft: "6%",
-          marginTop: "-6%",
+          marginTop: "-3%",
         },
       }}
     >

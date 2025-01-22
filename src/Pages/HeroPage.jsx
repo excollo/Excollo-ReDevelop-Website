@@ -98,14 +98,14 @@ const HeroPage = () => {
       if (isSpecificSize) {
         timeline.to(".threeDE", {
           x: "32%",
-          y: "-4%",
+          y: "0%",
           duration: 1,
           ease: "power2.out",
         });
       } else if(isDesktopSize){
         timeline.to(".threeDE", {
           x: "28%",
-          y: "4%",
+          y: "0%",
           duration: 1,
           ease: "power2.out",
         });
@@ -226,7 +226,7 @@ const HeroPage = () => {
              path: [
                { x: "28%", y: "2%" },
                { x: "15%", y: "50%" },
-               { x: "-23vw", y: "95vh" },
+               { x: "-23vw", y: "100vh" },
              ],
              curviness: 1.5,
            },
@@ -245,7 +245,7 @@ const HeroPage = () => {
             path: [
               { x: "28%", y: "2%" },
               { x: "12%", y: "50%" },
-              { x: "-23vw", y: "89vh" },
+              { x: "-23vw", y: "93vh" },
             ],
             curviness: 1.5,
           },
