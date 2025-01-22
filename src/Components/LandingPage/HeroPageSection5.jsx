@@ -71,7 +71,11 @@ const HeroPageSection5 = () => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width >= 1023 && width <= 1025) {
-        window.location.reload(); // Refresh the page
+        window.location.reload(); 
+      }
+
+      else if(width >= 940 && width <= 942){
+        window.location.reload();
       }
     };
 
