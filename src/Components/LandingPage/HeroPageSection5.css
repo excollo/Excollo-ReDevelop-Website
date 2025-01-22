@@ -205,7 +205,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1049px) {
   .gradientCardBox {
   display: flex;
   justify-content: center;

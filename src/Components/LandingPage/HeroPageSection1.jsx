@@ -6,7 +6,9 @@ const HeroPageSection1 = ({ animationComplete }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
-
+  const isDesktopSize = useMediaQuery(
+      "(min-width: 1025px) and (max-width: 1200px)"
+    );
   const isTabletOrMobile = isMobile || isTablet;
 
   return (
@@ -39,14 +41,18 @@ const HeroPageSection1 = ({ animationComplete }) => {
         },
         position: "relative",
         minHeight: {
-        xs: "500px",  // Fixed pixel height for mobile
-        sm: "500px",
-        md: "95vh"    // Keep vh units for larger screens
-},
+          xs: "500px", // Fixed pixel height for mobile
+          sm: "500px",
+          md: "95vh", // Keep vh units for larger screens
+        },
         zIndex: 2,
         "--gradient-start": "#ff7e5f",
         "--gradient-end": "#feb47b",
         "@media (min-width: 769px) and (max-width:1024px)": {
+          marginLeft: "6%",
+          marginTop: "-6%",
+        },
+        "@media (min-width: 1025px) and (max-width:1199px)": {
           marginLeft: "6%",
           marginTop: "-6%",
         },

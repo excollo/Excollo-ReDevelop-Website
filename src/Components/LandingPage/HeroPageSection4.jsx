@@ -117,7 +117,9 @@ const HeroPageSection4 = ({ onComplete }) => {
   const [isCardShrunk, setIsCardShrunk] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [key, setKey] = useState(0);
   const sectionRef = useRef(null);
+  const previousWidthRef = useRef(window.innerWidth);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
@@ -152,92 +154,127 @@ const HeroPageSection4 = ({ onComplete }) => {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      const currentWidth = window.innerWidth;
+      const previousWidth = previousWidthRef.current;
+
+      const crossingThreshold =
+        (previousWidth < 950 && currentWidth >= 950) ||
+        (previousWidth >= 950 && currentWidth < 950);
+
+      if (currentWidth >= 800 && currentWidth <= 1400 && crossingThreshold) {
+        setKey((prevKey) => prevKey + 1);
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+        setTimeout(() => {
+          if (sectionRef.current) {
+            initializeGSAPAnimations();
+          }
+        }, 100);
+      }
+
+      previousWidthRef.current = currentWidth;
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const initializeGSAPAnimations = () => {
     if (isMobile || isTablet) return;
 
-    let ctx = gsap.context(() => {
-      gsap.set(".side-cards-container", {
-        opacity: 0,
-        display: "block",
-        x: (index) => (index === 0 ? -100 : 100),
-      });
-
-      ScrollTrigger.create({
-        trigger: ".hero-page-section-4",
-        start: "top top",
-        end: "top 20%",
-        scrub: 0.5,
-        pin: ".title-section",
-        pinSpacing: false,
-      });
-
-      const mainCardTrigger = ScrollTrigger.create({
-        trigger: ".hero-page-section-4",
-        start: "top 20%",
-        end: "top 20%",
-        scrub: 0.5,
-        pin: true,
-        pinSpacing: true,
-        snap: {
-          snapTo: (value) => Math.round(value * 10) / 10,
-          duration: { min: 0.2, max: 0.5 },
-          ease: "power1.inOut",
-        },
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const scale = Math.pow(progress, 1.5);
-
-          gsap.to(".main-card", {
-            width: `${80 - scale * 60}%`,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-
-          gsap.to(".side-cards-container", {
-            opacity: scale,
-            x: 0,
-            duration: 1,
-            ease: "power2.out",
-          });
-
-          gsap.to(".cards-container", {
-            gap: `${2 + scale * 8}rem`,
-            duration: 0.3,
-            ease: "power2.out",
-            marginLeft: `-${scale * 2}%`,
-          });
-
-          gsap.to(".main-card .feature-title", {
-            fontSize: `${Math.max(3 - scale * 2, 2)}rem`,
-            duration: 1,
-            ease: "power2.out",
-          });
-
-          gsap.to(".main-card .feature-description", {
-            opacity: scale > 0.9 ? 1 : 0,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-
-          setIsCardShrunk(scale > 0.1);
-        },
-        onLeave: () => {
-          if (onComplete) {
-            onComplete();
-          }
-        },
-      });
-
-      return () => {
-        mainCardTrigger.kill();
-      };
+    gsap.set(".side-cards-container", {
+      opacity: 0,
+      display: "block",
+      x: (index) => (index === 0 ? -100 : 100),
     });
 
-    return () => ctx.revert();
-  }, [onComplete, isMobile, isTablet]);
+    ScrollTrigger.create({
+      trigger: ".hero-page-section-4",
+      start: "top top",
+      end: "top 20%",
+      scrub: 0.5,
+      pin: ".title-section",
+      pinSpacing: false,
+    });
+
+    const mainCardTrigger = ScrollTrigger.create({
+      trigger: ".hero-page-section-4",
+      start: "top 20%",
+      end: "top 20%",
+      scrub: 0.5,
+      pin: true,
+      pinSpacing: true,
+      snap: {
+        snapTo: (value) => Math.round(value * 10) / 10,
+        duration: { min: 0.2, max: 0.5 },
+        ease: "power1.inOut",
+      },
+      onUpdate: (self) => {
+        const progress = self.progress;
+        const scale = Math.pow(progress, 1.5);
+
+        gsap.to(".main-card", {
+          width: `${80 - scale * 60}%`,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+
+        gsap.to(".side-cards-container", {
+          opacity: scale,
+          x: 0,
+          duration: 1,
+          ease: "power2.out",
+        });
+
+        gsap.to(".cards-container", {
+          gap: `${2 + scale * 8}rem`,
+          duration: 0.3,
+          ease: "power2.out",
+          marginLeft: `-${scale * 2}%`,
+        });
+
+        gsap.to(".main-card .feature-title", {
+          fontSize: `${Math.max(3 - scale * 2, 2)}rem`,
+          duration: 1,
+          ease: "power2.out",
+        });
+
+        gsap.to(".main-card .feature-description", {
+          opacity: scale > 0.9 ? 1 : 0,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+
+        setIsCardShrunk(scale > 0.1);
+      },
+      onLeave: () => {
+        if (onComplete) {
+          onComplete();
+        }
+      },
+    });
+
+    return () => {
+      mainCardTrigger.kill();
+    };
+  };
+
+  useEffect(() => {
+    let cleanup;
+    if (sectionRef.current) {
+      cleanup = initializeGSAPAnimations();
+    }
+    return () => {
+      if (cleanup) cleanup();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [onComplete, isMobile, isTablet, key]);
 
   if (isMobile || isTablet) {
     return (
       <Box
+        key={key}
         sx={{
           minHeight: {
             xs: "30vh",
@@ -249,34 +286,34 @@ const HeroPageSection4 = ({ onComplete }) => {
           fontFamily: '"Inter", sans-serif',
           position: "relative",
           marginTop: {
-            xs: "0", // Consistent spacing for mobile devices
-            md: "0", // Desktop spacing
+            xs: "0",
+            md: "0",
           },
           pt: {
-            xs: "200px", // For screens up to 392px
-            sm: "60px", // For small tablets
-            md: "0", // For desktop
+            xs: "200px",
+            sm: "60px",
+            md: "0",
           },
           maxWidth: {
             xs: "100%",
             sm: "90%",
             md: "85%",
           },
-          mx: "auto", // Center the content
+          mx: "auto",
           "@media (min-width: 321px) and (max-width: 354px)": {
-            pt: "400px", // Specific padding for 321-374px
+            pt: "400px",
           },
           "@media (min-width: 355px) and (max-width: 374px)": {
-            pt: "300px", // Specific padding for 321-374px
+            pt: "300px",
           },
           "@media (min-width: 375px) and (max-width: 392px)": {
             pt: "280px",
           },
           "@media (min-width: 393px) and (max-width: 395)": {
-            pt: "200px", // Maintain consistent padding for larger mobile screens
+            pt: "200px",
           },
           "@media (min-width: 396px) and (max-width: 599px)": {
-            pt: "180px", // Maintain consistent padding for larger mobile screens
+            pt: "180px",
           },
           "@media (min-width: 600px) and (max-width: 768px)": {
             mt: 22,
@@ -382,6 +419,7 @@ const HeroPageSection4 = ({ onComplete }) => {
 
   return (
     <Box
+      key={key}
       ref={sectionRef}
       className="hero-page-section-4"
       sx={{

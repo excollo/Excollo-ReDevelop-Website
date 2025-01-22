@@ -33,6 +33,9 @@ const HeroPage = () => {
   const isSpecificSize = useMediaQuery(
     "(max-width: 1024px) and (max-height: 725px)"
   );
+  const isDesktopSize = useMediaQuery(
+    "(min-width: 1025px) and (max-width: 1200px)"
+  );
   const isDesktop = !isMobile && !isTablet;
 
   useEffect(() => {
@@ -96,6 +99,13 @@ const HeroPage = () => {
         timeline.to(".threeDE", {
           x: "32%",
           y: "-4%",
+          duration: 1,
+          ease: "power2.out",
+        });
+      } else if(isDesktopSize){
+        timeline.to(".threeDE", {
+          x: "28%",
+          y: "4%",
           duration: 1,
           ease: "power2.out",
         });
@@ -204,6 +214,25 @@ const HeroPage = () => {
           duration: 1.5,
           ease: "power2.out",
         });
+      } else if (isDesktopSize) {
+         gsap.to(threeDERef.current, {
+           scrollTrigger: {
+             trigger: ".hero-section-2",
+             start: "top center",
+             end: "bottom center",
+             scrub: true,
+           },
+           motionPath: {
+             path: [
+               { x: "28%", y: "2%" },
+               { x: "15%", y: "50%" },
+               { x: "-23vw", y: "95vh" },
+             ],
+             curviness: 1.5,
+           },
+           duration: 1.5,
+           ease: "power2.out",
+         });
       } else {
         gsap.to(threeDERef.current, {
           scrollTrigger: {
@@ -432,7 +461,7 @@ const HeroPage = () => {
           transform: isMobile || isTablet ? "translateY(0)" : "translateY(0)",
         }}
       >
-        <HeroPageSection4 onComplete={() => setHero4Complete(true)} />
+        <HeroPageSection4 />
       </Box>
       <Box>
         <HeroPageSection5 />

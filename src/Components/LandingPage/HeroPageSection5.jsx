@@ -22,7 +22,6 @@ const HeroPageSection5 = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const is1024px = useMediaQuery("(max-width: 1024px)");
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const cards = [
@@ -67,6 +66,21 @@ const HeroPageSection5 = () => {
       });
     }
   }, [isDesktop]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1023 && width <= 1025) {
+        window.location.reload(); // Refresh the page
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Box
