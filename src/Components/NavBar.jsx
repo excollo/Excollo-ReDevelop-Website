@@ -165,7 +165,14 @@ const NavBar = () => {
             <Box
               display="flex"
               gap="20px"
-              sx={{ position: "relative", zIndex: 0, overflow: "hidden" }}
+              sx={{
+                position: "relative",
+                zIndex: 0,
+                overflow: "hidden",
+                "@media (min-width: 900px) and (max-width: 950px)": {
+                  gap: "10px",
+                },
+              }}
             >
               <Typography component={Link} to="/" sx={commonLinkStyles}>
                 Home

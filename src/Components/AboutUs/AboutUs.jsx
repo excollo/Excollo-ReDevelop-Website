@@ -168,7 +168,7 @@ const Card = styled("div")(
       },
     },
 
-    "@media (min-width: 769px) and (max-width:1024px) ": {
+    "@media (min-width: 769px) and (max-width:1100px) ": {
       width: "95%",
       height: "fit-content",
       "& p": {
@@ -184,7 +184,7 @@ const AboutUs = () => {
   const isSpecificSize = useMediaQuery(
     "(min-width: 600px) and (max-width: 900px)"
   );
-  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 900px)");
 
   const [showButton, setShowButton] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -463,7 +463,7 @@ const AboutUs = () => {
 
       <VisionSection />
       <MissionSection />
-      <PhilosophySection sx={{ fontSize: "1rem" }} />
+      <PhilosophySection/>
       <HowWeWork />
       <Excollo3D />
       <Footer />

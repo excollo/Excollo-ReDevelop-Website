@@ -94,14 +94,55 @@ const TableContent = styled("div")({
     lineHeight: 1.6,
     textAlign: "center", // Center-align paragraph text
   },
-  "@media (min-width: 1025px) and (max-width:1440px)": {
-    width: "77.9%",
-    height: "400px",
-    "& h3": {
-      fontSize: "28px",
-    },
+  "@media (min-width: 1500px) and (max-width: 1600px)": {
+    width: "79%",
+    "& h3": { fontSize: "30px" },
   },
-  "@media (min-width: 769px) and (max-width:1024px)": {
+  "@media (min-width: 1400px) and (max-width: 1500px)": {
+    width: "78.2%",
+    "& h3": { fontSize: "30px" },
+  },
+  "@media (min-width: 1350px) and (max-width: 1399px)": {
+    width: "77.2%",
+    "& h3": { fontSize: "30px" },
+  },
+  "@media (min-width: 1300px) and (max-width: 1349px)": {
+    width: "76.5%",
+    "& h3": { fontSize: "29px" },
+  },
+  "@media (min-width: 1250px) and (max-width: 1299px)": {
+    width: "75%",
+    "& h3": { fontSize: "29px" },
+  },
+  "@media (min-width: 1200px) and (max-width: 1249px)": {
+    width: "73.5%",
+    "& h3": { fontSize: "28px" },
+  },
+  "@media (min-width: 1150px) and (max-width: 1199px)": {
+    width: "72%",
+    "& h3": { fontSize: "28px" },
+  },
+  "@media (min-width: 1100px) and (max-width: 1149px)": {
+    width: "70.5%",
+    "& h3": { fontSize: "27px" },
+  },
+  "@media (min-width: 1050px) and (max-width: 1099px)": {
+    width: "69.5%",
+    "& h3": { fontSize: "27px" },
+  },
+  "@media (min-width: 1000px) and (max-width: 1049px)": {
+    width: "67.8%",
+    "& h3": { fontSize: "26px" },
+  },
+  "@media (min-width: 950px) and (max-width: 999px)": {
+    width: "66%",
+    "& h3": { fontSize: "26px" },
+  },
+  "@media (min-width: 900px) and (max-width: 949px)": {
+    width: "64.5%",
+    "& h3": { fontSize: "25px" },
+  },
+  "@media (min-width: 769px) and (max-width:900px)": {
     width: "62%",
     height: "400px", // Make it 90% of the width for mobile
     // Add margin between cards on mobile
