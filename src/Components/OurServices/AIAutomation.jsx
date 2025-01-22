@@ -75,9 +75,22 @@ const AIAutomation = forwardRef((props, ref) => {
         .closest(".services-container")
         .getBoundingClientRect();
 
+      let topOffset = rect.top - parentRect.top + rect.height / 2 - 30;
+
+       // Adjust topOffset based on screen size
+       if (window.innerWidth >= 1200 && window.innerWidth <= 2000) {
+         const adjustmentFactor = (window.innerWidth - 1200) / 800; // Calculate adjustment factor
+         topOffset =
+           rect.top -
+           parentRect.top +
+           rect.height / 2 -
+           (10 + adjustmentFactor * 80); // Adjust this value as needed
+       }
+  
+
       console.log("Updating circle position for index:", currentDotIndex); // Debug log
       gsap.to(circleRef.current, {
-        top: rect.top - parentRect.top + rect.height / 2 - 40,
+        top: topOffset,
         left: rect.left - parentRect.left + rect.width / 2 - 1.2, // Adjusted left position
         ease: "power2.inOut",
       });

@@ -83,7 +83,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
 
       console.log("Updating circle position for index:", currentDotIndex); // Debug log
       gsap.to(circleRef.current, {
-        top: rect.top - parentRect.top + rect.height / 2 - 30,
+        top: rect.top - parentRect.top + rect.height / 2 - 390,
         left: rect.left - parentRect.left + rect.width / 2 - 1, // Adjusted left position
         ease: "power2.inOut",
       });

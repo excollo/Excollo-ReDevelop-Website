@@ -83,7 +83,7 @@ const TechConsultancy = forwardRef((props, ref) => {
 
       console.log("Updating circle position for index:", currentDotIndex);
       gsap.to(circleRef.current, {
-        top: rect.top - parentRect.top + rect.height / 2 - 30,
+        top: rect.top - parentRect.top + rect.height / 2 - 460,
         left: rect.left - parentRect.left + rect.width / 2 - 1,
         ease: "power2.inOut",
       });
