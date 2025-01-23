@@ -40,7 +40,6 @@ const NavBar = () => {
     "&:hover": {
       background:
         "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-      border: "1px solid transparent",
       borderRadius: "40px",
     },
   };
@@ -170,7 +169,7 @@ const NavBar = () => {
                 zIndex: 0,
                 overflow: "hidden",
                 "@media (min-width: 900px) and (max-width: 950px)": {
-                  gap: "10px",
+                  gap: "7px",
                 },
               }}
             >

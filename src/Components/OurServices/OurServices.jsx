@@ -20,11 +20,15 @@ const OurServices = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 899px)");
-  const isminiLaptop = useMediaQuery("(min-width: 900px) and (max-width: 1023px)");
-  const isSpecified = useMediaQuery("(min-width: 1024px) and (max-width: 1199px)")
-   const isLandscapeMedium = useMediaQuery(
-     "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
-   );
+  const isminiLaptop = useMediaQuery(
+    "(min-width: 900px) and (max-width: 1023px)"
+  );
+  const isSpecified = useMediaQuery(
+    "(min-width: 1024px) and (max-width: 1199px)"
+  );
+  const isLandscapeMedium = useMediaQuery(
+    "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
+  );
   const aiAutomationRef = useRef(null);
   const salesChannelRef = useRef(null);
   const mlDrivenDataAnalysisRef = useRef(null);
@@ -48,7 +52,6 @@ const OurServices = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
 
   useEffect(() => {
     const handleScroll = () => {
