@@ -33,7 +33,7 @@ const NavBar = () => {
 
   const commonLinkStyles = {
     textDecoration: "none",
-    fontSize: "16px",
+    fontSize: "calc(0.9vw + 0.9vh)",
     position: "relative",
     padding: "10px 20px",
     color: "white",
@@ -121,8 +121,9 @@ const NavBar = () => {
           backgroundColor: "transparent",
           boxShadow: "none",
           position: "relative",
-          width: "85%",
+          width: "100%",
           zIndex: 10,
+          pt: 4,
           margin: "0 auto",
           "@media (max-width: 320px)": {
             margin: "0 auto 0 -20px", // Adjust the left margin for smaller screens
@@ -132,11 +133,17 @@ const NavBar = () => {
           },
         }}
       >
-        <Toolbar sx={{ justifyContent: "space-between", position: "relative" }}>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+            position: "relative",
+            width: "85%",
+            margin: "auto",
+          }}
+        >
           <Box
             display="flex"
             alignItems="center"
-            padding={4}
             sx={{ position: "relative", zIndex: 0 }}
           >
             <Link to="/">
@@ -163,13 +170,14 @@ const NavBar = () => {
           ) : (
             <Box
               display="flex"
-              gap="20px"
               sx={{
                 position: "relative",
                 zIndex: 0,
                 overflow: "hidden",
-                "@media (min-width: 900px) and (max-width: 950px)": {
-                  gap: "7px",
+                gap: {
+                  md: "1rem", // Larger screens
+                  lg: "1.5rem", // Extra-large screens
+                  xl: "3rem", // Extra-extra-large screens
                 },
               }}
             >

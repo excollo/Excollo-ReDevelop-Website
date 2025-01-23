@@ -20,15 +20,13 @@ const OurServices = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 899px)");
-  const isminiLaptop = useMediaQuery(
-    "(min-width: 900px) and (max-width: 1023px)"
-  );
-  const isSpecified = useMediaQuery(
-    "(min-width: 1024px) and (max-width: 1199px)"
-  );
   const isLandscapeMedium = useMediaQuery(
     "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
   );
+  const isMediumScreen = useMediaQuery(theme.breakpoints.only("md"));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.only("lg")); 
+  const isExtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl")); 
+
   const aiAutomationRef = useRef(null);
   const salesChannelRef = useRef(null);
   const mlDrivenDataAnalysisRef = useRef(null);
@@ -95,21 +93,22 @@ const OurServices = () => {
   };
 
   return (
-    <Box className="services-section" sx={{ overflow: "hidden" }}>
+    <Box className="services-section">
       <Box
         sx={{
           minHeight: isLandscapeMedium ? "120vh" : "100vh",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
+          width: "100%",
           position: "relative",
         }}
       >
         <Box
           sx={{
-            maxWidth: { xs: "95%", sm: "90%", md: "90%" },
+            maxWidth: { xs: "95%", sm: "90%", md: "85%", lg: "85%", xl: "85%"},
             margin: isLandscapeMedium
               ? "120px auto 60px"
-              : { xs: "20px auto", md: "50px auto" },
+              : { xs: "20px auto", md: "0px auto"},
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
@@ -119,18 +118,18 @@ const OurServices = () => {
             sx={{
               minHeight: isLandscapeMedium
                 ? "auto"
-                : { xs: "auto", md: "50vh" },
+                : {xs: "auto", md: "auto"},
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               alignItems: "center",
               mt: isLandscapeMedium
                 ? "0"
-                : { xs: "10%", md: "-15%", lg: "-20%" },
+                : { xs: "10%", md: "-10%", lg: "-10%" },
               mb: { xs: 0, md: 0 },
               position: "relative",
             }}
           >
-            <Box>
+            <Box sx={{ width: {md: "70%", lg: "70%", xl: "70%"} }}>
               <Box
                 sx={{
                   display: "flex",
@@ -149,7 +148,7 @@ const OurServices = () => {
                           xs: "2.5rem",
                           sm: "3rem",
                           md: "3.5rem",
-                          lg: "4rem",
+                          lg: "5rem",
                         },
                     fontFamily: '"Inter", sans-serif',
                     fontWeight: "600",
@@ -157,11 +156,7 @@ const OurServices = () => {
                     whiteSpace: "nowrap", // Prevent line break
                     ml: isLandscapeMedium
                       ? "5%"
-                      : isSpecified
-                      ? "13%"
-                      : isminiLaptop
-                      ? "13%"
-                      : { xs: 0, md: "2%", lg: "11%" },
+                      : 0,
                   }}
                 >
                   <span className="highlight">Our </span>
@@ -182,7 +177,7 @@ const OurServices = () => {
                 sx={{
                   maxWidth: isLandscapeMedium
                     ? "90%"
-                    : { xs: "100%", md: "70%" },
+                    : { xs: "100%" },
                   fontSize: isLandscapeMedium
                     ? "1.1rem"
                     : {
@@ -190,17 +185,14 @@ const OurServices = () => {
                         sm: "1.2rem",
                         md: "1.3rem",
                         lg: "1.3rem",
+                        xl: "1.7rem",
                       },
                   fontWeight: 200,
                   lineHeight: 1.7,
                   textAlign: { xs: "center", md: "left" },
                   ml: isLandscapeMedium
                     ? "5%"
-                    : isSpecified
-                    ? "14%"
-                    : isminiLaptop
-                    ? "14%"
-                    : { xs: 0, md: "2%", lg: "12%" },
+                    : { xs: 0, md: "1%" },
                   px: { xs: 2, md: 0 },
                   mt: isLandscapeMedium ? 2 : { xs: 3, md: 5 },
                 }}
@@ -215,7 +207,7 @@ const OurServices = () => {
             {!isMobile && !isTablet && (
               <Box
                 sx={{
-                  width: isLandscapeMedium ? "50%" : { sm: "60%", md: "80%" },
+                  width: isLandscapeMedium ? "50%" : { md: "50%", lg: "40%" },
                   mr: { md: "0%", lg: "0%" },
                   "@media (min-width: 200px) and (max-width: 899px)": {
                     display: "none",
