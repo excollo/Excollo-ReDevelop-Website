@@ -185,6 +185,9 @@ const AboutUs = () => {
     "(min-width: 600px) and (max-width: 900px)"
   );
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 900px)");
+  const isLandscapeMedium = useMediaQuery(
+      "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
+    );
 
   const [showButton, setShowButton] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -327,10 +330,8 @@ const AboutUs = () => {
   return (
     <Box
       sx={{
-        bgcolor: "#000",
         minHeight: "100vh",
         fontFamily: '"Inter", sans-serif',
-        overflow: "hidden",
       }}
     >
       <Box
@@ -347,123 +348,127 @@ const AboutUs = () => {
       <NavBar />
       <Box
         sx={{
-          maxWidth: { xs: "95%", sm: "90%", md: "90%" },
-          margin: { xs: "20px auto", md: "50px auto" },
+          minHeight: isLandscapeMedium ? "120vh" : "100vh",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
-          alignItems: "center",
+          width: "100%",
+          position: "relative",
         }}
       >
         <Box
           sx={{
-            minHeight: { xs: "auto", md: "50vh" },
+            maxWidth: { xs: "95%", sm: "90%", md: "85%", lg: "85%", xl: "85%" },
+            margin: isLandscapeMedium
+              ? "120px auto 60px"
+              : { xs: "20px auto", md: "0px auto" },
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
-            mt: { xs: "10%", md: "-15%", lg: "-14%" },
-            mb: { xs: 0, md: 0 },
           }}
         >
-          <Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-                alignItems: { xs: "center", md: "flex-start" },
-              }}
-            >
-              <Typography
-                variant="h2"
+          <Box
+            sx={{
+              minHeight: isLandscapeMedium
+                ? "auto"
+                : { xs: "auto", md: "auto" },
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: "center",
+              mt: isLandscapeMedium
+                ? "0"
+                : { xs: "10%", md: "-10%", lg: "-10%" },
+              mb: { xs: 0, md: 0 },
+              position: "relative",
+            }}
+          >
+            <Box sx={{ width: { md: "70%", lg: "70%", xl: "70%" } }}>
+              <Box
                 sx={{
-                  textAlign: { xs: "center", md: "left" },
-                  fontSize: {
-                    xs: "2.5rem",
-                    sm: "3rem",
-                    md: "3.5rem",
-                    lg: "4rem",
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: "600",
-                  color: "#fff",
-                  whiteSpace: "nowrap",
-                  ml: { xs: 0, md: "13%", lg: "12%" },
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: { xs: "center", md: "flex-start" },
+                  marginBottom: isLandscapeMedium ? "40px" : undefined,
                 }}
               >
-                <span className="highlight">About</span>
-              </Typography>
-
-              <Typography
-                variant="h2"
-                sx={{
-                  textAlign: { xs: "center", md: "left" },
-                  fontSize: {
-                    xs: "2.5rem",
-                    sm: "3rem",
-                    md: "3.5rem",
-                    lg: "4rem",
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: "600",
-                  color: "#fff",
-                  whiteSpace: "nowrap",
-                  ml: { xs: 0, md: "2%", lg: "1.5%" },
-                }}
-              >
-                <span
-                  style={{
-                    background:
-                      "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
+                <Typography
+                  variant="h2"
+                  sx={{
+                    textAlign: { xs: "center", md: "left" },
+                    fontSize: isLandscapeMedium
+                      ? "3rem"
+                      : {
+                          xs: "2.5rem",
+                          sm: "3rem",
+                          md: "3.5rem",
+                          lg: "5rem",
+                        },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: "600",
+                    color: "#fff",
+                    whiteSpace: "nowrap", // Prevent line break
+                    ml: isLandscapeMedium ? "5%" : 0,
                   }}
                 >
-                  Excollo
-                </span>
+                  <span className="highlight">About </span>
+                  <span
+                    style={{
+                      background:
+                        "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    Excollo
+                  </span>
+                </Typography>
+              </Box>
+
+              <Typography
+                sx={{
+                  maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
+                  fontSize: isLandscapeMedium
+                    ? "1.1rem"
+                    : {
+                        xs: "1.1rem",
+                        sm: "1.2rem",
+                        md: "1.3rem",
+                        lg: "1.3rem",
+                        xl: "1.7rem",
+                      },
+                  fontWeight: 200,
+                  lineHeight: 1.7,
+                  textAlign: { xs: "center", md: "left" },
+                  ml: isLandscapeMedium ? "5%" : { xs: 0, md: "1%" },
+                  px: { xs: 2, md: 0 },
+                  mt: isLandscapeMedium ? 2 : { xs: 3, md: 5 },
+                }}
+              >
+                Excollo bridges today’s challenges and tomorrow’s opportunities.
+                We harness cutting-edge technology, AI, and tailored solutions
+                to deliver outcomes and make businesses future-ready.
               </Typography>
             </Box>
 
-            <Typography
-              sx={{
-                maxWidth: { xs: "100%", md: "70%" },
-                fontSize: {
-                  xs: "1.1rem",
-                  sm: "1.2rem",
-                  md: "1.3rem",
-                  lg: "1.3rem",
-                },
-                fontWeight: 200,
-                lineHeight: 1.7,
-                textAlign: { xs: "center", md: "left" },
-                ml: { xs: 0, md: "13%", lg: "12.5%" },
-                px: { xs: 2, md: 0 },
-                mt: { xs: 3, md: 5 },
-              }}
-            >
-              Excollo bridges today's challenges and tomorrow's opportunities.
-              We harness cutting-edge technology, AI, and tailored solutions to
-              deliver outcomes and make businesses future-ready.
-            </Typography>
+            {!isMobile && !isTablet && (
+              <Box
+                sx={{
+                  width: isLandscapeMedium ? "50%" : { md: "50%", lg: "40%" },
+                  mr: { md: "0%", lg: "0%" },
+                  "@media (min-width: 200px) and (max-width: 899px)": {
+                    display: "none",
+                  },
+                }}
+              >
+                <ThreeDE />
+              </Box>
+            )}
           </Box>
-
-          {!isMobile && !isTablet && (
-            <Box
-              sx={{
-                width: { sm: "60%", md: "80%" },
-                mr: { md: "2%", lg: "0%" },
-                "@media (min-width: 200px) and (max-width:900px) ": {
-                  display: "none",
-                },
-              }}
-            >
-              <ThreeDE />
-            </Box>
-          )}
         </Box>
       </Box>
 
       <VisionSection />
       <MissionSection />
-      <PhilosophySection/>
+      <PhilosophySection />
       <HowWeWork />
       <Excollo3D />
       <Footer />
