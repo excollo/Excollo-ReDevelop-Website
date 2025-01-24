@@ -36,11 +36,11 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
   const circleRef = useRef(null);
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isSpecified = useMediaQuery(
-    "(min-width: 900px) and (max-width: 1199px)"
-  );
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+    const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+    const isSpecified = useMediaQuery(theme.breakpoints.up("md"));
+    const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+    const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -114,7 +114,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
         },
         {
           opacity: 1,
-          y: 200,
+          y: 300,
           duration: 1,
           scrollTrigger: {
             trigger: ".fade-in-heading3",
@@ -129,9 +129,10 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
           opacity: 1,
           scrollTrigger: {
             trigger: ".fade-in-heading3",
-            start: "top 50%",
-            end: "top 40%",
+            start: "top 40%",
+            end: "top 35%",
             scrub: 1,
+            duration: 2,
           },
         })
         .to(".animate-content-3", {
@@ -140,8 +141,8 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
           delay: 1,
           scrollTrigger: {
             trigger: ".animate-content-3",
-            start: "top 8%",
-            end: "top 5%",
+            start: "top 20%",
+            end: "top 10%",
             scrub: 1,
           },
         })
@@ -181,7 +182,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
   }, [isMobile, isTablet]);
 
   useEffect(() => {
-    if (isSpecified || isTablet) {
+    if (isTablet) {
       gsap.set(".tablet-heading", {
         y: 100,
         opacity: 0,
@@ -236,7 +237,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
           });
         });
     }
-  }, [isTablet, isSpecified]);
+  }, [isTablet]);
 
   const services = [
     {
@@ -298,217 +299,6 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
       }}
     />
   );
-
-  const containerStyles = {
-    width: "100%",
-    minHeight: isTablet || isSpecified ? "auto" : "120vh",
-    position: "relative",
-    marginBottom: "5rem",
-    padding: isTablet || isSpecified ? "1rem" : 0,
-    ml: isTablet || isSpecified ? -5 : "-5%",
-  };
-
-  const contentStyles = {
-    maxWidth: isTablet || isSpecified ? "90%" : "1200px",
-    margin: "0 auto",
-    position: "relative",
-    padding: isTablet || isSpecified ? "1rem" : "2rem",
-  };
-
-  const titleStyles = {
-    fontSize: isTablet || isSpecified ? "2rem" : "3rem",
-    textAlign: "center",
-    ml: isTablet ? 0 : "5%",
-    marginBottom: isTablet || isSpecified ? "2rem" : "3rem",
-  };
-
-  if (isSpecified) {
-    return (
-      <Box className="services-container" sx={containerStyles}>
-        {!isSpecified && (
-          <Box
-            className="fade-in-heading"
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100vh",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Box>
-              <Typography
-                variant="h1"
-                sx={{ fontWeight: "500", textAlign: "center" }}
-              >
-                ML Driven Analysis
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                variant="h4"
-                sx={{ textAlign: "center", fontWeight: "500", mt: 2 }}
-              >
-                Empower your business with AI
-              </Typography>
-            </Box>
-          </Box>
-        )}
-
-        <Box
-          className={isSpecified ? "" : "animate-content"}
-          sx={{
-            position: isSpecified ? "relative" : "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: isSpecified ? "auto" : "100vh",
-            padding: "2rem",
-            "&::-webkit-scrollbar": {
-              width: "8px",
-            },
-            "&::-webkit-scrollbar-track": {
-              background: "rgba(0, 0, 0, 0.1)",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              background: "rgba(37, 121, 227, 0.5)",
-              borderRadius: "4px",
-            },
-          }}
-        >
-          <Box sx={contentStyles}>
-            {isSpecified && (
-              <Typography
-                variant="h2"
-                sx={{
-                  ...titleStyles,
-                  background: "linear-gradient(180deg, #2579e3, #8e54f7)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  textFillColor: "transparent",
-                  textAlign: "center",
-                  fontSize: "2.8rem",
-                  fontWeight: 500,
-                  mb: 4,
-                }}
-                className="tablet-heading"
-              >
-                ML Driven Analysis
-              </Typography>
-            )}
-            {services.map((service, index) => (
-              <Box className="tablet-service-item" key={service.id}>
-                <Accordion
-                  expanded={expanded === service.id}
-                  onChange={handleChange(service.id)}
-                  sx={{
-                    backgroundColor: "#000",
-                    color: "#fff",
-                    boxShadow: "none",
-                    "&.Mui-expanded": {
-                      margin: 0,
-                    },
-                  }}
-                >
-                  <AccordionSummary
-                    expandIcon={<ChevronDown style={{ color: "#fff" }} />}
-                    sx={{
-                      "&.Mui-expanded": {
-                        minHeight: isSpecified ? 80 : 105,
-                        margin: 0,
-                      },
-                      minHeight: isSpecified ? 80 : 105,
-                    }}
-                  >
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontSize: isSpecified ? "1.1rem" : "1.7rem",
-                        position: "relative",
-                        ml: isSpecified ? -5 : "1%",
-                      }}
-                      className={isSpecified ? "tablet-service-item" : ""}
-                    >
-                      <span
-                        ref={(el) => (symbolRefs.current[index] = el)}
-                        style={{ display: "inline-block" }}
-                      >
-                        ✤
-                      </span>
-                      {service.title}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails
-                    sx={{
-                      padding: "0 16px 8px 16px",
-                      maxWidth: "120%",
-                      ml: "1%",
-                    }}
-                  >
-                    <List
-                      sx={{
-                        padding: 0,
-                        "& .MuiListItem-root": {
-                          padding: "4px 0",
-                        },
-                      }}
-                    >
-                      {service.details.map((detail, index) => (
-                        <ListItem
-                          key={index}
-                          className={isSpecified ? "tablet-service-item" : ""}
-                        >
-                          <ListItemIcon sx={{ minWidth: 25 }}>
-                            <Circle size={6} color="#fff" />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={detail}
-                            primaryTypographyProps={{
-                              sx: {
-                                fontSize: isSpecified ? "0.8rem" : "0.9rem",
-                              },
-                            }}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </AccordionDetails>
-                </Accordion>
-                <GradientDivider
-                  className={
-                    isSpecified ? "tablet-gradient-divider" : "gradient-divider"
-                  }
-                />
-              </Box>
-            ))}
-
-            {!isSpecified && (
-              <Box
-                ref={circleRef}
-                sx={{
-                  position: "absolute",
-                  width: 20,
-                  height: 30,
-                  background:
-                    "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-                  borderRadius: "50%",
-                  zIndex: 2,
-                  boxShadow: "0 0 20px rgba(255, 87, 34, 0.5)",
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-            )}
-          </Box>
-          <Box sx={{ mt: 10 }}>
-            <MarqueeCarousel3 />
-          </Box>
-        </Box>
-      </Box>
-    );
-  }
 
   if (isTablet) {
     return (
@@ -837,21 +627,17 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
       className="services-container"
       sx={{
         width: "100%",
-        minHeight: "120vh",
-        marginTop: "5rem",
+        minHeight: "100vh",
         position: "relative",
-        marginBottom: "5rem",
       }}
     >
       <Box
         className="fade-in-heading3"
         sx={{
-          position: "absolute",
+          position: "relative",
           top: 0,
           left: 0,
           width: "100%",
-          height: "100vh",
-          marginTop: "20%",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -872,7 +658,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
             variant="h4"
             sx={{ textAlign: "center", fontWeight: "500", mt: 2 }}
           >
-            Gain actionable insights
+            Gain Actionable Insights
           </Typography>
         </Box>
       </Box>
@@ -880,39 +666,41 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
       <Box
         className="animate-content-3"
         sx={{
-          position: "absolute",
+          position: "relative",
           top: 0,
           left: 0,
           width: "100%",
-          height: "100vh",
-          padding: "2rem",
-          marginTop: "20%",
-          "&::-webkit-scrollbar": {
-            width: "8px",
-          },
-          "&::-webkit-scrollbar-track": {
-            background: "rgba(0, 0, 0, 0.1)",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "rgba(37, 121, 227, 0.5)",
-            borderRadius: "4px",
+          padding: {
+            md: "0 2%",
           },
         }}
       >
         <Box
           sx={{
             maxWidth: "100%",
-            margin: "0 auto",
             position: "relative",
-            backgroundColor: "#000",
             zIndex: 1,
-            pb: "2rem",
-            ml: "-2%",
           }}
         >
           <Typography
             variant="h6"
-            sx={{ color: "gray", ml: "2%" }}
+            sx={{
+              color: "#fff",
+              ml: {
+                md: "3%",
+              },
+              mb: {
+                md: "1%",
+                lg: "2%",
+                xl: "1.5%",
+              },
+              fontSize: {
+                xs: "1rem",
+                sm: "1.2rem",
+                md: "1.4rem",
+                lg: "1.6rem",
+              },
+            }}
             className="services-title-3"
           >
             ML Driven Analysis
@@ -927,29 +715,53 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                   color: "#fff",
                   boxShadow: "none",
                   "&.Mui-expanded": {
-                    marginRight: "50px",
+                    marginRight: {
+                      md: "0%",
+                      lg: "0%",
+                      xl: "0%",
+                    },
                   },
                 }}
               >
                 <AccordionSummary
                   expandIcon={
-                    <ChevronDown
-                      style={{ color: "#fff", marginRight: "50px" }}
-                    />
+                    <ChevronDown style={{ color: "#fff", marginRight: "0%" }} />
                   }
                   sx={{
-                    "&.Mui-expanded": {
-                      minHeight: 145,
+                    width: {
+                      md: "95%",
                     },
-                    minHeight: 145,
+                    height: {
+                      md: "clamp(100px, 16vh, 250px)",
+                      lg: "clamp(100px, 16vh, 250px)",
+                      xl: "clamp(100px, 18vh, 250px)",
+                    },
+                    minHeight: "auto",
+                    "&.Mui-expanded": {
+                      minHeight: {
+                        md: 70,
+                        lg: 120,
+                        xl: 140,
+                      },
+                    },
                   }}
                 >
                   <Typography
                     variant="h5"
                     sx={{
-                      fontSize: "1.7rem",
+                      fontSize: {
+                        xs: "1.3rem",
+                        sm: "1.5rem",
+                        md: "1.7rem",
+                        lg: "1.9rem",
+                        xl: "2.1rem",
+                      },
                       position: "relative",
-                      marginLeft: "2%",
+                      marginLeft: {
+                        md: "2%",
+                        lg: "2.5%",
+                        xl: "2.5%",
+                      },
                     }}
                   >
                     <span
@@ -963,28 +775,40 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                 </AccordionSummary>
                 <AccordionDetails
                   sx={{
-                    padding: "0 16px 8px 16px",
-                    maxWidth: "120%",
-                    ml: "4%",
+                    maxWidth: "100%",
+                    ml: {
+                      md: "4%",
+                      lg: "4.5%",
+                      xl: "5%",
+                    },
                   }}
                 >
                   <List
                     sx={{
                       padding: 0,
                       "& .MuiListItem-root": {
-                        padding: "4px 0",
+                        padding: {
+                          md: "4px 0px",
+                        },
                       },
                     }}
                   >
                     {service.details.map((detail, index) => (
                       <ListItem key={index}>
-                        <ListItemIcon sx={{ minWidth: 25 }}>
+                        <ListItemIcon>
                           <Circle size={8} color="#fff" />
                         </ListItemIcon>
                         <ListItemText
                           primary={detail}
                           primaryTypographyProps={{
-                            sx: { fontSize: "1.1rem" },
+                            sx: {
+                              fontSize: {
+                                xs: "0.9rem",
+                                sm: "1rem",
+                                md: "1.1rem",
+                                lg: "1.2rem",
+                              },
+                            },
                           }}
                         />
                       </ListItem>
@@ -1000,8 +824,16 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
             ref={circleRef}
             sx={{
               position: "absolute",
-              width: 30,
-              height: 30,
+              width: {
+                xs: 20,
+                sm: 25,
+                md: 30,
+              },
+              height: {
+                xs: 20,
+                sm: 25,
+                md: 30,
+              },
               background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
               borderRadius: "50%",
               zIndex: 2,
@@ -1010,7 +842,20 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
             }}
           />
         </Box>
-        <Box sx={{ mt: 10, ml: "-5%" }}>
+        <Box
+          sx={{
+            mt: {
+              md: 10,
+              lg: 12,
+              xl: 14,
+            },
+            ml: {
+              md: "-5%",
+              lg: "-6%",
+              xl: "-7%",
+            },
+          }}
+        >
           <MarqueeCarousel3 />
         </Box>
       </Box>

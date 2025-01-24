@@ -105,10 +105,10 @@ const OurServices = () => {
       >
         <Box
           sx={{
-            maxWidth: { xs: "95%", sm: "90%", md: "85%", lg: "85%", xl: "85%"},
+            maxWidth: { xs: "95%", sm: "90%", md: "85%", lg: "85%", xl: "85%" },
             margin: isLandscapeMedium
               ? "120px auto 60px"
-              : { xs: "20px auto", md: "0px auto"},
+              : { xs: "20px auto", md: "0px auto" },
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
@@ -118,7 +118,7 @@ const OurServices = () => {
             sx={{
               minHeight: isLandscapeMedium
                 ? "auto"
-                : {xs: "auto", md: "auto"},
+                : { xs: "auto", md: "auto" },
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               alignItems: "center",
@@ -129,7 +129,7 @@ const OurServices = () => {
               position: "relative",
             }}
           >
-            <Box sx={{ width: {md: "70%", lg: "70%", xl: "70%"} }}>
+            <Box sx={{ width: { md: "70%", lg: "70%", xl: "70%" } }}>
               <Box
                 sx={{
                   display: "flex",
@@ -154,9 +154,7 @@ const OurServices = () => {
                     fontWeight: "600",
                     color: "#fff",
                     whiteSpace: "nowrap", // Prevent line break
-                    ml: isLandscapeMedium
-                      ? "5%"
-                      : 0,
+                    ml: isLandscapeMedium ? "5%" : 0,
                   }}
                 >
                   <span className="highlight">Our </span>
@@ -175,9 +173,7 @@ const OurServices = () => {
 
               <Typography
                 sx={{
-                  maxWidth: isLandscapeMedium
-                    ? "90%"
-                    : { xs: "100%" },
+                  maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
                   fontSize: isLandscapeMedium
                     ? "1.1rem"
                     : {
@@ -190,9 +186,7 @@ const OurServices = () => {
                   fontWeight: 200,
                   lineHeight: 1.7,
                   textAlign: { xs: "center", md: "left" },
-                  ml: isLandscapeMedium
-                    ? "5%"
-                    : { xs: 0, md: "1%" },
+                  ml: isLandscapeMedium ? "5%" : { xs: 0, md: "1%" },
                   px: { xs: 2, md: 0 },
                   mt: isLandscapeMedium ? 2 : { xs: 3, md: 5 },
                 }}
@@ -223,22 +217,38 @@ const OurServices = () => {
       <Box
         sx={{
           position: "relative",
-          mt: isLandscapeMedium ? "-20px" : { xs: -50 },
+          mt: isLandscapeMedium ? "-20px" : { xs: -50, md: -30 },
           paddingTop: isLandscapeMedium ? "60px" : { xs: 0, md: 0 },
         }}
       >
         <AIAutomation ref={aiAutomationRef} />
       </Box>
-      <Box>
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
         <SalesChannelDevelopment ref={salesChannelRef} />
       </Box>
-      <Box>
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
         <MLDrivenDataAnalysis ref={mlDrivenDataAnalysisRef} />
       </Box>
-      <Box>
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
         <ProductDevelopment ref={productDevelopmentRef} />
       </Box>
-      <Box>
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
         <TechConsultancy ref={techConsultancyRef} />
       </Box>
       <Fade in={showButton}>
