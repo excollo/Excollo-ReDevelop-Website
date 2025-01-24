@@ -34,6 +34,7 @@ const TechConsultancy = forwardRef((props, ref) => {
   const [currentDotIndex, setCurrentDotIndex] = useState(0);
   const symbolRefs = useRef([]);
   const circleRef = useRef(null);
+  const lastAccordionRef = useRef(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -44,6 +45,19 @@ const TechConsultancy = forwardRef((props, ref) => {
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+
+    if (isExpanded && panel === services[services.length - 1].id) {
+      setTimeout(() => {
+        const element = symbolRefs.current[services.length - 1];
+        const offset = 480; // Adjust this value to scroll slightly (in pixels)
+        const elementTop = element.getBoundingClientRect().top + window.scrollY;
+
+        window.scrollTo({
+          top: elementTop - offset,
+          behavior: "smooth",
+        });
+      }, 0);
+    }
   };
 
   useImperativeHandle(ref, () => ({
@@ -129,8 +143,8 @@ const TechConsultancy = forwardRef((props, ref) => {
           opacity: 1,
           scrollTrigger: {
             trigger: ".fade-in-heading-5",
-            start: "top 50%",
-            end: "top 40%",
+            start: "top 40%",
+            end: "top 35%",
             scrub: 1,
             duration: 2,
           },
@@ -141,8 +155,8 @@ const TechConsultancy = forwardRef((props, ref) => {
           delay: 1,
           scrollTrigger: {
             trigger: ".animate-content-5",
-            start: "top 8%",
-            end: "top 5%",
+            start: "top 20%",
+            end: "top 10%",
             scrub: 1,
           },
         })
@@ -774,6 +788,7 @@ const TechConsultancy = forwardRef((props, ref) => {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails
+                  ref={index === services.length - 1 ? lastAccordionRef : null}
                   sx={{
                     maxWidth: "100%",
                     ml: {

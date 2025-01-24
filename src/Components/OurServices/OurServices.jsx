@@ -221,35 +221,39 @@ const OurServices = () => {
           paddingTop: isLandscapeMedium ? "60px" : { xs: 0, md: 0 },
         }}
       >
-        <AIAutomation ref={aiAutomationRef} />
+        <AIAutomation />
       </Box>
       <Box
         sx={{
           position: "relative",
+          mt: { xl: 30, lg: 10 },
         }}
       >
-        <SalesChannelDevelopment ref={salesChannelRef} />
+        <SalesChannelDevelopment />
       </Box>
       <Box
         sx={{
           position: "relative",
+          mt: { xl: 30, lg: 10 },
         }}
       >
-        <MLDrivenDataAnalysis ref={mlDrivenDataAnalysisRef} />
+        <MLDrivenDataAnalysis />
       </Box>
       <Box
         sx={{
           position: "relative",
+          mt: { xl: 30, lg: 10 },
         }}
       >
-        <ProductDevelopment ref={productDevelopmentRef} />
+        <ProductDevelopment />
       </Box>
       <Box
         sx={{
           position: "relative",
+          mt: { xl: 30, lg: 10 },
         }}
       >
-        <TechConsultancy ref={techConsultancyRef} />
+        <TechConsultancy />
       </Box>
       <Fade in={showButton}>
         <Button

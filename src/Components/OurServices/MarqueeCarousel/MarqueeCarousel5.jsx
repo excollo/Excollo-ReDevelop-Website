@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import github_copilot from "../../../assets/marqueelogo5/github_copilot.png";
 import microsoft365 from "../../../assets/marqueelogo5/microsoft365.png";
 import openai from "../../../assets/marqueelogo5/openai.png";
@@ -9,6 +9,10 @@ import claude from "../../../assets/marqueelogo5/claude.png";
 import microsoft_azure from "../../../assets/marqueelogo5/microsoft_azure.png";
 
 const MarqueeCarousel5 = () => {
+  const theme = useTheme();
+     const isSpecified = useMediaQuery(theme.breakpoints.up("md"));
+     const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+     const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
   const technologies = [
     {
       name: "Technology 1",
@@ -171,7 +175,14 @@ const MarqueeCarousel5 = () => {
           sx={{ display: "flex", whiteSpace: "nowrap" }}
         >
           {technologies.concat(technologies).map((tech, index) => (
-            <Box key={index} sx={{ flex: "none", mx: 4, px: 4 }}>
+            <Box
+              key={index}
+              sx={{
+                flex: "none",
+                mx: { md: 4, lg: 6, xl: 8 },
+                px: { md: 4, lg: 6, xl: 9 },
+              }}
+            >
               {tech.content}
             </Box>
           ))}

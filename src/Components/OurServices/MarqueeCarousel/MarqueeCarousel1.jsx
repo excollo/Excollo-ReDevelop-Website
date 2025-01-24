@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import botpress from "../../../assets/marqueelogo1/botpress.png";
 import github_copilot from "../../../assets/marqueelogo1/github_copilot.png";
 import microsoft_azure from "../../../assets/marqueelogo1/microsoft_azure.png";
@@ -9,6 +9,10 @@ import Zapier from "../../../assets/marqueelogo1/Zapier.png";
 import LLama from "../../../assets/marqueelogo1/LLama.png";
 
 const MarqueeCarousel1 = () => {
+   const theme = useTheme();
+   const isSpecified = useMediaQuery(theme.breakpoints.up("md"));
+   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+   const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
   const technologies = [
     {
       name: "Technology 1",
@@ -153,7 +157,6 @@ const MarqueeCarousel1 = () => {
  return (
    <Box
      sx={{
-       overflow: "hidden",
        backgroundColor: "black",
        position: "relative",
        zIndex: 1,
@@ -173,7 +176,7 @@ const MarqueeCarousel1 = () => {
          sx={{ display: "flex", whiteSpace: "nowrap" }}
        >
          {technologies.concat(technologies).map((tech, index) => (
-           <Box key={index} sx={{ flex: "none", mx: 4, px: 4 }}>
+           <Box key={index} sx={{ flex: "none", mx: {md: 4, lg: 6, xl: 8}, px: {md: 4,lg: 6, xl: 9} }}>
              {tech.content}
            </Box>
          ))}
@@ -185,11 +188,13 @@ const MarqueeCarousel1 = () => {
            transform: translateX(0%);
          }
          100% {
-           transform: translateX(-50%);
+           transform: translateX(-100%);
          }
        }
        .animate-marquee {
-         animation: marquee 16s linear infinite;
+         display: flex;
+         white-space: nowrap;
+         animation: marquee 30s linear infinite;
        }
      `}</style>
    </Box>

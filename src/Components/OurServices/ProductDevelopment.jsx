@@ -34,6 +34,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
   const [currentDotIndex, setCurrentDotIndex] = useState(0);
   const symbolRefs = useRef([]);
   const circleRef = useRef(null);
+  const lastAccordionRef = useRef(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -42,9 +43,22 @@ const ProductDevelopment = forwardRef((props, ref) => {
       const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
       const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+ const handleChange = (panel) => (event, isExpanded) => {
+   setExpanded(isExpanded ? panel : false);
+
+   if (isExpanded && panel === services[services.length - 1].id) {
+     setTimeout(() => {
+       const element = symbolRefs.current[services.length - 1];
+       const offset = 480; // Adjust this value to scroll slightly (in pixels)
+       const elementTop = element.getBoundingClientRect().top + window.scrollY;
+
+       window.scrollTo({
+         top: elementTop - offset,
+         behavior: "smooth",
+       });
+     }, 0);
+   }
+ };
 
   useImperativeHandle(ref, () => ({
     collapsePanel: () => {
@@ -772,6 +786,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails
+                  ref={index === services.length - 1 ? lastAccordionRef : null}
                   sx={{
                     maxWidth: "100%",
                     ml: {

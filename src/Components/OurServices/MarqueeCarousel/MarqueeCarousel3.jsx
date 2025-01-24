@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import apache from "../../../assets/marqueelogo3/apache.png";
 import metabase from "../../../assets/marqueelogo3/metabase.png";
 import mongodb from "../../../assets/marqueelogo3/mongodb.png";
@@ -9,6 +9,10 @@ import python from "../../../assets/marqueelogo3/python.png";
 import pytorch from "../../../assets/marqueelogo3/pytorch.png";
 
 const MarqueeCarousel3 = () => {
+   const theme = useTheme();
+   const isSpecified = useMediaQuery(theme.breakpoints.up("md"));
+   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+   const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
   const technologies = [
     {
       name: "Technology 1",
@@ -167,7 +171,14 @@ const MarqueeCarousel3 = () => {
           sx={{ display: "flex", whiteSpace: "nowrap" }}
         >
           {technologies.concat(technologies).map((tech, index) => (
-            <Box key={index} sx={{ flex: "none", mx: 4, px: 4 }}>
+            <Box
+              key={index}
+              sx={{
+                flex: "none",
+                mx: { md: 4, lg: 6, xl: 8 },
+                px: { md: 4, lg: 6, xl: 9 },
+              }}
+            >
               {tech.content}
             </Box>
           ))}
