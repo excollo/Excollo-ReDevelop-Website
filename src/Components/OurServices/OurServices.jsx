@@ -26,6 +26,7 @@ const OurServices = () => {
   const isMediumScreen = useMediaQuery(theme.breakpoints.only("md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.only("lg")); 
   const isExtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl")); 
+  const sectionRef = useRef(null);
 
   const aiAutomationRef = useRef(null);
   const salesChannelRef = useRef(null);
@@ -59,7 +60,7 @@ const OurServices = () => {
         setShowButton(false);
       }
 
-      if (!isMobile) {
+      if (!isMobile && window.scrollY > 250) {
         if (aiAutomationRef.current) {
           aiAutomationRef.current.collapsePanel();
         }
@@ -221,7 +222,7 @@ const OurServices = () => {
           paddingTop: isLandscapeMedium ? "60px" : { xs: 0, md: 0 },
         }}
       >
-        <AIAutomation />
+        <AIAutomation sectionRef={sectionRef} />
       </Box>
       <Box
         sx={{
@@ -229,7 +230,7 @@ const OurServices = () => {
           mt: { xl: 30, lg: 10 },
         }}
       >
-        <SalesChannelDevelopment />
+        <SalesChannelDevelopment sectionRef={sectionRef} />
       </Box>
       <Box
         sx={{
@@ -237,7 +238,7 @@ const OurServices = () => {
           mt: { xl: 30, lg: 10 },
         }}
       >
-        <MLDrivenDataAnalysis />
+        <MLDrivenDataAnalysis sectionRef={sectionRef} />
       </Box>
       <Box
         sx={{
@@ -245,7 +246,7 @@ const OurServices = () => {
           mt: { xl: 30, lg: 10 },
         }}
       >
-        <ProductDevelopment />
+        <ProductDevelopment sectionRef={sectionRef} />
       </Box>
       <Box
         sx={{
@@ -253,7 +254,7 @@ const OurServices = () => {
           mt: { xl: 30, lg: 10 },
         }}
       >
-        <TechConsultancy />
+        <TechConsultancy sectionRef={sectionRef} />
       </Box>
       <Fade in={showButton}>
         <Button

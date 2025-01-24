@@ -35,6 +35,7 @@ const AIAutomation = forwardRef((props, ref) => {
   const symbolRefs = useRef([]);
   const circleRef = useRef(null);
   const lastAccordionRef = useRef(null);
+  const sectionRef = useRef(null);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -60,7 +61,28 @@ const AIAutomation = forwardRef((props, ref) => {
     }
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            setExpanded(false);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!isMobile) {
@@ -665,6 +687,7 @@ const AIAutomation = forwardRef((props, ref) => {
 
   return (
     <Box
+      ref={sectionRef}
       className="services-container"
       sx={{
         width: "100%",
