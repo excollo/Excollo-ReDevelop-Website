@@ -196,8 +196,8 @@ const MarqueeCarousel2 = () => {
               key={index}
               sx={{
                 flex: "none",
-                mx: { md: 4, lg: 6, xl: 8 },
-                px: { md: 4, lg: 6, xl: 9 },
+                mx: {xs:4, sm: 4, md: 4, lg: 6, xl: 8 },
+                px: {xs:4, sm:4, md: 4, lg: 6, xl: 9 },
               }}
             >
               {tech.content}

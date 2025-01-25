@@ -176,7 +176,7 @@ const MarqueeCarousel1 = () => {
          sx={{ display: "flex", whiteSpace: "nowrap" }}
        >
          {technologies.concat(technologies).map((tech, index) => (
-           <Box key={index} sx={{ flex: "none", mx: {md: 4, lg: 6, xl: 8}, px: {md: 4,lg: 6, xl: 9} }}>
+           <Box key={index} sx={{ flex: "none", mx: {xs: 4, sm: 4,md: 4, lg: 6, xl: 8}, px: {xs: 4, sm: 4,md: 4,lg: 6, xl: 9} }}>
              {tech.content}
            </Box>
          ))}

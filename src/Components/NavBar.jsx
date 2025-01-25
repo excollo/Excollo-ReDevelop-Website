@@ -125,7 +125,7 @@ const NavBar = () => {
           zIndex: 10,
           pt: 4,
           margin: "0 auto",
-          "@media (max-width: 320px)": {
+          "@media (max-width: 319px)": {
             margin: "0 auto 0 -20px", // Adjust the left margin for smaller screens
           },
           "@media (min-width: 375px && max-width: 725px)": {
@@ -173,7 +173,6 @@ const NavBar = () => {
               sx={{
                 position: "relative",
                 zIndex: 0,
-                overflow: "hidden",
                 gap: {
                   md: "1rem", // Larger screens
                   lg: "1.5rem", // Extra-large screens

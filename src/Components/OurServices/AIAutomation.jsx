@@ -43,6 +43,16 @@ const AIAutomation = forwardRef((props, ref) => {
   const isSpecified = useMediaQuery(theme.breakpoints.up("md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
+  const is1536pxto1789px = useMediaQuery(
+    "(min-width: 1536px) and (max-width: 1789px)"
+  );
+  const is1790pxto2000px = useMediaQuery("(min-width: 1790px) and (max-width: 2000px)");
+  const is2001pxto2250px = useMediaQuery(
+    "(min-width: 2001px) and (max-width: 2275px)"
+  );
+  const is2251pxto2550px = useMediaQuery(
+    "(min-width: 2251px) and (max-width: 2550px)"
+  );
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -91,8 +101,7 @@ const AIAutomation = forwardRef((props, ref) => {
           const newIndex = Math.floor(Math.random() * services.length);
           return newIndex;
         });
-      }, 2000);
-
+      }, 1000);
       return () => clearInterval(interval);
     }
   }, [isMobile]);
@@ -106,40 +115,44 @@ const AIAutomation = forwardRef((props, ref) => {
   }, [currentDotIndex, isMobile]);
 
  const updateCirclePosition = () => {
-    if (symbolRefs.current[currentDotIndex+1] && circleRef.current) {
-      const symbol = symbolRefs.current[currentDotIndex];
+   if (symbolRefs.current[currentDotIndex] && circleRef.current) {
+     const symbol = symbolRefs.current[currentDotIndex];
      const rect = symbol.getBoundingClientRect();
      const parentRect = symbol
        .closest(".services-container")
        .getBoundingClientRect();
 
-     let topOffset = rect.top - parentRect.top + rect.height / 2 - 100;
+     let topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
+     let leftOffset = rect.left - parentRect.left + rect.width / 2 - 20;
 
-     // Adjust topOffset based on screen size
-     if (window.innerWidth >= 900 && window.innerWidth <= 2000) {
-       const adjustmentFactor = (window.innerWidth - 1200) / 800;
-       topOffset =
-         rect.top -
-         parentRect.top +
-         rect.height / 2 -
-         (10 + adjustmentFactor * 45);
+     if(isLargeScreen){
+        topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
+        leftOffset = rect.left - parentRect.left + rect.width / 2 - 27;
      }
-
-     // Adjust leftOffset based on screen size
-     let leftOffset = rect.left - parentRect.left + rect.width / 2 - 30;
-     if (window.innerWidth < 900) {
-       leftOffset = rect.left - parentRect.left + rect.width / 2 - 20;
-     } else if (window.innerWidth > 2000) {
-       leftOffset = rect.left - parentRect.left + rect.width / 2 - 40;
+     if (is1536pxto1789px) {
+        topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
+        leftOffset = rect.left - parentRect.left + rect.width / 2 - 32;
+      }
+     if (is1790pxto2000px){
+       topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
+       leftOffset = rect.left - parentRect.left + rect.width / 2 - 37;
      }
+      if (is2001pxto2250px) {
+        topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
+        leftOffset = rect.left - parentRect.left + rect.width / 2 - 42;
+      }
 
-     gsap.to(circleRef.current, {
-       top: topOffset,
-       left: leftOffset,
-       ease: "power2.inOut",
-       visibility: "visible", // Explicitly set visibility
-       opacity: 1, // Ensure opacity is 1
-     });
+      if (is2251pxto2550px){
+        topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
+        leftOffset = rect.left - parentRect.left + rect.width / 2 - 48;
+      }
+      gsap.to(circleRef.current, {
+          top: topOffset,
+          left: leftOffset,
+          ease: "power2.inOut",
+          visibility: "visible",
+          opacity: 1,
+      });
    }
  };
 
