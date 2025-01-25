@@ -370,6 +370,29 @@ const ProductDevelopment = forwardRef((props, ref) => {
     />
   );
 
+  const containerStyles = {
+    width: "100%",
+    minHeight: isTablet || isSpecified ? "auto" : "120vh",
+    position: "relative",
+    marginBottom: "5rem",
+    padding: isTablet || isSpecified ? "1rem" : 0,
+    ml: isTablet || isSpecified ? -5 : "-5%",
+  };
+
+  const contentStyles = {
+    maxWidth: isTablet || isSpecified ? "90%" : "1200px",
+    margin: "0 auto",
+    position: "relative",
+    padding: isTablet || isSpecified ? "1rem" : "2rem",
+  };
+
+  const titleStyles = {
+    fontSize: isTablet || isSpecified ? "2rem" : "3rem",
+    textAlign: "center",
+    ml: isTablet ? 0 : "5%",
+    marginBottom: isTablet || isSpecified ? "2rem" : "3rem",
+  };
+
   if (isTablet) {
     return (
       <Box className="services-container" sx={containerStyles}>
