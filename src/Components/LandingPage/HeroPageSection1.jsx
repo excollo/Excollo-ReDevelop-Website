@@ -5,10 +5,9 @@ const HeroPageSection1 = ({ animationComplete }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isSmallerLaptop = useMediaQuery(theme.breakpoints.up("md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
-  const isDesktopSize = useMediaQuery(
-      "(min-width: 1025px) and (max-width: 1200px)"
-    );
+  const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
   const isTabletOrMobile = isMobile || isTablet;
 
   return (
@@ -21,7 +20,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
         width: {
           xs: "100%",
           sm: "95%",
-          md: "80%",
+          md: "100%",
         },
         px: {
           xs: 2,
@@ -86,14 +85,15 @@ const HeroPageSection1 = ({ animationComplete }) => {
           variant="h3"
           component="h1"
           sx={{
-            fontWeight: 200,
+            fontWeight: 400,
             fontSize: {
               xs: "1.5rem",
               sm: "2.2rem",
               md: "2.5rem",
-              lg: "3rem",
+              lg: "4rem",
             },
-            lineHeight: 1.5,
+            lineHeight: 1.167, // Line height remains the same
+            letterSpacing: "-0.01562em",
             mt: {
               xs: 20,
               sm: 22,
@@ -112,12 +112,13 @@ const HeroPageSection1 = ({ animationComplete }) => {
           variant="h3"
           sx={{
             fontWeight: 600,
-            lineHeight: 1.2,
+            lineHeight: 1.167,
+            letterSpacing: "-0.01562em",
             fontSize: {
               xs: "1.75rem",
               sm: "2.25rem",
               md: "2.75rem",
-              lg: "3.25rem",
+              lg: "4rem",
             },
             "@media (min-width: 769px) and (max-width:1024px)": {
               fontSize: "2.5rem",
