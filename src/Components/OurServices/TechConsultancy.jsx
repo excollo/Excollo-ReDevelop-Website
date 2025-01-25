@@ -107,7 +107,7 @@ const TechConsultancy = forwardRef((props, ref) => {
           const newIndex = Math.floor(Math.random() * services.length);
           return newIndex;
         });
-      }, 2000);
+      }, 1000);
 
       return () => clearInterval(interval);
     }

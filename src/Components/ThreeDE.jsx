@@ -15,7 +15,6 @@ const ThreeDE = ({ onComplete }) => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"));
   const isLg = useMediaQuery(theme.breakpoints.up("lg"));
   const isXl = useMediaQuery(theme.breakpoints.up("xl"));
-  const is1150pxto1199px = useMediaQuery("(min-width: 1150px) and (max-width: 1199px)");
 
   let textSize;
   if (isXl) {
