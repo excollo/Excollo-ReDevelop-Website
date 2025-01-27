@@ -150,6 +150,7 @@ const OurServices = () => {
                           sm: "3rem",
                           md: "3.5rem",
                           lg: "5rem",
+                          xl: "clamp(5rem, 5vw, 6rem)",
                         },
                     fontFamily: '"Inter", sans-serif',
                     fontWeight: "600",
@@ -175,15 +176,7 @@ const OurServices = () => {
               <Typography
                 sx={{
                   maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
-                  fontSize: isLandscapeMedium
-                    ? "1.1rem"
-                    : {
-                        xs: "1.1rem",
-                        sm: "1.2rem",
-                        md: "1.3rem",
-                        lg: "1.3rem",
-                        xl: "1.7rem",
-                      },
+                  fontSize: "calc(0.9vw + 0.9vh)",
                   fontWeight: 200,
                   lineHeight: 1.7,
                   textAlign: { xs: "center", md: "left" },

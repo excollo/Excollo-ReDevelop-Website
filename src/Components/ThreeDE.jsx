@@ -169,9 +169,8 @@ const ThreeDE = ({ onComplete }) => {
     <div
       ref={mountRef}
       style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
+        width: `calc(100vh - 10%)`,
+        height: `calc(100vh - 10%)`,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "transparent",
