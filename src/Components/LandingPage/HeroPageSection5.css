@@ -15,6 +15,7 @@
   align-items: center;
   margin: 100px 70px;
   transition: 0.5s;
+  
 }
 
 .gradientCardBox .box::before {
@@ -54,6 +55,7 @@
 
 .gradientCardBox .box:before,
 .gradientCardBox .box:after {
+  
   background: linear-gradient(180deg,
     rgba(170, 63, 255, 0.9) 0%,
     rgba(94, 129, 235, 0.9) 100%)
@@ -75,7 +77,6 @@
   left: 0;
   padding: 20px 10px;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   z-index: 1;
@@ -89,6 +90,13 @@
   text-align: center;
   width: 100%;
 }
+
+.gradientCardBox .box .content {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(0px); /* Add this line for Safari */
+    
+}
+
 
 .gradientCardBox .box:hover .content {
   left: -25px;
@@ -129,7 +137,6 @@
 }
 
 .gradientCardBox .box .content a:hover {
-  background: #ffcf4d;
   border: 1px solid rgba(255, 0, 88, 0.4);
   box-shadow: 0 1px 15px rgba(1, 1, 1, 0.2);
 }
