@@ -42,12 +42,12 @@ const HeroPageSection3 = () => {
         marginTop: {
           xs: "0px",
           sm: "0px",
-          md: "8rem",
+          md: "0rem",
         },
         minHeight: {
           xs: isSpecificSize ? "1200px" : "1000px",
           sm: "1000px",
-          md: "100vh",
+          md: "120vh",
         },
       }}
     >

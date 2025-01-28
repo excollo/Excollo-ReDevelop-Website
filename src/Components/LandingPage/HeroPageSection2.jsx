@@ -89,7 +89,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         minHeight: {
           xs: "30vh",
           sm: isTablet ? "50vh" : "50vh",
-          md: "80vh",
+          md: "100vh",
         },
         display: "flex",
         flexDirection: "column",
