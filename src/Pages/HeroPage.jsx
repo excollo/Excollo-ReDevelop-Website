@@ -30,12 +30,9 @@ const HeroPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isSpecificSize = useMediaQuery(
-    "(max-width: 1024px) and (max-height: 725px)"
-  );
-  const isDesktopSize = useMediaQuery(
-    "(min-width: 1025px) and (max-width: 1200px)"
-  );
+  const isSpecificSize = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeScreenSize = useMediaQuery(theme.breakpoints.up("lg"));
+  const isXtraLargeScreenSize = useMediaQuery(theme.breakpoints.up("xl"));
   const isDesktop = !isMobile && !isTablet;
 
   useEffect(() => {
@@ -98,13 +95,6 @@ const HeroPage = () => {
       if (isSpecificSize) {
         timeline.to(".threeDE", {
           x: "32%",
-          y: "0%",
-          duration: 1,
-          ease: "power2.out",
-        });
-      } else if(isDesktopSize){
-        timeline.to(".threeDE", {
-          x: "28%",
           y: "0%",
           duration: 1,
           ease: "power2.out",
@@ -195,64 +185,66 @@ const HeroPage = () => {
         }
       );
 
-      if (isSpecificSize) {
-        gsap.to(threeDERef.current, {
-          scrollTrigger: {
-            trigger: ".hero-section-2",
-            start: "top center",
-            end: "bottom center",
-            scrub: true,
-          },
-          motionPath: {
-            path: [
-              { x: "33%", y: "2%" },
-              { x: "12%", y: "50%" },
-              { x: "-23vw", y: "90vh" },
-            ],
-            curviness: 1.5,
-          },
-          duration: 1.5,
-          ease: "power2.out",
-        });
-      } else if (isDesktopSize) {
+      if(isXtraLargeScreenSize){
          gsap.to(threeDERef.current, {
            scrollTrigger: {
              trigger: ".hero-section-2",
              start: "top center",
-             end: "bottom center",
+             end: "center center",
              scrub: true,
            },
            motionPath: {
              path: [
-               { x: "28%", y: "2%" },
-               { x: "15%", y: "50%" },
-               { x: "-23vw", y: "100vh" },
+               { x: "33%", y: "0%" },
+               { x: "12%", y: "50%" },
+               { x: "-23vw", y: "90vh" },
              ],
              curviness: 1.5,
            },
-           duration: 1.5,
-           ease: "power2.out",
+           duration: 3,
+           ease: "power6.out",
          });
-      } else {
+      }
+      else if (isLargeScreenSize) {
         gsap.to(threeDERef.current, {
           scrollTrigger: {
             trigger: ".hero-section-2",
             start: "top center",
-            end: "bottom center",
+            end: "center center",
             scrub: true,
           },
           motionPath: {
             path: [
-              { x: "28%", y: "2%" },
+              { x: "33%", y: "0%" },
               { x: "12%", y: "50%" },
-              { x: "-23vw", y: "90vh" },
+              { x: "-23vw", y: "89vh" },
             ],
             curviness: 1.5,
           },
-          duration: 1.5,
-          ease: "power2.out",
+          duration: 3,
+          ease: "power6.out",
         });
       }
+      else if (isSpecificSize) {
+        gsap.to(threeDERef.current, {
+          scrollTrigger: {
+            trigger: ".hero-section-2",
+            start: "top center",
+            end: "center center",
+            scrub: true,
+          },
+          motionPath: {
+            path: [
+              { x: "33%", y: "0%" },
+              { x: "12%", y: "50%" },
+              { x: "-23vw", y: "100vh" },
+            ],
+            curviness: 1.5,
+          },
+          duration: 3,
+          ease: "power6.out",
+        });
+      } 
 
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());

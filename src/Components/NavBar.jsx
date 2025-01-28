@@ -21,6 +21,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import BuildIcon from "@mui/icons-material/Build";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import CloseIcon from "@mui/icons-material/Close";
+import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png";
 
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -147,11 +148,7 @@ const NavBar = () => {
             sx={{ position: "relative", zIndex: 0 }}
           >
             <Link to="/">
-              <img
-                src="https://www.excollo.com/images/logo.svg"
-                alt="excollo"
-                loading="lazy"
-              />
+              <img src={ExcolloWebsiteLogo} alt="excollo" loading="lazy" />
             </Link>
           </Box>
 

@@ -89,7 +89,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         minHeight: {
           xs: "30vh",
           sm: isTablet ? "50vh" : "50vh",
-          md: "70vh",
+          md: "80vh",
         },
         display: "flex",
         flexDirection: "column",
@@ -172,7 +172,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
             marginLeft: {
               xs: 0,
               sm: isTablet ? 0 : "60%",
-              md: "60%",
+              md: "100%",
             },
             marginTop: {
               xs: "5%",
@@ -182,7 +182,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
             width: {
               xs: "100%",
               sm: isTablet ? "100%" : "auto",
-              md: "auto",
+              md: "100%",
             },
           }}
         >
@@ -221,8 +221,9 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 fontSize: {
                   xs: "1.2rem",
                   sm: isTablet ? "1.4rem" : "1.3rem",
-                  md: "1.5rem",
-                  lg: "1.7rem",
+                  md: `clamp(1rem, calc(0.8rem + 1vw), 2rem)`,
+                  lg: `clamp(1rem, calc(0.8rem + 1.2vw), 4rem)`,
+                  xl: `clamp(0.8rem, calc(0.8rem + 1.2vw), 5rem)`,
                 },
                 lineHeight: 1.5,
                 marginLeft: {
@@ -238,12 +239,15 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 maxWidth: {
                   xs: "90%",
                   sm: isTablet ? "90%" : "100%",
-                  md: "100%",
+                  md: "55%",
                 },
                 margin: {
                   xs: "0 auto 2rem auto",
                   sm: isTablet ? "0 auto 2rem auto" : "0 0 2rem 0.5%",
                   md: "0 0 2rem 0.5%",
+                },
+                marginBottom: {
+                  xl: "3rem",
                 },
               }}
             >
@@ -262,15 +266,17 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 fontSize: {
                   xs: "16px",
                   sm: "17px",
-                  md: "18px",
+                  md: `clamp(1rem, calc(0.8rem + 1vw), 1.5rem)`,
+                  xl: `clamp(0.5rem, calc(0.5rem + 1vw), 3.5rem)`,
                 },
                 border: "1px solid transparent",
                 padding: {
                   xs: "15px 30px",
                   sm: "16px 32px",
-                  md: "20px 60px",
+                  md: "20px 40px",
+                  xl: "20px 40px",
                 },
-                borderRadius: "40px",
+                borderRadius: { md: "40px", xl: "80px" },
                 background:
                   "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
                 zIndex: 3,

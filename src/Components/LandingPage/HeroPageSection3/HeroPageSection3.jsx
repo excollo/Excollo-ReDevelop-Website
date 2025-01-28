@@ -47,7 +47,7 @@ const HeroPageSection3 = () => {
         minHeight: {
           xs: isSpecificSize ? "1200px" : "1000px",
           sm: "1000px",
-          md: "110vh",
+          md: "100vh",
         },
       }}
     >
