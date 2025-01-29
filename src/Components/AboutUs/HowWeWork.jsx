@@ -9,6 +9,7 @@ import {
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+
 const WorkTable = styled("section")({
   width: "95%",
   margin: "auto",
@@ -17,20 +18,6 @@ const WorkTable = styled("section")({
   "@media (max-width: 768px)": {
     width: "100%",
     padding: "10px",
-  },
-});
-const LineBox = styled("div")({
-  position: "relative",
-  top: 0,
-  marginTop: "12.5%",
-  width: "100.1%",
-  height: "120px",
-  zIndex: 1,
-  backgroundColor: "#000",
-  "@media (max-width: 768px)": {
-    width: "100%",
-    display: "none",
-    height: "150px",
   },
 });
 const TableGrid = styled("div")({
@@ -60,7 +47,7 @@ const TableContent = styled("div")({
   margin: "0 0",
   padding: "30px",
   width: "80.8%",
-  height: "400px",
+  height: "100%",
   opacity: 0,
   transform: "translateY(100%)",
   visibility: "hidden",
@@ -202,7 +189,7 @@ const TableContent = styled("div")({
     width: "64.5%",
     "& h3": { fontSize: "25px" },
   },
-  "@media (min-width: 769px) and (max-width:900px)": {
+  "@media (min-width: 769px) and (max-width:899px)": {
     width: "62%",
     height: "400px", // Make it 90% of the width for mobile
     // Add margin between cards on mobile
@@ -360,14 +347,13 @@ const HowWeWork = () => {
         mb: isMobile || isTablet ? "2rem" : "6rem",
         pb: 2,
         // marginBottom: "-240px",
-        overflow: "hidden",
         "@media (max-width: 768px)": {
           marginBottom: "0",
         },
       }}
     >
       <WorkTable>
-        <Box sx={{ marginBottom: {md: "4rem", lg: "6rem", xl: "10rem"}, marginTop: {md: "4rem", lg: "6rem", xl: "10rem"} }}>
+        <Box sx={{ marginBottom: {xs: "4rem", md: "3rem", lg: "4rem", xl: "10rem"}, marginTop: {xs: "4rem", md: "3rem", lg: "4rem", xl: "10rem"} }}>
           <Box
             sx={{
               position: "absolute",
@@ -458,14 +444,13 @@ const HowWeWork = () => {
               >
                 <Box
                   sx={{
-                    minHeight: "100%",
+                    height: "100%",
                     width: "100%",
                     rowGap: "5rem",
-                    mt: isMobile || isTablet ? "auto" : "50%",
+                    mt: isMobile || isTablet ? "auto" : "20%",
                   }}
                 >
                   <Typography variant="h3">{step.title}</Typography>
-
                   <Typography variant="body1">{step.content}</Typography>
                 </Box>
               </TableContent>
