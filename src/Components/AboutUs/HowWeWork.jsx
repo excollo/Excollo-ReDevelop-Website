@@ -353,7 +353,7 @@ const HowWeWork = () => {
       }}
     >
       <WorkTable>
-        <Box sx={{ marginBottom: {xs: "4rem", md: "3rem", lg: "4rem", xl: "10rem"}, marginTop: {xs: "4rem", md: "3rem", lg: "4rem", xl: "10rem"} }}>
+        <Box sx={{ marginBottom: {xs: "4rem", md: "3rem", lg: "5rem", xl: "10rem"}, marginTop: {xs: "4rem", md: "3rem", lg: "5rem", xl: "10rem"} }}>
           <Box
             sx={{
               position: "absolute",
