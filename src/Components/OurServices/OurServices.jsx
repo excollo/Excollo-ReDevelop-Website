@@ -145,7 +145,7 @@ const OurServices = () => {
                     fontSize: {
                       md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
                       lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
-                      xl: `clamp(2.25rem, calc(2.5rem + 3vw), 10rem)`,
+                      xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
                     },
                     fontFamily: '"Inter", sans-serif',
                     fontWeight: "600",

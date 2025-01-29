@@ -79,8 +79,8 @@ const HeroPageSection1 = ({ animationComplete }) => {
             fontWeight: 400,
             fontSize: {
               md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
-              lg: `clamp(2rem, calc(1.37rem + 2.6vw), 12rem)`,
-              xl: `clamp(2.25rem, calc(1.5rem + 2.7vw), 15rem)`,
+              lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+              xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
             },
             lineHeight: 1.167, // Line height remains the same
             letterSpacing: "-0.01562em",
@@ -102,8 +102,8 @@ const HeroPageSection1 = ({ animationComplete }) => {
             letterSpacing: "-0.01562em",
             fontSize: {
               md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
-              lg: `clamp(2rem, calc(1.37rem + 2.6vw), 12rem)`,
-              xl: `clamp(2.7rem, calc(1.5rem + 2.7vw), 15rem)`,
+              lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+              xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
             },
             "@media (min-width: 769px) and (max-width:899)": {
               fontSize: "2.5rem",
@@ -157,44 +157,27 @@ const HeroPageSection1 = ({ animationComplete }) => {
           variant="h5"
           component="h5"
           sx={{
-            fontWeight: 200,
             fontSize: {
-              md: `clamp(1rem, calc(0.8rem + 1vw), 2rem)`,
-              lg: `clamp(1rem, calc(0.8rem + 1.2vw), 4rem)`,
-              xl: `clamp(0.7rem, calc(0.8rem + 1.1vw), 5rem)`,
+              md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+              lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+              xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
             },
-            lineHeight: 1.5,
-            marginLeft: isTabletOrMobile ? 0 : "0%",
+            fontWeight: 200,
+            lineHeight: 1.7,
+            marginLeft: isTabletOrMobile ? 0 : "1%",
+            mb: {
+              xs: 4,
+              sm: 5,
+              md: 4.5,
+            },
             textAlign: isTabletOrMobile ? "center" : "left",
             "@media (min-width: 769px) and (max-width:899px)": {
               fontSize: "1.2rem",
             },
           }}
         >
-          Unlock the potential of AI to transform your business and
-        </Typography>
-
-        <Typography
-          variant="h5"
-          component="h5"
-          sx={{
-            fontWeight: 200,
-            fontSize: {
-              md: `clamp(1rem, calc(0.8rem + 1vw), 2rem)`,
-              lg: `clamp(1rem, calc(0.8rem + 1.2vw), 4rem)`,
-              xl: `clamp(0.7rem, calc(0.8rem + 1.1vw), 5rem)`,
-            },
-            lineHeight: 1.5,
-            mb: {
-              xs: 4,
-              sm: 5,
-              md: 4.5,
-            },
-            marginLeft: isTabletOrMobile ? 0 : "0%",
-            textAlign: isTabletOrMobile ? "center" : "left",
-          }}
-        >
-          redefine success.
+          Unlock the potential of AI to transform your business and redefine
+          success.
         </Typography>
 
         <Box
