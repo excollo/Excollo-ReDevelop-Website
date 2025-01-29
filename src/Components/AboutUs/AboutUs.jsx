@@ -48,7 +48,7 @@ const TitleContainer = styled("div")(({ theme }) => ({
   "& h2": {
     textAlign: "left",
     padding: "55px",
-    fontSize: "4rem",
+    fontSize: "4.25rem",
     fontFamily: '"Inter", sans-serif',
     fontWeight: "bold",
     textUnderlinePosition: "from-font",
@@ -59,18 +59,25 @@ const TitleContainer = styled("div")(({ theme }) => ({
       display: "block",
     },
   },
+  [theme.breakpoints.down("xl")]: {
+    flex: "0 0 400px",
+    "& h2": {
+      fontSize: `clamp(2.25rem, calc(2.5rem + 3vw), 10rem)`,
+      paddingBottom: "-50px",
+    },
+  },
   [theme.breakpoints.down("lg")]: {
     flex: "0 0 400px",
     "& h2": {
-      fontSize: "3.5rem",
+      fontSize: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
       paddingBottom: "-50px",
     },
   },
   [theme.breakpoints.down("md")]: {
     width: "100%",
-    marginBottom: "-300px",
+    marginBottom: "-280px",
     "& h2": {
-      fontSize: "2.5rem",
+      fontSize: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
       paddingBottom: "-50px",
       textAlign: "center",
       "& br": {
@@ -113,13 +120,12 @@ const Card = styled("div")(
     },
 
     "& p": {
-      fontSize: "1.8rem",
       alignItems: "center",
       justifyContent: "center",
       alignText: "center",
       fontFamily: '"Inter", sans-serif',
       color: "#D1D1E2",
-      lineHeight: 1.6,
+      lineHeight: 1.7,
       fontWeight: 200,
       textAlign: "left",
       padding: 20,
@@ -128,9 +134,11 @@ const Card = styled("div")(
 
     [theme.breakpoints.down("lg")]: {
       height: "200px",
-      "& p": {
-        fontSize: "1.6rem",
-      },
+      fontSize: {
+                    md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                    lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                    xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                  },
     },
 
     [theme.breakpoints.down("md")]: {
@@ -146,7 +154,6 @@ const Card = styled("div")(
         display: isMobile ? "none" : "block",
       },
       "& p": {
-        fontSize: "1.4rem",
         padding: "15px",
         margin: "10px",
         textAlign: "center",
@@ -162,7 +169,6 @@ const Card = styled("div")(
         borderRadius: "31px",
       },
       "& p": {
-        fontSize: "1.2rem",
         padding: "10px",
         margin: "5px",
       },
@@ -171,9 +177,6 @@ const Card = styled("div")(
     "@media (min-width: 769px) and (max-width:1100px) ": {
       width: "95%",
       height: "fit-content",
-      "& p": {
-        fontSize: "1.8rem",
-      },
     },
   })
 );
@@ -182,12 +185,15 @@ const AboutUs = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isSpecificSize = useMediaQuery(
-    "(min-width: 600px) and (max-width: 900px)"
+    "(min-width: 600px) and (max-width: 899px)"
   );
-  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 900px)");
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 899px)");
   const isLandscapeMedium = useMediaQuery(
-      "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
-    );
+    "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
+  );
+  const isSpecificMargin = useMediaQuery(
+    "(min-width: 2200px) and (max-width: 2600px)"
+  );
 
   const [showButton, setShowButton] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -256,7 +262,19 @@ const AboutUs = () => {
       <div>
         <ContentSection>
           <TitleContainer>
-            <h2>Our {!isMobile && <br />} Vision</h2>
+            <h2>
+              Our {!isMobile && <br />}{" "}
+              <span
+                style={{
+                  background:
+                    "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Vision{" "}
+              </span>{" "}
+            </h2>
           </TitleContainer>
           <Card>
             <p>
@@ -277,7 +295,20 @@ const AboutUs = () => {
           {isMobile || isTablet || isSpecificSize ? (
             <>
               <TitleContainer>
-                <h2>Our {!isMobile || (isSpecificSize && <br />)} Mission</h2>
+                <h2>
+                  Our {!isMobile || (isSpecificSize && <br />)}{" "}
+                  <span
+                    style={{
+                      background:
+                        "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    {" "}
+                    Mission{" "}
+                  </span>
+                </h2>
               </TitleContainer>
               <Card>
                 <p>
@@ -295,8 +326,18 @@ const AboutUs = () => {
                 </p>
               </Card>
               <TitleContainer>
-                <h2>
-                  Our <br /> Mission
+                <h2 style={{ marginLeft: "15%" }}>
+                  Our <br />{" "}
+                  <span
+                    style={{
+                      background:
+                        "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    Mission
+                  </span>
                 </h2>
               </TitleContainer>
             </>
@@ -312,13 +353,27 @@ const AboutUs = () => {
       <div>
         <ContentSection>
           <TitleContainer>
-            <h2>Our {!isMobile && <br />} Philosophy</h2>
+            <h2>
+              Our {!isMobile && <br />}{" "}
+              <span
+                style={{
+                  background:
+                    "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Philosophy
+              </span>
+            </h2>
           </TitleContainer>
+
           <Card>
             <p>
               At Excollo, we commit to results, not just solutions. Our "Outcome
-              as a Service" (OaaS) approach ensures every action is aligned to
-              achieve measurable success for our clients.
+              as a Service" (OaaS) approach <br />
+              ensures every action is aligned to achieve measurable success for
+              our clients.
             </p>
           </Card>
         </ContentSection>
@@ -332,6 +387,7 @@ const AboutUs = () => {
       sx={{
         minHeight: "100vh",
         fontFamily: '"Inter", sans-serif',
+        overflowX: "hidden",
       }}
     >
       <Box
@@ -394,14 +450,11 @@ const AboutUs = () => {
                   variant="h2"
                   sx={{
                     textAlign: { xs: "center", md: "left" },
-                    fontSize: isLandscapeMedium
-                      ? "3rem"
-                      : {
-                          xs: "2.5rem",
-                          sm: "3rem",
-                          md: "3.5rem",
-                          lg: "5rem",
-                        },
+                    fontSize: {
+                      md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+                      lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+                      xl: `clamp(2.25rem, calc(2.5rem + 3vw), 10rem)`,
+                    },
                     fontFamily: '"Inter", sans-serif',
                     fontWeight: "600",
                     color: "#fff",
@@ -426,15 +479,11 @@ const AboutUs = () => {
               <Typography
                 sx={{
                   maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
-                  fontSize: isLandscapeMedium
-                    ? "1.1rem"
-                    : {
-                        xs: "1.1rem",
-                        sm: "1.2rem",
-                        md: "1.3rem",
-                        lg: "1.3rem",
-                        xl: "1.7rem",
-                      },
+                  fontSize: {
+                    md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                    lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                    xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                  },
                   fontWeight: 200,
                   lineHeight: 1.7,
                   textAlign: { xs: "center", md: "left" },
@@ -453,24 +502,51 @@ const AboutUs = () => {
               <Box
                 sx={{
                   width: isLandscapeMedium ? "50%" : { md: "50%", lg: "40%" },
-                  mr: { md: "0%", lg: "0%" },
+                  height: "100vh",
+                  display: "flex",
                   "@media (min-width: 200px) and (max-width: 899px)": {
                     display: "none",
                   },
+                  top: 0,
+                  left: 0,
                 }}
               >
-                <ThreeDE />
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <ThreeDE />
+                </Box>
               </Box>
             )}
           </Box>
         </Box>
       </Box>
 
-      <VisionSection />
-      <MissionSection />
-      <PhilosophySection />
+      <Box
+        sx={{
+          width: "100%",
+          margin: "auto",
+          marginTop: isMobile || isSpecificSize ? "0" : "-8%",
+          display: isMobile || isSpecificSize ? "block" : "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          rowGap: "2rem",
+        }}
+      >
+        <VisionSection />
+        <MissionSection />
+        <PhilosophySection />
+      </Box>
+
       <HowWeWork />
       <Excollo3D />
+
       <Footer />
       <Fade in={showButton}>
         <Button

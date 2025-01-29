@@ -24,9 +24,8 @@ const OurServices = () => {
     "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
   );
   const isMediumScreen = useMediaQuery(theme.breakpoints.only("md"));
-  const isLargeScreen = useMediaQuery(theme.breakpoints.only("lg")); 
-  const isExtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl")); 
-  const sectionRef = useRef(null);
+  const isLargeScreen = useMediaQuery(theme.breakpoints.only("lg"));
+  const isExtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
 
   const aiAutomationRef = useRef(null);
   const salesChannelRef = useRef(null);
@@ -60,7 +59,7 @@ const OurServices = () => {
         setShowButton(false);
       }
 
-      if (!isMobile && window.scrollY > 250) {
+      if (!isMobile) {
         if (aiAutomationRef.current) {
           aiAutomationRef.current.collapsePanel();
         }
@@ -143,15 +142,11 @@ const OurServices = () => {
                   variant="h2"
                   sx={{
                     textAlign: { xs: "center", md: "left" },
-                    fontSize: isLandscapeMedium
-                      ? "3rem"
-                      : {
-                          xs: "2.5rem",
-                          sm: "3rem",
-                          md: "3.5rem",
-                          lg: "5rem",
-                          xl: "clamp(5rem, 5vw, 6rem)",
-                        },
+                    fontSize: {
+                      md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+                      lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+                      xl: `clamp(2.25rem, calc(2.5rem + 3vw), 10rem)`,
+                    },
                     fontFamily: '"Inter", sans-serif',
                     fontWeight: "600",
                     color: "#fff",
@@ -176,7 +171,11 @@ const OurServices = () => {
               <Typography
                 sx={{
                   maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
-                  fontSize: "calc(0.9vw + 0.9vh)",
+                  fontSize: {
+                    md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                    lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                    xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                  },
                   fontWeight: 200,
                   lineHeight: 1.7,
                   textAlign: { xs: "center", md: "left" },
@@ -196,13 +195,26 @@ const OurServices = () => {
               <Box
                 sx={{
                   width: isLandscapeMedium ? "50%" : { md: "50%", lg: "40%" },
-                  mr: { md: "0%", lg: "0%" },
+                  height: "100vh",
+                  display: "flex",
                   "@media (min-width: 200px) and (max-width: 899px)": {
                     display: "none",
                   },
+                  top: 0,
+                  left: 0,
                 }}
               >
-                <ThreeDE />
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <ThreeDE />
+                </Box>
               </Box>
             )}
           </Box>
@@ -211,43 +223,23 @@ const OurServices = () => {
       <Box
         sx={{
           position: "relative",
-          mt: isLandscapeMedium ? "-20px" : { xs: -50, md: -30 },
+          mt: isLandscapeMedium ? "-20px" : { xs: -50 },
           paddingTop: isLandscapeMedium ? "60px" : { xs: 0, md: 0 },
         }}
       >
-        <AIAutomation sectionRef={sectionRef} />
+        <AIAutomation ref={aiAutomationRef} />
       </Box>
-      <Box
-        sx={{
-          position: "relative",
-          mt: { xl: 30, lg: 10 },
-        }}
-      >
-        <SalesChannelDevelopment sectionRef={sectionRef} />
+      <Box>
+        <SalesChannelDevelopment ref={salesChannelRef} />
       </Box>
-      <Box
-        sx={{
-          position: "relative",
-          mt: { xl: 30, lg: 10 },
-        }}
-      >
-        <MLDrivenDataAnalysis sectionRef={sectionRef} />
+      <Box>
+        <MLDrivenDataAnalysis ref={mlDrivenDataAnalysisRef} />
       </Box>
-      <Box
-        sx={{
-          position: "relative",
-          mt: { xl: 30, lg: 10 },
-        }}
-      >
-        <ProductDevelopment sectionRef={sectionRef} />
+      <Box>
+        <ProductDevelopment ref={productDevelopmentRef} />
       </Box>
-      <Box
-        sx={{
-          position: "relative",
-          mt: { xl: 30, lg: 10 },
-        }}
-      >
-        <TechConsultancy sectionRef={sectionRef} />
+      <Box>
+        <TechConsultancy ref={techConsultancyRef} />
       </Box>
       <Fade in={showButton}>
         <Button

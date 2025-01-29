@@ -18,9 +18,9 @@ const ThreeDE = ({ onComplete }) => {
 
   let textSize;
   if (isXl) {
-    textSize = "36.5"; 
+    textSize = "30.5"; 
   } else if (isLg) {
-    textSize = "35.5";
+    textSize = "34.5";
   } else if (isMd) {
     textSize = "34.5";
   }

@@ -46,7 +46,9 @@ const AIAutomation = forwardRef((props, ref) => {
   const is1536pxto1789px = useMediaQuery(
     "(min-width: 1536px) and (max-width: 1789px)"
   );
-  const is1790pxto2000px = useMediaQuery("(min-width: 1790px) and (max-width: 2000px)");
+  const is1790pxto2000px = useMediaQuery(
+    "(min-width: 1790px) and (max-width: 2000px)"
+  );
   const is2001pxto2250px = useMediaQuery(
     "(min-width: 2001px) and (max-width: 2275px)"
   );
@@ -114,47 +116,47 @@ const AIAutomation = forwardRef((props, ref) => {
     }
   }, [currentDotIndex, isMobile]);
 
- const updateCirclePosition = () => {
-   if (symbolRefs.current[currentDotIndex] && circleRef.current) {
-     const symbol = symbolRefs.current[currentDotIndex];
-     const rect = symbol.getBoundingClientRect();
-     const parentRect = symbol
-       .closest(".services-container")
-       .getBoundingClientRect();
+  const updateCirclePosition = () => {
+    if (symbolRefs.current[currentDotIndex] && circleRef.current) {
+      const symbol = symbolRefs.current[currentDotIndex];
+      const rect = symbol.getBoundingClientRect();
+      const parentRect = symbol
+        .closest(".services-container")
+        .getBoundingClientRect();
 
-     let topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
-     let leftOffset = rect.left - parentRect.left + rect.width / 2 - 20;
+      let topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
+      let leftOffset = rect.left - parentRect.left + rect.width / 2 - 20;
 
-     if(isLargeScreen){
+      if (isLargeScreen) {
         topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
         leftOffset = rect.left - parentRect.left + rect.width / 2 - 27;
-     }
-     if (is1536pxto1789px) {
+      }
+      if (is1536pxto1789px) {
         topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
         leftOffset = rect.left - parentRect.left + rect.width / 2 - 32;
       }
-     if (is1790pxto2000px){
-       topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
-       leftOffset = rect.left - parentRect.left + rect.width / 2 - 37;
-     }
+      if (is1790pxto2000px) {
+        topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
+        leftOffset = rect.left - parentRect.left + rect.width / 2 - 37;
+      }
       if (is2001pxto2250px) {
         topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
         leftOffset = rect.left - parentRect.left + rect.width / 2 - 42;
       }
 
-      if (is2251pxto2550px){
+      if (is2251pxto2550px) {
         topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
         leftOffset = rect.left - parentRect.left + rect.width / 2 - 48;
       }
       gsap.to(circleRef.current, {
-          top: topOffset,
-          left: leftOffset,
-          ease: "power2.inOut",
-          visibility: "visible",
-          opacity: 1,
+        top: topOffset,
+        left: leftOffset,
+        ease: "power2.inOut",
+        visibility: "visible",
+        opacity: 1,
       });
-   }
- };
+    }
+  };
 
   useImperativeHandle(ref, () => ({
     collapsePanel: () => {
@@ -785,7 +787,7 @@ const AIAutomation = forwardRef((props, ref) => {
           <Typography
             variant="h6"
             sx={{
-              color: "#fff",
+              color: "grey.500",
               ml: {
                 md: "3%",
               },
@@ -795,10 +797,9 @@ const AIAutomation = forwardRef((props, ref) => {
                 xl: "1.5%",
               },
               fontSize: {
-                xs: "1rem",
-                sm: "1.2rem",
-                md: "1.4rem",
-                lg: "1.6rem",
+                md: `clamp(0.5rem, calc(0.5rem + 1vw), 1.5rem)`,
+                lg: `clamp(0.5rem, calc(0.8rem + 1vw), 2rem)`,
+                xl: `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`,
               },
             }}
             className="services-title"
@@ -850,11 +851,9 @@ const AIAutomation = forwardRef((props, ref) => {
                     variant="h5"
                     sx={{
                       fontSize: {
-                        xs: "1.3rem",
-                        sm: "1.5rem",
-                        md: "1.7rem",
-                        lg: "1.9rem",
-                        xl: "2.1rem",
+                        md: `clamp(0.5rem, calc(0.5rem + 1vw), 1.5rem)`,
+                        lg: `clamp(0.5rem, calc(0.8rem + 1vw), 2rem)`,
+                        xl: `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`,
                       },
                       position: "relative",
                       marginLeft: {
@@ -904,10 +903,9 @@ const AIAutomation = forwardRef((props, ref) => {
                           primaryTypographyProps={{
                             sx: {
                               fontSize: {
-                                xs: "0.9rem",
-                                sm: "1rem",
-                                md: "1.1rem",
-                                lg: "1.2rem",
+                                md: `clamp(0.5rem, calc(0.3rem + 1vw), 1.5rem)`,
+                                lg: `clamp(0.5rem, calc(0.3rem + 1vw), 1.5rem)`,
+                                xl: `clamp(0.5rem, calc(0.3rem + 1vw), 1.5rem)`,
                               },
                             },
                           }}
