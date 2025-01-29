@@ -30,8 +30,8 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top center",
-        end: "bottom center",
+        start: "top 10%",
+        end: "center 50%",
         scrub: true,
         onComplete: () => {
           setTimeout(() => {
@@ -89,7 +89,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         minHeight: {
           xs: "30vh",
           sm: isTablet ? "50vh" : "50vh",
-          md: "100vh",
+          md: "90vh",
         },
         display: "flex",
         flexDirection: "column",
@@ -123,12 +123,13 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
           top: {
             xs: "-10%",
             sm: isTablet ? "-10%" : "8%",
-            md: "8%",
+            md: "-10%",
+            lg: "-20%",
           },
           left: 0,
           right: 0,
           bottom: 0,
-          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
+          background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 40%)`,
           zIndex: 1,
           pointerEvents: "none",
           transformOrigin: "center center",
@@ -177,12 +178,12 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
             marginTop: {
               xs: "5%",
               sm: isTablet ? "7%" : "10%",
-              md: "20%",
+              md: "10%",
             },
             width: {
               xs: "100%",
               sm: isTablet ? "100%" : "auto",
-              md: "100%",
+              md: "90%",
             },
           }}
         >
@@ -217,15 +218,15 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
               variant="h5"
               component="h5"
               sx={{
-                fontWeight: 200,
                 fontSize: {
                   xs: "1.2rem",
                   sm: isTablet ? "1.4rem" : "1.3rem",
-                  md: `clamp(1rem, calc(0.8rem + 1vw), 2rem)`,
-                  lg: `clamp(1rem, calc(0.8rem + 1.2vw), 4rem)`,
-                  xl: `clamp(0.8rem, calc(0.8rem + 1.2vw), 5rem)`,
+                  md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                  xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
                 },
-                lineHeight: 1.5,
+                fontWeight: 200,
+                lineHeight: 1.7,
                 marginLeft: {
                   xs: 0,
                   sm: isTablet ? 0 : "0.5%",
@@ -263,20 +264,21 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 display: "inline-block",
                 color: "#ffffff",
                 textDecoration: "none",
+                fontWeight: 100,
                 fontSize: {
                   xs: "16px",
                   sm: "17px",
-                  md: `clamp(1rem, calc(0.8rem + 1vw), 1.5rem)`,
-                  xl: `clamp(0.5rem, calc(0.5rem + 1vw), 3.5rem)`,
+                  md: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
+                  xl: `clamp(0.5rem, calc(0.6rem + 1vw), 5rem)`,
                 },
                 border: "1px solid transparent",
                 padding: {
                   xs: "15px 30px",
                   sm: "16px 32px",
-                  md: "20px 40px",
+                  md: "15px 30px",
                   xl: "20px 40px",
                 },
-                borderRadius: { md: "40px", xl: "80px" },
+                borderRadius: {sm: "20px", md: "40px", xl: "80px" },
                 background:
                   "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
                 zIndex: 3,

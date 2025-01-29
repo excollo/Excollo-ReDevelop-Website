@@ -199,7 +199,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
                 xs: "16px",
                 sm: "17px",
                 md: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
-                xl: `clamp(0.5rem, calc(0.5rem + 1vw), 3.5rem)`,
+                xl: `clamp(0.5rem, calc(0.6rem + 1vw), 5rem)`,
               },
               border: "1px solid transparent",
               padding: {
@@ -208,7 +208,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
                 md: "15px 30px",
                 xl: "20px 40px",
               },
-              borderRadius: { md: "40px", xl: "80px" },
+              borderRadius: { sm: "40px",md: "40px", xl: "80px" },
               background:
                 "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
               zIndex: 3,

@@ -16,6 +16,7 @@ import { styled } from "@mui/material/styles";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/OurServices/Footer";
 import ThreeDE from "../Components/ThreeDE";
+
 // Styled Components
 const StyledFormContainer = styled(Box)(({ theme }) => ({
   background: "#12101A",
@@ -24,13 +25,34 @@ const StyledFormContainer = styled(Box)(({ theme }) => ({
   border: "1px solid #7E22CE",
   boxShadow: "0px 0px 100px 0px rgba(133, 86, 245, 0.4)",
   margin: "0 auto",
-  maxWidth: "1000px",
-  maxHeight: "auto", // Increased to accommodate the new form fields
+  maxWidth: "95%",
+  maxHeight: "fit-content", // Increased to accommodate the new form fields
   "@media (min-width: 320px) and (max-width:480px)": {
     padding: theme.spacing(4),
     maxHeight: "950px",
   },
+  // "@media (min-width: 481px) and (max-width:768px)": {
+  //   padding: theme.spacing(5),
+  //   maxHeight: "950px",
+  // },
+  // "@media (min-width: 769px) and (max-width:1024px)": {
+  //   padding: theme.spacing(6),
+  //   maxHeight: "950px",
+  // },
+  // "@media (min-width: 1025px) and (max-width:1300px)": {
+  //   padding: theme.spacing(7),
+  //   maxHeight: "950px",
+  // },
+  // "@media (min-width: 1301px) and (max-width:1600px)": {
+  //   padding: theme.spacing(7),
+  //   maxHeight: "1000px",
+  // },
+  // "@media (min-width: 1601px) and (max-width:2600px) and (max-height:1600px)": {
+  //   padding: theme.spacing(8),
+  //   maxHeight: "1100px",
+  // },
 }));
+
 const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-root": {
     backgroundColor: "rgba(30, 32, 37, 0.6)",
@@ -47,13 +69,20 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     color: theme.palette.grey[600],
   },
   marginBottom: theme.spacing(2),
+  fontSize: {
+    md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+    lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+    xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+  },
 }));
+
 const StyledCheckbox = styled(Checkbox)(({ theme }) => ({
   color: theme.palette.grey[400],
   "&.Mui-checked": {
     color: "#8E54F7",
   },
 }));
+
 const SubmitButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#8E54F7",
   color: "white",
@@ -69,6 +98,7 @@ const SubmitButton = styled(Button)(({ theme }) => ({
     fontSize: "0.8rem",
   },
 }));
+
 const ContactForm = () => {
   const theme = useTheme();
   const [formData, setFormData] = useState({
@@ -81,6 +111,7 @@ const ContactForm = () => {
     otherService: "",
   });
   const [showCalendar, setShowCalendar] = useState(false);
+
   // Google Form Field IDs
   const GOOGLE_FORM_IDS = {
     firstName: "entry.1875910263",
@@ -90,14 +121,17 @@ const ContactForm = () => {
     services: "entry.1314171994",
     message: "entry.580072994",
   };
+
   const GOOGLE_FORM_BASE_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLSdH1-pOT7JDOFpBe_Vd9wNJcu32PqLbKVIfumtIzp5gJ6uUTg/formResponse";
+
   const serviceOptions = [
     "AI & Automation Solutions",
     "Sales Channel Development",
     "Technical Consultancy",
     "Website or Application Development",
   ];
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -105,6 +139,7 @@ const ContactForm = () => {
       [name]: value,
     }));
   };
+
   const handleServiceChange = (service) => {
     setFormData((prev) => {
       const services = prev.services.includes(service)
@@ -113,6 +148,7 @@ const ContactForm = () => {
       return { ...prev, services };
     });
   };
+
   const submitToGoogleForm = () => {
     const formURL = new URL(GOOGLE_FORM_BASE_URL);
     // Add regular fields
@@ -147,10 +183,12 @@ const ContactForm = () => {
       setShowCalendar(true);
     }, 1000);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     submitToGoogleForm();
   };
+
   return (
     <Box sx={{ backgroundColor: "#000000", minHeight: "100vh" }}>
       {/* Gradient Overlay */}
@@ -174,7 +212,13 @@ const ContactForm = () => {
         {/* Header Section */}
         <Box textAlign="center" mb={8}>
           <Typography
-            variant="h2"
+            sx={{
+              fontSize: {
+                md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+                lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+                xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
+              },
+            }}
             color="common.white"
             fontWeight="bold"
             mb={2}
@@ -191,7 +235,18 @@ const ContactForm = () => {
               touch
             </Box>
           </Typography>
-          <Typography color="grey.300">
+          <Typography
+            color="grey.300"
+            sx={{
+              fontSize: {
+                md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+              },
+              fontWeight: 200,
+              lineHeight: 1.7,
+            }}
+          >
             Reach out, and let's create a universe of possibilities together!
           </Typography>
         </Box>
@@ -203,16 +258,43 @@ const ContactForm = () => {
               display={{ xs: "none", md: "flex" }}
               alignItems="center"
               justifyContent="center"
-              sx={{ marginTop: "-20%" }}
+              sx={{
+                marginTop: "-40%",
+                marginBottom: "-25%",
+                position: "relative",
+              }}
             >
               <ThreeDE />
             </Box>
             {/* Form Section */}
             <Box>
-              <Typography variant="h4" color="common.white" mb={1}>
+              <Typography
+                variant="h4"
+                color="common.white"
+                mb={1}
+                sx={{
+                  fontSize: {
+                    md: `clamp(1rem, calc(1rem + 1.5vw), 6rem)`,
+                    lg: `clamp(1rem, calc(1rem + 1.68vw), 6rem)`,
+                    xl: `clamp(1rem, calc(1rem + 1.80vw), 6rem)`,
+                  },
+                }}
+              >
                 Let's connect constellations
               </Typography>
-              <Typography color="grey.400" mb={4}>
+              <Typography
+                color="grey.400"
+                mb={4}
+                sx={{
+                  fontSize: {
+                    md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                    lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                    xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
+                  },
+                  fontWeight: 200,
+                  lineHeight: 1.7,
+                }}
+              >
                 Let's align our constellations! Reach out and let the magic of
                 collaboration illuminate our skies.
               </Typography>
@@ -255,10 +337,32 @@ const ContactForm = () => {
                   required
                 />
                 {/* Services Selection */}
-                <Typography color="grey.300" mb={2}>
+                <Typography
+                  color="grey.300"
+                  sx={{
+                    fontSize: {
+                      md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                      lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                      xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
+                    },
+                    fontWeight: 200,
+                    lineHeight: 1.7,
+                  }}
+                >
                   Services Required:
                 </Typography>
-                <FormGroup sx={{ mb: 2 }}>
+                <FormGroup
+                  sx={{
+                    mb: 1,
+                    fontSize: {
+                      md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                      lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                      xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
+                    },
+                    fontWeight: 200,
+                    lineHeight: 1.7,
+                  }}
+                >
                   {serviceOptions.map((service) => (
                     <FormControlLabel
                       key={service}
@@ -269,7 +373,18 @@ const ContactForm = () => {
                         />
                       }
                       label={service}
-                      sx={{ color: "grey.300" }}
+                      sx={{
+                        "& .MuiFormControlLabel-label": {
+                          fontSize: {
+                            xs: "clamp(0.5rem, calc(0.8rem + 0.2vw), 1rem)", // Default/mobile
+                            md: `clamp(0.5rem, calc(0.8rem + 0.3vw), 1.5rem)`,
+                            lg: `clamp(0.5rem, calc(0.8rem + 0.4vw), 1.8rem)`,
+                            xl: `clamp(0.5rem, calc(0.8rem + 0.5vw), 2.1rem)`,
+                          },
+                          fontWeight: 200,
+                          lineHeight: 1.7,
+                        },
+                      }}
                     />
                   ))}
                   <StyledTextField
@@ -331,4 +446,5 @@ const ContactForm = () => {
     </Box>
   );
 };
+
 export default ContactForm;
