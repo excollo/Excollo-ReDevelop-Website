@@ -294,6 +294,9 @@ const HowWeWork = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isLaptop = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeLaptop = useMediaQuery(theme.breakpoints.up("lg"));
+  const isXtraLargeLaptop = useMediaQuery(theme.breakpoints.up("xl"));
 
   useEffect(() => {
     if (isMobile || isTablet) return;
@@ -364,7 +367,7 @@ const HowWeWork = () => {
       }}
     >
       <WorkTable>
-        <Box sx={{ marginBottom: "10rem", marginTop: "10rem" }}>
+        <Box sx={{ marginBottom: {md: "4rem", lg: "6rem", xl: "10rem"}, marginTop: {md: "4rem", lg: "6rem", xl: "10rem"} }}>
           <Box
             sx={{
               position: "absolute",

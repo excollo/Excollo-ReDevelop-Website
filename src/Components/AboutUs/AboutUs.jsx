@@ -59,17 +59,24 @@ const TitleContainer = styled("div")(({ theme }) => ({
       display: "block",
     },
   },
-  [theme.breakpoints.down("xl")]: {
+  [theme.breakpoints.up("xl")]: {
     flex: "0 0 400px",
     "& h2": {
       fontSize: `clamp(2.25rem, calc(2.5rem + 3vw), 10rem)`,
       paddingBottom: "-50px",
     },
   },
-  [theme.breakpoints.down("lg")]: {
+  [theme.breakpoints.down("xl")]: {
     flex: "0 0 400px",
     "& h2": {
       fontSize: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+      paddingBottom: "-50px",
+    },
+  },
+  [theme.breakpoints.down("lg")]: {
+    flex: "0 0 400px",
+    "& h2": {
+      fontSize: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
       paddingBottom: "-50px",
     },
   },
@@ -77,7 +84,7 @@ const TitleContainer = styled("div")(({ theme }) => ({
     width: "100%",
     marginBottom: "-280px",
     "& h2": {
-      fontSize: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+      fontSize: "2.50rem",
       paddingBottom: "-50px",
       textAlign: "center",
       "& br": {
@@ -96,7 +103,6 @@ const TitleContainer = styled("div")(({ theme }) => ({
 const Card = styled("div")(
   ({ theme, direction = "90deg", isMobile = false }) => ({
     width: "50%",
-    height: "350px",
     background: `linear-gradient(${direction}, rgba(142, 84, 247, 0.5), rgba(51, 46, 108, 0.8), rgba(0, 0, 0, 1))`,
     borderRadius: "60px",
     padding: "30px",
@@ -132,13 +138,19 @@ const Card = styled("div")(
       margin: 15,
     },
 
+    [theme.breakpoints.up("xl")]: {
+      height: "400px",
+      fontSize: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+    },
+
+    [theme.breakpoints.down("xl")]: {
+      height: "300px",
+      fontSize: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+    },
+
     [theme.breakpoints.down("lg")]: {
       height: "200px",
-      fontSize: {
-                    md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                    lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
-                    xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
-                  },
+      fontSize: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
     },
 
     [theme.breakpoints.down("md")]: {
@@ -174,7 +186,7 @@ const Card = styled("div")(
       },
     },
 
-    "@media (min-width: 769px) and (max-width:1100px) ": {
+    "@media (min-width: 769px) and (max-width:899px) ": {
       width: "95%",
       height: "fit-content",
     },
@@ -192,8 +204,11 @@ const AboutUs = () => {
     "(min-width: 625px) and (max-width: 899px) and (orientation: landscape)"
   );
   const isSpecificMargin = useMediaQuery(
-    "(min-width: 2200px) and (max-width: 2600px)"
+    "(min-width: 1800px) and (max-width: 2600px)"
   );
+  const isLaptop = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeLaptop = useMediaQuery(theme.breakpoints.up("lg"));
+  const isXtraLargeLaptop = useMediaQuery(theme.breakpoints.up("xl"));
 
   const [showButton, setShowButton] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -326,18 +341,20 @@ const AboutUs = () => {
                 </p>
               </Card>
               <TitleContainer>
-                <h2 style={{ marginLeft: "15%" }}>
-                  Our <br />{" "}
-                  <span
-                    style={{
-                      background:
-                        "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }}
-                  >
-                    Mission
-                  </span>
+                <h2>
+                  <Box sx={{marginLeft: {md: "40%", lg: "20%", xl: "0"}}}>
+                    Our <br />{" "}
+                    <span
+                      style={{
+                        background:
+                          "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                      }}
+                    >
+                      Mission
+                    </span>
+                  </Box>
                 </h2>
               </TitleContainer>
             </>
