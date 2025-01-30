@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Typography,
@@ -23,6 +23,7 @@ const HeroPageSection5 = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
 
   const cards = [
     {
@@ -44,7 +45,8 @@ const HeroPageSection5 = () => {
     },
   ];
 
-  useEffect(() => {
+  // GSAP Animation Logic
+  const initializeAnimations = () => {
     if (isDesktop) {
       cardRefs.current.forEach((card, index) => {
         gsap.fromTo(
@@ -65,32 +67,30 @@ const HeroPageSection5 = () => {
         );
       });
     }
-  }, [isDesktop]);
+  };
 
+  // Handle Window Resize
   useEffect(() => {
     const handleResize = () => {
-      const width = window.innerWidth;
-      if (width >= 1023 && width <= 1025) {
-        window.location.reload(); 
-      }
-
-      else if(width >= 940 && width <= 942){
-        window.location.reload();
-      }
+      setWindowSize(window.innerWidth);
+      ScrollTrigger.refresh(); // Refresh ScrollTrigger to recalculate positions
+      initializeAnimations(); // Reinitialize animations
     };
 
     window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isDesktop]);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  // Initialize animations on mount and when isDesktop changes
+  useEffect(() => {
+    initializeAnimations();
+  }, [isDesktop]);
 
   return (
     <Box
       ref={sectionRef}
       sx={{
-        minHeight: {md: "100vh", xl: "100vh"},
+        minHeight: { md: "100vh", xl: "100vh" },
         fontFamily: '"Inter", sans-serif',
         position: "relative",
         bgcolor: "#000",
@@ -114,7 +114,7 @@ const HeroPageSection5 = () => {
         }}
       />
       {/* Title Section */}
-      <Box sx={{ marginBottom: {md: "5%", xl: "7.5%"}}}>
+      <Box sx={{ marginBottom: { md: "5%", xl: "7.5%" } }}>
         <Typography
           sx={{
             color: "#fff",
