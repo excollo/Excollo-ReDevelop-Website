@@ -3,7 +3,6 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import AnimatedCTAButton from "../AnimatedCTAButton";
-
 const HeroPageSection6 = () => {
   const circleRef = useRef(null);
   const containerRef = useRef(null);
@@ -14,20 +13,17 @@ const HeroPageSection6 = () => {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-
   const targetLetters = ["e", "a", "d", "y", "o", "n", "s"];
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const navigate = useNavigate();
-
   const shuffleArray = (array) => {
     return array
       .map((item) => ({ item, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ item }) => item);
   };
-
   const createAnimation = () => {
     if (
       !textRef1.current ||
@@ -36,12 +32,10 @@ const HeroPageSection6 = () => {
       !containerRef.current
     )
       return;
-
     // Kill previous timeline if it exists
     if (timelineRef.current) {
       timelineRef.current.kill();
     }
-
     const splitTextIntoSpans = (textRef) => {
       const text = textRef.textContent;
       textRef.innerHTML = text
@@ -54,16 +48,12 @@ const HeroPageSection6 = () => {
         })
         .join("");
     };
-
     splitTextIntoSpans(textRef1.current);
     splitTextIntoSpans(textRef2.current);
-
     const letters1 = textRef1.current.querySelectorAll(".target-letter");
     const letters2 = textRef2.current.querySelectorAll(".target-letter");
     const allLetters = [...letters1, ...letters2];
-
     const offsetY = 8;
-
     const containerRect = containerRef.current.getBoundingClientRect();
     let letterPositions = allLetters.map((letter) => {
       const rect = letter.getBoundingClientRect();
@@ -82,21 +72,15 @@ const HeroPageSection6 = () => {
           offsetY,
       };
     });
-
     if (letterPositions.length === 0) return;
-
     letterPositions = shuffleArray(letterPositions);
-
     const tl = gsap.timeline({
       repeat: -1,
       defaults: { ease: "power2.inOut" },
     });
-
     timelineRef.current = tl;
-
     letterPositions.forEach((pos, index) => {
       const prevPos = index > 0 ? letterPositions[index - 1] : null;
-
       tl.to(circleRef.current, {
         x: pos.x,
         y: pos.y,
@@ -112,7 +96,6 @@ const HeroPageSection6 = () => {
           }
         },
       });
-
       tl.to(
         circleRef.current,
         {
@@ -122,7 +105,6 @@ const HeroPageSection6 = () => {
         },
         ">"
       );
-
       tl.to(
         circleRef.current,
         {
@@ -132,9 +114,7 @@ const HeroPageSection6 = () => {
         },
         ">"
       );
-
       tl.to({}, { duration: 0.4 });
-
       if (index === letterPositions.length - 1) {
         tl.add(() => {
           gsap.to(pos.element, {
@@ -145,17 +125,14 @@ const HeroPageSection6 = () => {
         });
       }
     });
-
     gsap.set(circleRef.current, {
       x: letterPositions[0].x,
       y: letterPositions[0].y,
     });
   };
-
   useEffect(() => {
     // Initial animation creation
     createAnimation();
-
     // Debounce function to prevent too many rapid updates
     const debounce = (func, wait) => {
       let timeout;
@@ -168,7 +145,6 @@ const HeroPageSection6 = () => {
         timeout = setTimeout(later, wait);
       };
     };
-
     // Handle resize with debounce
     const handleResize = debounce(() => {
       setWindowSize({
@@ -177,9 +153,7 @@ const HeroPageSection6 = () => {
       });
       createAnimation();
     }, 250);
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
       if (timelineRef.current) {
@@ -187,13 +161,11 @@ const HeroPageSection6 = () => {
       }
     };
   }, []);
-
   const handleClick = (e) => {
     e.preventDefault();
     navigate("/contact");
     window.scrollTo(0, 0);
   };
-
   return (
     <Box
       sx={{
@@ -202,8 +174,8 @@ const HeroPageSection6 = () => {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        minHeight: "30vh",
-        padding: { xs: "2rem 1rem", md: "5rem 2rem" },
+        minHeight: "40vh",
+        padding: { xs: "2rem 1rem", md: "0rem 2rem" },
         color: "#fff",
       }}
     >
@@ -219,8 +191,8 @@ const HeroPageSection6 = () => {
           ref={circleRef}
           sx={{
             marginTop: "-0.3rem",
-            width: { xs: "17px", sm: "25px", md: "35px", lg: "50px" },
-            height: { xs: "17px", sm: "25px", md: "35px", lg: "50px" },
+            width: { xs: "17px", sm: "25px", md: "35px", lg: "40px", xl: "50px" },
+            height: { xs: "17px", sm: "25px", md: "35px", lg: "40px", xl: "50px" },
             background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             borderRadius: "50%",
             position: "absolute",
@@ -234,8 +206,8 @@ const HeroPageSection6 = () => {
           fontWeight="500"
           sx={{
             letterSpacing: "0.001em",
-            fontSize: { xs: "2rem", sm: "3rem", md: "5rem", lg: "7rem" },
-            lineHeight: { xs: "2.5rem", sm: "4rem", md: "6rem", lg: "10rem" },
+            fontSize: `clamp(2rem, calc(2rem + 3.5vw), 10rem)`,
+            lineHeight: `clamp(2.5rem, calc(2rem + 3vw), 10rem)`,
             "& .letter": {
               display: "inline-block",
               position: "relative",
@@ -275,5 +247,4 @@ const HeroPageSection6 = () => {
     </Box>
   );
 };
-
 export default HeroPageSection6;

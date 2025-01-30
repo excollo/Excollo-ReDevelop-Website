@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-
 const AnimatedCTAButton = ({ onClick }) => {
   const buttonRef = useRef(null);
   const circleRef = useRef(null);
@@ -13,13 +12,11 @@ const AnimatedCTAButton = ({ onClick }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-
   useEffect(() => {
     const circle = circleRef.current;
     const text = textRef.current;
     const button = buttonRef.current;
     const container = containerRef.current;
-
     // Initial styles with responsive widths
     gsap.set(circle, {
       scale: 0,
@@ -27,24 +24,22 @@ const AnimatedCTAButton = ({ onClick }) => {
       width: isMobile ? "30px" : "80px",
       height: isMobile ? "30px" : "80px",
       borderRadius: "50%",
-      border: "2px solid #7e22ce",
+      // border: "2px solid #7E22CE",
       background:
         "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
     });
     gsap.set(text, { opacity: 0 });
     gsap.set(button, { width: isMobile ? "80px" : "80px" });
-
     // Main animation timeline with responsive final widths
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: "top 85%",
-        end: "top 50%",
+        end: "top 85%",
         toggleActions: "play reverse play reverse",
-        scrub: 0.3,
+        scrub: 1,
       },
     });
-
     tl.to(circle, {
       scale: 1,
       opacity: 1,
@@ -76,7 +71,6 @@ const AnimatedCTAButton = ({ onClick }) => {
         },
         "-=0.2"
       );
-
     // Hover animation
     const handleMouseEnter = () => {
       gsap.to(circle, {
@@ -85,7 +79,6 @@ const AnimatedCTAButton = ({ onClick }) => {
         ease: "power2.out",
       });
     };
-
     const handleMouseLeave = () => {
       gsap.to(circle, {
         scale: 1,
@@ -94,10 +87,8 @@ const AnimatedCTAButton = ({ onClick }) => {
         boxShadow: "none",
       });
     };
-
     button.addEventListener("mouseenter", handleMouseEnter);
     button.addEventListener("mouseleave", handleMouseLeave);
-
     return () => {
       if (tl.scrollTrigger) tl.scrollTrigger.kill();
       tl.kill();
@@ -105,14 +96,15 @@ const AnimatedCTAButton = ({ onClick }) => {
       button.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [isMobile]);
-
   return (
     <Box
       ref={containerRef}
       sx={{
         padding: {
           xs: "20px 20px", // Reduced padding for mobile
-          sm: "20px 60px", // Original padding for larger screens
+          sm: "20px 50px",
+          lg: "25px 50px",
+          xl: "30px 80px", // Original padding for larger screens
         },
       }}
     >
@@ -146,14 +138,19 @@ const AnimatedCTAButton = ({ onClick }) => {
         <Typography
           ref={textRef}
           sx={{
-            color: "#ffffff",
-            fontSize: { xs: "14px", md: "19px", lg: "22px" },
-            fontWeight: 500,
+            color: "#FFFFFF",
+            fontWeight: 100,
+            fontSize: {
+              xs: "16px",
+              sm: "17px",
+              md: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
+              xl: `clamp(0.5rem, calc(0.6rem + 0.7vw), 5rem)`,
+            },
             zIndex: 2,
             whiteSpace: "nowrap",
             position: "relative",
             marginTop: { xs: "-5px", sm: "2rem" }, // Adjusted margin for mobile
-            marginLeft: {xs: "80px", sm: "0"}, // Adjusted margin for mobile
+            marginLeft: { xs: "80px", sm: "0" }, // Adjusted margin for mobile
           }}
         >
           Talk to Us
@@ -162,5 +159,4 @@ const AnimatedCTAButton = ({ onClick }) => {
     </Box>
   );
 };
-
 export default AnimatedCTAButton;

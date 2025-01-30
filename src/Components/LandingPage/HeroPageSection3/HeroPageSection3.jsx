@@ -70,10 +70,16 @@ const HeroPageSection3 = () => {
         }}
       />
       <Typography
-        variant={isMobile ? "h4" : isTablet ? "h3" : "h2"}
         sx={{
           color: "#fff",
-          fontWeight: "bold",
+          fontWeight: 600,
+          lineHeight: 1.167,
+          letterSpacing: "-0.01562em",
+          fontSize: {
+            md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+            lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+            xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
+          },
           position: "relative",
           top: "20px",
           background: "black",
@@ -96,10 +102,9 @@ const HeroPageSection3 = () => {
         <Box
           sx={{
             position: "relative",
-            marginTop: "5rem",
+            marginTop: "0rem",
             zIndex: 0,
-            marginRight: margins.mr,
-            marginLeft: margins.ml,
+          
           }}
         >
           <Box

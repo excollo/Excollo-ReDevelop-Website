@@ -423,7 +423,7 @@ const HeroPageSection4 = ({ onComplete }) => {
       ref={sectionRef}
       className="hero-page-section-4"
       sx={{
-        height: "100vh",
+        height: "90vh",
         color: "#fff",
         position: "relative",
         overflow: "hidden",
