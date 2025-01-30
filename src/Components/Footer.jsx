@@ -17,7 +17,7 @@ import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png";
 const Footer = () => {
   const isTablet = useMediaQuery("(min-width:480px) and (max-width:899px)");
   const specificCondition = useMediaQuery(
-    "(min-width: 1800px) and (max-width: 2600px) and (max-height:1600px)"
+    "(min-width: 1800px) and (max-width: 2600px) and (max-height:1900px)"
   );
 
   const navigationLinks = [
