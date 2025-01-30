@@ -86,6 +86,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
       ref={sectionRef}
       sx={{
         color: "#fff",
+        overflow: "hidden",
         minHeight: {
           xs: "30vh",
           sm: isTablet ? "50vh" : "50vh",

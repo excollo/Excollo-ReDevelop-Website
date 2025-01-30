@@ -57,7 +57,7 @@ const HeroPageSection7 = () => {
         position="relative"
         zIndex={2}
         sx={{
-          height: "400px",
+          height: "60vh",
           width: "100%",
           overflow: "hidden",
           "@media (max-width: 1200px)": {
@@ -83,12 +83,12 @@ const HeroPageSection7 = () => {
           style={{
             height: "auto",
             width: "80%",
-            transform:
-              isMobile || isTablet
-                ? "none"
-                : `translateY(${Math.min(translateYImage, 1300)}px) rotateX(${
-                    rotation.y
-                  }deg) rotateY(${rotation.x}deg)`,
+            // transform:
+            //   isMobile || isTablet
+            //     ? "none"
+            //     : `translateY(${Math.min(translateYImage, 500)}px) rotateX(${
+            //         rotation.y
+            //       }deg) rotateY(${rotation.x}deg)`,
             transformStyle: "preserve-3d",
             willChange: "transform",
             transition: "transform 0.2s ease-out",
