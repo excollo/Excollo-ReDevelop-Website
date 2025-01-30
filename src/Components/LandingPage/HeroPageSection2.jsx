@@ -278,7 +278,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                   md: "1.6vw",
                   xl: "1.8vw",
                 },
-                borderRadius: { sm: "20px", md: "40px", xl: "80px" },
+                borderRadius: { sm: "40px", md: "40px", xl: "80px" },
                 background:
                   "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
                 zIndex: 3,

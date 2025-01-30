@@ -262,45 +262,6 @@ const HeroPage = () => {
     }
   }, [hero1Complete, isDesktop, isSpecificSize]);
 
-  useEffect(() => {
-    if (hero2Complete && isDesktop) {
-      gsap.fromTo(
-        ".hero-page-section-4",
-        {
-          opacity: 0,
-          y: 100,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".hero-page-section-4",
-            start: "top center",
-            end: "bottom center",
-            toggleActions: "play none none reverse",
-            onEnter: () => {
-              setHero4Complete(true);
-            },
-            preventOverlaps: true,
-            fastScrollEnd: true,
-          },
-        }
-      );
-    } else if (hero2Complete && !isDesktop) {
-      // Set hero4Complete immediately for mobile/tablet
-      setHero4Complete(true);
-
-      // Set initial styles for hero-page-section-4
-      const heroSection4 = document.querySelector(".hero-page-section-4");
-      if (heroSection4) {
-        heroSection4.style.opacity = "1";
-        heroSection4.style.transform = "translateY(0)";
-      }
-    }
-  }, [hero2Complete, isDesktop]);
-
   const handleScrollToTop = () => {
     const section4 = document.querySelector(".hero-page-section-4");
     const section4Bounds = section4?.getBoundingClientRect();
@@ -436,22 +397,14 @@ const HeroPage = () => {
                 transform: "none",
               }
             : {
-                opacity: 0,
+                opacity: 1,
                 transform: "translateX(50%)",
               }),
         }}
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
       </Box>
-      <Box className="hero-page-section-3" sx={{ opacity: 1 }}>
-        <HeroPageSection3 />
-      </Box>
       <Box
-        className="hero-page-section-4"
-        sx={{
-          opacity: isMobile || isTablet ? 1 : 0,
-          transform: isMobile || isTablet ? "translateY(0)" : "translateY(0)",
-        }}
       >
         <HeroPageSection4 />
       </Box>

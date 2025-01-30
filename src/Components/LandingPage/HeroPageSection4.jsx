@@ -24,66 +24,49 @@ const FeatureCard = ({
   isMobile,
   isTablet,
 }) => {
-  const cardStyles =
-    isMobile || isTablet
-      ? {
-          background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
-          borderRadius: "12px",
-          textAlign: "center",
-          padding: "1rem",
-          width: "100%",
-          minHeight: isMobile ? "150px" : "200px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: "1rem",
-        }
-      : {
-          background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
-          borderRadius: "12px",
-          textAlign: "center",
-          padding: "1rem",
-          height: "300px",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
-          border: isFinalState ? "1px solid #7e22ce" : "1px solid #7e22ce",
-          transition: "all 0.3s ease",
-          "&:hover": {
-            backgroundColor: "#000000",
-            transform: "translateY(-5px)",
-            boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
-          },
-        };
+  const cardStyles = {
+    background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+    borderRadius: "12px",
+    textAlign: "center",
+    padding: "1rem",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "1rem",
+    boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
+    border: isFinalState ? "1px solid #7e22ce" : "1px solid #7e22ce",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#000000",
+      transform: "translateY(-5px)",
+      boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
+    },
+  };
 
-  const titleStyles =
-    isMobile || isTablet
-      ? {
-          background: isMobile
-            ? "linear-gradient(90deg, #2579e3, #8e54f7)"
-            : "linear-gradient(180deg, #2579e3, #8e54f7)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          display: "inline-block",
-          marginBottom: "0.5rem",
-          fontSize: isMobile ? "1.5rem" : "2rem",
-          fontWeight: 600,
-        }
-      : {
-          background: "linear-gradient(90deg, #2579e3, #8e54f7)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          display: "inline-block",
-          marginBottom: "1rem",
-          marginTop: isFinalState ? "0" : "2rem",
-          transition: "margin-top 0.5s ease",
-          fontSize: isMainCard ? "3rem" : "2rem",
-          fontWeight: "400",
-        };
+  const titleStyles = {
+    background: isMobile
+      ? "linear-gradient(90deg, #2579e3, #8e54f7)"
+      : "linear-gradient(90deg, #2579e3, #8e54f7)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    display: "inline-block",
+    marginBottom: isMobile ? "0.5rem" : "1rem",
+    marginTop: isFinalState ? "0" : "2rem",
+    transition: "margin-top 0.5s ease",
+    fontSize: isMainCard
+      ? isMobile
+        ? "1.5rem"
+        : isTablet
+        ? "2rem"
+        : "3rem"
+      : isMobile
+      ? "1.5rem"
+      : "2rem",
+    fontWeight: isMainCard ? 400 : 400,
+  };
 
   return (
     <Paper elevation={6} sx={cardStyles}>
@@ -202,7 +185,7 @@ const HeroPageSection4 = ({ onComplete }) => {
       trigger: ".hero-page-section-4",
       start: "top 20%",
       end: "top 20%",
-      scrub: 0.5,
+      scrub: 1,
       pin: true,
       pinSpacing: true,
       snap: {
@@ -231,7 +214,8 @@ const HeroPageSection4 = ({ onComplete }) => {
           gap: `${2 + scale * 8}rem`,
           duration: 0.3,
           ease: "power2.out",
-          marginLeft: `-${scale * 2}%`,
+          marginLeft: `-${scale * 1}%`,
+          marginRight: `${scale * 1.5}%`,
         });
 
         gsap.to(".main-card .feature-title", {
@@ -319,7 +303,7 @@ const HeroPageSection4 = ({ onComplete }) => {
             mt: 22,
             mb: -4,
           },
-          "@media (min-width: 769px) and (max-width: 900px)": {
+          "@media (min-width: 769px) and (max-width: 899px)": {
             mt: 22,
             mb: -4,
           },
@@ -423,23 +407,37 @@ const HeroPageSection4 = ({ onComplete }) => {
       ref={sectionRef}
       className="hero-page-section-4"
       sx={{
-        height: "90vh",
+        height: "100vh",
         color: "#fff",
         position: "relative",
-        overflow: "hidden",
         fontFamily: '"Inter", sans-serif',
       }}
     >
       <Box
         className="title-section"
         sx={{
-          position: "sticky",
+          position: "relative",
           top: "2%",
           textAlign: "center",
           zIndex: 2,
         }}
       >
-        <Typography variant="h2" fontWeight="bold">
+        <Typography
+          sx={{
+            fontWeight: 600,
+            lineHeight: 1.167,
+            letterSpacing: "-0.01562em",
+            textAlign: "center",
+            fontSize: {
+              md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+              lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+              xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
+            },
+            position: "relative",
+            top: "20px",
+            background: "black",
+          }}
+        >
           Why Choose{" "}
           <Box
             component="span"
@@ -458,7 +456,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         className="cards-container"
         sx={{
           position: "relative",
-          height: "calc(100vh - 200px)",
+          height: "calc(100vh - 0%)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -471,6 +469,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           className="side-cards-container"
           sx={{
             width: "20%",
+            height: "40%",
             opacity: 0,
           }}
         >
@@ -486,6 +485,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           className="main-card"
           sx={{
             width: "80%",
+            height: "40%",
             transition: "width 0.4s ease",
           }}
         >
@@ -502,6 +502,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           className="side-cards-container"
           sx={{
             width: "20%",
+            height: "40%",
             opacity: 0,
           }}
         >

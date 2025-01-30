@@ -12,9 +12,13 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png";
 
 const Footer = () => {
   const isTablet = useMediaQuery("(min-width:480px) and (max-width:899px)");
+  const specificCondition = useMediaQuery(
+    "(min-width: 1800px) and (max-width: 2600px) and (max-height:1600px)"
+  );
 
   const navigationLinks = [
     { name: "Home", path: "/" },
@@ -28,7 +32,20 @@ const Footer = () => {
       {/* Excollo Section */}
       <Box sx={{ display: "flex", mb: 4 }}>
         <Typography variant="h6" sx={{ width: "30%", fontWeight: "500" }}>
-          Excollo
+          <Box
+            display="flex"
+            alignItems="center"
+            sx={{ position: "relative", zIndex: 0, width: "100%" }}
+          >
+            <Link to="/">
+              <img
+                src={ExcolloWebsiteLogo}
+                alt="excollo"
+                loading="lazy"
+                style={{ width: "50%" }}
+              />
+            </Link>
+          </Box>
         </Typography>
         <Box sx={{ width: "70%" }}>
           <Typography variant="body2" color="grey.400" gutterBottom>
@@ -230,7 +247,7 @@ const Footer = () => {
             item
             xs={12}
             sm={6}
-            md={5}
+            md={4.5}
             sx={{
               marginLeft: "8%",
               textAlign: { xs: "center", md: "left" },
@@ -251,20 +268,50 @@ const Footer = () => {
                 fontSize: { xs: "1.1rem", sm: "1.25rem" },
               }}
             >
-              Excollo
+              <Box
+                display="flex"
+                alignItems="center"
+                sx={{ position: "relative", zIndex: 0, width: "100%" }}
+              >
+                <Link to="/">
+                  <img
+                    src={ExcolloWebsiteLogo}
+                    alt="excollo"
+                    loading="lazy"
+                    style={{
+                      width: {
+                        xs: "50%",
+                        sm: "50%",
+                        md: "50%",
+                        lg: "50%",
+                        xl: specificCondition ? "70%" : "50%",
+                      },
+                    }}
+                  />
+                </Link>
+              </Box>
             </Typography>
             <Typography
               variant="body2"
               color="grey.400"
               sx={{
-                fontSize: { xs: "0.875rem", sm: "1rem" },
+                fontSize: {
+                  xs: "0.875rem",
+                  sm: "1rem",
+
+                  md: "1rem",
+                  lg: "1rem",
+                  xl: specificCondition
+                    ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                    : "1rem",
+                },
               }}
               gutterBottom
             >
               AI Driven. Outcome Focused.
             </Typography>
             <Link
-              href="#"
+              href="/about"
               sx={{
                 color: "grey.400",
                 display: "flex",
@@ -274,13 +321,30 @@ const Footer = () => {
                 "&:hover": { color: "#a693c1" },
                 justifyContent: { xs: "center", md: "flex-start" },
                 mt: 1,
-                fontSize: { xs: "0.875rem", sm: "1rem" },
+                fontSize: {
+                  xs: "0.875rem",
+                  sm: "1rem",
+                  xl: specificCondition
+                    ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                    : "auto",
+                },
                 "@media (max-width: 768px)": {
                   justifyContent: "center",
                 },
               }}
             >
-              Learn More <LaunchIcon sx={{ fontSize: { xs: 14, sm: 16 } }} />
+              Learn More{" "}
+              <LaunchIcon
+                sx={{
+                  fontSize: {
+                    xs: 14,
+                    sm: 16,
+                    xl: specificCondition
+                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                      : "auto",
+                  },
+                }}
+              />
             </Link>
           </Grid>
 
@@ -304,7 +368,13 @@ const Footer = () => {
               sx={{
                 fontWeight: "500",
                 mb: 2,
-                fontSize: { xs: "1rem", sm: "1.1rem" },
+                fontSize: {
+                  xs: "1rem",
+                  sm: "1.1rem",
+                  xl: specificCondition
+                    ? `clamp(0.5rem, calc(0.5rem + 1.25vw), 3.5rem)`
+                    : "auto",
+                },
               }}
             >
               Quick Links
@@ -328,6 +398,13 @@ const Footer = () => {
                     color: "grey.400",
                     textDecoration: "none",
                     display: "block",
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "1rem",
+                      xl: specificCondition
+                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                        : "auto",
+                    },
                     mb: 1,
                     "&:hover": { color: "#a693c1" },
                   }}
@@ -357,7 +434,13 @@ const Footer = () => {
               sx={{
                 fontWeight: "500",
                 mb: 2,
-                fontSize: { xs: "1rem", sm: "1.1rem" },
+                fontSize: {
+                  xs: "1rem",
+                  sm: "1.1rem",
+                  xl: specificCondition
+                    ? `clamp(0.5rem, calc(0.5rem + 1.25vw), 3.5rem)`
+                    : "auto",
+                },
               }}
             >
               Contact Us
@@ -382,7 +465,16 @@ const Footer = () => {
                 }}
               >
                 <EmailIcon
-                  sx={{ fontSize: { xs: 18, sm: 20 }, color: "grey.400" }}
+                  sx={{
+                    fontSize: {
+                      xs: 18,
+                      sm: 20,
+                      xl: specificCondition
+                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                        : "auto",
+                    },
+                    color: "grey.400",
+                  }}
                 />
                 <Link
                   href="mailto:info@excollo.com"
@@ -390,7 +482,13 @@ const Footer = () => {
                     color: "grey.400",
                     textDecoration: "none",
                     "&:hover": { color: "#a693c1" },
-                    fontSize: { xs: "0.875rem", sm: "1rem" },
+                    fontSize: {
+                      xs: "0.875rem",
+                      sm: "1rem",
+                      xl: specificCondition
+                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                        : "auto",
+                    },
                   }}
                 >
                   info@excollo.com
@@ -405,7 +503,16 @@ const Footer = () => {
                 }}
               >
                 <PhoneIcon
-                  sx={{ fontSize: { xs: 18, sm: 20 }, color: "grey.400" }}
+                  sx={{
+                    fontSize: {
+                      xs: 18,
+                      sm: 20,
+                      xl: specificCondition
+                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                        : "auto",
+                    },
+                    color: "grey.400",
+                  }}
                 />
                 <Link
                   href="tel:+918890204938"
@@ -413,7 +520,13 @@ const Footer = () => {
                     color: "grey.400",
                     textDecoration: "none",
                     "&:hover": { color: "#a693c1" },
-                    fontSize: { xs: "0.875rem", sm: "1rem" },
+                    fontSize: {
+                      xs: "0.875rem",
+                      sm: "1rem",
+                      xl: specificCondition
+                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                        : "auto",
+                    },
                   }}
                 >
                   +91 8890204938
@@ -437,19 +550,37 @@ const Footer = () => {
                     variant="body2"
                     color="grey.400"
                     sx={{
-                      fontSize: { xs: "0.875rem", sm: "1rem" },
+                      fontSize: {
+                        xs: "0.875rem",
+                        sm: "1rem",
+                        xl: specificCondition
+                          ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                          : "auto",
+                      },
                       textAlign: { xs: "center", md: "left" },
                     }}
                   >
-                    <LocationOnIcon
-                      sx={{
-                        fontSize: { xs: 14, sm: 20 },
-                        color: "grey.400",
-                        mr: 0.5,
-                      }}
-                    />
-                    C-230 Bharat Marg, Hanuman Nagar, Vaishali, Jaipur,
-                    Rajasthan - 302021
+                    <Box sx={{ display: "flex" }}>
+                      <LocationOnIcon
+                        sx={{
+                          fontSize: {
+                            xs: 12,
+                            sm: 20,
+                            md: 20,
+                            lg: 16,
+                            xl: specificCondition
+                              ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                              : "auto",
+                          },
+                          color: "grey.400",
+                          mr: 0.5,
+                        }}
+                      />
+                      <Box sx={{ ml: 0.5, mt: -0.5, position: "relative" }}>
+                        C-230 Bharat Marg, Hanuman Nagar, Vaishali, Jaipur,
+                        Rajasthan - 302021
+                      </Box>
+                    </Box>
                   </Typography>
                 </Link>
               </Box>
@@ -461,7 +592,7 @@ const Footer = () => {
             item
             xs={12}
             sm={6}
-            md={2}
+            md={2.1}
             sx={{
               textAlign: { xs: "center", md: "left" },
               marginLeft: { md: 5, xs: 0 },
@@ -476,7 +607,13 @@ const Footer = () => {
               sx={{
                 fontWeight: "500",
                 mb: 2,
-                fontSize: { xs: "1rem", sm: "1.1rem" },
+                fontSize: {
+                  xs: "1rem",
+                  sm: "1.1rem",
+                  xl: specificCondition
+                    ? `clamp(0.5rem, calc(0.5rem + 1.25vw), 3.5rem)`
+                    : "auto",
+                },
               }}
             >
               Stay Connected
@@ -502,10 +639,27 @@ const Footer = () => {
                   textDecoration: "none",
                   "&:hover": { color: "#a693c1" },
                   justifyContent: { xs: "center", md: "flex-start" },
-                  fontSize: { xs: "0.875rem", sm: "1rem" },
+                  fontSize: {
+                    xs: "0.875rem",
+                    sm: "1rem",
+                    xl: specificCondition
+                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                      : "auto",
+                  },
                 }}
               >
-                <LinkedInIcon sx={{ fontSize: { xs: 18, sm: 20 } }} /> LinkedIn
+                <LinkedInIcon
+                  sx={{
+                    fontSize: {
+                      xs: 18,
+                      sm: 20,
+                      xl: specificCondition
+                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                        : "auto",
+                    },
+                  }}
+                />{" "}
+                LinkedIn
               </Link>
               <Link
                 href="/contact"
@@ -517,11 +671,27 @@ const Footer = () => {
                   textDecoration: "none",
                   "&:hover": { color: "#a693c1" },
                   justifyContent: { xs: "center", md: "flex-start" },
-                  fontSize: { xs: "0.875rem", sm: "1rem" },
+                  fontSize: {
+                    xs: "0.875rem",
+                    sm: "1rem",
+                    xl: specificCondition
+                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                      : "auto",
+                  },
                 }}
               >
                 Schedule a Consultation{" "}
-                <LaunchIcon sx={{ fontSize: { xs: 14, sm: 16 } }} />
+                <LaunchIcon
+                  sx={{
+                    fontSize: {
+                      xs: 14,
+                      sm: 16,
+                      xl: specificCondition
+                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                        : "auto",
+                    },
+                  }}
+                />
               </Link>
               <Link
                 href="/services"
@@ -533,11 +703,27 @@ const Footer = () => {
                   textDecoration: "none",
                   "&:hover": { color: "#a693c1" },
                   justifyContent: { xs: "center", md: "flex-start" },
-                  fontSize: { xs: "0.875rem", sm: "1rem" },
+                  fontSize: {
+                    xs: "0.875rem",
+                    sm: "1rem",
+                    xl: specificCondition
+                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                      : "auto",
+                  },
                 }}
               >
                 Explore our Services{" "}
-                <LaunchIcon sx={{ fontSize: { xs: 14, sm: 16 } }} />
+                <LaunchIcon
+                  sx={{
+                    fontSize: {
+                      xs: 14,
+                      sm: 16,
+                      xl: specificCondition
+                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                        : "auto",
+                    },
+                  }}
+                />
               </Link>
             </Box>
           </Grid>
@@ -572,7 +758,13 @@ const Footer = () => {
         <Typography
           variant="caption"
           sx={{
-            fontSize: { xs: "0.75rem", sm: "0.875rem" },
+            fontSize: {
+              xs: "0.75rem",
+              sm: "0.875rem",
+              xl: specificCondition
+                ? `clamp(0.5rem, calc(0.5rem + 1vw), 2.5rem)`
+                : "auto",
+            },
             textAlign: { xs: "center", sm: "left" },
           }}
         >
@@ -599,7 +791,13 @@ const Footer = () => {
               color: "grey.400",
               textDecoration: "none",
               "&:hover": { color: "#a693c1" },
-              fontSize: { xs: "0.75rem", sm: "0.8rem" },
+              fontSize: {
+                xs: "0.75rem",
+                sm: "0.8rem",
+                xl: specificCondition
+                  ? `clamp(0.5rem, calc(0.5rem + 1vw), 2.5rem)`
+                  : "auto",
+              },
             }}
           >
             Privacy Policy
@@ -611,7 +809,13 @@ const Footer = () => {
               color: "grey.400",
               textDecoration: "none",
               "&:hover": { color: "#a693c1" },
-              fontSize: { xs: "0.75rem", sm: "0.8rem" },
+              fontSize: {
+                xs: "0.75rem",
+                sm: "0.8rem",
+                xl: specificCondition
+                  ? `clamp(0.5rem, calc(0.5rem + 1vw), 2.5rem)`
+                  : "auto",
+              },
             }}
           >
             Terms of Service
