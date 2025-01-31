@@ -16,7 +16,6 @@ const App = () => {
     <Router>
       <Box sx={{ backgroundColor: "#000", color: "#fff" }}>
         <CustomCursor />
-        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HeroPage />} />
           <Route path="/about" element={<AboutUsPage />} />

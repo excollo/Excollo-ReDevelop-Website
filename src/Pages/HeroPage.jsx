@@ -369,29 +369,18 @@ const HeroPage = () => {
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
       </Box>
-      <Box sx={{ marginTop: { md: "-10%", xl: "-7%" } }}>
-        {" "}
-        {/* Apply consistent spacing */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: { xs: 2, md: 4, lg: 6 },
+          marginTop: 4, // Base spacing
+        }}
+      >
         <HeroPageSection3 />
-      </Box>
-      <Box sx={{ marginTop: { md: "-8%", lg: "1%", xl: "0%" } }}>
-        {" "}
-        {/* Apply consistent spacing */}
         <HeroPageSection4 />
-      </Box>
-      <Box sx={{ marginTop: { md: "2%", lg: "5%", xl: "3%" } }}>
-        {" "}
-        {/* Apply consistent spacing */}
         <HeroPageSection5 />
-      </Box>
-      <Box sx={{ marginTop: { md: "-3%", lg: "2%", xl: "0%" } }}>
-        {" "}
-        {/* Apply consistent spacing */}
         <HeroPageSection6 />
-      </Box>
-      <Box sx={{ marginTop: { md: "-3%", lg: "0%", xl: "7%" } }}>
-        {" "}
-        {/* Apply consistent spacing */}
         <HeroPageSection7 />
       </Box>
       <Footer />

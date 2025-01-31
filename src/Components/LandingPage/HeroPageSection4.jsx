@@ -464,6 +464,7 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
         color: "#fff",
         position: "relative",
         fontFamily: '"Inter", sans-serif',
+        marginTop: "-5rem"
       }}
     >
       <Box
