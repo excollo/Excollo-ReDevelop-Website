@@ -25,6 +25,7 @@ const HeroPage = () => {
   const [hero1Complete, setHero1Complete] = useState(false);
   const [hero2Complete, setHero2Complete] = useState(false);
   const [hero4Complete, setHero4Complete] = useState(false);
+  const [isLoading,setIsLoading] = useState(true);
   const threeDERef = useRef(null);
 
   const theme = useTheme();
@@ -140,7 +141,8 @@ const HeroPage = () => {
         gradientBackground.style.opacity = "1";
       }
     }
-  }, [showThreeDE, isSpecificSize, isDesktop]);
+    ScrollTrigger.refresh();
+  }, [showThreeDE, isSpecificSize, isTablet, isMobile ,isDesktop]);
 
   useEffect(() => {
     if (hero1Complete && isDesktop) {
@@ -254,9 +256,6 @@ const HeroPage = () => {
       });
     }
   };
-
-  // Define a consistent spacing value
-  const sectionSpacing = 8; // You can adjust this value as needed
 
   return (
     <Box

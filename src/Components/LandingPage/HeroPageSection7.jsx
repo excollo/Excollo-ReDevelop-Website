@@ -11,6 +11,7 @@ const HeroPageSection7 = () => {
   const isSpecified = useMediaQuery("(max-width: 899px)");
   const isSmallerLaptop = useMediaQuery(theme.breakpoints.up("md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const is1300pxto1535px = useMediaQuery( "(min-width:1300px) and (max-width:1535px)");
   const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
   const is1750to2000px = useMediaQuery("(min-width:1750px) and (max-width:2000px)");
   const is2001to2300px = useMediaQuery(
@@ -54,14 +55,18 @@ const HeroPageSection7 = () => {
     if (isMobile || isTablet) return;
     setRotation({ x: 0, y: 0 });
   };
-  const translateYImage = is2301to2600px ? Math.max(3600 - scrollY * 0.5, 0) : is2001to2300px
+  const translateYImage = is2301to2600px
+    ? Math.max(3600 - scrollY * 0.5, 0)
+    : is2001to2300px
     ? Math.max(3100 - scrollY * 0.5, 0)
     : is1750to2000px
     ? Math.max(2800 - scrollY * 0.5, 0)
     : isXtraLargeScreen
     ? Math.max(2500 - scrollY * 0.5, 0)
+    : is1300pxto1535px
+    ? Math.max(1900 - scrollY * 0.5, 0)
     : isLargeScreen
-    ? Math.max(2100 - scrollY * 0.5, 0)
+    ? Math.max(1900 - scrollY * 0.5, 0)
     : isSmallerLaptop
     ? Math.max(1800 - scrollY * 0.5, 0)
     : Math.max(100 - scrollY * 0.5, 0); ;
@@ -105,7 +110,7 @@ const HeroPageSection7 = () => {
             transform:
               isMobile || isTablet
                 ? "none"
-                : `translateY(${Math.min(translateYImage, 500)}px) rotateX(${
+                : `translateY(${Math.min(translateYImage, 1000)}px) rotateX(${
                     rotation.y
                   }deg) rotateY(${rotation.x}deg)`,
             transformStyle: "preserve-3d",
