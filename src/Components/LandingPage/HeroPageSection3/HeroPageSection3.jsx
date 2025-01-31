@@ -10,7 +10,8 @@ const HeroPageSection3 = () => {
   const isSpecificSize = useMediaQuery(
     "(max-width: 320px) and (max-height: 725px)"
   );
-  const isSpecified = useMediaQuery("(max-width: 1024px)");
+  const isSpecified = useMediaQuery("(max-width: 899px)");
+  const isSmallLaptop = useMediaQuery(theme.breakpoints.up("md"));
   // Custom breakpoint checks for specific margins
   const is600to640 = useMediaQuery("(min-width:600px) and (max-width:640px)");
   const is640to670 = useMediaQuery("(min-width:640px) and (max-width:670px)");
@@ -54,7 +55,7 @@ const HeroPageSection3 = () => {
       <Box
         sx={{
           position: "absolute",
-          top: isSpecified ? "10%" : "2%",
+          top: isSmallLaptop ? "-15%" : isSpecified ? "10%" : "2%",
           left: "10%",
           right: "10%",
           bottom: isSpecified ? "0" : "0",
@@ -63,6 +64,8 @@ const HeroPageSection3 = () => {
               ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`
               : isSpecified
               ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`
+              : isSmallLaptop
+              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`
               : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 0,
           pointerEvents: "none",
@@ -102,9 +105,8 @@ const HeroPageSection3 = () => {
         <Box
           sx={{
             position: "relative",
-            marginTop: "0rem",
+            marginTop: { md: "8%" },
             zIndex: 0,
-          
           }}
         >
           <Box

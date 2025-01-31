@@ -9,14 +9,12 @@ import { Box } from "@mui/material";
 import "./App.css";
 import ServicesPage from "./Pages/ServicesPage";
 import CustomCursor from "./Components/CursorEffect/CursorEffetct";
-import GradientBallNotification from "./Components/notification/Notification"; 
 
 const App = () => {
   return (
     <Router>
       <Box sx={{ backgroundColor: "#000", color: "#fff" }}>
         <CustomCursor />
-        <GradientBallNotification />
         <Routes>
           <Route path="/" element={<HeroPage />} />
           <Route path="/about" element={<AboutUsPage />} />

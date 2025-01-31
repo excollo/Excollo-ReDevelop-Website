@@ -71,23 +71,6 @@ const HeroPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     window.location.reload();
-  //   };
-
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
-
-  // // Ensure the page scrolls to the top on reload
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
-
   useEffect(() => {
     if (!showThreeDE && isDesktop) {
       const timeline = gsap.timeline();
@@ -114,13 +97,12 @@ const HeroPage = () => {
         ease: "power2.out",
       });
 
-      // Modified animation to have both elements come from left
       timeline.add([
         gsap.fromTo(
           [".navbar", ".hero-content"],
           {
             opacity: 0,
-            x: -100, // Both start from -100px (left side)
+            x: -100,
           },
           {
             opacity: 1,
@@ -137,11 +119,9 @@ const HeroPage = () => {
         ),
       ]);
     } else if (!showThreeDE && !isDesktop) {
-      // For mobile and tablet, set states immediately without animations
       setAnimationComplete(true);
       setHero1Complete(true);
 
-      // Set initial styles without animations
       const navbar = document.querySelector(".navbar");
       const heroContent = document.querySelector(".hero-content");
       const gradientBackground = document.querySelector(".gradient-background");
@@ -185,27 +165,26 @@ const HeroPage = () => {
         }
       );
 
-      if(isXtraLargeScreenSize){
-         gsap.to(threeDERef.current, {
-           scrollTrigger: {
-             trigger: ".hero-section-2",
-             start: "top center",
-             end: "center center",
-             scrub: true,
-           },
-           motionPath: {
-             path: [
-               { x: "33%", y: "0%" },
-               { x: "12%", y: "50%" },
-               { x: "-23vw", y: "90vh" },
-             ],
-             curviness: 1.5,
-           },
-           duration: 3,
-           ease: "power6.out",
-         });
-      }
-      else if (isLargeScreenSize) {
+      if (isXtraLargeScreenSize) {
+        gsap.to(threeDERef.current, {
+          scrollTrigger: {
+            trigger: ".hero-section-2",
+            start: "top center",
+            end: "center center",
+            scrub: true,
+          },
+          motionPath: {
+            path: [
+              { x: "33%", y: "0%" },
+              { x: "12%", y: "50%" },
+              { x: "-23vw", y: "90vh" },
+            ],
+            curviness: 1.5,
+          },
+          duration: 3,
+          ease: "power6.out",
+        });
+      } else if (isLargeScreenSize) {
         gsap.to(threeDERef.current, {
           scrollTrigger: {
             trigger: ".hero-section-2",
@@ -224,8 +203,7 @@ const HeroPage = () => {
           duration: 3,
           ease: "power6.out",
         });
-      }
-      else if (isSpecificSize) {
+      } else if (isSpecificSize) {
         gsap.to(threeDERef.current, {
           scrollTrigger: {
             trigger: ".hero-section-2",
@@ -244,16 +222,14 @@ const HeroPage = () => {
           duration: 3,
           ease: "power6.out",
         });
-      } 
+      }
 
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     } else if (hero1Complete && !isDesktop) {
-      // Set hero2Complete immediately for mobile/tablet
       setHero2Complete(true);
 
-      // Set initial styles for hero-section-2
       const heroSection2 = document.querySelector(".hero-section-2");
       if (heroSection2) {
         heroSection2.style.opacity = "1";
@@ -278,6 +254,9 @@ const HeroPage = () => {
       });
     }
   };
+
+  // Define a consistent spacing value
+  const sectionSpacing = 8; // You can adjust this value as needed
 
   return (
     <Box
@@ -404,17 +383,29 @@ const HeroPage = () => {
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
       </Box>
-      <Box
-      >
+      <Box sx={{ marginTop: {md: "-10%", xl: "-7%"} }}>
+        {" "}
+        {/* Apply consistent spacing */}
+        <HeroPageSection3 />
+      </Box>
+      <Box sx={{ marginTop: {md: "-8%", lg: "-1%", xl: "-8%"} }}>
+        {" "}
+        {/* Apply consistent spacing */}
         <HeroPageSection4 />
       </Box>
-      <Box>
+      <Box sx={{ marginTop: {md:"2%", lg: "5%"} }}>
+        {" "}
+        {/* Apply consistent spacing */}
         <HeroPageSection5 />
       </Box>
-      <Box>
+      <Box sx={{ marginTop: {md: "-3%", lg: "2%", xl: "-8%"} }}>
+        {" "}
+        {/* Apply consistent spacing */}
         <HeroPageSection6 />
       </Box>
-      <Box>
+      <Box sx={{ marginTop: {md: "-3%", lg: "0%", xl: "-8%"} }}>
+        {" "}
+        {/* Apply consistent spacing */}
         <HeroPageSection7 />
       </Box>
       <Footer />

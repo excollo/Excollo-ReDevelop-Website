@@ -1,14 +1,25 @@
-import { Box, Divider, useMediaQuery } from "@mui/material";
+import { Box, Divider, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Logo from "../../assets/logo/excollo3d.png";
 import { m } from "framer-motion";
 const HeroPageSection7 = () => {
+  const theme = useTheme();
   const [scrollY, setScrollY] = useState(0);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
-  const is900 = useMediaQuery("(min-width: 900) and (max-width: 1024px)");
-  const isSpecified = useMediaQuery("(max-width: 1024px)");
+  const isSpecified = useMediaQuery("(max-width: 899px)");
+  const isSmallerLaptop = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
+  const is1750to2000px = useMediaQuery("(min-width:1750px) and (max-width:2000px)");
+  const is2001to2300px = useMediaQuery(
+    "(min-width:2001px) and (max-width:2300px)"
+  );
+  const is2301to2600px = useMediaQuery(
+    "(min-width:2301px) and (max-width:2600px)"
+  );
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 480);
@@ -43,9 +54,17 @@ const HeroPageSection7 = () => {
     if (isMobile || isTablet) return;
     setRotation({ x: 0, y: 0 });
   };
-  const translateYImage = is900
-    ? Math.max(600 - scrollY * 0.5, 0)
-    : Math.max(2100 - scrollY * 0.5, 0); ;
+  const translateYImage = is2301to2600px ? Math.max(3600 - scrollY * 0.5, 0) : is2001to2300px
+    ? Math.max(3100 - scrollY * 0.5, 0)
+    : is1750to2000px
+    ? Math.max(2800 - scrollY * 0.5, 0)
+    : isXtraLargeScreen
+    ? Math.max(2500 - scrollY * 0.5, 0)
+    : isLargeScreen
+    ? Math.max(2100 - scrollY * 0.5, 0)
+    : isSmallerLaptop
+    ? Math.max(1800 - scrollY * 0.5, 0)
+    : Math.max(100 - scrollY * 0.5, 0); ;
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
   return (
@@ -60,7 +79,7 @@ const HeroPageSection7 = () => {
           height: "60vh",
           width: "100%",
           overflow: "hidden",
-          "@media (max-width: 1200px)": {
+          "@media (max-width: 899px)": {
             width: "100%",
             marginTop: "-5%",
           },
@@ -83,12 +102,12 @@ const HeroPageSection7 = () => {
           style={{
             height: "auto",
             width: "80%",
-            // transform:
-            //   isMobile || isTablet
-            //     ? "none"
-            //     : `translateY(${Math.min(translateYImage, 500)}px) rotateX(${
-            //         rotation.y
-            //       }deg) rotateY(${rotation.x}deg)`,
+            transform:
+              isMobile || isTablet
+                ? "none"
+                : `translateY(${Math.min(translateYImage, 500)}px) rotateX(${
+                    rotation.y
+                  }deg) rotateY(${rotation.x}deg)`,
             transformStyle: "preserve-3d",
             willChange: "transform",
             transition: "transform 0.2s ease-out",

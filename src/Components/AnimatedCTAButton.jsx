@@ -1,162 +1,170 @@
 import React, { useEffect, useRef } from "react";
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button, Box } from "@mui/material";
+import { styled } from "@mui/system";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-const AnimatedCTAButton = ({ onClick }) => {
-  const buttonRef = useRef(null);
-  const circleRef = useRef(null);
-  const textRef = useRef(null);
+const CTAContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  top: -10,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  display: "flex",
+  justifyContent: "center",
+  padding: theme.spacing(2.5),
+  [theme.breakpoints.up("xl")]: {
+    padding: theme.spacing(3),
+  },
+  [theme.breakpoints.up(2000)]: {
+    padding: theme.spacing(4),
+  },
+}));
+const StyledButton = styled(Button)(({ theme }) => ({
+  background:
+    "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
+  color: "white",
+  "&:hover": {
+    backgroundColor: "#0077ED",
+  },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.875rem",
+    padding: "10px 20px",
+    minWidth: "120px",
+  },
+  [theme.breakpoints.up("sm")]: {
+    fontSize: "1rem",
+    padding: "12px 24px",
+    minWidth: "150px",
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: "1.0625rem",
+    padding: "14px 28px",
+    minWidth: "180px",
+  },
+  [theme.breakpoints.up("lg")]: {
+    fontSize: "1.125rem",
+    padding: "16px 32px",
+    minWidth: "200px",
+  },
+  [theme.breakpoints.up(2000)]: {
+    fontSize: "1.25rem",
+    padding: "20px 40px",
+    minWidth: "240px",
+  },
+  [theme.breakpoints.up(2550)]: {
+    fontSize: "1.375rem",
+    padding: "24px 48px",
+    minWidth: "280px",
+  },
+}));
+const AnimatedCTA = () => {
   const containerRef = useRef(null);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const buttonRef = useRef(null);
   useEffect(() => {
-    const circle = circleRef.current;
-    const text = textRef.current;
-    const button = buttonRef.current;
     const container = containerRef.current;
-    // Initial styles with responsive widths
-    gsap.set(circle, {
-      scale: 0,
+    const button = buttonRef.current;
+    // Initial state
+    gsap.set(container, {
       opacity: 0,
-      width: isMobile ? "30px" : "80px",
-      height: isMobile ? "30px" : "80px",
-      borderRadius: "50%",
-      // border: "2px solid #7E22CE",
-      background:
-        "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
+      scale: 0,
+      // y: "100%"
     });
-    gsap.set(text, { opacity: 0 });
-    gsap.set(button, { width: isMobile ? "80px" : "80px" });
-    // Main animation timeline with responsive final widths
+    gsap.set(button, {
+      width: "80px",
+      height: "80px",
+      padding: 0,
+      borderRadius: "50%",
+      fontSize: 0,
+      minWidth: "50px",
+      opacity: 0,
+      scale: 0,
+    });
+    // Create the animation timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: "top 85%",
-        end: "top 85%",
+        end: "bottom 20%",
         toggleActions: "play reverse play reverse",
-        scrub: 1,
+        scrub: false,
       },
     });
-    tl.to(circle, {
-      scale: 1,
+    // Bounce animation sequence (matching the keyframes)
+    tl.to(container, {
       opacity: 1,
-      duration: 0.4,
-      ease: "power2.out",
+      scale: 1,
+      duration: 0.24, // 20% of 1.2s
     })
-      .to(button, {
-        width: isMobile ? "120px" : "200px",
-        marginLeft: isMobile ? "-70px" : "0",
-        duration: 0.4,
-        ease: "power2.inOut",
+      .to(container, {
+        // y: "-10%",
+        duration: 0.48, // 40% of 1.2s
       })
-      .to(
-        circle,
-        {
-          width: "100%",
-          borderRadius: "50px",
-          duration: 0.4,
-          ease: "power2.inOut",
-        },
-        "<"
-      )
-      .to(
-        text,
-        {
-          opacity: 1,
-          duration: 0.3,
-          ease: "power2.out",
-        },
-        "-=0.2"
-      );
-    // Hover animation
-    const handleMouseEnter = () => {
-      gsap.to(circle, {
-        duration: 0.3,
-        scale: 1.1,
-        ease: "power2.out",
+      .to(container, {
+        // y: "15%",
+        duration: 0.24, // 20% of 1.2s
+      })
+      .to(container, {
+        // y: "10%",
+        duration: 0.24, // 20% of 1.2s
       });
-    };
-    const handleMouseLeave = () => {
-      gsap.to(circle, {
+    // Morph button animation (matching the keyframes)
+    const buttonTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: "top 85%",
+        end: "bottom 30%",
+        toggleActions: "play reverse play reverse",
+        scrub: false,
+      },
+    });
+    buttonTl
+      .to(button, {
+        opacity: 1,
         scale: 1,
-        duration: 0.3,
+        duration: 0.1,
+      })
+      .to(button, {
+        width: "80px",
+        height: "80px",
+        padding: 0,
+        borderRadius: "50%",
+        fontSize: 0,
+        minWidth: "50px",
+        duration: 0.6, // 50% of 1.2s
+      })
+      .to(button, {
+        width: "200px",
+        height: "80px",
+        padding: "12px 24px",
+        borderRadius: "980px",
+        fontSize: "1.25rem",
+        minWidth: "200px",
+        duration: 0.36, // 30% of 1.2s
+      })
+      .to(button, {
+        y: "10%",
+        duration: 0.24, // 20% of 1.2s
         ease: "power2.out",
-        boxShadow: "none",
       });
-    };
-    button.addEventListener("mouseenter", handleMouseEnter);
-    button.addEventListener("mouseleave", handleMouseLeave);
+    // Cleanup
     return () => {
-      if (tl.scrollTrigger) tl.scrollTrigger.kill();
+      if (tl.scrollTrigger) {
+        tl.scrollTrigger.kill();
+      }
+      if (buttonTl.scrollTrigger) {
+        buttonTl.scrollTrigger.kill();
+      }
       tl.kill();
-      button.removeEventListener("mouseenter", handleMouseEnter);
-      button.removeEventListener("mouseleave", handleMouseLeave);
+      buttonTl.kill();
     };
-  }, [isMobile]);
+  }, []);
   return (
-    <Box
-      ref={containerRef}
-      sx={{
-        padding: {
-          xs: "20px 20px", // Reduced padding for mobile
-          sm: "20px 50px",
-          lg: "25px 50px",
-          xl: "30px 80px", // Original padding for larger screens
-        },
-      }}
-    >
-      <Box
-        ref={buttonRef}
-        component={Link}
-        to="/contact"
-        onClick={onClick}
-        sx={{
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: isMobile ? "40px" : "50px", // Reduced height for mobile
-          textDecoration: "none",
-          cursor: "pointer",
-          transition: "transform 0.3s ease",
-        }}
-      >
-        <Box
-          ref={circleRef}
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: { xs: "35%", sm: 0 }, // Adjusted left position for mobile
-            height: "100%",
-            width: "50px",
-            zIndex: 1,
-          }}
-        />
-        <Typography
-          ref={textRef}
-          sx={{
-            color: "#FFFFFF",
-            fontWeight: 100,
-            fontSize: {
-              xs: "16px",
-              sm: "17px",
-              md: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
-              xl: `clamp(0.5rem, calc(0.6rem + 0.7vw), 5rem)`,
-            },
-            zIndex: 2,
-            whiteSpace: "nowrap",
-            position: "relative",
-            marginTop: { xs: "-5px", sm: "2rem" }, // Adjusted margin for mobile
-            marginLeft: { xs: "80px", sm: "0" }, // Adjusted margin for mobile
-          }}
-        >
-          Talk to Us
-        </Typography>
-      </Box>
-    </Box>
+    <CTAContainer ref={containerRef}>
+      <StyledButton ref={buttonRef} variant="contained" disableElevation>
+        Talk to Us
+      </StyledButton>
+    </CTAContainer>
   );
 };
-export default AnimatedCTAButton;
+export default AnimatedCTA;

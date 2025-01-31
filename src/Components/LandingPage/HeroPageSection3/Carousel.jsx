@@ -11,10 +11,20 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate } from "react-router-dom";
 
-const CARD_WIDTH = 620;
-const CARD_HEIGHT = 450;
-const GAP = 950;
-const TOTAL_WIDTH = CARD_WIDTH + GAP;
+// Dynamic card width and gap based on screen size
+const getCardDimensions = (width) => {
+  if (width >= 2001 && width <= 2600) {
+    return { CARD_WIDTH: 1000, GAP: 1400 }; // Adjusted for larger screens
+  } else if (width >= 1536 && width <= 2000) {
+    return { CARD_WIDTH: 800, GAP: 1200 }; // Adjusted for larger screens
+  } else if (width >= 1200 && width < 1536) {
+    return { CARD_WIDTH: 600, GAP: 1000 }; // Adjusted for medium-large screens
+  } else if (width >= 900 && width < 1200) {
+    return { CARD_WIDTH: 400, GAP: 800 }; // Adjusted for medium screens
+  }
+  return { CARD_WIDTH: 620, GAP: 950 }; // Default for smaller screens
+};
+
 const SCROLL_COOLDOWN = 800;
 const INITIAL_SCROLL_THRESHOLD = 20;
 
@@ -22,13 +32,13 @@ const carouselContent = [
   {
     title: "AI & Automation",
     description:
-      " Identify gaps in processes, align technology to bridge those gaps, and implement transformative solutions tailored for success.",
+      "Identify gaps in processes, align technology to bridge those gaps, and implement transformative solutions tailored for success.",
     link: "/services",
   },
   {
     title: "Sales Channel Development",
     description:
-      "Scalable websites, web apps, and mobile apps tailored to meet your business's unique challenges and goals.",
+      "Scalable websites, web apps, and mobile apps tailored to meet your business’s unique challenges and goals.",
     link: "/services",
   },
   {
@@ -152,21 +162,15 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const specificCondition = useMediaQuery(
-    "(min-width: 1800px) and (max-width: 2700px) and ( max-height: 1600px)"
+  const isLargeScreen = useMediaQuery(
+    "(min-width: 1536px) and (max-width: 2600px)"
   );
-  // const specificGap2100px = useMediaQuery(
-  //   "(min-width: 1800px) and (max-width: 2100px) and ( max-height: 1200px)"
-  // );
-  const specificGap2400 = useMediaQuery(
-    "(min-width: 2100px) and (max-width: 2400px) and ( max-height: 1600px)"
-  );
-  // const specificGap2800 = useMediaQuery(
-  //   "(min-width: 2400px) and (max-width: 2800px) and ( max-height: 1600px)"
-  // );
-  const isSpecificSize = useMediaQuery(
-    "(max-width: 1024px) and (max-height: 800px)"
-  );
+  const issmallLaptop = useMediaQuery(theme.breakpoints.up("md"));
+  const islaptop = useMediaQuery(theme.breakpoints.up("lg"));
+
+  // Dynamic card dimensions
+  const { CARD_WIDTH, GAP } = getCardDimensions(window.innerWidth);
+  const TOTAL_WIDTH = CARD_WIDTH + GAP;
 
   const handleMouseMove = (e, index) => {
     if (isMobile || isTablet) return;
@@ -195,10 +199,8 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   };
 
   const handleMouseLeave = () => {
-    if (type === "title") {
-      setRotation({ x: 0, y: 0 });
-      setHoveredIndex(null);
-    }
+    setRotation({ x: 0, y: 0 });
+    setHoveredIndex(null);
   };
 
   const handleWheelEvent = (e) => {
@@ -369,18 +371,19 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     const isHovered = hoveredIndex === index;
     const baseStyle = {
       flex: "0 0 auto",
-      width: isMobile || isTablet ? "80%" : specificCondition ? "100%" : "100%", //: specificGap2400 ? "50%"
-      height:
-        isMobile || isTablet ? "auto" : specificCondition ? "650px" : "500px",
-      marginTop: isMobile || isTablet ? "1rem" : "2rem",
-      marginBottom: isMobile || isTablet ? "1rem" : "3rem",
+      width: isMobile || isTablet ? "80%" : `${CARD_WIDTH}px`,
+      height: issmallLaptop ? "calc(40vh + 5vw)" 
+        : isMobile || isTablet
+        ? "auto"
+        : "calc(60vh + 5vw)",
+      marginTop: isMobile || isTablet ? "1rem" : "4rem",
+      marginBottom: isMobile || isTablet ? "1rem" : "4rem",
       padding: isMobile || isTablet ? "1rem" : "1rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
       borderRadius: type === "description" ? "60px" : "20px",
-
       scrollSnapAlign: "center",
       cursor: type === "title" ? "pointer" : "default",
       color: isReverse ? "white" : "black",
@@ -390,13 +393,9 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       transition: "all 0.3s ease",
       transformStyle: "preserve-3d",
       backgroundColor:
-        type === "title" ? "rgba(255, 255, 255, 0.1)" : "transparent",
-      backgroundColor:
         type === "description" ? "rgba(255, 255, 255, 0.1)" : "transparent",
       boxShadow:
         type === "description" ? "0 10px 30px -15px rgba(0,0,0,0.3)" : "none",
-      boxShadow:
-        type === "title" ? "0 10px 30px -15px rgba(0,0,0,0.3)" : "none",
       transform: isHovered
         ? `perspective(1000px) scale(1) rotateX(${rotation.y}deg) rotateY(${
             rotation.x
@@ -408,6 +407,43 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
           }deg) translateZ(${type === "title" ? "30px" : "20px"}) translateZ(${
             type === "description" ? "40px" : "10px"
           })`,
+
+      "& .MuiTypography-h3": {
+        fontSize: {
+          xs: "2.5rem",
+          md: "clamp(0.25rem, calc(1rem + 2vw), 1.9rem)",
+          lg: "clamp(0.25rem, calc(1.5rem + 4vw), 2.8rem)",
+          xl: "clamp(0.25rem, calc(2rem + 6vw), 4rem)",
+        },
+        fontWeight: "400",
+        background: "linear-gradient(180deg, #2579e3, #8e54f7)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        display: "inline-block",
+        transform: "translateZ(60px)",
+        marginBottom: "1rem",
+        textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+      },
+
+      "& .MuiTypography-h5": {
+        fontSize: {
+          xs: "1rem",
+          md: "clamp(0.5rem, calc(0.6rem + 0.7vw), 1.3rem)",
+          lg: "clamp(0.5rem, calc(0.6rem + 0.9vw), 1.8rem)",
+          xl: "clamp(0.5rem, calc(0.6rem + 1.1vw), 2.1rem)",
+        },
+        fontWeight: "100",
+        color: "#ddd",
+        marginLeft: "auto",
+        marginRight: "auto",
+        justifyContent: "center",
+        alignItems: "center",
+        display: "flex",
+        width: "95%",
+        marginTop: "12%",
+        transform: "translateZ(40px)",
+        transition: "transform 0.3s ease-out",
+      },
     };
 
     return baseStyle;
@@ -417,7 +453,6 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     <Box
       sx={{
         display: "flex",
-
         justifyContent: "center",
         alignItems: "center",
         touchAction: "none",
@@ -425,45 +460,40 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
         perspective: "1000px",
       }}
     >
-      <Box
-        sx={{
-          width: specificCondition ? "30%" : "10%",
-          height: specificCondition ? "800px" : "500px",
-          backgroundColor: "black",
-          zIndex: 1,
-          position: "relative",
-          top: 0,
-          left: 0,
-        }}
-      >
-        {!isMobile && !isTablet && (
-          <IconButton
-            onClick={() => handleButtonClick(-1)}
-            disabled={scrollPosition === 0}
+      {!isMobile && !isTablet && (
+        <IconButton
+          onClick={() => handleButtonClick(-1)}
+          disabled={scrollPosition === 0}
+          sx={{
+            position: "absolute",
+            left: { xs: "10px", md: "10px" },
+            zIndex: 3,
+            color: "white",
+            marginLeft: { xs: "2rem", md: "5rem", lg: "7rem" }, // Adjusted for larger screens
+            fontSize: { xs: "1.2rem", md: "1.5rem", lg: "2rem", xl: "2.5rem" },
+            "&.Mui-disabled": {
+              color: "#716b6b",
+            },
+          }}
+        >
+          <ArrowBackIosIcon
             sx={{
-              position: "relative",
-              top: "50%",
-              right: specificCondition ? 0 : 80,
-              zIndex: 3,
-              backgroundColor: "rgba(0,0,0,0.5)",
-              color: "white",
-              marginLeft: "7rem",
-              "&.Mui-disabled": {
-                color: "#716b6b",
+              fontSize: {
+                xs: "1.2rem",
+                md: "1.5rem",
+                lg: "2rem",
+                xl: "2.5rem",
               },
             }}
-          >
-            <ArrowBackIosIcon />
-          </IconButton>
-        )}
-      </Box>
+          />
+        </IconButton>
+      )}
       <Box
         ref={containerRef}
         sx={{
           display: "flex",
           overflowX: "auto",
           overflowY: "hidden",
-
           width: "100%",
           height: "auto",
           scrollSnapType: "x mandatory",
@@ -471,29 +501,11 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
           "-ms-overflow-style": "none",
           "&::-webkit-scrollbar": { display: "none" },
           touchAction: "pan-x pinch-zoom",
-          gap: {
-            xs: "1rem",
-            sm: "1rem",
-            md: "1050px",
-            lg: "800px",
-            xl: specificCondition ? "800px" : "800px",
-          },
-          paddingLeft: "15%", // Add padding for left side
-          paddingRight: "30%",
+          gap: isMobile || isTablet ? "1rem" : `${GAP}px`, // Dynamic gap
+          paddingLeft: isLargeScreen ? "20%" : "15%", // Adjusted for larger screens
+          paddingRight: isLargeScreen ? "20%" : "30%", // Adjusted for larger screens
         }}
       >
-        {/* <Box
-          sx={{
-            display: specificCondition ? "block" : "none",
-            width: "10%",
-            height: "100%",
-            backgroundColor: "black",
-            zIndex: 1,
-            position: "absolute",
-            top: 0,
-            left: 0,
-          }}
-        ></Box> */}
         {carouselContent.map((item, index) => (
           <Box
             key={index}
@@ -512,51 +524,25 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
               <Link
                 to={item.link || "#"}
                 style={{
-                  marginTop: isSpecificSize
+                  marginTop: islaptop
+                    ? "-8rem"
+                    : issmallLaptop
+                    ? "-6rem"
+                    : isLargeScreen
                     ? "-10rem"
-                    : specificCondition
-                    ? "-30%"
-                    : "-30%",
-                  transformStyle: "preserve-3d",
-                  display: "block",
-                }}
+                    : "-6rem",
+                }} // Adjusted for larger screens
               >
                 <Typography
                   variant="h3"
-                  fontWeight="400"
                   sx={{
-                    background:
-                      "linear-gradient(180deg, #2579e3 30%, #8e54f7 100%)",
-                    fontSize: {
-                      xs: "2.5rem",
-                      sm: `clamp(0.5rem,calc(1rem + 1.5vw),4rem)`,
-                      md: `clamp(0.5rem, calc(0.5rem + 2vw), 4rem)`,
-                      lg: `clamp(0.5rem,calc(0.8rem + 2vw),3.5rem)`,
-                      xl: `clamp(1rem,calc(1rem + 2vw),4rem)`,
-                    },
-                    // isMobile || isTablet || isSpecificSize
-                    //   ? "2.5rem"
-                    //   : "3rem",
+                    background: "linear-gradient(180deg, #2579e3, #8e54f7)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     display: "inline-block",
+                    transform: "translateZ(60px)",
                     marginBottom: "1rem",
-                    textShadow:
-                      hoveredIndex === index
-                        ? "4px 4px 8px rgba(0,0,0,0.2), 0 0 30px rgba(137, 84, 247, 0.3)"
-                        : "2px 2px 4px rgba(0,0,0,0.1)",
-                    letterSpacing: hoveredIndex === index ? "1px" : "0px",
-                    position: "relative",
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      bottom: "-10px",
-                      left: "0",
-                      width: "100%",
-                      transform:
-                        hoveredIndex === index ? "scaleX(0.5)" : "scaleX(0)",
-                      transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                    },
+                    textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
                   }}
                 >
                   {item.title}
@@ -564,16 +550,8 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
               </Link>
             ) : (
               <Typography
-                // variant="h5"
-                fontWeight="300"
+                variant="h5"
                 sx={{
-                  fontSize: {
-                    xs: "1.5rem",
-                    sm: `clamp(0.5rem,calc(1rem + 1.5vw),2.5rem)`,
-                    md: `clamp(0.5rem, calc(0.5rem + 1.5vw), 2rem)`,
-                    lg: `clamp(0.5rem,calc(0.5rem +  1.5vw),2.5rem)`,
-                    xl: `clamp(0.5rem,calc(0.5rem + 1.5vw),2.5rem)`,
-                  },
                   color: "#ddd",
                   marginLeft: "auto",
                   marginRight: "auto",
@@ -581,7 +559,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
                   alignItems: "center",
                   display: "flex",
                   width: "95%",
-                  marginTop: specificCondition ? "25%" : "15%",
+                  marginTop: "12%",
                   transform: "translateZ(40px)",
                   transition: "transform 0.3s ease-out",
                 }}
@@ -591,57 +569,42 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
             )}
           </Box>
         ))}
-        {/* <Box
+      </Box>
+      {!isMobile && !isTablet && (
+        <IconButton
+          onClick={() => handleButtonClick(1)}
+          disabled={
+            scrollPosition === (carouselContent.length - 1) * TOTAL_WIDTH
+          }
           sx={{
-            display: specificCondition ? "block" : "none",
-            width: "10%",
-
-            height: "100%",
-            backgroundColor: "black",
-            zIndex: 2,
             position: "absolute",
-            top: 0,
-            right: 0,
+            right: { xs: "10px", md: "10px" }, // Adjusts right spacing
+            zIndex: 3,
+            color: "white",
+            "&.Mui-disabled": {
+              color: "#716b6b",
+            },
+            marginRight: { xs: "2rem", md: "5rem", lg: "7rem" }, // Dynamically adjust margin
+            fontSize: { xs: "1.2rem", md: "1.5rem", lg: "2rem", xl: "2.5rem" }, // Scale icon size
           }}
-        ></Box> */}
-      </Box>
-      <Box
-        sx={{
-          width: specificCondition ? "30%" : "5%",
-          height: "800px",
-          backgroundColor: "black",
-          zIndex: 1,
-          position: "relative",
-          top: 0,
-          right: 0,
-        }}
-      >
-        {!isMobile && !isTablet && (
-          <IconButton
-            onClick={() => handleButtonClick(1)}
-            disabled={
-              scrollPosition === (carouselContent.length - 1) * TOTAL_WIDTH
-            }
+        >
+          <ArrowForwardIosIcon
             sx={{
-              position: "relative",
-              top: "50%",
-
-              zIndex: 3,
-              color: "white",
-              "&.Mui-disabled": {
-                color: "#716b6b",
+              fontSize: {
+                xs: "1.2rem",
+                md: "1.5rem",
+                lg: "2rem",
+                xl: "2.5rem",
               },
-              marginRight: "7rem",
             }}
-          >
-            <ArrowForwardIosIcon />
-          </IconButton>
-        )}
-      </Box>
+          />
+        </IconButton>
+      )}
+
       <Box
         sx={{
           position: "absolute",
-          bottom: "-2rem",
+          bottom: { xs: "-2rem", md: "-3rem", lg: "-4rem" }, // Adjust position for large screens
           display: "flex",
           justifyContent: "center",
           width: "100%",
@@ -653,12 +616,12 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
             key={index}
             onClick={() => handleDotClick(index)}
             sx={{
-              width: "10px",
-              height: "10px",
+              width: { xs: "8px", md: "10px", lg: "12px" }, // Scale dot size for larger screens
+              height: { xs: "8px", md: "10px", lg: "12px" },
               borderRadius: "50%",
               backgroundColor:
                 scrollPosition / TOTAL_WIDTH === index ? "white" : "gray",
-              margin: "0 8px",
+              margin: { xs: "0 5px", md: "0 8px", lg: "0 10px" }, // Increase margin spacing
               cursor: "pointer",
             }}
           />
