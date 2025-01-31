@@ -9,12 +9,14 @@ import { Box } from "@mui/material";
 import "./App.css";
 import ServicesPage from "./Pages/ServicesPage";
 import CustomCursor from "./Components/CursorEffect/CursorEffetct";
+import ScrollToTop from "./Components/ScrollToTop";
 
 const App = () => {
   return (
     <Router>
       <Box sx={{ backgroundColor: "#000", color: "#fff" }}>
         <CustomCursor />
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HeroPage />} />
           <Route path="/about" element={<AboutUsPage />} />

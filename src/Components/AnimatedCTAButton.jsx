@@ -3,6 +3,7 @@ import { Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 gsap.registerPlugin(ScrollTrigger);
 const CTAContainer = styled(Box)(({ theme }) => ({
   position: "relative",
@@ -61,6 +62,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const AnimatedCTA = () => {
   const containerRef = useRef(null);
   const buttonRef = useRef(null);
+  const navigate = useNavigate(); // Initialize useNavigate
   useEffect(() => {
     const container = containerRef.current;
     const button = buttonRef.current;
@@ -68,7 +70,6 @@ const AnimatedCTA = () => {
     gsap.set(container, {
       opacity: 0,
       scale: 0,
-      // y: "100%"
     });
     gsap.set(button, {
       width: "80px",
@@ -90,30 +91,27 @@ const AnimatedCTA = () => {
         scrub: false,
       },
     });
-    // Bounce animation sequence (matching the keyframes)
+    // Bounce animation sequence
     tl.to(container, {
       opacity: 1,
       scale: 1,
-      duration: 0.24, // 20% of 1.2s
+      duration: 0.24,
     })
       .to(container, {
-        // y: "-10%",
-        duration: 0.48, // 40% of 1.2s
+        duration: 0.48,
       })
       .to(container, {
-        // y: "15%",
-        duration: 0.24, // 20% of 1.2s
+        duration: 0.24,
       })
       .to(container, {
-        // y: "10%",
-        duration: 0.24, // 20% of 1.2s
+        duration: 0.24,
       });
-    // Morph button animation (matching the keyframes)
+    // Morph button animation
     const buttonTl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: "top 85%",
-        end: "bottom 0%",
+        end: "bottom 30%",
         toggleActions: "play reverse play reverse",
         scrub: false,
       },
@@ -131,7 +129,7 @@ const AnimatedCTA = () => {
         borderRadius: "50%",
         fontSize: 0,
         minWidth: "50px",
-        duration: 0.6, // 50% of 1.2s
+        duration: 0.6,
       })
       .to(button, {
         width: "200px",
@@ -140,11 +138,11 @@ const AnimatedCTA = () => {
         borderRadius: "980px",
         fontSize: "1.25rem",
         minWidth: "200px",
-        duration: 0.36, // 30% of 1.2s
+        duration: 0.36,
       })
       .to(button, {
         y: "10%",
-        duration: 0.24, // 20% of 1.2s
+        duration: 0.24,
         ease: "power2.out",
       });
     // Cleanup
@@ -159,9 +157,19 @@ const AnimatedCTA = () => {
       buttonTl.kill();
     };
   }, []);
+  // Handle button click to navigate to ContactUs page
+  const handleButtonClick = () => {
+    navigate("/contact");
+    window.scrollTo(0, 0); // Navigate to the ContactUs page
+  };
   return (
     <CTAContainer ref={containerRef}>
-      <StyledButton ref={buttonRef} variant="contained" disableElevation>
+      <StyledButton
+        ref={buttonRef}
+        variant="contained"
+        disableElevation
+        onClick={handleButtonClick} // Add onClick handler
+      >
         Talk to Us
       </StyledButton>
     </CTAContainer>

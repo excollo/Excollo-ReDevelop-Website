@@ -379,8 +379,8 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
         : isMobile || isTablet
         ? "auto"
         : "calc(60vh + 5vw)",
-      marginTop: isMobile || isTablet ? "1rem" : "4rem",
-      marginBottom: isMobile || isTablet ? "1rem" : "4rem",
+      marginTop: isLargeScreen ? "4rem" : islaptop ? "2rem" : isMobile || isTablet ? "1rem" : "4rem",
+      marginBottom: isLargeScreen ? "4rem" : islaptop ? "2rem" : isMobile || isTablet ? "1rem" : "4rem",
       padding: isMobile || isTablet ? "1rem" : "1rem",
       display: "flex",
       flexDirection: "column",
