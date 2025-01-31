@@ -38,11 +38,11 @@ const NavBar = () => {
     position: "relative",
     padding: "10px 20px",
     color: "white",
-    "&:hover": {
-      background:
-        "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-      borderRadius: "40px",
-    },
+    // "&:hover": {
+    //   background:
+    //     "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
+    //   borderRadius: "40px",
+    // },
   };
 
   const menuItems = [
@@ -177,13 +177,53 @@ const NavBar = () => {
                 },
               }}
             >
-              <Typography component={Link} to="/" sx={commonLinkStyles}>
+              <Typography
+                component={Link}
+                to="/"
+                sx={{
+                  ...commonLinkStyles,
+                  height: "100%",
+                  mt: 1,
+                  "&:hover": {
+                    background:
+                      "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
+                    borderRadius: "40px",
+                  },
+                }}
+              >
                 Home
               </Typography>
-              <Typography component={Link} to="/about" sx={commonLinkStyles}>
+              <Typography
+                component={Link}
+                to="/about"
+                sx={{
+                  ...commonLinkStyles,
+                  height: "100%",
+                  mt: 1,
+                  "&:hover": {
+                    background:
+                      "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
+                    borderRadius: "40px",
+                  },
+                }}
+              >
                 About
               </Typography>
-              <Typography component={Link} to="/services" sx={commonLinkStyles}>
+              <Typography
+                component={Link}
+                to="/services"
+                sx={{
+                  ...commonLinkStyles,
+                  height: "100%",
+                  mt: 1,
+                  // paddingBottom:"-10px",
+                  "&:hover": {
+                    background:
+                      "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
+                    borderRadius: "40px",
+                  },
+                }}
+              >
                 Services
               </Typography>
               <Typography
@@ -194,7 +234,10 @@ const NavBar = () => {
                   display: "flex",
                   alignItems: "center",
                   position: "relative",
-                  padding: "10px 20px",
+                  padding: {
+                    md: "0.3vw",
+                    xl: "0.3vw",
+                  },
                   borderRadius: "40px",
                   background: "transparent",
                   "&::before": {
@@ -204,7 +247,11 @@ const NavBar = () => {
                     padding: "2px", // Adjust the thickness of the border
                     background:
                       "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-                    borderRadius: "40px",
+                    borderRadius: {
+                      md: "40px",
+                      lg: "40px",
+                      xl: "50px",
+                    },
                     WebkitMask:
                       "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                     WebkitMaskComposite: "xor",
@@ -221,11 +268,20 @@ const NavBar = () => {
                   },
                 }}
               >
-                <Box>LET'S TALK</Box>
-                <Box>
-                  <FaChevronRight
-                    style={{ marginLeft: "20px", marginTop: "3px" }}
-                  />
+                <Typography
+                  component={Link}
+                  to="/contact"
+                  sx={{
+                    ...commonLinkStyles,
+                    display: "flex",
+                    alignItems: "center",
+                    position: "relative",
+                  }}
+                >
+                  LET'S TALK
+                </Typography>
+                <Box sx={{ mt: "4%" }}>
+                  <FaChevronRight style={{ marginLeft: "0px", marginRight: "10px" }} />
                 </Box>
               </Typography>
             </Box>

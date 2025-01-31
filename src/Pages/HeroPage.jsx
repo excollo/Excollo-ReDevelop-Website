@@ -387,7 +387,7 @@ const HeroPage = () => {
         {/* Apply consistent spacing */}
         <HeroPageSection3 />
       </Box>
-      <Box sx={{ marginTop: {md: "-8%", lg: "-1%", xl: "-8%"} }}>
+      <Box sx={{ marginTop: {md: "-8%", lg: "1%", xl: "-8%"} }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection4 />
