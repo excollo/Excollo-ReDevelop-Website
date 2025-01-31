@@ -14,7 +14,6 @@ import ProductDevelopment from "./ProductDevelopment";
 import TechConsultancy from "./TechConsultancy";
 import SalesChannelDevelopment from "./SalesChannelDevelopment";
 import MLDrivenDataAnalysis from "./MLDrivenDataAnalysis";
-
 const OurServices = () => {
   const [showButton, setShowButton] = useState(false);
   const theme = useTheme();
@@ -26,31 +25,26 @@ const OurServices = () => {
   const isMediumScreen = useMediaQuery(theme.breakpoints.only("md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.only("lg"));
   const isExtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
-
   const aiAutomationRef = useRef(null);
   const salesChannelRef = useRef(null);
   const mlDrivenDataAnalysisRef = useRef(null);
   const productDevelopmentRef = useRef(null);
   const techConsultancyRef = useRef(null);
-
+  // Reload the page on window resize
   useEffect(() => {
     let resizeTimer;
-
     const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        window.location.reload();
+        window.location.reload(); // Reload the page
       }, 300); // Debounce timer (300ms)
     };
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 250) {
@@ -58,40 +52,32 @@ const OurServices = () => {
       } else {
         setShowButton(false);
       }
-
       if (!isMobile) {
         if (aiAutomationRef.current) {
           aiAutomationRef.current.collapsePanel();
         }
-
         if (salesChannelRef.current) {
           salesChannelRef.current.collapsePanel();
         }
-
         if (mlDrivenDataAnalysisRef.current) {
           mlDrivenDataAnalysisRef.current.collapsePanel();
         }
-
         if (productDevelopmentRef.current) {
           productDevelopmentRef.current.collapsePanel();
         }
-
         if (techConsultancyRef.current) {
           techConsultancyRef.current.collapsePanel();
         }
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [isMobile]);
-
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
   return (
     <Box className="services-section">
       <Box
@@ -167,7 +153,6 @@ const OurServices = () => {
                   </span>
                 </Typography>
               </Box>
-
               <Typography
                 sx={{
                   maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
@@ -190,7 +175,6 @@ const OurServices = () => {
                 success.
               </Typography>
             </Box>
-
             {!isMobile && !isTablet && (
               <Box
                 sx={{
@@ -255,7 +239,7 @@ const OurServices = () => {
             borderRadius: "50%",
             background: "rgba(255, 255, 255, 0.1)",
             "&:hover": {
-              background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             },
             "@media (max-width: 768px)": {
               position: "fixed",
@@ -275,5 +259,4 @@ const OurServices = () => {
     </Box>
   );
 };
-
 export default OurServices;

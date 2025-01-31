@@ -15,9 +15,7 @@ import HeroPageSection5 from "../Components/LandingPage/HeroPageSection5";
 import Footer from "../Components/Footer";
 import HeroPageSection6 from "../Components/LandingPage/HeroPageSection6";
 import HeroPageSection7 from "../Components/LandingPage/HeroPageSection7";
-
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MotionPathPlugin);
-
 const HeroPage = () => {
   const [showThreeDE, setShowThreeDE] = useState(true);
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -25,9 +23,8 @@ const HeroPage = () => {
   const [hero1Complete, setHero1Complete] = useState(false);
   const [hero2Complete, setHero2Complete] = useState(false);
   const [hero4Complete, setHero4Complete] = useState(false);
-  const [isLoading,setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const threeDERef = useRef(null);
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
@@ -35,7 +32,15 @@ const HeroPage = () => {
   const isLargeScreenSize = useMediaQuery(theme.breakpoints.up("lg"));
   const isXtraLargeScreenSize = useMediaQuery(theme.breakpoints.up("xl"));
   const isDesktop = !isMobile && !isTablet;
-
+  useEffect(() => {
+    const handleResize = () => {
+      window.location.reload();
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 250) {
@@ -49,7 +54,6 @@ const HeroPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
   useEffect(() => {
     if (!hero1Complete || showThreeDE) {
       document.body.style.overflow = "hidden";
@@ -58,12 +62,10 @@ const HeroPage = () => {
         document.body.style.overflow = "auto";
       }, 100);
     }
-
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [hero1Complete, showThreeDE]);
-
   useEffect(() => {
     const rotationDuration = 2;
     const timer = setTimeout(() => {
@@ -71,11 +73,9 @@ const HeroPage = () => {
     }, rotationDuration * 1000);
     return () => clearTimeout(timer);
   }, []);
-
   useEffect(() => {
     if (!showThreeDE && isDesktop) {
       const timeline = gsap.timeline();
-
       if (isSpecificSize) {
         timeline.to(".threeDE", {
           x: "32%",
@@ -91,13 +91,11 @@ const HeroPage = () => {
           ease: "power2.out",
         });
       }
-
       timeline.to(".gradient-background", {
         opacity: 1,
         duration: 0.5,
         ease: "power2.out",
       });
-
       timeline.add([
         gsap.fromTo(
           [".navbar", ".hero-content"],
@@ -122,28 +120,23 @@ const HeroPage = () => {
     } else if (!showThreeDE && !isDesktop) {
       setAnimationComplete(true);
       setHero1Complete(true);
-
       const navbar = document.querySelector(".navbar");
       const heroContent = document.querySelector(".hero-content");
       const gradientBackground = document.querySelector(".gradient-background");
-
       if (navbar) {
         navbar.style.opacity = "1";
         navbar.style.transform = "translateX(0)";
       }
-
       if (heroContent) {
         heroContent.style.opacity = "1";
         heroContent.style.transform = "translateX(0)";
       }
-
       if (gradientBackground) {
         gradientBackground.style.opacity = "1";
       }
     }
     ScrollTrigger.refresh();
-  }, [showThreeDE, isSpecificSize, isTablet, isMobile ,isDesktop]);
-
+  }, [showThreeDE, isSpecificSize, isTablet, isMobile, isDesktop]);
   useEffect(() => {
     if (hero1Complete && isDesktop) {
       gsap.fromTo(
@@ -166,7 +159,6 @@ const HeroPage = () => {
           },
         }
       );
-
       if (isXtraLargeScreenSize) {
         gsap.to(threeDERef.current, {
           scrollTrigger: {
@@ -225,13 +217,11 @@ const HeroPage = () => {
           ease: "power6.out",
         });
       }
-
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     } else if (hero1Complete && !isDesktop) {
       setHero2Complete(true);
-
       const heroSection2 = document.querySelector(".hero-section-2");
       if (heroSection2) {
         heroSection2.style.opacity = "1";
@@ -239,11 +229,9 @@ const HeroPage = () => {
       }
     }
   }, [hero1Complete, isDesktop, isSpecificSize]);
-
   const handleScrollToTop = () => {
     const section4 = document.querySelector(".hero-page-section-4");
     const section4Bounds = section4?.getBoundingClientRect();
-
     if (
       !section4Bounds ||
       section4Bounds.top < 0 ||
@@ -256,7 +244,6 @@ const HeroPage = () => {
       });
     }
   };
-
   return (
     <Box
       sx={{
@@ -281,7 +268,7 @@ const HeroPage = () => {
             borderRadius: "50%",
             background: "rgba(255, 255, 255, 0.1)",
             "&:hover": {
-              background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             },
             "@media (max-width: 768px)": {
               position: "fixed",
@@ -382,27 +369,27 @@ const HeroPage = () => {
       >
         <HeroPageSection2 onAnimationComplete={() => setHero2Complete(true)} />
       </Box>
-      <Box sx={{ marginTop: {md: "-10%", xl: "-7%"} }}>
+      <Box sx={{ marginTop: { md: "-10%", xl: "-7%" } }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection3 />
       </Box>
-      <Box sx={{ marginTop: {md: "-8%", lg: "1%", xl: "0%"} }}>
+      <Box sx={{ marginTop: { md: "-8%", lg: "1%", xl: "0%" } }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection4 />
       </Box>
-      <Box sx={{ marginTop: {md:"2%", lg: "5%", xl: "3"} }}>
+      <Box sx={{ marginTop: { md: "2%", lg: "5%", xl: "3%" } }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection5 />
       </Box>
-      <Box sx={{ marginTop: {md: "-3%", lg: "2%", xl: "0%"} }}>
+      <Box sx={{ marginTop: { md: "-3%", lg: "2%", xl: "0%" } }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection6 />
       </Box>
-      <Box sx={{ marginTop: {md: "-3%", lg: "0%", xl: "7%"} }}>
+      <Box sx={{ marginTop: { md: "-3%", lg: "0%", xl: "7%" } }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection7 />
@@ -411,5 +398,4 @@ const HeroPage = () => {
     </Box>
   );
 };
-
 export default HeroPage;
