@@ -199,8 +199,8 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
 
     const mainCardTrigger = ScrollTrigger.create({
       trigger: ".hero-page-section-4",
-      start: "top 20%",
-      end: "top 20%",
+      start: "top 10%",
+      end: "top 10%",
       scrub: 1,
       pin: true,
       pinSpacing: true,
@@ -366,10 +366,10 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
           variant="h2"
           fontWeight="bold"
           textAlign="center"
-          sx={{
+                sx={{
             fontSize: isMobile ? "2rem" : "2.5rem",
             marginBottom: "2rem",
-          }}
+                }}
         >
           Why Choose{" "}
           <Box
@@ -476,21 +476,22 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
         }}
       >
         <Typography
-          sx={{
-            fontWeight: 600,
-            lineHeight: 1.167,
-            letterSpacing: "-0.01562em",
-            textAlign: "center",
-            fontSize: {
-              md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
-              lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
-              xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
-            },
-            position: "relative",
-            top: "20px",
-            background: "black",
-          }}
-        >
+                                sx={{
+                                  color: "#fff",
+                                  fontWeight: 600,
+                                  lineHeight: 1.167,
+                                  letterSpacing: "-0.01562em",
+                                  fontSize: {
+                                    md: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
+                                    lg: `clamp(1.75rem, calc(1.37rem + 2.5vw), 8rem)`,
+                                    xl: `clamp(2.25rem, calc(2rem + 2.5vw), 10rem)`,
+                                  },
+                                  position: "relative",
+                                  top: "20px",
+                                  background: "black",
+                                  textAlign: "center"
+                                }}
+                        >
           Why Choose{" "}
           <Box
             component="span"

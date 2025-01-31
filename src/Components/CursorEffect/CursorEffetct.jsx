@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box, styled, keyframes } from "@mui/material";
 import { useCursor } from "./context/CursorContext";
-
 const moveUpDown = keyframes`
   0%  {
     transform: translateY(42px) scale(0);
@@ -16,7 +15,6 @@ const moveUpDown = keyframes`
     opacity: 1;
   }
 `;
-
 const CursorContainer = styled(Box)({
   position: "fixed",
   left: 0,
@@ -28,7 +26,6 @@ const CursorContainer = styled(Box)({
     display: "none",
   },
 });
-
 const CursorOuter = styled(Box)(({ theme, isIdle, isPointer, isHovered }) => ({
   width: isIdle || isPointer || isHovered ? 30 : 30,
   height: isIdle || isPointer || isHovered ? 60 : 30,
@@ -55,18 +52,17 @@ const CursorOuter = styled(Box)(({ theme, isIdle, isPointer, isHovered }) => ({
     transform: "translate(-50%, -50%) rotate(45deg)",
   },
 }));
-
 const CursorInner = styled(Box)({
   width: 10,
   height: 10,
+  zIndex: 9999,
   borderRadius: "50%",
   position: "absolute",
   backgroundColor: "#FFFFFF",
   transform: "translate(-50%, -50%)",
   transition: "width 0.2s ease, height 0.2s ease",
 });
-
-const CustomCursor = ({ idleTimeout = 10000 }) => {
+const CustomCursor = ({ idleTimeout = 5000 }) => {
   const { cursorType, isHovered } = useCursor();
   const cursorOuterRef = useRef(null);
   const cursorInnerRef = useRef(null);
@@ -79,7 +75,6 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
   const [isIdle, setIsIdle] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
   const [lastActivity, setLastActivity] = useState(Date.now());
-
   useEffect(() => {
     const moveCursor = (e) => {
       mouse.current = { x: e.clientX, y: e.clientY };
@@ -90,7 +85,6 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
       lastMousePosition.current = { x: mouse.current.x, y: mouse.current.y };
       setLastActivity(Date.now());
       setIsIdle(false);
-
       // Check if hovering over button or link
       const target = e.target;
       const isClickable =
@@ -99,27 +93,23 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
         target.closest("button") ||
         target.closest("a") ||
         getComputedStyle(target).cursor === "pointer";
-
       setIsPointer(isClickable);
     };
-
     const handleActivity = () => {
       setLastActivity(Date.now());
       setIsIdle(false);
     };
-
     window.addEventListener("mousemove", moveCursor);
     window.addEventListener("click", handleActivity);
     window.addEventListener("keypress", handleActivity);
     window.addEventListener("scroll", handleActivity);
-
     const idleTimer = setInterval(() => {
       const timeSinceLastActivity = Date.now() - lastActivity;
+      console.log(timeSinceLastActivity);
       if (timeSinceLastActivity >= idleTimeout && !isHovered) {
         setIsIdle(true);
       }
-    }, 10000);
-
+    }, 500000);
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("click", handleActivity);
@@ -128,7 +118,6 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
       clearInterval(idleTimer);
     };
   }, [idleTimeout, isHovered]);
-
   const animate = () => {
     if (cursorOuterRef.current && cursorInnerRef.current) {
       cursorOuter.current.x += (mouse.current.x - cursorOuter.current.x) * 0.15;
@@ -148,12 +137,10 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
     }
     requestRef.current = requestAnimationFrame(animate);
   };
-
   useEffect(() => {
     requestRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(requestRef.current);
   }, []);
-
   return (
     <CursorContainer
       onClick={() => isIdle && window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -180,9 +167,10 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
             opacity: isHovered ? 1 : 0.95,
             background: isHovered ? "white" : "black",
             transform: `scale(${isHovered ? 1.2 : 1})`,
-            boxShadow: isHovered
-              ? "0 0 10px rgba(255, 255, 255, 0.8)"
-              : "0 0 10px rgba(255, 255, 255, 0.5)",
+            zIndex: 9999,
+            // boxShadow: isHovered
+            //   ? "0 0 10px rgba(255, 255, 255, 0.8)"
+            //   : "0 0 10px rgba(255, 255, 255, 0.5)",
             position: isIdle ? "absolute" : "fixed",
             animation: isIdle
               ? `${moveUpDown} 1.7s ease-in-out infinite`
@@ -191,7 +179,6 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
           }}
         />
       </CursorOuter>
-
       <CursorInner
         ref={cursorInnerRef}
         sx={{
@@ -199,6 +186,7 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
           width: isHovered ? "50px" : isIdle ? "10px" : "15px",
           height: isHovered ? "50px" : isIdle ? "10px" : "15px",
           opacity: isHovered ? 1 : 0.95,
+          zIndex: 9999,
           background:
             isHovered || isPointer
               ? "white"
@@ -217,5 +205,4 @@ const CustomCursor = ({ idleTimeout = 10000 }) => {
     </CursorContainer>
   );
 };
-
 export default CustomCursor;

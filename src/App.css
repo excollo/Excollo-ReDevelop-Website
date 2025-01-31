@@ -2,12 +2,10 @@
   margin: 0;
   padding: 0;
 }
-
 /* Hide cursor by default on all elements */
 * {
   cursor: none !important;
 }
-
 /* Show default cursor for interactive elements */
 button:not(.custom-cursor-disable),
 input:not(.custom-cursor-disable),
@@ -21,10 +19,21 @@ label:not(.custom-cursor-disable),
 details:not(.custom-cursor-disable),
 summary:not(.custom-cursor-disable),
 [onclick]:not(.custom-cursor-disable),
-[contenteditable="true"]:not(.custom-cursor-disable) {
+[contenteditable="true"]:not(.custom-cursor-disable),
+/* Icon selectors */
+i:not(.custom-cursor-disable),
+svg:not(.custom-cursor-disable),
+.png:not(.custom-cursor-disable),
+path:not(.custom-cursor-disable),
+.icon:not(.custom-cursor-disable),
+[class*="icon"]:not(.custom-cursor-disable),
+[class^="fa-"]:not(.custom-cursor-disable),
+[class*=" fa-"]:not(.custom-cursor-disable),
+[class^="material-icons"]:not(.custom-cursor-disable),
+[class*="material-symbols"]:not(.custom-cursor-disable),
+[class*="lucide-"]:not(.custom-cursor-disable) {
   cursor: pointer !important;
 }
-
 /* Show text cursor for text inputs and editable content */
 input[type="text"]:not(.custom-cursor-disable),
 input[type="email"]:not(.custom-cursor-disable),
@@ -35,17 +44,26 @@ textarea:not(.custom-cursor-disable),
 [contenteditable="true"]:not(.custom-cursor-disable) {
   cursor: text !important;
 }
-
 /* Show resize cursors for resizable elements */
 textarea:not(.custom-cursor-disable),
 iframe:not(.custom-cursor-disable),
 img[draggable="true"]:not(.custom-cursor-disable) {
   cursor: auto !important;
 }
-
 /* Optional: Add hover state cursors */
 button:hover:not(.custom-cursor-disable),
+/* :hover:not(.custom-cursor-disable), */
 a:hover:not(.custom-cursor-disable),
-[role="button"]:hover:not(.custom-cursor-disable) {
+[role="button"]:hover:not(.custom-cursor-disable),
+/* Icon hover states */
+i:hover:not(.custom-cursor-disable),
+svg:hover:not(.custom-cursor-disable),
+.icon:hover:not(.custom-cursor-disable),
+[class*="icon"]:hover:not(.custom-cursor-disable),
+[class^="fa-"]:hover:not(.custom-cursor-disable),
+[class*=" fa-"]:hover:not(.custom-cursor-disable),
+[class^="material-icons"]:hover:not(.custom-cursor-disable),
+[class*="material-symbols"]:hover:not(.custom-cursor-disable),
+[class*="lucide-"]:hover:not(.custom-cursor-disable) {
   cursor: pointer !important;
 }

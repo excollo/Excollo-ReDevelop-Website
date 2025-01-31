@@ -62,21 +62,21 @@ const TitleContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("xl")]: {
     flex: "0 0 400px",
     "& h2": {
-      fontSize: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
+      fontSize: `clamp(2.25rem, calc(2rem + 2.5vw), 10rem)`,
       paddingBottom: "-50px",
     },
   },
   [theme.breakpoints.down("xl")]: {
     flex: "0 0 400px",
     "& h2": {
-      fontSize: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+      fontSize: `clamp(1.75rem, calc(1.37rem + 2.5vw), 8rem)`,
       paddingBottom: "-50px",
     },
   },
   [theme.breakpoints.down("lg")]: {
     flex: "0 0 400px",
     "& h2": {
-      fontSize: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+      fontSize: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
       paddingBottom: "-50px",
     },
   },

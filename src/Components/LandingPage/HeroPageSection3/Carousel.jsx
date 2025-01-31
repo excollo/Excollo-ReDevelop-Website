@@ -201,6 +201,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const handleMouseLeave = () => {
     setRotation({ x: 0, y: 0 });
     setHoveredIndex(null);
+    setIsOverCard(false);
   };
 
   const handleWheelEvent = (e) => {
@@ -372,7 +373,8 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     const baseStyle = {
       flex: "0 0 auto",
       width: isMobile || isTablet ? "80%" : `${CARD_WIDTH}px`,
-      height: issmallLaptop ? "calc(40vh + 5vw)" 
+      height: issmallLaptop
+        ? "calc(40vh + 5vw)"
         : isMobile || isTablet
         ? "auto"
         : "calc(60vh + 5vw)",
@@ -390,7 +392,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       textAlign: "center",
       marginLeft: index === 0 ? (type === "title" ? "40%" : "30%") : "0",
       marginRight: index === carouselContent.length - 1 ? "40%" : "0",
-      transition: "all 0.3s ease",
+      transition: "transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       transformStyle: "preserve-3d",
       backgroundColor:
         type === "description" ? "rgba(255, 255, 255, 0.1)" : "transparent",
@@ -399,14 +401,10 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       transform: isHovered
         ? `perspective(1000px) scale(1) rotateX(${rotation.y}deg) rotateY(${
             rotation.x
-          }deg) translateZ(${type === "title" ? "100px" : "40px"}) translateZ(${
-            type === "description" ? "100px" : "50px"
-          })`
+          }deg) translateZ(${type === "title" ? "100px" : "50px"})`
         : `perspective(1000px) scale(1.05) rotateX(${rotation.y}deg) rotateY(${
             rotation.x
-          }deg) translateZ(${type === "title" ? "30px" : "20px"}) translateZ(${
-            type === "description" ? "40px" : "10px"
-          })`,
+          }deg) translateZ(${type === "title" ? "30px" : "10px"})`,
 
       "& .MuiTypography-h3": {
         fontSize: {
@@ -525,7 +523,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
                 to={item.link || "#"}
                 style={{
                   marginTop: islaptop
-                    ? "-8rem"
+                    ? "-5rem"
                     : issmallLaptop
                     ? "-6rem"
                     : isLargeScreen

@@ -12,6 +12,7 @@ const HeroPageSection3 = () => {
   );
   const isSpecified = useMediaQuery("(max-width: 899px)");
   const isSmallLaptop = useMediaQuery(theme.breakpoints.up("md"));
+  const isLaptop = useMediaQuery(theme.breakpoints.up("lg"));
   // Custom breakpoint checks for specific margins
   const is600to640 = useMediaQuery("(min-width:600px) and (max-width:640px)");
   const is640to670 = useMediaQuery("(min-width:640px) and (max-width:670px)");
@@ -55,12 +56,21 @@ const HeroPageSection3 = () => {
       <Box
         sx={{
           position: "absolute",
-          top: isSmallLaptop ? "-15%" : isSpecified ? "10%" : "2%",
+          top: isLaptop
+            ? "0%"
+            : isSmallLaptop
+            ? "-15%"
+            : isSpecified
+            ? "10%"
+            : "2%",
           left: "10%",
           right: "10%",
           bottom: isSpecified ? "0" : "0",
           background:
-            isMobile || isTablet
+              isLaptop
+              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`
+              :
+             isMobile || isTablet
               ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`
               : isSpecified
               ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`
@@ -79,9 +89,9 @@ const HeroPageSection3 = () => {
           lineHeight: 1.167,
           letterSpacing: "-0.01562em",
           fontSize: {
-            md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
-            lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
-            xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
+            md: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
+            lg: `clamp(1.75rem, calc(1.37rem + 2.5vw), 8rem)`,
+            xl: `clamp(2.25rem, calc(2rem + 2.5vw), 10rem)`,
           },
           position: "relative",
           top: "20px",
