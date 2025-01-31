@@ -387,22 +387,22 @@ const HeroPage = () => {
         {/* Apply consistent spacing */}
         <HeroPageSection3 />
       </Box>
-      <Box sx={{ marginTop: {md: "-8%", lg: "1%", xl: "-8%"} }}>
+      <Box sx={{ marginTop: {md: "-8%", lg: "1%", xl: "0%"} }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection4 />
       </Box>
-      <Box sx={{ marginTop: {md:"2%", lg: "5%"} }}>
+      <Box sx={{ marginTop: {md:"2%", lg: "5%", xl: "3"} }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection5 />
       </Box>
-      <Box sx={{ marginTop: {md: "-3%", lg: "2%", xl: "-8%"} }}>
+      <Box sx={{ marginTop: {md: "-3%", lg: "2%", xl: "0%"} }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection6 />
       </Box>
-      <Box sx={{ marginTop: {md: "-3%", lg: "0%", xl: "-8%"} }}>
+      <Box sx={{ marginTop: {md: "-3%", lg: "0%", xl: "7%"} }}>
         {" "}
         {/* Apply consistent spacing */}
         <HeroPageSection7 />

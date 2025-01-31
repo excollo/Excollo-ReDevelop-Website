@@ -199,8 +199,8 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
 
     const mainCardTrigger = ScrollTrigger.create({
       trigger: ".hero-page-section-4",
-      start: "top 10%",
-      end: "top 10%",
+      start: "center 60%",
+      end: "center 60%",
       scrub: 1,
       pin: true,
       pinSpacing: true,

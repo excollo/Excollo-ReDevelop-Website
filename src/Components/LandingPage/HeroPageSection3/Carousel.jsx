@@ -167,6 +167,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   );
   const issmallLaptop = useMediaQuery(theme.breakpoints.up("md"));
   const islaptop = useMediaQuery(theme.breakpoints.up("lg"));
+  const isXtraLargeLaptop = useMediaQuery(theme.breakpoints.up("xl"));
 
   // Dynamic card dimensions
   const { CARD_WIDTH, GAP } = getCardDimensions(window.innerWidth);
@@ -411,7 +412,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
           xs: "2.5rem",
           md: "clamp(0.25rem, calc(1rem + 2vw), 1.9rem)",
           lg: "clamp(0.25rem, calc(1.5rem + 4vw), 2.8rem)",
-          xl: "clamp(0.25rem, calc(2rem + 6vw), 4rem)",
+          xl: "clamp(0.25rem, calc(2rem + 6vw), 3.7rem)",
         },
         fontWeight: "400",
         background: "linear-gradient(180deg, #2579e3, #8e54f7)",
@@ -522,7 +523,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
               <Link
                 to={item.link || "#"}
                 style={{
-                  marginTop: islaptop
+                  marginTop: isXtraLargeLaptop ? "-6rem" : islaptop
                     ? "-5rem"
                     : issmallLaptop
                     ? "-6rem"

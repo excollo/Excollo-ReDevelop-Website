@@ -113,7 +113,7 @@ const AnimatedCTA = () => {
       scrollTrigger: {
         trigger: container,
         start: "top 85%",
-        end: "bottom 30%",
+        end: "bottom 0%",
         toggleActions: "play reverse play reverse",
         scrub: false,
       },
