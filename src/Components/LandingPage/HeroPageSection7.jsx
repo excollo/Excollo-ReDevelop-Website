@@ -62,7 +62,7 @@ const HeroPageSection7 = () => {
     : is1750to2000px
     ? Math.max(2800 - scrollY * 0.5, 0)
     : isXtraLargeScreen
-    ? Math.max(2400 - scrollY * 0.5, 0)
+    ? Math.max(2300 - scrollY * 0.5, 0)
     : is1300pxto1535px
     ? Math.max(1900 - scrollY * 0.5, 0)
     : isLargeScreen
