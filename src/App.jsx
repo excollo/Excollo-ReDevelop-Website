@@ -14,6 +14,7 @@ import ScrollToTop from "./Components/ScrollToTop";
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Box sx={{ backgroundColor: "#000", color: "#fff" }}>
         <CustomCursor />
         <Routes>

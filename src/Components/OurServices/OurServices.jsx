@@ -30,6 +30,7 @@ const OurServices = () => {
   const mlDrivenDataAnalysisRef = useRef(null);
   const productDevelopmentRef = useRef(null);
   const techConsultancyRef = useRef(null);
+  const sectionRef = useRef(null);
   // Reload the page on window resize
   useEffect(() => {
     let resizeTimer;
@@ -211,19 +212,19 @@ const OurServices = () => {
           paddingTop: isLandscapeMedium ? "60px" : { xs: 0, md: 0 },
         }}
       >
-        <AIAutomation ref={aiAutomationRef} />
+        <AIAutomation sectionRef={sectionRef} />
       </Box>
       <Box>
-        <SalesChannelDevelopment ref={salesChannelRef} />
+        <SalesChannelDevelopment sectionRef={sectionRef} />
       </Box>
       <Box>
-        <MLDrivenDataAnalysis ref={mlDrivenDataAnalysisRef} />
+        <MLDrivenDataAnalysis sectionRef={sectionRef} />
       </Box>
       <Box>
-        <ProductDevelopment ref={productDevelopmentRef} />
+        <ProductDevelopment sectionRef={sectionRef} />
       </Box>
       <Box>
-        <TechConsultancy ref={techConsultancyRef} />
+        <TechConsultancy sectionRef={sectionRef} />
       </Box>
       <Fade in={showButton}>
         <Button
