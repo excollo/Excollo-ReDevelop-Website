@@ -354,20 +354,6 @@ const HowWeWork = () => {
     >
       <WorkTable>
         <Box sx={{ marginBottom: {xs: "4rem", md: "3rem", lg: "5rem", xl: "7rem"}, marginTop: {xs: "4rem", md: "3rem", lg: "5rem", xl: "7rem"} }}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "-8%",
-              left: "0",
-              right: "0%",
-              bottom: 0,
-              height: "60%",
-              background: `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`,
-              zIndex: -1,
-              pointerEvents: "none",
-              transformOrigin: "center center",
-            }}
-          />
             <Typography
                                           sx={{
                                             color: "#fff",
