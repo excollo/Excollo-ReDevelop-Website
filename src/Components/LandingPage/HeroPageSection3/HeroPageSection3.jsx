@@ -7,50 +7,21 @@ const HeroPageSection3 = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isSpecificSize = useMediaQuery(
-    "(max-width: 320px) and (max-height: 725px)"
-  );
+  const mobileScreen = useMediaQuery(theme.breakpoints.up("xs"));
   const isSpecified = useMediaQuery("(max-width: 899px)");
   const isSmallLaptop = useMediaQuery(theme.breakpoints.up("md"));
   const isLaptop = useMediaQuery(theme.breakpoints.up("lg"));
-  // Custom breakpoint checks for specific margins
-  const is600to640 = useMediaQuery("(min-width:600px) and (max-width:640px)");
-  const is640to670 = useMediaQuery("(min-width:640px) and (max-width:670px)");
-  const is670to685 = useMediaQuery("(min-width:670px) and (max-width:685px)");
-  const is685to720 = useMediaQuery("(min-width:685px) and (max-width:720px)");
-  const is720to768 = useMediaQuery("(min-width:720px) and (max-width:768px)");
-  const is768to800 = useMediaQuery("(min-width:768px) and (max-width:800px)");
-  const is800to850 = useMediaQuery("(min-width:800px) and (max-width:850px)");
-  const is850to900 = useMediaQuery("(min-width:850px) and (max-width:900px)");
-  // Function to get margin values based on breakpoints
-  const getMargins = () => {
-    if (is600to640) return { mr: 0, ml: -8 };
-    if (is640to670) return { mr: 0, ml: -7 };
-    if (is670to685) return { mr: 15, ml: -5 };
-    if (is685to720) return { mr: 15, ml: -3 };
-    if (is720to768) return { mr: 15, ml: -1 };
-    if (is768to800) return { mr: "auto", ml: 3.5 };
-    if (is800to850) return { mr: "auto", ml: 4.5 };
-    if (is850to900) return { mr: "auto", ml: 6 };
-    return { mr: 0, ml: 0 }; // default margins
-  };
-  const margins = getMargins();
   return (
     <Box
       sx={{
         textAlign: "center",
         position: "relative",
-        height: "auto",
-        marginTop: {
-          xs: "0px",
-          sm: "0px",
-          md: "-8rem",
-        },
         minHeight: {
-          xs: isSpecificSize ? "1200px" : "1000px",
-          sm: "1000px",
+          xs: "120vh",
+          sm: "140vh",
           md: "120vh",
         },
+        marginTop: {sm: "-3rem", md: 0}
       }}
     >
       <Box
@@ -66,17 +37,15 @@ const HeroPageSection3 = () => {
           left: "10%",
           right: "10%",
           bottom: isSpecified ? "0" : "0",
-          background:
-              isLaptop
-              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`
-              :
-             isMobile || isTablet
-              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`
-              : isSpecified
-              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`
-              : isSmallLaptop
-              ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`
-              : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
+          background: isLaptop
+            ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`
+            : isMobile || isTablet
+            ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 0%)`
+            : isSpecified
+            ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`
+            : isSmallLaptop
+            ? `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 50%)`
+            : `radial-gradient(closest-corner, rgba(115, 80, 190, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 0,
           pointerEvents: "none",
           transformOrigin: "center center",
@@ -89,6 +58,7 @@ const HeroPageSection3 = () => {
           lineHeight: 1.167,
           letterSpacing: "-0.01562em",
           fontSize: {
+            xs: `clamp(1.75rem, calc(1.15rem + 2vw), 9rem)`,
             md: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
             lg: `clamp(1.75rem, calc(1.37rem + 2.5vw), 8rem)`,
             xl: `clamp(2.25rem, calc(2rem + 2.5vw), 10rem)`,
@@ -115,7 +85,7 @@ const HeroPageSection3 = () => {
         <Box
           sx={{
             position: "relative",
-            marginTop: { md: "8%" },
+            marginTop: { xs: "10%", md: "8%" },
             zIndex: 0,
           }}
         >

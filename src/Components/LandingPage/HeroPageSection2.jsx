@@ -88,7 +88,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         color: "#fff",
         overflow: "hidden",
         minHeight: {
-          xs: "30vh",
+          xs: "10vh",
           sm: isTablet ? "50vh" : "50vh",
           md: "90vh",
         },
@@ -122,8 +122,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         sx={{
           position: "absolute",
           top: {
-            xs: "-10%",
-            sm: isTablet ? "-10%" : "8%",
+            xs: "0%",
             md: "-10%",
             lg: "-20%",
           },
@@ -165,7 +164,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
             display: "flex",
             justifyContent: "center",
             marginBottom: {
-              xs: "1.5rem",
+              xs: "0",
               sm: isTablet ? "1.75rem" : "2rem",
               md: "2rem",
             },
@@ -198,7 +197,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
               display: "flex",
               flexDirection: "column",
               mt: {
-                xs: 5,
+                xs: 10,
                 sm: isTablet ? 8 : 0,
                 md: 0,
                 lg: -20,
@@ -220,8 +219,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
               component="h5"
               sx={{
                 fontSize: {
-                  xs: "1.2rem",
-                  sm: isTablet ? "1.4rem" : "1.3rem",
+                  xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
                   md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
                   lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
                   xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
@@ -267,19 +265,17 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 textDecoration: "none",
                 fontWeight: 100,
                 fontSize: {
-                  xs: "16px",
-                  sm: "17px",
+                  xs: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
                   md: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
                   xl: `clamp(0.5rem, calc(0.6rem + 1.1vw), 5rem)`,
                 },
                 border: "1px solid transparent",
                 padding: {
-                  xs: "15px 30px",
-                  sm: "16px 32px",
+                  xs: "2vw 4vw",
                   md: "1.6vw",
                   xl: "1.8vw",
                 },
-                borderRadius: { sm: "40px", md: "40px", xl: "80px" },
+                borderRadius: { xs: "80px", md: "80px", xl: "80px" },
                 background:
                   "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
                 zIndex: 3,

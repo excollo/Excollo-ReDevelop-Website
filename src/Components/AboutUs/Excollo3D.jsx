@@ -1,12 +1,30 @@
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Logo from "../../assets/logo/excollo3d.png";
 import { m } from "framer-motion";
 const Excollo3D = () => {
+  const theme = useTheme();
   const [scrollY, setScrollY] = useState(0);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const isSpecified = useMediaQuery("(max-width: 899px)");
+  const isSmallerLaptop = useMediaQuery(theme.breakpoints.up("md"));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const is1300pxto1535px = useMediaQuery(
+    "(min-width:1300px) and (max-width:1535px)"
+  );
+  const isXtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
+  const is1750to2000px = useMediaQuery(
+    "(min-width:1750px) and (max-width:2000px)"
+  );
+  const is2001to2300px = useMediaQuery(
+    "(min-width:2001px) and (max-width:2300px)"
+  );
+  const is2301to2600px = useMediaQuery(
+    "(min-width:2301px) and (max-width:2600px)"
+  );
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 480);
@@ -41,7 +59,21 @@ const Excollo3D = () => {
     if (isMobile || isTablet) return;
     setRotation({ x: 0, y: 0 });
   };
-  const translateYImage = Math.max(1500 - scrollY * 0.5, 0);
+  const translateYImage = is2301to2600px
+    ? Math.max(3600 - scrollY * 0.5, 0)
+    : is2001to2300px
+    ? Math.max(3100 - scrollY * 0.5, 0)
+    : is1750to2000px
+    ? Math.max(2800 - scrollY * 0.5, 0)
+    : isXtraLargeScreen
+    ? Math.max(2300 - scrollY * 0.5, 0)
+    : is1300pxto1535px
+    ? Math.max(1900 - scrollY * 0.5, 0)
+    : isLargeScreen
+    ? Math.max(1900 - scrollY * 0.5, 0)
+    : isSmallerLaptop
+    ? Math.max(1800 - scrollY * 0.5, 0)
+    : Math.max(100 - scrollY * 0.5, 0);
   const gradientOpacity =
     scrollY > 100 ? Math.min((scrollY - 800) / 300, 1) : 1;
   return (
@@ -53,11 +85,12 @@ const Excollo3D = () => {
         position="relative"
         zIndex={2}
         sx={{
-          height: "100%",
+          height: "60vh",
           width: "100%",
           overflow: "hidden",
-          "@media (max-width: 1200px)": {
+          "@media (max-width: 899px)": {
             width: "100%",
+            marginTop: "-5%",
           },
           "@media (max-width: 768px)": {
             width: "100%",
@@ -81,7 +114,7 @@ const Excollo3D = () => {
             transform:
               isMobile || isTablet
                 ? "none"
-                : `translateY(${Math.min(translateYImage, 100)}px) rotateX(${
+                : `translateY(${Math.min(translateYImage, 1000)}px) rotateX(${
                     rotation.y
                   }deg) rotateY(${rotation.x}deg)`,
             transformStyle: "preserve-3d",

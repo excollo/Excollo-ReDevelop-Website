@@ -12,7 +12,7 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import ExcolloWebsiteLogo from "../../assets/logo/ExcolloWebsiteLogo.png"
+import ExcolloWebsiteLogo from "../../assets/logo/ExcolloWebsiteLogo.png";
 
 const Footer = () => {
   const isTablet = useMediaQuery("(min-width:480px) and (max-width:899px)");
@@ -279,13 +279,7 @@ const Footer = () => {
                     alt="excollo"
                     loading="lazy"
                     style={{
-                      width: {
-                        xs: "50%",
-                        sm: "50%",
-                        md: "50%",
-                        lg: "50%",
-                        xl: specificCondition ? "70%" : "50%",
-                      },
+                      width: specificCondition ? "100%" : "50%",
                     }}
                   />
                 </Link>

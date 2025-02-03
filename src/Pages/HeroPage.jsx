@@ -374,7 +374,8 @@ const HeroPage = () => {
           display: "flex",
           flexDirection: "column",
           gap: { xs: 2, md: 4, lg: 6 },
-          marginTop: 4, // Base spacing
+          marginTop: 4,
+          zIndex: 1,
         }}
       >
         <HeroPageSection3 />

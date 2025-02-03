@@ -84,7 +84,7 @@ const TitleContainer = styled("div")(({ theme }) => ({
     width: "100%",
     marginBottom: "-280px",
     "& h2": {
-      fontSize: "2.50rem",
+      fontSize: `clamp(1.75rem, calc(1.15rem + 2vw), 9rem)`,
       paddingBottom: "-50px",
       textAlign: "center",
       "& br": {
@@ -95,7 +95,7 @@ const TitleContainer = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     marginBottom: "-275px",
     "& h2": {
-      fontSize: "2.0rem",
+      fontSize: `clamp(1.75rem, calc(1.15rem + 2vw), 9rem)`,
     },
   },
 }));
@@ -158,6 +158,7 @@ const Card = styled("div")(
       height: "auto",
       minHeight: isMobile ? "auto" : "250px",
       marginBottom: "20px",
+      fontSize: `clamp(0.8rem, calc(0.6rem + 1vw), 9rem)`,
       background: isMobile
         ? "none"
         : `linear-gradient(${direction}, rgba(142, 84, 247, 0.5), rgba(51, 46, 108, 0.8), rgba(0, 0, 0, 1))`,
@@ -176,6 +177,7 @@ const Card = styled("div")(
       width: "100%",
       marginBottom: "-30px",
       borderRadius: "30px",
+      fontSize: `clamp(0.8rem, calc(0.6rem + 1vw), 9rem)`,
       padding: isMobile ? "0" : "20px",
       "&::before": {
         borderRadius: "31px",
@@ -245,6 +247,20 @@ const AboutUs = () => {
       clearTimeout(resizeTimer);
     };
   }, [windowWidth, shouldRefresh]);
+  useEffect(() => {
+    let resizeTimer;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        window.location.reload(); // Reload the page
+      }, 300); // Debounce timer (300ms)
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // Helper function to determine breakpoint category
   const getBreakpoint = (width) => {
@@ -342,7 +358,7 @@ const AboutUs = () => {
               </Card>
               <TitleContainer>
                 <h2>
-                  <Box sx={{marginLeft: {md: "40%", lg: "20%", xl: "0"}}}>
+                  <Box sx={{ marginLeft: { md: "40%", lg: "20%", xl: "0" } }}>
                     Our <br />{" "}
                     <span
                       style={{
@@ -421,7 +437,11 @@ const AboutUs = () => {
       <NavBar />
       <Box
         sx={{
-          minHeight: isLandscapeMedium ? "120vh" : "100vh",
+          minHeight: isLandscapeMedium
+            ? "50vh"
+            : isMobile || isSpecificSize
+            ? "38vh"
+            : "100vh",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           width: "100%",
@@ -443,18 +463,23 @@ const AboutUs = () => {
             sx={{
               minHeight: isLandscapeMedium
                 ? "auto"
-                : { xs: "auto", md: "auto" },
+                : { xs: "auto", sm: "auto", md: "auto" },
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               alignItems: "center",
               mt: isLandscapeMedium
                 ? "0"
                 : { xs: "10%", md: "-10%", lg: "-10%" },
-              mb: { xs: 0, md: 0 },
+              mb: { xs: -50, sm: -50, md: 0 },
               position: "relative",
             }}
           >
-            <Box sx={{ width: { md: "70%", lg: "70%", xl: "70%" } }}>
+            <Box
+              sx={{
+                width: { md: "70%", lg: "70%", xl: "70%" },
+                mb: { xs: -50, sm: -50, md: 0 },
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -468,6 +493,7 @@ const AboutUs = () => {
                   sx={{
                     textAlign: { xs: "center", md: "left" },
                     fontSize: {
+                      xs: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
                       md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
                       lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
                       xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
@@ -497,6 +523,7 @@ const AboutUs = () => {
                 sx={{
                   maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
                   fontSize: {
+                    xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
                     md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
                     lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
                     xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,

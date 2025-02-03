@@ -28,20 +28,17 @@ const HeroPageSection1 = ({ animationComplete }) => {
           md: 0,
         },
         marginLeft: {
-          xs: 0,
-          sm: "2.5%",
+          xs: "2.5%",
           md: "7.5%",
         },
         marginRight: {
-          xs: 0,
-          sm: "2.5%",
+          xs: "2.5%",
           md: "0%",
         },
         position: "relative",
         minHeight: {
-          xs: "500px", // Fixed pixel height for mobile
-          sm: "500px",
-          md: "60vh", // Keep vh units for larger screens
+          xs: "60vh",
+          md: "60vh"
         },
         zIndex: 2,
         marginTop: {
@@ -55,7 +52,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
         sx={{
           maxWidth: {
             xs: "100%",
-            sm: "95%",
+            sm: "100%",
             md: "85%",
           },
           opacity: isTabletOrMobile ? 1 : animationComplete ? 1 : 0,
@@ -67,7 +64,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
           transition: "opacity 0.5s ease, transform 0.5s ease",
           padding: {
             xs: 2,
-            sm: 4,
+            sm: 0,
             md: 0,
           },
         }}
@@ -78,6 +75,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
           sx={{
             fontWeight: 400,
             fontSize: {
+              xs: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
               md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
               lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
               xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
@@ -101,12 +99,10 @@ const HeroPageSection1 = ({ animationComplete }) => {
             lineHeight: 1.167,
             letterSpacing: "-0.01562em",
             fontSize: {
+              xs: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
               md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
               lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
               xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
-            },
-            "@media (min-width: 769px) and (max-width:899)": {
-              fontSize: "2.5rem",
             },
           }}
         >
@@ -158,6 +154,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
           component="h5"
           sx={{
             fontSize: {
+              xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
               md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
               lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
               xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
@@ -171,9 +168,6 @@ const HeroPageSection1 = ({ animationComplete }) => {
               md: 4.5,
             },
             textAlign: isTabletOrMobile ? "center" : "left",
-            "@media (min-width: 769px) and (max-width:899px)": {
-              fontSize: "1.2rem",
-            },
           }}
         >
           Unlock the potential of AI to transform your business and redefine
@@ -196,19 +190,17 @@ const HeroPageSection1 = ({ animationComplete }) => {
               textDecoration: "none",
               fontWeight: 100,
               fontSize: {
-                xs: "16px",
-                sm: "17px",
+                xs: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
                 md: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
                 xl: `clamp(0.5rem, calc(0.6rem + 1.1vw), 5rem)`,
               },
               border: "1px solid transparent",
               padding: {
-                xs: "15px 30px",
-                sm: "16px 32px",
+                xs: "2vw 4vw",
                 md: "1.6vw",
                 xl: "1.8vw",
               },
-              borderRadius: { sm: "40px", md: "80px", xl: "80px" },
+              borderRadius: { xs: "80px", md: "80px", xl: "80px" },
               background:
                 "linear-gradient(to right, #000, #000) padding-box, linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%) border-box",
               zIndex: 3,

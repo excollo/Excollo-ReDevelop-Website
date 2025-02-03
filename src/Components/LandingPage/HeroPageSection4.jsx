@@ -25,7 +25,7 @@ const FeatureCard = ({
   isTablet,
   md,
   lg,
-  xl
+  xl,
 }) => {
   const cardStyles = {
     background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
@@ -33,7 +33,7 @@ const FeatureCard = ({
     textAlign: "center",
     padding: "1rem",
     width: "100%",
-    height: "100%",
+    height: isMobile ? "150px" : isTablet ? "200px" : "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -57,16 +57,16 @@ const FeatureCard = ({
     WebkitTextFillColor: "transparent",
     display: "inline-block",
     marginBottom: isMobile ? "0.5rem" : "1rem",
-    marginTop: isFinalState ? "0" : "2rem",
+    marginTop: isFinalState ? "0" : isMobile ? "0" : isTablet ? "0" : "2rem",
     transition: "margin-top 0.5s ease",
     fontSize: isMainCard
-      ? isMobile
-        ? "1.5rem"
-        : isTablet
-        ? "2rem"
-        : {md: "3.5rem", lg: "4rem", xl: "5rem"}
+      ? isTablet
+        ? `clamp(1.35rem, calc(0.5rem + 1.5vw), 9rem)`
+        : { md: "3.5rem", lg: "4rem", xl: "5rem" }
       : isMobile
-      ? "1.5rem"
+      ? `clamp(1.35rem, calc(0.5rem + 1vw), 9rem)`
+      : isTablet
+      ? `clamp(1.35rem, calc(0.5rem + 1vw), 9rem)`
       : {
           md: `clamp(0.25rem,calc(1rem + 0.5vw),2.2rem)`,
           lg: `clamp(0.25rem,calc(1rem + 0.8vw),2.2rem)`,
@@ -89,13 +89,13 @@ const FeatureCard = ({
           className="feature-description"
           sx={{
             fontSize: {
-              xs: "1.2rem",
-              sm: isTablet ? "1.4rem" : "1.3rem",
+              xs: `clamp(0.8rem, calc(0.5rem + 1vw), 9rem)`,
               md: `clamp(0.5rem, calc(0.6rem + 0.4vw), 1.5rem)`,
               lg: `clamp(0.5rem, calc(0.6rem + 0.6vw), 1.8rem)`,
               xl: `clamp(0.25rem, calc(0.5rem + 0.8vw), 3rem)`,
             },
-            lineHeight: "1.5",
+            fontWeight: 200,
+            lineHeight: "1.7",
             fontFamily: '"Inter", sans-serif',
             maxWidth: "80%",
             opacity: isMobile || isTablet ? 1 : showDescription ? 1 : 0,
@@ -120,8 +120,8 @@ const HeroPageSection4 = ({ onComplete }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const md = useMediaQuery(theme.breakpoints.up("md"));
-const lg = useMediaQuery(theme.breakpoints.up("lg"));
-const xl = useMediaQuery(theme.breakpoints.up("xl"));
+  const lg = useMediaQuery(theme.breakpoints.up("lg"));
+  const xl = useMediaQuery(theme.breakpoints.up("xl"));
 
   const cards = [
     {
@@ -151,33 +151,6 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
       (prevIndex) => (prevIndex - 1 + cards.length) % cards.length
     );
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      const currentWidth = window.innerWidth;
-      const previousWidth = previousWidthRef.current;
-
-      const crossingThreshold =
-        (previousWidth < 950 && currentWidth >= 950) ||
-        (previousWidth >= 950 && currentWidth < 950);
-
-      if (currentWidth >= 800 && currentWidth <= 1400 && crossingThreshold) {
-        setKey((prevKey) => prevKey + 1);
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-        setTimeout(() => {
-          if (sectionRef.current) {
-            initializeGSAPAnimations();
-          }
-        }, 100);
-      }
-
-      previousWidthRef.current = currentWidth;
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const initializeGSAPAnimations = () => {
     if (isMobile || isTablet) return;
@@ -243,11 +216,11 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
             return "3rem"; // Smaller font size for mobile
           } else if (viewportWidth < 1200) {
             return "3.5rem"; // Medium font size for tablets
-          } else if(viewportWidth < 1536) {
+          } else if (viewportWidth < 1536) {
             return "4rem"; // Larger font size for desktops
-          } else if(viewportWidth < 2000) {
+          } else if (viewportWidth < 2000) {
             return "5rem";
-          } else if(viewportWidth < 2600) {
+          } else if (viewportWidth < 2600) {
             return "5rem";
           }
         };
@@ -314,62 +287,56 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
         key={key}
         sx={{
           minHeight: {
-            xs: "30vh",
-            sm: isTablet ? "50vh" : "50vh",
-            md: "70vh",
+            xs: "50vh",
           },
           color: "#fff",
-          padding: "2rem 1rem",
           fontFamily: '"Inter", sans-serif',
           position: "relative",
-          marginTop: {
-            xs: "0",
-            md: "0",
-          },
-          pt: {
-            xs: "200px",
-            sm: "60px",
-            md: "0",
-          },
           maxWidth: {
             xs: "100%",
             sm: "90%",
             md: "85%",
           },
           mx: "auto",
-          "@media (min-width: 321px) and (max-width: 354px)": {
-            pt: "400px",
+          zIndex: 2,
+          marginTop: {
+            xs: "8vh",
+            sm: "0",
           },
-          "@media (min-width: 355px) and (max-width: 374px)": {
-            pt: "300px",
+          "@media (min-width: 300px) and (max-width:340px)": {
+            marginTop: "22vh",
           },
-          "@media (min-width: 375px) and (max-width: 392px)": {
-            pt: "280px",
+          "@media (min-width: 341px) and (max-width:380px)": {
+            marginTop: "18vh",
           },
-          "@media (min-width: 393px) and (max-width: 395)": {
-            pt: "200px",
+          "@media (min-width: 381px) and (max-width:400px)": {
+            marginTop: "18vh",
           },
-          "@media (min-width: 396px) and (max-width: 599px)": {
-            pt: "180px",
+          "@media (min-width: 401px) and (max-width:450px)": {
+            marginTop: "13vh",
           },
-          "@media (min-width: 600px) and (max-width: 768px)": {
-            mt: 22,
-            mb: -4,
+          "@media (min-width: 451px) and (max-width:500px)": {
+            marginTop: "10vh",
           },
-          "@media (min-width: 769px) and (max-width: 899px)": {
-            mt: 22,
-            mb: -4,
+          "@media (min-width: 800px) and (max-width:899px)": {
+            marginTop: "10vh",
           },
         }}
       >
         <Typography
-          variant="h2"
-          fontWeight="bold"
           textAlign="center"
-                sx={{
-            fontSize: isMobile ? "2rem" : "2.5rem",
-            marginBottom: "2rem",
-                }}
+          sx={{
+            color: "#fff",
+            fontWeight: 600,
+            lineHeight: 1.167,
+            letterSpacing: "-0.01562em",
+            mb: "20%",
+            fontSize: {
+              xs: `clamp(1.75rem, calc(1.15rem + 2vw), 9rem)`,
+            },
+            position: "relative",
+            zIndex: 2,
+          }}
         >
           Why Choose{" "}
           <Box
@@ -390,17 +357,23 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
             flexDirection: "column",
             alignItems: "center",
             position: "relative",
+            height: "300px",
           }}
         >
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={currentIndex}
               custom={direction}
-              initial={{ opacity: 0, x: direction > 0 ? 100 : -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction > 0 ? -100 : 100 }}
+              initial={{ opacity: 0, x: direction > 0 ? "100%" : "-100%" }}
+              animate={{ opacity: 1, x: "0%" }}
+              exit={{ opacity: 0, x: direction > 0 ? "-100%" : "100%" }}
               transition={{ duration: 0.5 }}
-              style={{ width: "90%", marginLeft: -30, position: "absolute" }}
+              style={{
+                width: "90%",
+                position: "absolute",
+                left: "0%",
+                x: "-50%", // Centers the element using Framer Motion's transform
+              }}
             >
               <FeatureCard
                 title={cards[currentIndex].title}
@@ -464,7 +437,7 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
         color: "#fff",
         position: "relative",
         fontFamily: '"Inter", sans-serif',
-        marginTop: "-5rem"
+        marginTop: "-5rem",
       }}
     >
       <Box
@@ -477,22 +450,22 @@ const xl = useMediaQuery(theme.breakpoints.up("xl"));
         }}
       >
         <Typography
-                                sx={{
-                                  color: "#fff",
-                                  fontWeight: 600,
-                                  lineHeight: 1.167,
-                                  letterSpacing: "-0.01562em",
-                                  fontSize: {
-                                    md: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
-                                    lg: `clamp(1.75rem, calc(1.37rem + 2.5vw), 8rem)`,
-                                    xl: `clamp(2.25rem, calc(2rem + 2.5vw), 10rem)`,
-                                  },
-                                  position: "relative",
-                                  top: "20px",
-                                  background: "black",
-                                  textAlign: "center"
-                                }}
-                        >
+          sx={{
+            color: "#fff",
+            fontWeight: 600,
+            lineHeight: 1.167,
+            letterSpacing: "-0.01562em",
+            fontSize: {
+              md: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
+              lg: `clamp(1.75rem, calc(1.37rem + 2.5vw), 8rem)`,
+              xl: `clamp(2.25rem, calc(2rem + 2.5vw), 10rem)`,
+            },
+            position: "relative",
+            top: "20px",
+            background: "black",
+            textAlign: "center",
+          }}
+        >
           Why Choose{" "}
           <Box
             component="span"

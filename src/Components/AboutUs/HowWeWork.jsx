@@ -15,7 +15,7 @@ const WorkTable = styled("section")({
   margin: "auto",
   padding: "20px",
   position: "relative",
-  "@media (max-width: 768px)": {
+  "@media (max-width: 899px)": {
     width: "100%",
     padding: "10px",
   },
@@ -27,7 +27,7 @@ const TableGrid = styled("div")({
   margin: "auto",
   position: "relative",
   justifyContent: "space-evenly", // Keep spacing even on larger screens
-  "@media (max-width: 768px)": {
+  "@media (max-width: 899px)": {
     flexDirection: "column", // Stack vertically on small screens
     width: "100%", // Take up full width
     margin: "auto",
@@ -190,12 +190,25 @@ const TableContent = styled("div")({
     "& h3": { fontSize: "25px" },
   },
   "@media (min-width: 769px) and (max-width:899px)": {
-    width: "62%",
-    height: "400px", // Make it 90% of the width for mobile
-    // Add margin between cards on mobile
+    width: "90%",
+    height: "140px", // Make it 90% of the width for mobile
+    // Let the height adjust dynamically
+    borderRadius: "20px", // Modern rounded corners
+    border: "1px solid #7E22CE ",
+    // borderColor: "#7E22CE !important",
+    background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)", // Remove border for a cleaner look
+    textAlign: "center",
+    padding: "20px", // Adjust padding for mobile
+    marginBottom: "20px", // Add margin between cards on mobile
     opacity: 1,
     transform: "none",
     visibility: "visible",
+    "&:hover": {
+      border: "1px solid #7E22CE ",
+      // borderColor: "#7E22CE !important",
+      background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
+      zIndex: 1000, // Added !important to override GSAP inline styles
+    },
     "& h3": {
       fontSize: "28px",
       margin: "4px",
@@ -207,7 +220,7 @@ const TableContent = styled("div")({
   },
   "@media (max-width: 768px)": {
     width: "90%",
-    height: "200px", // Make it 90% of the width for mobile
+    height: "160px", // Make it 90% of the width for mobile
     // Let the height adjust dynamically
     borderRadius: "20px", // Modern rounded corners
     border: "1px solid #7E22CE ",
@@ -300,6 +313,20 @@ const HowWeWork = () => {
         anticipatePin: 1,
       },
     });
+    // useEffect(() => {
+    //   let resizeTimer;
+    //   const handleResize = () => {
+    //     clearTimeout(resizeTimer);
+    //     resizeTimer = setTimeout(() => {
+    //       window.location.reload(); // Reload the page
+    //     }, 300); // Debounce timer (300ms)
+    //   };
+    //   window.addEventListener("resize", handleResize);
+    //   return () => {
+    //     clearTimeout(resizeTimer);
+    //     window.removeEventListener("resize", handleResize);
+    //   };
+    // }, []);
     // Create animations for each content box
     contents.forEach((content, index) => {
       if (!content) return;
@@ -353,23 +380,29 @@ const HowWeWork = () => {
       }}
     >
       <WorkTable>
-        <Box sx={{ marginBottom: {xs: "4rem", md: "3rem", lg: "5rem", xl: "7rem"}, marginTop: {xs: "4rem", md: "3rem", lg: "5rem", xl: "7rem"} }}>
-            <Typography
-                                          sx={{
-                                            color: "#fff",
-                                            fontWeight: 600,
-                                            lineHeight: 1.167,
-                                            letterSpacing: "-0.01562em",
-                                            fontSize: {
-                                              md: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
-                                              lg: `clamp(1.75rem, calc(1.37rem + 2.5vw), 8rem)`,
-                                              xl: `clamp(2.25rem, calc(2rem + 2.5vw), 10rem)`,
-                                            },
-                                            position: "relative",
-                                            top: "20px",
-                                            textAlign: "center"
-                                          }}
-                                  >
+        <Box
+          sx={{
+            marginBottom: { xs: "4rem", md: "3rem", lg: "5rem", xl: "7rem" },
+            marginTop: { xs: "4rem", md: "3rem", lg: "5rem", xl: "7rem" },
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#fff",
+              fontWeight: 600,
+              lineHeight: 1.167,
+              letterSpacing: "-0.01562em",
+              fontSize: {
+                xs: `clamp(1.75rem, calc(1.15rem + 2vw), 9rem)`,
+                md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+                lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+                xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
+              },
+              position: "relative",
+              top: "20px",
+              textAlign: "center",
+            }}
+          >
             How We{" "}
             <Box
               component="span"
@@ -416,7 +449,7 @@ const HowWeWork = () => {
                 width: "20%",
                 position: "relative",
                 perspective: "1000px",
-                "@media (max-width: 768px)": {
+                "@media (max-width: 899px)": {
                   width: "90%",
                 },
               }}

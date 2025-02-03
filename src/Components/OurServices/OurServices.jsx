@@ -83,7 +83,7 @@ const OurServices = () => {
     <Box className="services-section">
       <Box
         sx={{
-          minHeight: isLandscapeMedium ? "120vh" : "100vh",
+          minHeight: isLandscapeMedium ? "60vh" : "100vh",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           width: "100%",
@@ -130,6 +130,7 @@ const OurServices = () => {
                   sx={{
                     textAlign: { xs: "center", md: "left" },
                     fontSize: {
+                      xs: `clamp(1.75rem, calc(1.45rem + 2vw), 9rem)`,
                       md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
                       lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
                       xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
@@ -158,6 +159,7 @@ const OurServices = () => {
                 sx={{
                   maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
                   fontSize: {
+                    xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
                     md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
                     lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
                     xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,

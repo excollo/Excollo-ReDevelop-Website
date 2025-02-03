@@ -61,35 +61,59 @@ const carouselContent = [
   },
 ];
 
+const ResponsiveView = ({ type, isTablet }) => {
+  return (
+    <Box
+      sx={{ p: 2, minHeight: "100vh", display: "flex", justifyContent: "center" }}
+    >
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gridTemplateRows: "repeat(5, auto)",
+          gap: 2,
+          width: "100%",
+          maxWidth: "600px", // Maximum width for tablet
+          justifyItems: "center", // Center cards horizontally
+        }}
+      >
+        {carouselContent.map((item, index) => (
+          <ResponsiveCard
+            key={index}
+            {...item}
+            type={type}
+            isTablet={isTablet}
+            isMobile={!isTablet} // Add this prop if needed
+          />
+        ))}
+      </Box>
+    </Box>
+  );
+};
+
+// Update ResponsiveCard component
 const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
   return (
     <Box
       sx={{
-        width: "90%",
+        width: isMobile ? "90%" : "80%", // Adjust for mobile vs tablet
         mb: 4,
         p: 2,
-        ml: isTablet ? "50px" : "0",
         borderRadius: 2,
         fontFamily: '"Inter", sans-serif',
-        backgroundColor: "linear-gradient(180deg, #2579e3, #8e54f7 100%)",
-        // backdropFilter: "blur(-10px)",
         boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 10px 0px",
         border: "1px solid #7e22ce",
-
-        alignItems: "center",
         cursor: "pointer",
         transition: "transform 0.3s",
-        ...(isTablet && {
-          width: "100%",
-          height: "auto",
-        }),
+        marginLeft: "auto",
+        marginRight: "auto",
       }}
     >
       <Typography
         variant="h4"
         sx={{
           fontWeight: 400,
-          fontSize: isTablet ? "2rem" : "1.5rem",
+          fontSize: { xs: `clamp(1.35rem, calc(0.5rem + 1vw), 9rem)` },
           mb: 2,
           textAlign: "center",
           background: isTablet
@@ -102,41 +126,16 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
         {title}
       </Typography>
       <Typography
-        variant="body1"
         sx={{
           color: "#ddd",
           fontWeight: 200,
+          fontSize: { xs: `clamp(0.8rem, calc(0.5rem + 1vw), 9rem)` },
           letterSpacing: "0.001em",
           textAlign: "center",
         }}
       >
         {description}
       </Typography>
-    </Box>
-  );
-};
-
-const ResponsiveView = ({ type, isTablet }) => {
-  return (
-    <Box sx={{ p: 2, height: "150vh" }}>
-      <Box
-        sx={{
-          display: "grid",
-
-          gridTemplateColumns: isTablet ? "repeat(1, 600px)" : "repeat(1, 1fr)",
-          gridTemplateRows: isTablet ? "repeat(5, 200px)" : "repeat(5, 1fr)",
-          gap: 1,
-        }}
-      >
-        {carouselContent.map((item, index) => (
-          <ResponsiveCard
-            key={index}
-            {...item}
-            type={type}
-            isTablet={isTablet}
-          />
-        ))}
-      </Box>
     </Box>
   );
 };
@@ -583,8 +582,8 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
             "&.Mui-disabled": {
               color: "#716b6b",
             },
-            marginRight: { xs: "2rem", md: "5rem", lg: "7rem" }, // Dynamically adjust margin
-            fontSize: { xs: "1.2rem", md: "1.5rem", lg: "2rem", xl: "2.5rem" }, // Scale icon size
+            marginRight: { md: "5rem", lg: "7rem" }, // Dynamically adjust margin
+            fontSize: { md: "1.5rem", lg: "2rem", xl: "2.5rem" }, // Scale icon size
           }}
         >
           <ArrowForwardIosIcon

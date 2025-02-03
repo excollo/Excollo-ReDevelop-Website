@@ -74,7 +74,20 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
   const requestRef = useRef();
   const [isIdle, setIsIdle] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
-  const [lastActivity, setLastActivity] = useState(Date.now());
+  const idleTimerRef = useRef(null);
+
+  const resetIdleTimer = () => {
+    if (idleTimerRef.current) {
+      clearTimeout(idleTimerRef.current);
+    }
+    setIsIdle(false);
+    idleTimerRef.current = setTimeout(() => {
+      if (!isHovered) {
+        setIsIdle(true);
+      }
+    }, idleTimeout);
+  };
+
   useEffect(() => {
     const moveCursor = (e) => {
       mouse.current = { x: e.clientX, y: e.clientY };
@@ -83,8 +96,8 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
         y: mouse.current.y - lastMousePosition.current.y,
       };
       lastMousePosition.current = { x: mouse.current.x, y: mouse.current.y };
-      setLastActivity(Date.now());
-      setIsIdle(false);
+      resetIdleTimer();
+
       // Check if hovering over button or link
       const target = e.target;
       const isClickable =
@@ -95,29 +108,30 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
         getComputedStyle(target).cursor === "pointer";
       setIsPointer(isClickable);
     };
+
     const handleActivity = () => {
-      setLastActivity(Date.now());
-      setIsIdle(false);
+      resetIdleTimer();
     };
+
     window.addEventListener("mousemove", moveCursor);
     window.addEventListener("click", handleActivity);
     window.addEventListener("keypress", handleActivity);
     window.addEventListener("scroll", handleActivity);
-    const idleTimer = setInterval(() => {
-      const timeSinceLastActivity = Date.now() - lastActivity;
-      console.log(timeSinceLastActivity);
-      if (timeSinceLastActivity >= idleTimeout && !isHovered) {
-        setIsIdle(true);
-      }
-    }, 500000);
+
+    // Initial idle timer
+    resetIdleTimer();
+
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("click", handleActivity);
       window.removeEventListener("keypress", handleActivity);
       window.removeEventListener("scroll", handleActivity);
-      clearInterval(idleTimer);
+      if (idleTimerRef.current) {
+        clearTimeout(idleTimerRef.current);
+      }
     };
   }, [idleTimeout, isHovered]);
+
   const animate = () => {
     if (cursorOuterRef.current && cursorInnerRef.current) {
       cursorOuter.current.x += (mouse.current.x - cursorOuter.current.x) * 0.15;

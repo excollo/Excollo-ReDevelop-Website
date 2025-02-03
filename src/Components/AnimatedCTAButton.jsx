@@ -4,7 +4,9 @@ import { styled } from "@mui/system";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+
 gsap.registerPlugin(ScrollTrigger);
+
 const CTAContainer = styled(Box)(({ theme }) => ({
   position: "relative",
   top: -10,
@@ -14,6 +16,7 @@ const CTAContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   padding: theme.spacing(2.5),
+
   [theme.breakpoints.up("xl")]: {
     padding: theme.spacing(3),
   },
@@ -21,15 +24,20 @@ const CTAContainer = styled(Box)(({ theme }) => ({
     padding: theme.spacing(4),
   },
 }));
+
 const StyledButton = styled(Button)(({ theme }) => ({
   background:
     "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
   color: "white",
+  transition: " background transform 0.3s ease", // Add smooth transition for transform
+
   "&:hover": {
-    backgroundColor: "#0077ED",
+    transform: " scale(1.05)", // Add hover scale effect
+    background:
+      "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)", // Maintain gradient on hover
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.875rem",
+    fontSize: "1rem",
     padding: "10px 20px",
     minWidth: "120px",
   },
@@ -39,7 +47,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     minWidth: "150px",
   },
   [theme.breakpoints.up("md")]: {
-    fontSize: "1.0625rem",
+    fontSize: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
     padding: "14px 28px",
     minWidth: "180px",
   },
@@ -48,24 +56,27 @@ const StyledButton = styled(Button)(({ theme }) => ({
     padding: "16px 32px",
     minWidth: "200px",
   },
-  [theme.breakpoints.up(2000)]: {
-    fontSize: "1.25rem",
-    padding: "20px 40px",
-    minWidth: "240px",
-  },
+  // [theme.breakpoints.up(2000)]: {
+  //   fontSize: "1.25rem",
+  //   padding: "20px 40px",
+  //   minWidth: "240px",
+  // },
   [theme.breakpoints.up(2550)]: {
-    fontSize: "1.375rem",
+    fontSize: `clamp(0.2rem, calc(0.5rem + 1vw), 4rem)`,
     padding: "24px 48px",
     minWidth: "280px",
   },
 }));
+
 const AnimatedCTA = () => {
   const containerRef = useRef(null);
   const buttonRef = useRef(null);
   const navigate = useNavigate(); // Initialize useNavigate
+
   useEffect(() => {
     const container = containerRef.current;
     const button = buttonRef.current;
+
     // Initial state
     gsap.set(container, {
       opacity: 0,
@@ -81,6 +92,7 @@ const AnimatedCTA = () => {
       opacity: 0,
       scale: 0,
     });
+
     // Create the animation timeline
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -91,6 +103,7 @@ const AnimatedCTA = () => {
         scrub: false,
       },
     });
+
     // Bounce animation sequence
     tl.to(container, {
       opacity: 1,
@@ -106,6 +119,7 @@ const AnimatedCTA = () => {
       .to(container, {
         duration: 0.24,
       });
+
     // Morph button animation
     const buttonTl = gsap.timeline({
       scrollTrigger: {
@@ -116,6 +130,7 @@ const AnimatedCTA = () => {
         scrub: false,
       },
     });
+
     buttonTl
       .to(button, {
         opacity: 1,
@@ -123,8 +138,8 @@ const AnimatedCTA = () => {
         duration: 0.1,
       })
       .to(button, {
-        width: "80px",
-        height: "80px",
+        width: "60px",
+        height: "60px",
         padding: 0,
         borderRadius: "50%",
         fontSize: 0,
@@ -132,19 +147,29 @@ const AnimatedCTA = () => {
         duration: 0.6,
       })
       .to(button, {
-        width: "200px",
-        height: "80px",
-        padding: "12px 24px",
+        width: "15vw",
+        height: "8vh",
+
+        padding: {
+          xs: "15px 30px",
+          sm: "16px 32px",
+          md: " 1vw 1.6vw",
+          xl: "1vw 1.8vw",
+        },
         borderRadius: "980px",
-        fontSize: "1.25rem",
+        fontSize: `clamp(1rem, calc(0.5rem + 1vw), 4rem)`,
         minWidth: "200px",
         duration: 0.36,
+        "&:hover": {
+          transform: "scale(1.05)",
+        },
       })
       .to(button, {
         y: "10%",
         duration: 0.24,
         ease: "power2.out",
       });
+
     // Cleanup
     return () => {
       if (tl.scrollTrigger) {
@@ -157,22 +182,26 @@ const AnimatedCTA = () => {
       buttonTl.kill();
     };
   }, []);
+
   // Handle button click to navigate to ContactUs page
   const handleButtonClick = () => {
     navigate("/contact");
     window.scrollTo(0, 0); // Navigate to the ContactUs page
   };
+
   return (
     <CTAContainer ref={containerRef}>
       <StyledButton
         ref={buttonRef}
         variant="contained"
         disableElevation
-        onClick={handleButtonClick} // Add onClick handler
+        onClick={handleButtonClick}
+        // Add onClick handler
       >
-        Talk to Us
+        LET’S CONNECT
       </StyledButton>
     </CTAContainer>
   );
 };
+
 export default AnimatedCTA;

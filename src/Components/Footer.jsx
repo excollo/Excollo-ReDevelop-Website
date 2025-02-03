@@ -12,12 +12,12 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png";
+import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png"
 
 const Footer = () => {
   const isTablet = useMediaQuery("(min-width:480px) and (max-width:899px)");
   const specificCondition = useMediaQuery(
-    "(min-width: 1800px) and (max-width: 2600px) and (max-height:1900px)"
+    "(min-width: 1800px) and (max-width: 2600px) and (max-height:1600px)"
   );
 
   const navigationLinks = [
@@ -214,7 +214,7 @@ const Footer = () => {
           left: 0,
           right: 0,
           height: "12%",
-          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 1) 0%, rgba(0, 0, 0, 0) 60%)`,
+          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 1) 0%, rgba(0, 0, 0, 0) 0%)`,
           zIndex: -1,
           "@media (max-width: 899px)": {
             display: "none",
@@ -279,13 +279,7 @@ const Footer = () => {
                     alt="excollo"
                     loading="lazy"
                     style={{
-                      width: {
-                        xs: "50%",
-                        sm: "50%",
-                        md: "50%",
-                        lg: "50%",
-                        xl: specificCondition ? "70%" : "50%",
-                      },
+                      width: specificCondition ? "100%" : "50%",
                     }}
                   />
                 </Link>

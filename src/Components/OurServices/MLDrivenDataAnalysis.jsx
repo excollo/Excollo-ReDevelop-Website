@@ -463,7 +463,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                   backgroundClip: "text",
                   textFillColor: "transparent",
                   textAlign: "center",
-                  fontSize: "2.8rem",
+                  fontSize: `clamp(1rem, calc(1rem + 2vw), 9rem)`,
                   fontWeight: 500,
                   mb: 4,
                 }}
@@ -497,9 +497,9 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                     }}
                   >
                     <Typography
-                      variant="h6"
                       sx={{
-                        fontSize: isTablet ? "1.1rem" : "1.7rem",
+                        fontSize: `clamp(1rem, calc(0.6rem + 1vw), 9rem)`,
+                        fontWeight: 100,
                         position: "relative",
                         ml: isTablet ? -5 : "1%",
                       }}
@@ -540,7 +540,10 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                           <ListItemText
                             primary={detail}
                             primaryTypographyProps={{
-                              sx: { fontSize: isTablet ? "0.8rem" : "0.9rem" },
+                              sx: {
+                                fontSize: `clamp(0.8rem, calc(0.5rem + 0.8vw), 9rem)`,
+                                fontWeight: 100,
+                              },
                             }}
                           />
                         </ListItem>
@@ -595,12 +598,11 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
           }}
         >
           <Typography
-            variant="h3"
             sx={{
               textAlign: "center",
               m: 3,
               mb: 1,
-              fontSize: "2rem",
+              fontSize: `clamp(1.5rem, calc(1rem + 2vw), 9rem)`,
               background: "linear-gradient(90deg,#2579e3, #8e54f7)",
               WebkitBackgroundClip: "text",
               color: "transparent",
@@ -616,11 +618,11 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
             }}
           >
             <Typography
-              variant="h6"
               sx={{
                 textAlign: expanded ? "left" : "center",
-                fontSize: "1.2rem",
+                fontSize: `clamp(1rem, calc(0.7rem + 1vw), 9rem)`,
                 width: "100%",
+                fontWeight: 100,
               }}
             >
               {services[0].title}
@@ -642,7 +644,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                       primary={detail}
                       primaryTypographyProps={{
                         sx: {
-                          fontSize: "0.95rem",
+                          fontSize: `clamp(0.8rem, calc(0.5rem + 0.8vw), 9rem)`,
                           ml: -1,
                           color: "rgba(255, 255, 255, 0.85)",
                         },
@@ -653,7 +655,13 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
               </List>
               {services.slice(1).map((service, index) => (
                 <Box key={index} sx={{ mt: 2, width: "100%" }}>
-                  <Typography variant="h6" sx={{ textAlign: "left" }}>
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                      fontSize: `clamp(1rem, calc(0.7rem + 1vw), 9rem)`,
+                      fontWeight: 100,
+                    }}
+                  >
                     {service.title}
                   </Typography>
                   <List>
@@ -672,7 +680,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                           primary={detail}
                           primaryTypographyProps={{
                             sx: {
-                              fontSize: "0.95rem",
+                              fontSize: `clamp(0.8rem, calc(0.5rem + 0.8vw), 9rem)`,
                               ml: -1,
                               color: "rgba(255, 255, 255, 0.85)",
                             },
