@@ -497,7 +497,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           className="side-cards-container"
           sx={{
             width: "20%",
-            height: "40%",
+            height: "50%",
             opacity: 0,
           }}
         >
@@ -513,7 +513,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           className="main-card"
           sx={{
             width: "80%",
-            height: "40%",
+            height: "50%",
             transition: "width 0.4s ease",
           }}
         >
@@ -530,7 +530,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           className="side-cards-container"
           sx={{
             width: "20%",
-            height: "40%",
+            height: "50%",
             opacity: 0,
           }}
         >

@@ -214,7 +214,7 @@ const Footer = () => {
           left: 0,
           right: 0,
           height: "12%",
-          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 1) 0%, rgba(0, 0, 0, 0) 0%)`,
+          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 0.57) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: -1,
           "@media (max-width: 899px)": {
             display: "none",

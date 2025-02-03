@@ -389,8 +389,8 @@
   
   .gradientCardBox .box:hover:before,
   .gradientCardBox .box:hover:after {
-    left: 25px;
-    width: calc(100% - 80px);
+    left: "0%";
+    width: "100%";
   }
   
   .gradientCardBox .box .content {
@@ -442,8 +442,8 @@
 
   .gradientCardBox .box:hover:before,
   .gradientCardBox .box:hover:after {
-    left: 30px;
-    width: calc(100% - 100px);
+    left: "0%";
+    width: "80%";
   }
 
   .gradientCardBox .box .content {

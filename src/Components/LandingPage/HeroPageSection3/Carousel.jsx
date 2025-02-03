@@ -207,15 +207,22 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const handleWheelEvent = (e) => {
     if (isMobile || isTablet) return;
 
+    const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+
     if (!isOverCard) {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      if (isHorizontalScroll) {
         e.preventDefault();
       }
       return;
     }
 
+    if (isHorizontalScroll) {
     e.stopPropagation();
     e.preventDefault();
+  } else {
+    // Allow vertical scroll to bubble up
+    return;
+  }
 
     if (!containerRef.current || isScrolling) return;
 
