@@ -214,7 +214,7 @@ const ContactForm = () => {
           <Typography
             sx={{
               fontSize: {
-                xs: `clamp(1.75rem, calc(1.45rem + 2vw), 9rem)`,
+                xs: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
                 md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
                 lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
                 xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
@@ -276,7 +276,6 @@ const ContactForm = () => {
                 mb={1}
                 sx={{
                   fontSize: {
-                    xs: `clamp(1rem, calc(1rem + 1.5vw), 6rem)`,
                     md: `clamp(1rem, calc(1rem + 1.5vw), 6rem)`,
                     lg: `clamp(1rem, calc(1rem + 1.68vw), 6rem)`,
                     xl: `clamp(1rem, calc(1rem + 1.80vw), 6rem)`,

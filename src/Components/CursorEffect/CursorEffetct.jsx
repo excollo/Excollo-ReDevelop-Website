@@ -57,7 +57,7 @@ const CursorInner = styled(Box)({
   zIndex: 9999,
   borderRadius: "50%",
   position: "absolute",
-  backgroundColor: "rgba(255,255,225,1)",
+  backgroundColor: "#FFFFFF",
   transform: "translate(-50%, -50%)",
   transition: "width 0.2s ease, height 0.2s ease",
 });
@@ -73,8 +73,8 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
   const requestRef = useRef();
   const [isIdle, setIsIdle] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
-  const [isElementHovered, setIsElementHovered] = useState(false);
   const idleTimerRef = useRef(null);
+
   const resetIdleTimer = () => {
     if (idleTimerRef.current) {
       clearTimeout(idleTimerRef.current);
@@ -86,34 +86,8 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
       }
     }, idleTimeout);
   };
+
   useEffect(() => {
-    const addHoverListeners = (element) => {
-      element.addEventListener("mouseenter", () => setIsElementHovered(true));
-      element.addEventListener("mouseleave", () => setIsElementHovered(false));
-    };
-    const removeHoverListeners = (element) => {
-      element.removeEventListener("mouseenter", () =>
-        setIsElementHovered(true)
-      );
-      element.removeEventListener("mouseleave", () =>
-        setIsElementHovered(false)
-      );
-    };
-    const addListenersToElements = () => {
-      // Select elements with gradients or text
-      const gradientElements = document.querySelectorAll(
-        'h1, h2, h3, h4, h5, h6, p, span, .gradient, [class*="gradient"]'
-      );
-      gradientElements.forEach(addHoverListeners);
-      // Add listeners to carousel cards
-      const carouselCards = document.querySelectorAll(".carousel-card");
-      carouselCards.forEach(addHoverListeners);
-      return () => {
-        gradientElements.forEach(removeHoverListeners);
-        carouselCards.forEach(removeHoverListeners);
-      };
-    };
-    const cleanupListeners = addListenersToElements();
     const moveCursor = (e) => {
       mouse.current = { x: e.clientX, y: e.clientY };
       velocity.current = {
@@ -122,6 +96,7 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
       };
       lastMousePosition.current = { x: mouse.current.x, y: mouse.current.y };
       resetIdleTimer();
+
       // Check if hovering over button or link
       const target = e.target;
       const isClickable =
@@ -132,15 +107,19 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
         getComputedStyle(target).cursor === "pointer";
       setIsPointer(isClickable);
     };
+
     const handleActivity = () => {
       resetIdleTimer();
     };
+
     window.addEventListener("mousemove", moveCursor);
     window.addEventListener("click", handleActivity);
     window.addEventListener("keypress", handleActivity);
     window.addEventListener("scroll", handleActivity);
+
     // Initial idle timer
     resetIdleTimer();
+
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("click", handleActivity);
@@ -149,9 +128,9 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
       if (idleTimerRef.current) {
         clearTimeout(idleTimerRef.current);
       }
-      cleanupListeners();
     };
   }, [idleTimeout, isHovered]);
+
   const animate = () => {
     if (cursorOuterRef.current && cursorInnerRef.current) {
       cursorOuter.current.x += (mouse.current.x - cursorOuter.current.x) * 0.15;
@@ -191,6 +170,7 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
           display: isPointer ? "none" : isIdle ? "block" : "none",
         }}
       >
+        {/* Inner cursor is now a child of outer cursor to contain the animation */}
         <CursorInner
           ref={cursorInnerRef}
           sx={{
@@ -201,6 +181,9 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
             background: isHovered ? "white" : "black",
             transform: `scale(${isHovered ? 1.2 : 1})`,
             zIndex: 9999,
+            // boxShadow: isHovered
+            //   ? "0 0 10px rgba(255, 255, 255, 0.8)"
+            //   : "0 0 10px rgba(255, 255, 255, 0.5)",
             position: isIdle ? "absolute" : "fixed",
             animation: isIdle
               ? `${moveUpDown} 1.7s ease-in-out infinite`
@@ -213,19 +196,19 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
         ref={cursorInnerRef}
         sx={{
           display: isIdle || isPointer ? "none" : "block",
-          width:
-            isHovered || isElementHovered ? "50px" : isIdle ? "10px" : "15px",
-          height:
-            isHovered || isElementHovered ? "50px" : isIdle ? "10px" : "15px",
-          opacity: isHovered || isElementHovered ? 1 : 0.95,
+          width: isHovered ? "50px" : isIdle ? "10px" : "15px",
+          height: isHovered ? "50px" : isIdle ? "10px" : "15px",
+          opacity: isHovered ? 1 : 0.95,
           zIndex: 9999,
           background:
-            isHovered || isPointer || isElementHovered
+            isHovered || isPointer
               ? "white"
               : "linear-gradient(90deg, rgb(169, 63, 255) 0%, rgb(94, 129, 235) 100%)",
-          transform: `scale(${
-            isHovered || isPointer || isElementHovered ? 1.2 : 1
-          })`,
+          transform: `scale(${isHovered || isPointer ? 1.2 : 1})`,
+          // boxShadow:
+          //   isHovered || isPointer
+          //     ? "0 0 10px rgba(255, 255, 255, 0.8)"
+          //     : "0 0 10px rgba(255, 255, 255, 0.5)",
           "&.pointer": {
             width: 40,
             height: 40,

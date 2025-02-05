@@ -11,11 +11,12 @@ import {
   Paper,
 } from "@mui/material";
 import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png";
+
 const TermsOfService = () => {
   return (
-    <Box sx={{ backgroundColor: "#000", minHeight: "100vh" }}>
+    <Box sx={{ backgroundColor: "#000", color: "white", minHeight: "100vh" }}>
       {/* Header */}
-      <Box sx={{ backgroundColor: "#000", padding: "20px 0" }}>
+      <Box sx={{ backgroundColor: "#000", color: "white", padding: "20px 0" }}>
         <Toolbar>
           <Box
             display="flex"
@@ -30,6 +31,8 @@ const TermsOfService = () => {
           </Box>
         </Toolbar>
       </Box>
+
+      {/* Title Section */}
       <Box
         sx={{
           background: "#000",
@@ -42,120 +45,147 @@ const TermsOfService = () => {
           <Typography variant="h3" fontWeight="bold">
             Terms of Service
           </Typography>
-          <Typography variant="body1" sx={{ marginTop: 2 }}>
-            Last Updated: January 10, 2025
-          </Typography>
         </Container>
       </Box>
-      <Box sx={{ background: "#000"}}>
+
+      {/* Main Content */}
+      <Box sx={{ backgroundColor: "#000" }}>
         <Container sx={{ marginTop: 4 }}>
           <Paper
             sx={{
               padding: 3,
               borderRadius: 2,
               boxShadow: 3,
-              backgroundColor: "white",
+              backgroundColor: "#000",
             }}
           >
             {/* Introduction */}
             <Typography
               variant="h5"
               fontWeight="bold"
-              color="#1E293B"
+              color="#fff"
               sx={{ marginBottom: 2 }}
             >
               Introduction
             </Typography>
-            <Typography
-              variant="body1"
-              color="textSecondary"
-              sx={{ marginBottom: 3 }}
-            >
-              Welcome to Exccollo! By using our services, you agree to the
-              following terms and conditions. Please read them carefully.
+            <Typography variant="body1" color="#fff" sx={{ marginBottom: 3 }}>
+              Welcome to the Excollo website. By accessing or using our site,
+              you agree to these Terms of Service. If you do not agree, please
+              refrain from using the website.
             </Typography>
-            {/* Usage Terms */}
+
+            {/* Website Use */}
             <Typography
               variant="h5"
               fontWeight="bold"
-              color="#1E293B"
+              color="#fff"
               sx={{ marginBottom: 2 }}
             >
-              Usage Terms
+              Website Use
             </Typography>
-            <Typography
-              variant="body1"
-              color="textSecondary"
-              sx={{ marginBottom: 2 }}
-            >
-              By accessing our platform, you agree to:
+            <Typography variant="body1" color="#fff" sx={{ marginBottom: 2 }}>
+              Purpose: This website is for informational purposes only,
+              showcasing Excollo's services and allowing prospective clients to
+              connect with us.
             </Typography>
-            <List sx={{ paddingLeft: 2 }}>
+            <Typography variant="body1" color="#fff" sx={{ marginBottom: 2 }}>
+              Prohibited Activities: You agree not to:
+            </Typography>
+            <List sx={{ color: "white", paddingLeft: 2 }}>
               <ListItem>
-                <ListItemText primary="Comply with all applicable laws and regulations." />
+                <ListItemText primary="Use the website for any unlawful purpose." />
               </ListItem>
               <ListItem>
-                <ListItemText primary="Use our services only for lawful purposes." />
+                <ListItemText primary="Attempt to access restricted areas or disrupt website functionality." />
               </ListItem>
               <ListItem>
-                <ListItemText primary="Refrain from violating the rights of others." />
+                <ListItemText primary="Submit false or misleading information through our contact form." />
               </ListItem>
             </List>
-            {/* Limitation of Liability */}
-            <Typography
-              variant="h5"
-              fontWeight="bold"
-              color="#1E293B"
-              sx={{ marginBottom: 2 }}
-            >
-              Limitation of Liability
-            </Typography>
-            <Typography
-              variant="body1"
-              color="textSecondary"
-              sx={{ marginBottom: 3 }}
-            >
-              Exccollo is not liable for any damages arising from your use of
-              our services. This includes, but is not limited to, direct,
-              indirect, or consequential damages.
-            </Typography>
+
             {/* Intellectual Property */}
             <Typography
               variant="h5"
               fontWeight="bold"
-              color="#1E293B"
+              color="#fff"
               sx={{ marginBottom: 2 }}
             >
               Intellectual Property
             </Typography>
-            <Typography
-              variant="body1"
-              color="textSecondary"
-              sx={{ marginBottom: 3 }}
-            >
-              All content, trademarks, and data on this platform are the
-              property of Exccollo. Unauthorized use is strictly prohibited.
-            </Typography>
-            {/* Contact Us */}
+            <List sx={{ color: "white", paddingLeft: 2 }}>
+              <ListItem>
+                <ListItemText primary="All content on this website, including text, images, logos, and graphics, is the property of Excollo and is protected by intellectual property laws." />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="You may not reproduce, distribute, or modify website content without prior written consent from Excollo." />
+              </ListItem>
+            </List>
+
+            {/* Disclaimer */}
             <Typography
               variant="h5"
               fontWeight="bold"
-              color="#1E293B"
+              color="#fff"
               sx={{ marginBottom: 2 }}
             >
-              Contact Us
+              Disclaimer
             </Typography>
-            <Typography variant="body1" color="textSecondary">
-              If you have any questions about these terms, please reach out to
-              us at{" "}
-              <Link href="mailto:info@exccollo.com" color="primary">
-                info@exccollo.com
-              </Link>
-              .
+            <List sx={{ color: "white", paddingLeft: 2 }}>
+              <ListItem>
+                <ListItemText primary="No Guarantees: While we strive to keep our website content accurate and up-to-date, we make no guarantees regarding its completeness or accuracy." />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="Third-Party Links: Our website may contain links to external sites. Excollo is not responsible for the content or functionality of third-party websites." />
+              </ListItem>
+            </List>
+
+            {/* Limitation of Liability */}
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              color="#fff"
+              sx={{ marginBottom: 2 }}
+            >
+              Limitation of Liability
+            </Typography>
+            <Typography variant="body1" color="#fff" sx={{ marginBottom: 3 }}>
+              To the maximum extent permitted by law, Excollo will not be liable
+              for any indirect or consequential damages resulting from the use
+              or inability to use our website.
+            </Typography>
+
+            {/* Changes to These Terms */}
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              color="#fff"
+              sx={{ marginBottom: 2 }}
+            >
+              Changes to These Terms
+            </Typography>
+            <Typography variant="body1" color="#fff" sx={{ marginBottom: 3 }}>
+              Excollo reserves the right to modify these Terms of Service at any
+              time. Updated terms will be posted on this page.
+            </Typography>
+
+            {/* Governing Law */}
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              color="#fff"
+              sx={{ marginBottom: 2 }}
+            >
+              Governing Law
+            </Typography>
+            <Typography variant="body1" color="#fff">
+              These terms are governed by the laws of India. Any disputes will
+              be subject to the exclusive jurisdiction of the courts in [City,
+              State].
             </Typography>
           </Paper>
         </Container>
       </Box>
+
       {/* Footer */}
       <Box
         sx={{
@@ -163,6 +193,7 @@ const TermsOfService = () => {
           color: "white",
           textAlign: "center",
           padding: "20px 0",
+          marginTop: 4,
         }}
       >
         <Container>
@@ -174,4 +205,5 @@ const TermsOfService = () => {
     </Box>
   );
 };
+
 export default TermsOfService;

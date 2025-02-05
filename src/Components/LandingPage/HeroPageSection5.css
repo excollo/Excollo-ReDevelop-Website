@@ -389,8 +389,8 @@
   
   .gradientCardBox .box:hover:before,
   .gradientCardBox .box:hover:after {
-    left: "0%";
-    width: "100%";
+    left: 25px;
+    width: calc(100% - 80px);
   }
   
   .gradientCardBox .box .content {
@@ -430,7 +430,8 @@
 
   .gradientCardBox .box {
     width: 22%;
-    height: 400px;
+    height: 440px;
+    /* padding-left: 15px; */
     margin: 120px 40px;
   }
 
@@ -442,8 +443,8 @@
 
   .gradientCardBox .box:hover:before,
   .gradientCardBox .box:hover:after {
-    left: "0%";
-    width: "80%";
+    left: 20px;
+    width: calc(100% - 100px);
   }
 
   .gradientCardBox .box .content {
@@ -478,13 +479,15 @@
 @media (min-width: 2000px) {
   .gradientCardBox {
     max-width: 2800px;
-    padding: 80px 60px;
+    padding: 80px 80px;
     gap: 60px;
+    margin-top: 7%;
   }
 
   .gradientCardBox .box {
     width: 23%;
-    height: 500px;
+    height: 550px;
+ 
     margin: 140px 50px;
   }
 
@@ -496,7 +499,7 @@
 
   .gradientCardBox .box:hover:before,
   .gradientCardBox .box:hover:after {
-    left: 40px;
+    left: 25px;
     width: calc(100% - 120px);
   }
 
@@ -534,9 +537,11 @@
     font-size:clamp(0.25rem,calc(1rem + 1vw),3rem);
     margin-bottom: 1rem;
   }
+  
   .gradientCardBox .box .content p {
     font-size: clamp(0.25rem, calc(0.5rem + 0.8vw), 3rem);
     font-weight: 100;
+   
     line-height: 1.7;
     margin-bottom: 20px;
   }  

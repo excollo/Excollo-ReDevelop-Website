@@ -157,7 +157,7 @@ const AnimatedCTA = () => {
           xl: "1vw 1.8vw",
         },
         borderRadius: "980px",
-        fontSize: `clamp(1rem, calc(0.5rem + 1vw), 4rem)`,
+        fontSize: `clamp(0.2rem, calc(0.5rem + 0.7vw), 3.5rem)`,
         minWidth: "200px",
         duration: 0.36,
         "&:hover": {

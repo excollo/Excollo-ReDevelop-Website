@@ -8,13 +8,16 @@ import {
   AppBar,
   Toolbar,
 } from "@mui/material";
-import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png"
+import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png";
 const PrivacyPolicy = () => {
   return (
     <>
       <CssBaseline />
       {/* Header */}
-      <AppBar position="static" sx={{ backgroundColor: "#000" }}>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: "#000", color: "white" }}
+      >
         <Toolbar>
           <Box
             display="flex"
@@ -33,6 +36,7 @@ const PrivacyPolicy = () => {
       <Box
         sx={{
           backgroundColor: "#000",
+          color: "#fff",
           textAlign: "center",
           padding: "60px 20px",
           marginBottom: "40px",
@@ -52,15 +56,16 @@ const PrivacyPolicy = () => {
         >
           Privacy Policy
         </Typography>
-        <Typography variant="subtitle1" sx={{ color: "#fff" }}>
+        {/* <Typography variant="subtitle1" sx={{ color: "#fff" }}>
           Effective Date: January 10, 2025
-        </Typography>
+        </Typography> */}
       </Box>
       {/* Content Section */}
       <Container maxWidth="md">
         <Box
           sx={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#000",
+            color: "#fff",
             padding: "40px 20px",
             borderRadius: "10px",
             marginBottom: "40px",
@@ -74,18 +79,18 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: "1.75rem",
               fontWeight: "bold",
-              color: "#0D1117",
+
+              color: "#fff",
               mb: 2,
             }}
           >
             Introduction
           </Typography>
-          <Typography sx={{ fontSize: "1rem", color: "#555", mb: 3 }}>
-            At Excollo, we are committed to protecting your privacy and ensuring
-            the security of your personal information. This Privacy Policy
-            outlines the types of information we collect, how we use it, and the
-            measures we take to safeguard your data. By using our services, you
-            agree to the terms outlined in this policy.
+          <Typography sx={{ fontSize: "1rem", color: "#fff", mb: 3 }}>
+            At Excollo, we value your privacy and are committed to protecting
+            your personal information. This Privacy Policy outlines how we
+            collect, use, and safeguard your information when you visit our
+            website or interact with us.
           </Typography>
 
           {/* Information We Collect */}
@@ -95,36 +100,37 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: "1.75rem",
               fontWeight: "bold",
-              color: "#0D1117",
+              color: "#fff",
               mb: 2,
             }}
           >
             Information We Collect
           </Typography>
-          <Typography sx={{ fontSize: "1rem", color: "#555", mb: 2 }}>
+          {/* <Typography sx={{ fontSize: "1rem", color: "#fff", mb: 2 }}>
             We collect various types of information to provide and improve our
             services:
-          </Typography>
+          </Typography> */}
           <ul>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Personal Information:</strong> Name, email address,
-                phone number, billing address, and other details you provide
-                when registering or making a purchase.
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                <strong>Personal Information:</strong> When you use our contact
+                form, we collect your name, email address, phone number, and any
+                additional information you provide in your message.
               </Typography>
             </li>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Usage Data:</strong> Information about how you interact
-                with our website, including IP address, browser type, pages
-                visited, and time spent on the site.
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                <strong>Non-Personal Information:</strong> We may collect
+                technical data such as your IP address, browser type, and the
+                pages you visit on our site, which helps us understand website
+                usage and improve functionality.
               </Typography>
             </li>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Cookies and Tracking Technologies:</strong> We use
-                cookies and similar technologies to enhance your experience,
-                analyze trends, and administer the website.
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                <strong>Cookies :</strong> We use cookies to enhance your
+                browsing experience, track website performance, and analyze
+                trends.
               </Typography>
             </li>
           </ul>
@@ -136,45 +142,45 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: "1.75rem",
               fontWeight: "bold",
-              color: "#0D1117",
+              color: "#fff",
               mb: 2,
             }}
           >
             How We Use Your Information
           </Typography>
-          <Typography sx={{ fontSize: "1rem", color: "#555", mb: 2 }}>
+          <Typography sx={{ fontSize: "1rem", color: "#fff", mb: 2 }}>
             We use the information we collect for the following purposes:
           </Typography>
           <ul>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                To provide, maintain, and improve our services.
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                To respond to inquiries and communicate with you regarding our
+                services.
               </Typography>
             </li>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                To process transactions and send you related information,
-                including confirmations and invoices.
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                To analyze website usage and improve the user experience.
               </Typography>
             </li>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                To communicate with you about updates, promotions, and customer
-                support.
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                To send you updates about our services or promotional materials
+                (only if you opt in).
               </Typography>
             </li>
-            <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
+            {/* <li>
+              <Typography sx={{ color: "#fff", mb: 1 }}>
                 To monitor and analyze usage patterns to enhance your
                 experience.
               </Typography>
             </li>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
+              <Typography sx={{ color: "#fff", mb: 1 }}>
                 To comply with legal obligations and protect the rights and
                 safety of our users.
               </Typography>
-            </li>
+            </li> */}
           </ul>
 
           {/* Sharing Your Information */}
@@ -184,38 +190,73 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: "1.75rem",
               fontWeight: "bold",
-              color: "#0D1117",
+              color: "#fff",
               mb: 2,
             }}
           >
             Sharing Your Information
           </Typography>
-          <Typography sx={{ fontSize: "1rem", color: "#555", mb: 2 }}>
-            We do not sell or rent your personal information to third parties.
-            However, we may share your data in the following circumstances:
+          <Typography sx={{ fontSize: "1rem", color: "#fff", mb: 2 }}>
+            We do not sell or rent your personal information. However, we may
+            share your data with:
           </Typography>
           <ul>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Service Providers:</strong> We may share information
-                with trusted third-party vendors who assist us in operating our
-                website, conducting business, or providing services to you.
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                Trusted third-party service providers assisting with website
+                analytics or communication.
               </Typography>
             </li>
             <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Legal Requirements:</strong> We may disclose your
-                information if required by law or in response to valid requests
-                by public authorities.
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                Authorities, if required by law or to protect our rights.
               </Typography>
             </li>
-            <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
+            {/* <li>
+              <Typography sx={{ color: "#fff", mb: 1 }}>
                 <strong>Business Transfers:</strong> In the event of a merger,
                 acquisition, or sale of assets, your information may be
                 transferred as part of the transaction.
               </Typography>
+            </li> */}
+          </ul>
+          {/* your rights */}
+          <Typography
+            variant="h4"
+            component="h2"
+            sx={{
+              fontSize: "1.75rem",
+              fontWeight: "bold",
+              color: "#fff",
+              mb: 2,
+            }}
+          >
+            Your Rights
+          </Typography>
+          <Typography sx={{ fontSize: "1rem", color: "#fff", mb: 2 }}>
+            <strong>Access and Correction: </strong>You can request access to
+            your personal data and update inaccuracies.
+          </Typography>
+          <ul>
+            <li>
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                <strong>Deletion: </strong>You can request the deletion of your
+                personal data, subject to applicable legal obligations.
+              </Typography>
             </li>
+            <li>
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                <strong>Opt-Out : </strong> You can unsubscribe from promotional
+                communications at any time.
+              </Typography>
+            </li>
+            {/* <li>
+              <Typography sx={{ color: "#fff", mb: 1 }}>
+                <strong>Business Transfers:</strong> In the event of a merger,
+                acquisition, or sale of assets, your information may be
+                transferred as part of the transaction.
+              </Typography>
+            </li> */}
           </ul>
 
           {/* Data Security */}
@@ -225,65 +266,33 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: "1.75rem",
               fontWeight: "bold",
-              color: "#0D1117",
+              color: "#fff",
               mb: 2,
             }}
           >
             Data Security
           </Typography>
-          <Typography sx={{ fontSize: "1rem", color: "#555", mb: 3 }}>
-            We implement industry-standard security measures to protect your
-            personal information from unauthorized access, alteration,
-            disclosure, or destruction. However, no method of transmission over
-            the internet or electronic storage is 100% secure, and we cannot
+          <Typography sx={{ fontSize: "1rem", color: "#fff", mb: 3 }}>
+            We implement reasonable security measures to protect your
+            information. However, no system is entirely secure, and we cannot
             guarantee absolute security.
           </Typography>
-
-          {/* Your Rights */}
+          {/* third party links */}
           <Typography
             variant="h4"
             component="h2"
             sx={{
               fontSize: "1.75rem",
               fontWeight: "bold",
-              color: "#0D1117",
+              color: "#fff",
               mb: 2,
             }}
           >
-            Your Rights
+            Third-Party Links
           </Typography>
-          <Typography sx={{ fontSize: "1rem", color: "#555", mb: 2 }}>
-            You have the following rights regarding your personal information:
-          </Typography>
-          <ul>
-            <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Access:</strong> Request a copy of the personal data we
-                hold about you.
-              </Typography>
-            </li>
-            <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Correction:</strong> Update or correct inaccurate or
-                incomplete information.
-              </Typography>
-            </li>
-            <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Deletion:</strong> Request the deletion of your personal
-                data under certain conditions.
-              </Typography>
-            </li>
-            <li>
-              <Typography sx={{ color: "#333", mb: 1 }}>
-                <strong>Opt-Out:</strong> Opt-out of receiving promotional
-                communications from us.
-              </Typography>
-            </li>
-          </ul>
-          <Typography sx={{ fontSize: "1rem", color: "#555", mb: 3 }}>
-            To exercise these rights, please contact us at the email address
-            provided below.
+          <Typography sx={{ fontSize: "1rem", color: "#fff", mb: 3 }}>
+            Our website may include links to third-party websites. Excollo is
+            not responsible for the privacy practices or content of these sites.
           </Typography>
 
           {/* Changes to This Policy */}
@@ -293,18 +302,15 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: "1.75rem",
               fontWeight: "bold",
-              color: "#0D1117",
+              color: "#fff",
               mb: 2,
             }}
           >
-            Changes to This Policy
+            Policy Updates
           </Typography>
-          <Typography sx={{ fontSize: "1rem", color: "#555", mb: 3 }}>
-            We may update this Privacy Policy from time to time. Any changes
-            will be posted on this page, and the revised policy will be
-            effective immediately upon posting. We encourage you to review this
-            policy periodically to stay informed about how we are protecting
-            your information.
+          <Typography sx={{ fontSize: "1rem", color: "#fff", mb: 3 }}>
+            We may update this Privacy Policy from time to time. Changes will be
+            posted on this page with an updated "last revised" date.
           </Typography>
 
           {/* Contact Us */}
@@ -314,25 +320,37 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: "1.75rem",
               fontWeight: "bold",
-              color: "#0D1117",
+              color: "#fff",
               mb: 2,
             }}
           >
             Contact Us
           </Typography>
-          <Typography sx={{ fontSize: "1rem", color: "#555" }}>
-            If you have any questions or concerns about this Privacy Policy or
-            our data practices, please contact us at{" "}
-            <Link
-              href="mailto:info@excollo.com"
-              sx={{
-                color: "#0D6EFD",
-                textDecoration: "none",
-                "&:hover": { textDecoration: "underline" },
-              }}
-            >
-              info@excollo.com
-            </Link>
+          <Typography sx={{ fontSize: "1rem", color: "#fff" }}>
+            If you have questions or concerns about this Privacy Policy, please
+            contact us at:
+            <ul>
+              <li>
+                <Typography sx={{ fontSize: "1rem", color: "#fff" }}>
+                  <strong>Email :</strong>
+                  <Link
+                    href="mailto:info@excollo.com"
+                    sx={{
+                      color: "#0D6EFD",
+                      textDecoration: "none",
+                      "&:hover": { textDecoration: "underline" },
+                    }}
+                  >
+                    info@excollo.com
+                  </Link>
+                </Typography>
+              </li>
+              <li>
+                <Typography sx={{ fontSize: "1rem", color: "#fff" }}>
+                  <strong>Phone :</strong>+91-8890204938
+                </Typography>
+              </li>
+            </ul>
             .
           </Typography>
         </Box>
