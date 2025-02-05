@@ -378,10 +378,21 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
         height: "1px",
         width: "125%",
         ml: "-13%",
-        background: "linear-gradient(90deg, #2579e3 0%, #8e54f7 100%)",
+        background: "linear-gradient(90deg, #2579E3 0%, #8E54F7 100%)",
         mb: 2,
         mt: 3,
         opacity: 1,
+        cursor: "pointer !important",
+        position: "relative",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: "-25px", // Increase clickable area above
+          bottom: "-25px", // Increase clickable area below
+          left: 0,
+          right: 0,
+          cursor: "pointer !important",
+        },
       }}
     />
   );
