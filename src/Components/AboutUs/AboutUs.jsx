@@ -482,6 +482,28 @@ const AboutUs = () => {
             >
               <Box
                 sx={{
+                  width: { xs: "100%", md: "50%", lg: "40%" },
+                  height: "60vh",
+                  display: { xs: "block", md: "none", lg: "none", xl: "none" },
+                  // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
+                  top: 0,
+                  left: 200,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <ThreeDE />
+                </Box>
+              </Box>
+              <Box
+                sx={{
                   display: "flex",
                   flexDirection: { xs: "column", md: "row" },
                   alignItems: { xs: "center", md: "flex-start" },
@@ -574,9 +596,11 @@ const AboutUs = () => {
 
       <Box
         sx={{
+          position: "relative",
+          top: isMobile || isSpecificSize ? 450 : 0,
           width: "100%",
           margin: "auto",
-          marginTop: isMobile || isSpecificSize ? "0" : "-8%",
+          marginTop: isMobile || isSpecificSize ? 0 : "-8%",
           display: isMobile || isSpecificSize ? "block" : "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -587,11 +611,17 @@ const AboutUs = () => {
         <MissionSection />
         <PhilosophySection />
       </Box>
-
-      <HowWeWork />
-      <Excollo3D />
-
-      <Footer />
+      <Box
+        sx={{ position: "relative", top: isMobile || isSpecificSize ? 450 : 0 }}
+      >
+        <HowWeWork />
+        <Excollo3D />
+      </Box>
+      <Box
+        sx={{ position: "relative", top: isMobile || isSpecificSize ? 450 : 0 }}
+      >
+        <Footer />
+      </Box>
       <Fade in={showButton}>
         <Button
           onClick={handleScrollToTop}

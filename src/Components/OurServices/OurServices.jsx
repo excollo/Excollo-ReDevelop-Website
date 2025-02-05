@@ -119,6 +119,28 @@ const OurServices = () => {
             <Box sx={{ width: { md: "70%", lg: "70%", xl: "70%" } }}>
               <Box
                 sx={{
+                  width: { xs: "100%", md: "50%", lg: "40%" },
+                  height: "60vh",
+                  display: { xs: "block", md: "none", lg: "none", xl: "none" },
+                  // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
+                  top: 0,
+                  left: 200,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <ThreeDE />
+                </Box>
+              </Box>
+              <Box
+                sx={{
                   display: "flex",
                   flexDirection: { xs: "column", md: "row" },
                   alignItems: { xs: "center", md: "flex-start" },
@@ -210,8 +232,8 @@ const OurServices = () => {
       <Box
         sx={{
           position: "relative",
-          mt: isLandscapeMedium ? "-20px" : { xs: -50, md: -30 },
-          paddingTop: isLandscapeMedium ? "60px" : { xs: 0, md: 0 },
+          mt: { xs: -15, sm: -5, md: -30 },
+          paddingTop: isTablet || isLandscapeMedium ? "10px" : { xs: 0, md: 0 },
         }}
       >
         <AIAutomation sectionRef={sectionRef} />

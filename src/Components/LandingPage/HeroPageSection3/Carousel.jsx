@@ -38,7 +38,7 @@ const carouselContent = [
   {
     title: "Sales Channel Development",
     description:
-      "Scalable websites, web apps, and mobile apps tailored to meet your business’s unique challenges and goals.",
+      "Scalable websites and applications on both, web and mobile, tailored to meet your business’s unique challenges and goals.",
     link: "/services",
   },
   {
@@ -220,7 +220,6 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     e.stopPropagation();
     e.preventDefault();
   } else {
-    // Allow vertical scroll to bubble up
     return;
   }
 
@@ -412,7 +411,6 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
         : `perspective(1000px) scale(1.05) rotateX(${rotation.y}deg) rotateY(${
             rotation.x
           }deg) translateZ(${type === "title" ? "30px" : "10px"})`,
-
       "& .MuiTypography-h3": {
         fontSize: {
           xs: "2.5rem",

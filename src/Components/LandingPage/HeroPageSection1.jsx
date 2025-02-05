@@ -55,13 +55,6 @@ const HeroPageSection1 = ({ animationComplete }) => {
             sm: "100%",
             md: "85%",
           },
-          opacity: isTabletOrMobile ? 1 : animationComplete ? 1 : 0,
-          transform: isTabletOrMobile
-            ? "none"
-            : animationComplete
-            ? "none"
-            : "translateX(-100px)",
-          transition: "opacity 0.5s ease, transform 0.5s ease",
           padding: {
             xs: 2,
             sm: 0,

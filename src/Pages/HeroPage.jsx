@@ -67,7 +67,7 @@ const HeroPage = () => {
     };
   }, [hero1Complete, showThreeDE]);
   useEffect(() => {
-    const rotationDuration = 2;
+    const rotationDuration = 1;
     const timer = setTimeout(() => {
       setShowThreeDE(false);
     }, rotationDuration * 1000);
@@ -80,20 +80,20 @@ const HeroPage = () => {
         timeline.to(".threeDE", {
           x: "32%",
           y: "0%",
-          duration: 1,
+          duration: 0.7,
           ease: "power2.out",
         });
       } else {
         timeline.to(".threeDE", {
           x: "28%",
           y: "0%",
-          duration: 1,
+          duration: 0.7,
           ease: "power2.out",
         });
       }
       timeline.to(".gradient-background", {
         opacity: 1,
-        duration: 0.5,
+        duration: 0.1,
         ease: "power2.out",
       });
       timeline.add([
@@ -338,6 +338,28 @@ const HeroPage = () => {
         <NavBar />
       </Box>
       <Box
+        sx={{
+          width: { xs: "100%", md: "50%", lg: "40%" },
+          height: "60vh",
+          display: { xs: "block", md: "none", lg: "none", xl: "none" },
+          // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
+          top: 0,
+          left: 200,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <ThreeDE />
+        </Box>
+      </Box>
+      <Box
         className="hero-content"
         sx={{
           display: "flex",
@@ -349,7 +371,7 @@ const HeroPage = () => {
             isMobile || isTablet ? "translateX(0)" : "translateX(-100px)",
         }}
       >
-        <HeroPageSection1 animationComplete={animationComplete} />
+        <HeroPageSection1 />
       </Box>
       <Box
         className="hero-section-2"

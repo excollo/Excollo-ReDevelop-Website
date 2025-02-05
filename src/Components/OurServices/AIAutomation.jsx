@@ -189,7 +189,7 @@ const AIAutomation = forwardRef((props, ref) => {
       scrollTrigger: {
         trigger: ".services-container",
         start: "center center",
-        end: "+=100%",
+        end: "+=200%",
         scrub: 1,
         pin: true,
         anticipatePin: 1,
@@ -221,9 +221,9 @@ const AIAutomation = forwardRef((props, ref) => {
         duration: 5,
         scrollTrigger: {
           trigger: ".fade-in-heading",
-          start: "top 20%",
-          end: "top 15%",
-          scrub: 3,
+          start: "center 5%",
+          end: "center 0%",
+          scrub: 2,
         },
       })
       .to(".animate-content", {
@@ -233,9 +233,9 @@ const AIAutomation = forwardRef((props, ref) => {
         duration: 5,
         scrollTrigger: {
           trigger: ".animate-content",
-          start: "center 30%",
+          start: "center 10%",
           end: "center 10%",
-          scrub: 3,
+          scrub: 2,
         },
       })
       .to(".services-title", {
@@ -245,7 +245,7 @@ const AIAutomation = forwardRef((props, ref) => {
         delay: 0.3,
         scrollTrigger: {
           trigger: ".services-title",
-          start: "center 20%",
+          start: "center 10%",
           end: "center 10%",
           scrub: 1,
         },
@@ -399,17 +399,6 @@ const AIAutomation = forwardRef((props, ref) => {
         mb: 2,
         mt: 3,
         opacity: 1,
-        cursor: "pointer !important",
-        position: "relative",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: "-25px", // Increase clickable area above
-          bottom: "-25px", // Increase clickable area below
-          left: 0,
-          right: 0,
-          cursor: "pointer !important",
-        },
       }}
     />
   );
@@ -555,7 +544,7 @@ const AIAutomation = forwardRef((props, ref) => {
                         ref={(el) => (symbolRefs.current[index] = el)}
                         style={{ display: "inline-block" }}
                       >
-                        ✤
+                        ➢
                       </span>
                       {service.title}
                     </Typography>
@@ -911,7 +900,7 @@ const AIAutomation = forwardRef((props, ref) => {
                       ref={(el) => (symbolRefs.current[index] = el)}
                       style={{ display: "inline-block" }}
                     >
-                      ✤
+                      ➢
                     </span>
                     {service.title}
                   </Typography>

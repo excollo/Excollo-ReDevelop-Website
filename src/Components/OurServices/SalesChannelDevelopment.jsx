@@ -186,7 +186,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
         scrollTrigger: {
           trigger: ".services-container-2",
           start: "center center",
-          end: "+=100%",
+          end: "+=200%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -216,9 +216,9 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
           opacity: 1,
           scrollTrigger: {
             trigger: ".fade-in-heading-2",
-            start: "top 20%",
-            end: "top 15%",
-            scrub: 3,
+            start: "center 40%",
+            end: "center 30%",
+            scrub: 2,
           },
         })
         .to(".animate-content-2", {
@@ -228,9 +228,9 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
           duration: 5,
           scrollTrigger: {
             trigger: ".animate-content-2",
-            start: "center 30%",
-            end: "center 10%",
-            scrub: 3,
+            start: "center 5%",
+            end: "center 0%",
+            scrub: 2,
           },
         })
         .to(".services-title-2", {
@@ -373,28 +373,17 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
   ];
 
   const GradientDivider = () => (
-    <Box
-      sx={{
-        height: "1px",
-        width: "125%",
-        ml: "-13%",
-        background: "linear-gradient(90deg, #2579E3 0%, #8E54F7 100%)",
-        mb: 2,
-        mt: 3,
-        opacity: 1,
-        cursor: "pointer !important",
-        position: "relative",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: "-25px", // Increase clickable area above
-          bottom: "-25px", // Increase clickable area below
-          left: 0,
-          right: 0,
-          cursor: "pointer !important",
-        },
-      }}
-    />
+      <Box
+        sx={{
+          height: "1px",
+          width: "125%",
+          ml: "-13%",
+          background: "linear-gradient(90deg, #2579E3 0%, #8E54F7 100%)",
+          mb: 2,
+          mt: 3,
+          opacity: 1,
+        }}
+      />
   );
 
   const containerStyles = {
@@ -537,7 +526,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
                         ref={(el) => (symbolRefs.current[index] = el)}
                         style={{ display: "inline-block" }}
                       >
-                        ✤
+                        ➢
                       </span>
                       {service.title}
                     </Typography>
@@ -900,7 +889,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
                       ref={(el) => (symbolRefs.current[index] = el)}
                       style={{ display: "inline-block" }}
                     >
-                      ✤
+                      ➢
                     </span>
                     {service.title}
                   </Typography>

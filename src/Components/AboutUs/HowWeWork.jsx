@@ -69,7 +69,7 @@ const TableContent = styled("div")(({ theme }) => ({
     visibility: "hidden",
     marginBottom: 0,
     borderRadius: 0,
-    padding: "30px",
+    padding: "1vw 1vw",
     background: "transparent",
     margin: 0,
     borderLeft: "none",
@@ -157,7 +157,7 @@ const TableContent = styled("div")(({ theme }) => ({
       fontSize: "clamp(0.5rem, calc(0.5rem + 0.9vw), 1.5rem)",
     },
     [theme.breakpoints.up("xl")]: {
-      fontSize: "clamp(0.5rem, calc(0.6rem + 1.1vw), 2.1rem)",
+      fontSize: "clamp(0.5rem, calc(0.5rem + 1vw), 2.1rem)",
     },
   },
 }));
@@ -217,7 +217,7 @@ const HowWeWork = () => {
         fontFamily: '"Inter", sans-serif',
         letterSpacing: "-0.00833em",
         mt: { xs: 0, md: "10%" },
-        mb: { xs: "2rem", md: "6rem" },
+        mb: { xs: "2rem", md: "0rem" },
       }}
     >
       <WorkTable>

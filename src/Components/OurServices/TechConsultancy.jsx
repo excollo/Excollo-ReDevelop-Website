@@ -186,7 +186,7 @@ const TechConsultancy = forwardRef((props, ref) => {
         scrollTrigger: {
           trigger: ".services-container-5",
           start: "center center",
-          end: "+=100%",
+          end: "+=200%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -218,9 +218,9 @@ const TechConsultancy = forwardRef((props, ref) => {
           duration: 5,
           scrollTrigger: {
             trigger: ".fade-in-heading-5",
-            start: "top 20%",
-            end: "top 15%",
-            scrub: 3,
+            start: "center 5%",
+            end: "center 0%",
+            scrub: 2,
           },
         })
         .to(".animate-content-5", {
@@ -230,9 +230,9 @@ const TechConsultancy = forwardRef((props, ref) => {
           duration: 5,
           scrollTrigger: {
             trigger: ".animate-content-5",
-            start: "center 30%",
+            start: "center 10%",
             end: "center 10%",
-            scrub: 3,
+            scrub: 2,
           },
         })
         .to(".services-title-5", {
@@ -242,7 +242,7 @@ const TechConsultancy = forwardRef((props, ref) => {
           delay: 0.3,
           scrollTrigger: {
             trigger: ".services-title-5",
-            start: "center 20%",
+            start: "center 10%",
             end: "center 10%",
             scrub: 1,
           },
@@ -408,17 +408,6 @@ const TechConsultancy = forwardRef((props, ref) => {
         mb: 2,
         mt: 3,
         opacity: 1,
-        cursor: "pointer !important",
-        position: "relative",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: "-25px", // Increase clickable area above
-          bottom: "-25px", // Increase clickable area below
-          left: 0,
-          right: 0,
-          cursor: "pointer !important",
-        },
       }}
     />
   );
@@ -540,7 +529,7 @@ const TechConsultancy = forwardRef((props, ref) => {
                         ref={(el) => (symbolRefs.current[index] = el)}
                         style={{ display: "inline-block" }}
                       >
-                        ✤
+                        ➢
                       </span>
                       {service.title}
                     </Typography>
@@ -762,7 +751,7 @@ const TechConsultancy = forwardRef((props, ref) => {
       className="services-container-5"
       sx={{
         width: "100%",
-        minHeight: "100vh",
+        minHeight: "140vh",
         position: "relative",
       }}
     >
@@ -900,7 +889,7 @@ const TechConsultancy = forwardRef((props, ref) => {
                       ref={(el) => (symbolRefs.current[index] = el)}
                       style={{ display: "inline-block" }}
                     >
-                      ✤
+                      ➢
                     </span>
                     {service.title}
                   </Typography>

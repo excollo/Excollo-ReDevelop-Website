@@ -437,7 +437,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         color: "#fff",
         position: "relative",
         fontFamily: '"Inter", sans-serif',
-        marginTop: "-5rem",
+        marginTop: "-7rem",
       }}
     >
       <Box

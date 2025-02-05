@@ -23,6 +23,8 @@ const ThreeDE = ({ onComplete }) => {
     textSize = "34.5";
   } else if (isMd) {
     textSize = "34.5";
+  } else{
+    textSize = "30";
   }
 
   useEffect(() => {

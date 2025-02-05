@@ -21,7 +21,7 @@ const HeroPageSection3 = () => {
           sm: "140vh",
           md: "120vh",
         },
-        marginTop: {sm: "-3rem", md: "-4rem"}
+        marginTop: {sm: "-3rem", md: "-10rem"}
       }}
     >
       <Box

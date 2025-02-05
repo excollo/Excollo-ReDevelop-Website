@@ -185,7 +185,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
         scrollTrigger: {
           trigger: ".services-container-3",
           start: "center center",
-          end: "+=100%",
+          end: "+=200%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -217,21 +217,21 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
           duration: 5,
           scrollTrigger: {
             trigger: ".fade-in-heading3",
-            start: "top 20%",
-            end: "top 15%",
-            scrub: 3,
+            start: "center 5%",
+            end: "center 0%",
+            scrub: 2,
           },
         })
         .to(".animate-content-3", {
           x: "0%",
           opacity: 1,
-          delay: 1,
+          delay: 2,
           duration: 5,
           scrollTrigger: {
             trigger: ".animate-content-3",
-            start: "center 30%",
+            start: "center 10%",
             end: "center 10%",
-            scrub: 3,
+            scrub: 2,
           },
         })
         .to(".services-title-3", {
@@ -384,17 +384,6 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
         mb: 2,
         mt: 3,
         opacity: 1,
-        cursor: "pointer !important",
-        position: "relative",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: "-25px", // Increase clickable area above
-          bottom: "-25px", // Increase clickable area below
-          left: 0,
-          right: 0,
-          cursor: "pointer !important",
-        },
       }}
     />
   );
@@ -536,7 +525,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                         ref={(el) => (symbolRefs.current[index] = el)}
                         style={{ display: "inline-block" }}
                       >
-                        ✤
+                        ➢
                       </span>
                       {service.title}
                     </Typography>
@@ -896,7 +885,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
                       ref={(el) => (symbolRefs.current[index] = el)}
                       style={{ display: "inline-block" }}
                     >
-                      ✤
+                      ➢
                     </span>
                     {service.title}
                   </Typography>

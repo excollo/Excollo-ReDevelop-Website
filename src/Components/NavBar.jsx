@@ -34,7 +34,7 @@ const NavBar = () => {
 
   const commonLinkStyles = {
     textDecoration: "none",
-    fontSize: "calc(0.9vw + 0.9vh)",
+    fontSize: "calc(0.8vw + 0.8vh)",
     position: "relative",
     padding: "10px 20px",
     color: "white",
@@ -72,8 +72,8 @@ const NavBar = () => {
       >
         <Box>
           <img
-            style={{ height: "50px", width: "60%" }}
-            src="https://www.excollo.com/images/logo.svg"
+            style={{ width: "60%", height: "auto" }} // Adjust values as needed
+            src={ExcolloWebsiteLogo}
             alt="excollo"
             loading="lazy"
           />
@@ -148,7 +148,16 @@ const NavBar = () => {
             sx={{ position: "relative", zIndex: 0 }}
           >
             <Link to="/">
-              <img src={ExcolloWebsiteLogo} alt="excollo" loading="lazy" />
+              <img
+                style={{
+                  width: "auto", // Will adjust based on container size
+                  height: "5vh", // Fixed height
+                  maxWidth: "100%", // Prevents the image from exceeding its container
+                }}
+                src={ExcolloWebsiteLogo}
+                alt="excollo"
+                loading="lazy"
+              />
             </Link>
           </Box>
 
@@ -183,11 +192,15 @@ const NavBar = () => {
                 sx={{
                   ...commonLinkStyles,
                   height: "100%",
+                  fontWeight: "200",
                   mt: 1,
+                  padding: {
+                    md: "0.5vw 0.8vw",
+                  },
                   "&:hover": {
                     background:
                       "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-                    borderRadius: "40px",
+                    borderRadius: "80px",
                   },
                 }}
               >
@@ -199,11 +212,15 @@ const NavBar = () => {
                 sx={{
                   ...commonLinkStyles,
                   height: "100%",
+                  fontWeight: "200",
+                  padding: {
+                    md: "0.5vw 0.8vw",
+                  },
                   mt: 1,
                   "&:hover": {
                     background:
                       "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-                    borderRadius: "40px",
+                    borderRadius: "80px",
                   },
                 }}
               >
@@ -215,12 +232,16 @@ const NavBar = () => {
                 sx={{
                   ...commonLinkStyles,
                   height: "100%",
+                  fontWeight: "200",
+                  padding: {
+                    md: "0.5vw 0.8vw",
+                  },
                   mt: 1,
                   // paddingBottom:"-10px",
                   "&:hover": {
                     background:
                       "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
-                    borderRadius: "40px",
+                    borderRadius: "80px",
                   },
                 }}
               >
@@ -234,9 +255,10 @@ const NavBar = () => {
                   display: "flex",
                   alignItems: "center",
                   position: "relative",
+                  fontWeight: "200",
                   padding: {
-                    md: "0.3vw",
-                    xl: "0.3vw",
+                    md: "0.1vw",
+                    xl: "0.2vw",
                   },
                   borderRadius: "40px",
                   background: "transparent",
@@ -275,13 +297,16 @@ const NavBar = () => {
                     ...commonLinkStyles,
                     display: "flex",
                     alignItems: "center",
+                    fontWeight: "200",
                     position: "relative",
                   }}
                 >
                   LET'S TALK
                 </Typography>
                 <Box sx={{ mt: "4%" }}>
-                  <FaChevronRight style={{ marginLeft: "0px", marginRight: "10px" }} />
+                  <FaChevronRight
+                    style={{ marginLeft: "0px", marginRight: "10px" }}
+                  />
                 </Box>
               </Typography>
             </Box>
