@@ -29,9 +29,13 @@ import MarqueeCarousel1 from "./MarqueeCarousel/MarqueeCarousel1";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const SCROLL_THRESHOLD = 50; // Adjust this value to control scroll sensitivity
+const SCROLL_COOLDOWN = 800; // Time in ms before next scroll action
+
 const AIAutomation = forwardRef((props, ref) => {
   const [expanded, setExpanded] = useState(false);
   const [currentDotIndex, setCurrentDotIndex] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
   const symbolRefs = useRef([]);
   const circleRef = useRef(null);
   const lastAccordionRef = useRef(null);
@@ -164,93 +168,110 @@ const AIAutomation = forwardRef((props, ref) => {
     },
   }));
 
-  useEffect(() => {
-    if (!isMobile && !isTablet) {
-      gsap.set(".animate-content", {
-        x: "100%",
-        opacity: 0,
-      });
+ useEffect(() => {
+  if (!isMobile && !isTablet) {
+    const screenHeight = window.innerHeight;
 
-      gsap.set(".services-title", {
-        opacity: 0,
-        y: 20,
-      });
+    // Define y values relative to screen height
+    const yValue = screenHeight * 0.13; // 10% of screen height
 
-      const tl = gsap.timeline();
+    gsap.set(".animate-content", {
+      x: "100%",
+      opacity: 0,
+    });
 
-      tl.fromTo(
-        ".fade-in-heading",
-        {
-          opacity: 1,
-          y: 300,
+    gsap.set(".services-title", {
+      opacity: 0,
+      y: yValue, // Dynamic based on screen height
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".services-container",
+        start: "center center",
+        end: "+=100%",
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+      },
+    });
+
+    tl.fromTo(
+      ".fade-in-heading",
+      {
+        opacity: 1,
+        y: yValue * 4, // Scales dynamically
+      },
+      {
+        opacity: 1,
+        y: yValue * 4,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".fade-in-heading",
+          start: "top 100%",
+          end: "top 50%",
+          scrub: 1,
         },
-        {
-          opacity: 1,
-          y: 300,
-          duration: 1,
-          scrollTrigger: {
-            trigger: ".fade-in-heading",
-            start: "top 100%",
-            end: "top 50%",
-            scrub: 1,
-          },
-        }
-      )
-        .to(".fade-in-heading", {
-          x: "-100%",
-          opacity: 1,
-          scrollTrigger: {
-            trigger: ".fade-in-heading",
-            start: "top 40%",
-            end: "top 35%",
-            scrub: 1,
-          },
-        })
-        .to(".animate-content", {
-          x: "0%",
-          opacity: 1,
-          delay: 1,
-          scrollTrigger: {
-            trigger: ".animate-content",
-            start: "top 20%",
-            end: "top 10%",
-            scrub: 1,
-          },
-        })
-        .to(".services-title", {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          delay: 0.3,
-          scrollTrigger: {
-            trigger: ".services-title",
-            start: "top 10%",
-            end: "top 10%",
-            scrub: 1,
-          },
-        });
-
-      // Animate service items
-      gsap.utils.toArray(".service-item").forEach((item, index) => {
-        gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top bottom-=100",
-            toggleActions: "play none none reverse",
-            markers: true,
-          },
-          opacity: 0,
-          y: 50,
-          duration: 0.6,
-          delay: index * 0.1,
-        });
+      }
+    )
+      .to(".fade-in-heading", {
+        x: "-100%",
+        opacity: 1,
+        delay: 2,
+        duration: 5,
+        scrollTrigger: {
+          trigger: ".fade-in-heading",
+          start: "top 20%",
+          end: "top 15%",
+          scrub: 3,
+        },
+      })
+      .to(".animate-content", {
+        x: "0%",
+        opacity: 1,
+        delay: 2,
+        duration: 5,
+        scrollTrigger: {
+          trigger: ".animate-content",
+          start: "center 30%",
+          end: "center 10%",
+          scrub: 3,
+        },
+      })
+      .to(".services-title", {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        delay: 0.3,
+        scrollTrigger: {
+          trigger: ".services-title",
+          start: "center 20%",
+          end: "center 10%",
+          scrub: 1,
+        },
       });
 
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    }
-  }, [isMobile, isTablet]);
+    // Animate service items
+    gsap.utils.toArray(".service-item").forEach((item, index) => {
+      gsap.from(item, {
+        scrollTrigger: {
+          trigger: item,
+          start: "top bottom-=100",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 0,
+        y: yValue / 2, // Adjusted dynamically
+        duration: 0.6,
+        delay: index * 0.1,
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }
+}, [isMobile, isTablet]);
+
 
   useEffect(() => {
     if (isTablet) {
@@ -405,6 +426,7 @@ const AIAutomation = forwardRef((props, ref) => {
     marginBottom: isTablet || isSpecified ? "2rem" : "3rem",
   };
 
+
   if (isTablet) {
     return (
       <Box className="services-container" sx={containerStyles}>
@@ -555,7 +577,7 @@ const AIAutomation = forwardRef((props, ref) => {
                             primaryTypographyProps={{
                               sx: {
                                 fontSize: `clamp(0.8rem, calc(0.5rem + 0.8vw), 9rem)`,
-                                fontWeight: 100
+                                fontWeight: 100,
                               },
                             }}
                           />
@@ -672,7 +694,7 @@ const AIAutomation = forwardRef((props, ref) => {
                     sx={{
                       textAlign: "left",
                       fontSize: `clamp(1rem, calc(0.7rem + 1vw), 9rem)`,
-                      fontWeight: 100
+                      fontWeight: 100,
                     }}
                   >
                     {service.title}

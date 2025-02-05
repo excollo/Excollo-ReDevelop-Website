@@ -210,7 +210,7 @@ const OurServices = () => {
       <Box
         sx={{
           position: "relative",
-          mt: isLandscapeMedium ? "-20px" : { xs: -50 },
+          mt: isLandscapeMedium ? "-20px" : { xs: -50, md: -30 },
           paddingTop: isLandscapeMedium ? "60px" : { xs: 0, md: 0 },
         }}
       >

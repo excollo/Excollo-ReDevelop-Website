@@ -128,7 +128,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
       const symbol = symbolRefs.current[currentDotIndex];
       const rect = symbol.getBoundingClientRect();
       const parentRect = symbol
-        .closest(".services-container")
+        .closest(".services-container-2")
         .getBoundingClientRect();
 
       let topOffset = rect.top - parentRect.top + rect.height / 2 - 170;
@@ -167,6 +167,11 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (!isMobile && !isTablet) {
+      const screenHeight = window.innerHeight;
+
+      // Define y values relative to screen height
+      const yValue = screenHeight * 0.13;
+
       gsap.set(".animate-content-2", {
         x: "100%",
         opacity: 0,
@@ -174,20 +179,29 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
 
       gsap.set(".services-title-2", {
         opacity: 0,
-        y: 20,
+        y: yValue,
       });
 
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".services-container-2",
+          start: "center center",
+          end: "+=100%",
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
 
       tl.fromTo(
         ".fade-in-heading-2",
         {
           opacity: 1,
-          y: 300,
+          y: yValue * 4,
         },
         {
           opacity: 1,
-          y: 300,
+          y: yValue * 4,
           duration: 1,
           scrollTrigger: {
             trigger: ".fade-in-heading-2",
@@ -202,21 +216,21 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
           opacity: 1,
           scrollTrigger: {
             trigger: ".fade-in-heading-2",
-            start: "top 40%",
-            end: "top 35%",
-            scrub: 1,
-            duration: 2,
+            start: "top 20%",
+            end: "top 15%",
+            scrub: 3,
           },
         })
         .to(".animate-content-2", {
           x: "0%",
           opacity: 1,
-          delay: 1,
+          delay: 2,
+          duration: 5,
           scrollTrigger: {
             trigger: ".animate-content-2",
-            start: "top 20%",
-            end: "top 10%",
-            scrub: 1,
+            start: "center 30%",
+            end: "center 10%",
+            scrub: 3,
           },
         })
         .to(".services-title-2", {
@@ -226,8 +240,8 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
           delay: 0.3,
           scrollTrigger: {
             trigger: ".services-title-2",
-            start: "top 10%",
-            end: "top 10%",
+            start: "center 20%",
+            end: "center 10%",
             scrub: 1,
           },
         });
@@ -397,7 +411,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
 
   if (isTablet) {
     return (
-      <Box className="services-container" sx={containerStyles}>
+      <Box className="services-container-2" sx={containerStyles}>
         {!isTablet && (
           <Box
             className="fade-in-heading"
@@ -734,7 +748,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
   return (
     <Box
       ref={sectionRef}
-      className="services-container"
+      className="services-container-2"
       sx={{
         width: "100%",
         minHeight: "100vh",
