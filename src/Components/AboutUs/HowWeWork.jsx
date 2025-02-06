@@ -62,7 +62,7 @@ const TableContent = styled("div")(({ theme }) => ({
   borderRadius: "20px",
   background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
   [theme.breakpoints.up("md")]: {
-    width: "12vw",
+    width: "14vw",
     height: "60vh",
     opacity: 0,
     transform: "translateY(100%)",
@@ -78,7 +78,7 @@ const TableContent = styled("div")(({ theme }) => ({
     },
   },
   [theme.breakpoints.up("lg")]: {
-    width: "13vw",
+    width: "15vw",
     height: "50vh",
     opacity: 0,
     transform: "translateY(100%)",
@@ -93,7 +93,7 @@ const TableContent = styled("div")(({ theme }) => ({
     },
   },
   [theme.breakpoints.up("xl")]: {
-    width: "14vw",
+    width: "15vw",
     height: "50vh",
     opacity: 0,
     transform: "translateY(100%)",
@@ -225,7 +225,7 @@ const HowWeWork = () => {
           sx={{
             mb: { xs: "4rem", md: "10%" },
             mt: { xs: "4rem", md: "5rem", xl: "10%" },
-            ml: {xs: "0rem", sm: "2rem", md: "0rem"},
+            ml: { xs: "0rem", sm: "2rem", md: "0rem" },
             position: "relative",
           }}
         >
@@ -304,7 +304,9 @@ const HowWeWork = () => {
                     width: "100%",
                   }}
                 >
-                  <Typography variant="h3">{step.title}</Typography>
+                  <Box sx={{margin: "10% 0"}}>
+                    <Typography variant="h3">{step.title}</Typography>
+                  </Box>
                   <Typography variant="body1">{step.content}</Typography>
                 </Box>
               </TableContent>

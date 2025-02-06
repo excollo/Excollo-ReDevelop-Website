@@ -91,14 +91,9 @@ const HeroPage = () => {
           ease: "power2.out",
         });
       }
-      timeline.to(".gradient-background", {
-        opacity: 1,
-        duration: 0.1,
-        ease: "power2.out",
-      });
       timeline.add([
         gsap.fromTo(
-          [".navbar", ".hero-content"],
+          [".gradient-background",".navbar", ".hero-content"],
           {
             opacity: 0,
             x: -100,

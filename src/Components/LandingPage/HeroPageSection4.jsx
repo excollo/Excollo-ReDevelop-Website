@@ -32,7 +32,6 @@ const FeatureCard = ({
     borderRadius: "12px",
     textAlign: "center",
     padding: "1rem",
-    width: "100%",
     height: isMobile ? "150px" : isTablet ? "200px" : "100%",
     display: "flex",
     flexDirection: "column",
@@ -189,7 +188,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         // Card shrinking animation
         gsap.to(".main-card", {
           width: `${80 - scale * 60}%`,
-          duration: 0.3,
+          duration: 0.7,
           ease: "power2.out",
         });
 
@@ -203,11 +202,9 @@ const HeroPageSection4 = ({ onComplete }) => {
 
         // Cards container animation
         gsap.to(".cards-container", {
-          gap: `${2 + scale * 8}rem`,
+          gap: "10%",
           duration: 0.3,
           ease: "power2.out",
-          marginLeft: `-${scale * 1}%`,
-          marginRight: `${scale * 1.5}%`,
         });
 
         const dynamicInitialFontSize = () => {
@@ -462,8 +459,6 @@ const HeroPageSection4 = ({ onComplete }) => {
             },
             position: "relative",
             top: "20px",
-            background: "black",
-            textAlign: "center",
           }}
         >
           Why Choose{" "}
@@ -483,21 +478,20 @@ const HeroPageSection4 = ({ onComplete }) => {
       <Box
         className="cards-container"
         sx={{
-          position: "relative",
           height: "calc(100vh - 0%)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          gap: "2rem",
-          padding: "0 2rem",
+          maxWidth: "100%",
+          boxSizing: "border-box",
           transition: "gap 0.3s ease",
         }}
       >
         <Box
           className="side-cards-container"
           sx={{
-            width: "20%",
             height: "50%",
+            maxWidth: "20%",
             opacity: 0,
           }}
         >
@@ -514,7 +508,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           sx={{
             width: "80%",
             height: "50%",
-            transition: "width 0.4s ease",
+            flexShrink: 0,
           }}
         >
           <FeatureCard
@@ -529,8 +523,8 @@ const HeroPageSection4 = ({ onComplete }) => {
         <Box
           className="side-cards-container"
           sx={{
-            width: "20%",
             height: "50%",
+            maxWidth: "20%",
             opacity: 0,
           }}
         >
