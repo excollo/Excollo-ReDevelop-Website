@@ -189,7 +189,7 @@ const AIAutomation = forwardRef((props, ref) => {
       scrollTrigger: {
         trigger: ".services-container",
         start: "center center",
-        end: "+=200%",
+        end: "+=150%",
         scrub: 1,
         pin: true,
         anticipatePin: 1,

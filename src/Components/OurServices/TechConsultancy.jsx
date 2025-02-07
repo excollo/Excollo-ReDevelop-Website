@@ -170,7 +170,7 @@ const TechConsultancy = forwardRef((props, ref) => {
       const screenHeight = window.innerHeight;
 
       // Define y values relative to screen height
-      const yValue = screenHeight * 0.13;
+      const yValue = screenHeight * 0.15;
 
       gsap.set(".animate-content-5", {
         x: "100%",
@@ -186,7 +186,7 @@ const TechConsultancy = forwardRef((props, ref) => {
         scrollTrigger: {
           trigger: ".services-container-5",
           start: "center center",
-          end: "+=200%",
+          end: "+=150%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -218,8 +218,8 @@ const TechConsultancy = forwardRef((props, ref) => {
           duration: 5,
           scrollTrigger: {
             trigger: ".fade-in-heading-5",
-            start: "center 5%",
-            end: "center 0%",
+            start: "center 20%",
+            end: "center 10%",
             scrub: 2,
           },
         })

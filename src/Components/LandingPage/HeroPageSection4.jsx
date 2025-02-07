@@ -188,7 +188,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         // Card shrinking animation
         gsap.to(".main-card", {
           width: `${80 - scale * 60}%`,
-          duration: 0.7,
+          duration: 1,
           ease: "power2.out",
         });
 

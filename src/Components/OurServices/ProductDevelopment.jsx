@@ -185,7 +185,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
         scrollTrigger: {
           trigger: ".services-container-4",
           start: "center center",
-          end: "+=200%",
+          end: "+=150%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,

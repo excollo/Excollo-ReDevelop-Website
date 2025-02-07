@@ -185,7 +185,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
         scrollTrigger: {
           trigger: ".services-container-3",
           start: "center center",
-          end: "+=200%",
+          end: "+=150%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,

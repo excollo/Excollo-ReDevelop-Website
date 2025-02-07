@@ -186,7 +186,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
         scrollTrigger: {
           trigger: ".services-container-2",
           start: "center center",
-          end: "+=200%",
+          end: "+=150%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -216,8 +216,8 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
           opacity: 1,
           scrollTrigger: {
             trigger: ".fade-in-heading-2",
-            start: "center 40%",
-            end: "center 30%",
+            start: "center 20%",
+            end: "center 10%",
             scrub: 2,
           },
         })
