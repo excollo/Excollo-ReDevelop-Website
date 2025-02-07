@@ -38,7 +38,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
         position: "relative",
         minHeight: {
           xs: "60vh",
-          md: "60vh"
+          md: "60vh",
         },
         zIndex: 2,
         marginTop: {
@@ -176,22 +176,20 @@ const HeroPageSection1 = ({ animationComplete }) => {
         >
           <Typography
             component="a"
-            href="#scheduleaconsultation"
+            href="/contact"
             sx={{
               display: "inline-block",
               color: "#ffffff",
               textDecoration: "none",
               fontWeight: 100,
               fontSize: {
-                xs: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
-                md: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
-                xl: `clamp(0.5rem, calc(0.6rem + 1.1vw), 5rem)`,
+                xs: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                md: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
               },
               border: "1px solid transparent",
               padding: {
-                xs: "2vw 4vw",
-                md: "1vw 1.6vw",
-                xl: "1vw 1.8vw",
+                xs: "1vw 2vw"
               },
               borderRadius: { xs: "80px", md: "80px", xl: "80px" },
               background:
@@ -209,7 +207,7 @@ const HeroPageSection1 = ({ animationComplete }) => {
               },
             }}
           >
-            Schedule a Consultation
+            Schedule a Call
           </Typography>
         </Box>
       </Box>

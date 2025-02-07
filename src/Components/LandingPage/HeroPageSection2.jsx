@@ -265,15 +265,13 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 textDecoration: "none",
                 fontWeight: 100,
                 fontSize: {
-                  xs: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
-                  md: `clamp(1rem, calc(0.3rem + 1vw), 1.5rem)`,
-                  xl: `clamp(0.5rem, calc(0.6rem + 1.1vw), 5rem)`,
+                  xs: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  md: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
                 },
                 border: "1px solid transparent",
                 padding: {
-                  xs: "2vw 4vw",
-                  md: "1vw 1.6vw",
-                  xl: "1vw 1.8vw",
+                  xs: "1vw 2vw",
                 },
                 borderRadius: { xs: "80px", md: "80px", xl: "80px" },
                 background:

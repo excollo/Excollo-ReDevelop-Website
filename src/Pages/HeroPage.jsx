@@ -15,6 +15,7 @@ import HeroPageSection5 from "../Components/LandingPage/HeroPageSection5";
 import Footer from "../Components/Footer";
 import HeroPageSection6 from "../Components/LandingPage/HeroPageSection6";
 import HeroPageSection7 from "../Components/LandingPage/HeroPageSection7";
+import { useLocation } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MotionPathPlugin);
 const HeroPage = () => {
   const [showThreeDE, setShowThreeDE] = useState(true);
@@ -41,6 +42,43 @@ const HeroPage = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // scroll remember
+  const location = useLocation();
+
+  useEffect(() => {
+    const saveScroll = () =>
+      sessionStorage.setItem("scrollY", ScrollTrigger.scroll());
+    window.addEventListener("beforeunload", saveScroll);
+
+    return () => {
+      window.removeEventListener("beforeunload", saveScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    let savedScrollY = sessionStorage.getItem("scrollY");
+    if (savedScrollY) {
+      gsap.to(window, { scrollTo: savedScrollY, duration: 0.5 });
+    }
+  }, [location]);
+
+  // threeDE animation with scrollTrigger
+  const ANIMATION_SESSION_DURATION = 12 * 60 * 60 * 1000;
+
+  const [hasAnimationPlayed, setHasAnimationPlayed] = useState(() => {
+    const lastAnimationTime = localStorage.getItem("lastAnimationTime");
+    if (!lastAnimationTime) return false;
+
+    const timeSinceLastAnimation = Date.now() - parseInt(lastAnimationTime);
+    return timeSinceLastAnimation < ANIMATION_SESSION_DURATION;
+  });
+
+  const [threeDEPosition, setThreeDEPosition] = useState(() => {
+    const savedPosition = localStorage.getItem("threeDEPosition");
+    return savedPosition ? JSON.parse(savedPosition) : null;
+  });
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 250) {
@@ -54,6 +92,7 @@ const HeroPage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   useEffect(() => {
     if (!hero1Complete || showThreeDE) {
       document.body.style.overflow = "hidden";
@@ -66,72 +105,141 @@ const HeroPage = () => {
       document.body.style.overflow = "auto";
     };
   }, [hero1Complete, showThreeDE]);
+
   useEffect(() => {
-    const rotationDuration = 1;
-    const timer = setTimeout(() => {
+    if (!hasAnimationPlayed) {
+      const rotationDuration = 1;
+      const timer = setTimeout(() => {
+        setShowThreeDE(false);
+      }, rotationDuration * 1000);
+      return () => clearTimeout(timer);
+    } else {
       setShowThreeDE(false);
-    }, rotationDuration * 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    }
+  }, [hasAnimationPlayed]);
+
   useEffect(() => {
-    if (!showThreeDE && isDesktop) {
+    // Function to run the animation
+    const runAnimation = () => {
       const timeline = gsap.timeline();
-      if (isSpecificSize) {
-        timeline.to(".threeDE", {
-          x: "32%",
-          y: "0%",
-          duration: 0.7,
-          ease: "power2.out",
-        });
-      } else {
-        timeline.to(".threeDE", {
-          x: "28%",
-          y: "0%",
-          duration: 0.7,
-          ease: "power2.out",
-        });
-      }
-      timeline.add([
-        gsap.fromTo(
-          [".gradient-background",".navbar", ".hero-content"],
-          {
-            opacity: 0,
-            x: -100,
-          },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
+
+      if (isDesktop) {
+        if (isSpecificSize) {
+          timeline.to(".threeDE", {
+            x: "32%",
+            y: "0%",
+            duration: 0.7,
             ease: "power2.out",
             onComplete: () => {
-              setAnimationComplete(true);
-              setTimeout(() => {
-                setHero1Complete(true);
-              }, 500);
+              localStorage.setItem(
+                "threeDEPosition",
+                JSON.stringify({ x: "32%", y: "0%" })
+              );
             },
-          }
-        ),
-      ]);
-    } else if (!showThreeDE && !isDesktop) {
+          });
+        } else {
+          timeline.to(".threeDE", {
+            x: "28%",
+            y: "0%",
+            duration: 0.7,
+            ease: "power2.out",
+            onComplete: () => {
+              localStorage.setItem(
+                "threeDEPosition",
+                JSON.stringify({ x: "28%", y: "0%" })
+              );
+            },
+          });
+        }
+
+        timeline.add([
+          gsap.fromTo(
+            [".gradient-background",".navbar", ".hero-content"],
+            {
+              opacity: 0,
+              x: -100,
+            },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.5,
+              ease: "power2.out",
+              onComplete: () => {
+                setAnimationComplete(true);
+                setTimeout(() => {
+                  setHero1Complete(true);
+                  // Save animation timestamp
+                  localStorage.setItem(
+                    "lastAnimationTime",
+                    Date.now().toString()
+                  );
+                  setHasAnimationPlayed(true);
+                }, 500);
+              },
+            }
+          ),
+        ]);
+      }
+    };
+
+    // Function to skip animation and set default styles
+    const skipAnimation = () => {
       setAnimationComplete(true);
       setHero1Complete(true);
-      const navbar = document.querySelector(".navbar");
-      const heroContent = document.querySelector(".hero-content");
-      const gradientBackground = document.querySelector(".gradient-background");
-      if (navbar) {
-        navbar.style.opacity = "1";
-        navbar.style.transform = "translateX(0)";
-      }
-      if (heroContent) {
-        heroContent.style.opacity = "1";
-        heroContent.style.transform = "translateX(0)";
-      }
-      if (gradientBackground) {
-        gradientBackground.style.opacity = "1";
+
+      const elements = {
+        navbar: document.querySelector(".navbar"),
+        heroContent: document.querySelector(".hero-content"),
+        gradientBackground: document.querySelector(".gradient-background"),
+      };
+
+      Object.values(elements).forEach((element) => {
+        if (element) {
+          element.style.opacity = "1";
+          if (element !== elements.gradientBackground) {
+            element.style.transform = "translateX(0)";
+          }
+        }
+      });
+    };
+
+    if (!showThreeDE) {
+      const lastAnimationTime = localStorage.getItem("lastAnimationTime");
+      const timeSinceLastAnimation = lastAnimationTime
+        ? Date.now() - parseInt(lastAnimationTime)
+        : ANIMATION_SESSION_DURATION + 1;
+
+      if (
+        !lastAnimationTime ||
+        timeSinceLastAnimation >= ANIMATION_SESSION_DURATION
+      ) {
+        // Run animation if it's the first time or session has expired
+        runAnimation();
+      } else {
+        // Skip animation if within session duration
+        skipAnimation();
       }
     }
+
     ScrollTrigger.refresh();
-  }, [showThreeDE, isSpecificSize, isTablet, isMobile, isDesktop]);
+  }, [
+    showThreeDE,
+    isSpecificSize,
+    isTablet,
+    isMobile,
+    isDesktop,
+    hasAnimationPlayed,
+  ]);
+
+  // Initialize ThreeDE position on mount if animation has played
+  useEffect(() => {
+    if (hasAnimationPlayed && threeDEPosition) {
+      const threeDE = document.querySelector(".threeDE");
+      if (threeDE) {
+        threeDE.style.transform = `translate(${threeDEPosition.x}, ${threeDEPosition.y})`;
+      }
+    }
+  }, []);
   useEffect(() => {
     if (hero1Complete && isDesktop) {
       gsap.fromTo(

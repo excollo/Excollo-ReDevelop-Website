@@ -91,7 +91,6 @@ const ResponsiveView = ({ type, isTablet }) => {
   );
 };
 
-// Update ResponsiveCard component
 const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
   return (
     <Box
@@ -168,9 +167,44 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const islaptop = useMediaQuery(theme.breakpoints.up("lg"));
   const isXtraLargeLaptop = useMediaQuery(theme.breakpoints.up("xl"));
 
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  const SCROLL_TIMING = {
+    duration: isSafari ? 1200 : 800, // Longer duration for Safari
+    cooldown: isSafari ? 1000 : 800, // Longer cooldown for Safari
+  };
+
   // Dynamic card dimensions
   const { CARD_WIDTH, GAP } = getCardDimensions(window.innerWidth);
   const TOTAL_WIDTH = CARD_WIDTH + GAP;
+
+  const smoothScrollTo = (element, to, duration) => {
+    if (!element || duration <= 0) return;
+
+    const start = element.scrollLeft;
+    const change = to - start;
+    const startTime = performance.now();
+
+    const animateScroll = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smoother animation
+      const easeInOutCubic = (progress) => {
+        return progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+      };
+
+      element.scrollLeft = start + change * easeInOutCubic(progress);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
+  };
 
   const handleMouseMove = (e, index) => {
     if (isMobile || isTablet) return;
@@ -217,16 +251,16 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     }
 
     if (isHorizontalScroll) {
-    e.stopPropagation();
-    e.preventDefault();
-  } else {
-    return;
-  }
+      e.stopPropagation();
+      e.preventDefault();
+    } else {
+      return;
+    }
 
     if (!containerRef.current || isScrolling) return;
 
     const currentTime = Date.now();
-    if (currentTime - lastScrollTime.current < SCROLL_COOLDOWN) return;
+    if (currentTime - lastScrollTime.current < SCROLL_TIMING.cooldown) return;
 
     if (
       !isScrolling &&
@@ -256,16 +290,24 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
         setActiveScroller(isReverse ? "reverse" : "normal");
         setScrollPosition(targetPosition);
 
-        containerRef.current.scrollTo({
-          left: targetPosition,
-          behavior: "smooth",
-        });
+        if (isSafari) {
+          smoothScrollTo(
+            containerRef.current,
+            targetPosition,
+            SCROLL_TIMING.duration
+          );
+        } else {
+          containerRef.current.scrollTo({
+            left: targetPosition,
+            behavior: "smooth",
+          });
+        }
 
         setTimeout(() => {
           setIsScrolling(false);
           initialScrollDirection.current = null;
           setActiveScroller(null);
-        }, SCROLL_COOLDOWN);
+        }, SCROLL_TIMING.cooldown);
       }
     }
   };
@@ -314,15 +356,23 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       setActiveScroller(isReverse ? "reverse" : "normal");
       setScrollPosition(targetPosition);
 
-      containerRef.current.scrollTo({
-        left: targetPosition,
-        behavior: "smooth",
-      });
+      if (isSafari) {
+        smoothScrollTo(
+          containerRef.current,
+          targetPosition,
+          SCROLL_TIMING.duration
+        );
+      } else {
+        containerRef.current.scrollTo({
+          left: targetPosition,
+          behavior: "smooth",
+        });
+      }
 
       setTimeout(() => {
         setIsScrolling(false);
         setActiveScroller(null);
-      }, SCROLL_COOLDOWN);
+      }, SCROLL_TIMING.cooldown);
     }
   };
 

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Container,
+  Fade,
   TextField,
   Button,
   Typography,
@@ -12,6 +13,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { styled } from "@mui/material/styles";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/OurServices/Footer";
@@ -104,26 +106,19 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    companyName: "",
     email: "",
     phoneNumber: "",
     message: "",
     services: [],
     otherService: "",
   });
+  const [showButton, setShowButton] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [submitState, setSubmitState] = useState("initial"); // "initial", "submitting", "submitted"
 
-  // Google Form Field IDs
-  const GOOGLE_FORM_IDS = {
-    firstName: "entry.1875910263",
-    lastName: "entry.654080252",
-    phoneNumber: "entry.1490732534",
-    email: "entry.321715765",
-    services: "entry.1314171994",
-    message: "entry.580072994",
-  };
-
-  const GOOGLE_FORM_BASE_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSdH1-pOT7JDOFpBe_Vd9wNJcu32PqLbKVIfumtIzp5gJ6uUTg/formResponse";
+  const GOOGLE_FORM_ACTION =
+    "https://script.google.com/macros/s/AKfycbx0rpL6A-S9C9q6W2sGAXwGJw5VcKUkTZkL7OM_fLkWszqdhcjlEyDZJUmb2YHumQq0/exec";
 
   const serviceOptions = [
     "AI & Automation Solutions",
@@ -149,48 +144,166 @@ const ContactForm = () => {
     });
   };
 
-  const submitToGoogleForm = () => {
-    const formURL = new URL(GOOGLE_FORM_BASE_URL);
-    // Add regular fields
-    formURL.searchParams.append(GOOGLE_FORM_IDS.firstName, formData.firstName);
-    formURL.searchParams.append(GOOGLE_FORM_IDS.lastName, formData.lastName);
-    formURL.searchParams.append(GOOGLE_FORM_IDS.email, formData.email);
-    formURL.searchParams.append(
-      GOOGLE_FORM_IDS.phoneNumber,
-      formData.phoneNumber
-    );
-    formURL.searchParams.append(GOOGLE_FORM_IDS.message, formData.message);
-    // Add selected services
-    formData.services.forEach((service) => {
-      formURL.searchParams.append(GOOGLE_FORM_IDS.services, service);
-    });
-    // Add other service if specified
-    if (formData.otherService) {
-      formURL.searchParams.append(
-        `${GOOGLE_FORM_IDS.services}.other_option_response`,
-        formData.otherService
-      );
-      formURL.searchParams.append(GOOGLE_FORM_IDS.services, "__other_option__");
+  const submitToGoogleScript = async (data) => {
+    try {
+      const formData = new URLSearchParams();
+      formData.append("firstName", data.firstName);
+      formData.append("lastName", data.lastName);
+      formData.append("companyName", data.companyName);
+      formData.append("email", data.email);
+      formData.append("phoneNumber", data.phoneNumber);
+      formData.append("message", data.message);
+      formData.append("services", data.services.join(", "));
+      if (data.otherService) {
+        formData.append("otherService", data.otherService);
+      }
+
+      const response = await fetch(GOOGLE_FORM_ACTION, {
+        redirect: "follow",
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData.toString(),
+      });
+
+      return { status: "success" };
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      throw error;
     }
-    // Create and submit hidden iframe
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
-    iframe.src = formURL.toString();
-    // Cleanup and show calendar
-    setTimeout(() => {
-      document.body.removeChild(iframe);
-      setShowCalendar(true);
-    }, 1000);
   };
 
-  const handleSubmit = (e) => {
+  const resetForm = () => {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      companyName: "",
+      email: "",
+      phoneNumber: "",
+      message: "",
+      services: [],
+      otherService: "",
+    });
+  };
+
+  const handleCalendarClose = () => {
+    setShowCalendar(false);
+    setSubmitState("submitted");
+    resetForm();
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    submitToGoogleForm();
+    setSubmitState("submitting");
+
+    try {
+      await submitToGoogleScript(formData);
+      setShowCalendar(true);
+    } catch (error) {
+      setSubmitState("initial");
+      // Handle error appropriately
+    }
+  };
+
+  useEffect(() => {
+    let timeoutId;
+    if (submitState === "submitted") {
+      timeoutId = setTimeout(() => {
+        setSubmitState("initial");
+      }, 3000); // 5 seconds
+    }
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [submitState]);
+  const getButtonContent = () => {
+    switch (submitState) {
+      case "submitting":
+        return "Submitting...";
+      case "submitted":
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 1,
+            }}
+          >
+            ✔ Submitted
+          </Box>
+        );
+      default:
+        return "Submit & Schedule Meeting";
+    }
+  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleScrollToTop = () => {
+    const section4 = document.querySelector(".hero-page-section-4");
+    const section4Bounds = section4?.getBoundingClientRect();
+    if (
+      !section4Bounds ||
+      section4Bounds.top < 0 ||
+      section4Bounds.bottom > window.innerHeight
+    ) {
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: 0,
+        ease: "power2.inOut",
+      });
+    }
   };
 
   return (
     <Box sx={{ backgroundColor: "#000000", minHeight: "100vh" }}>
+      <Fade in={showButton}>
+        <Button
+          onClick={handleScrollToTop}
+          variant="contained"
+          color="primary"
+          sx={{
+            position: "fixed",
+            bottom: 50,
+            height: 60,
+            right: 50,
+            zIndex: 1000,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.1)",
+            "&:hover": {
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+            },
+            "@media (max-width: 768px)": {
+              position: "fixed",
+              bottom: 50,
+              right: 50,
+            },
+            "@media (max-width: 480px)": {
+              position: "fixed",
+              bottom: 50,
+              right: 50,
+            },
+          }}
+        >
+          <ArrowUpwardIcon />
+        </Button>
+      </Fade>
       {/* Gradient Overlay */}
       <Box
         sx={{
@@ -303,7 +416,6 @@ const ContactForm = () => {
               </Typography>
               <form onSubmit={handleSubmit}>
                 {/* Name Fields */}
-                <Box display="grid" gridTemplateColumns="1fr 1fr" gap={2}>
                   <StyledTextField
                     name="firstName"
                     placeholder="First Name"
@@ -312,16 +424,15 @@ const ContactForm = () => {
                     onChange={handleInputChange}
                     required
                   />
-                  <StyledTextField
-                    name="lastName"
-                    placeholder="Last Name"
-                    fullWidth
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </Box>
                 {/* Contact Fields */}
+                <StyledTextField
+                  name="companyName"
+                  placeholder="Company Name"
+                  fullWidth
+                  value={formData.companyName}
+                  onChange={handleInputChange}
+                  required
+                />
                 <StyledTextField
                   name="email"
                   placeholder="Email"
@@ -415,24 +526,29 @@ const ContactForm = () => {
                 <SubmitButton
                   type="submit"
                   fullWidth
+                  disabled={submitState === "submitting"}
+                  className={submitState === "submitted" ? "submitted" : ""}
                   sx={{
                     background:
-                      "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                      submitState === "submitted"
+                        ? " #8E54F7"
+                        : "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
                     fontSize: "1.0rem",
                     fontWeight: "400",
                   }}
                 >
-                  Submit & Schedule Meeting
+                  {getButtonContent()}
                 </SubmitButton>
               </form>
             </Box>
           </Box>
         </StyledFormContainer>
       </Container>
+
       {/* Calendar Dialog */}
       <Dialog
         open={showCalendar}
-        onClose={() => setShowCalendar(false)}
+        onClose={handleCalendarClose}
         maxWidth="md"
         fullWidth
       >
@@ -453,3 +569,44 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
+//   // submition
+//  if (formState.isSubmitted && !showCalendar) {
+//    return (
+//      <Box sx={{ backgroundColor: "#000000", minHeight: "100vh" }}>
+//        <Container maxWidth="lg" sx={{ paddingTop: theme.spacing(8) }}>
+//          <StyledFormContainer>
+//            <Typography variant="h4" color="common.white" align="center" mb={2}>
+//              Thank you for your submission!
+//            </Typography>
+//            <Typography color="grey.400" align="center" mb={4}>
+//              We'll be in touch soon.
+//            </Typography>
+//            <Box align="center" sx={{margin:"auto"}} >
+//              <SubmitButton
+//                onClick={() => {
+//                  setFormState({
+//                    isSubmitting: false,
+//                    isSubmitted: false,
+//                    error: null,
+//                  });
+//                  setFormData({
+//                    firstName: "",
+//                    lastName: "",
+//                    companyName:"",
+//                    email: "",
+//                    phoneNumber: "",
+//                    message: "",
+//                    services: [],
+//                    otherService: "",
+//                  });
+//                }}
+//              >
+//                Submit Another Response
+//              </SubmitButton>
+//            </Box>
+//          </StyledFormContainer>
+//        </Container>
+//      </Box>
+//    );
+//  }

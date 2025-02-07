@@ -30,6 +30,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
   color: "white",
   transition: " background transform 0.3s ease", // Add smooth transition for transform
+  fontWeight: 500,
 
   "&:hover": {
     transform: " scale(1.05)", // Add hover scale effect
@@ -62,7 +63,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
   //   minWidth: "240px",
   // },
   [theme.breakpoints.up(2550)]: {
-    fontSize: `clamp(0.2rem, calc(0.5rem + 1vw), 4rem)`,
+    fontSize: `clamp(0.2rem, calc(0.5rem + 0.8vw), 40rem)`,
     padding: "24px 48px",
     minWidth: "280px",
   },
@@ -147,17 +148,18 @@ const AnimatedCTA = () => {
         duration: 0.6,
       })
       .to(button, {
-        width: "15vw",
+        width: "13vw",
         height: "8vh",
 
         padding: {
-          xs: "15px 30px",
+          xs: "5px 10px",
           sm: "16px 32px",
-          md: " 1vw 1.6vw",
-          xl: "1vw 1.8vw",
+          md: " 1vw 1vw",
+          xl: "0.5vw 2vw",
         },
         borderRadius: "980px",
-        fontSize: `clamp(0.2rem, calc(0.5rem + 0.7vw), 3.5rem)`,
+        fontSize: `clamp(0rem, calc(0.5rem + 0.7vw), 4rem)`,
+        fontWeight: "500",
         minWidth: "200px",
         duration: 0.36,
         "&:hover": {

@@ -34,9 +34,9 @@ const NavBar = () => {
 
   const commonLinkStyles = {
     textDecoration: "none",
-    fontSize: "calc(0.8vw + 0.8vh)",
+    fontSize: "calc(0.7vw + 0.7vh)",
     position: "relative",
-    padding: "10px 20px",
+    padding: "0px 15px",
     color: "white",
     // "&:hover": {
     //   background:
@@ -255,10 +255,10 @@ const NavBar = () => {
                   display: "flex",
                   alignItems: "center",
                   position: "relative",
-                  fontWeight: "200",
+                  fontWeight: "100",
                   padding: {
                     md: "0.1vw",
-                    xl: "0.2vw",
+                    xl: "0.25vw",
                   },
                   borderRadius: "40px",
                   background: "transparent",
@@ -297,7 +297,7 @@ const NavBar = () => {
                     ...commonLinkStyles,
                     display: "flex",
                     alignItems: "center",
-                    fontWeight: "200",
+                    fontWeight: "100",
                     position: "relative",
                   }}
                 >
@@ -305,7 +305,7 @@ const NavBar = () => {
                 </Typography>
                 <Box sx={{ mt: "4%" }}>
                   <FaChevronRight
-                    style={{ marginLeft: "0px", marginRight: "10px" }}
+                    style={{ marginLeft: "0px", marginRight: "5px" }}
                   />
                 </Box>
               </Typography>
