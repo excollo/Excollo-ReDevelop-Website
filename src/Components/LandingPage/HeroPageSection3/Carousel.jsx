@@ -96,7 +96,7 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
     <Box
       sx={{
         width: isMobile ? "90%" : "80%", // Adjust for mobile vs tablet
-        mb: 4,
+        mb: 2,
         p: 2,
         borderRadius: 2,
         fontFamily: '"Inter", sans-serif',
@@ -178,34 +178,6 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const { CARD_WIDTH, GAP } = getCardDimensions(window.innerWidth);
   const TOTAL_WIDTH = CARD_WIDTH + GAP;
 
-  const smoothScrollTo = (element, to, duration) => {
-    if (!element || duration <= 0) return;
-
-    const start = element.scrollLeft;
-    const change = to - start;
-    const startTime = performance.now();
-
-    const animateScroll = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Easing function for smoother animation
-      const easeInOutCubic = (progress) => {
-        return progress < 0.5
-          ? 4 * progress * progress * progress
-          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-      };
-
-      element.scrollLeft = start + change * easeInOutCubic(progress);
-
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
-
-    requestAnimationFrame(animateScroll);
-  };
-
   const handleMouseMove = (e, index) => {
     if (isMobile || isTablet) return;
 
@@ -237,6 +209,26 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     setHoveredIndex(null);
     setIsOverCard(false);
   };
+
+  const smoothScroll = (element, target, duration) => {
+    let start = element.scrollLeft;
+    let startTime = performance.now();
+
+    const animate = (currentTime) => {
+      let elapsed = currentTime - startTime;
+      let progress = Math.min(elapsed / duration, 1);
+      element.scrollLeft = start + (target - start) * easeOutCubic(progress);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
+
+  // Ease-out function for a smoother effect
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
   const handleWheelEvent = (e) => {
     if (isMobile || isTablet) return;
@@ -290,18 +282,10 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
         setActiveScroller(isReverse ? "reverse" : "normal");
         setScrollPosition(targetPosition);
 
-        if (isSafari) {
-          smoothScrollTo(
-            containerRef.current,
-            targetPosition,
-            SCROLL_TIMING.duration
-          );
-        } else {
           containerRef.current.scrollTo({
             left: targetPosition,
             behavior: "smooth",
           });
-        }
 
         setTimeout(() => {
           setIsScrolling(false);
@@ -356,18 +340,12 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       setActiveScroller(isReverse ? "reverse" : "normal");
       setScrollPosition(targetPosition);
 
-      if (isSafari) {
-        smoothScrollTo(
-          containerRef.current,
-          targetPosition,
-          SCROLL_TIMING.duration
-        );
-      } else {
         containerRef.current.scrollTo({
           left: targetPosition,
           behavior: "smooth",
+          
         });
-      }
+      
 
       setTimeout(() => {
         setIsScrolling(false);
@@ -481,9 +459,9 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       "& .MuiTypography-h5": {
         fontSize: {
           xs: "1rem",
-          md: "clamp(0.5rem, calc(0.6rem + 0.7vw), 1.3rem)",
-          lg: "clamp(0.5rem, calc(0.6rem + 0.9vw), 1.8rem)",
-          xl: "clamp(0.5rem, calc(0.6rem + 1.1vw), 2.1rem)",
+          md: "clamp(0.5rem, calc(0.7rem + 0.7vw), 1.3rem)",
+          lg: "clamp(0.5rem, calc(0.7rem + 0.9vw), 1.8rem)",
+          xl: "clamp(0.5rem, calc(0.7rem + 1.1vw), 2.1rem)",
         },
         fontWeight: "100",
         color: "#ddd",
@@ -605,7 +583,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
               <Typography
                 variant="h5"
                 sx={{
-                  color: "#ddd",
+                  color: "#fff",
                   marginLeft: "auto",
                   marginRight: "auto",
                   justifyContent: "center",

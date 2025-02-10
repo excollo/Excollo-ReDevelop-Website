@@ -173,7 +173,7 @@ const AIAutomation = forwardRef((props, ref) => {
     const screenHeight = window.innerHeight;
 
     // Define y values relative to screen height
-    const yValue = screenHeight * 0.13; // 10% of screen height
+    const yValue = screenHeight * 0.14; // 10% of screen height
 
     gsap.set(".animate-content", {
       x: "100%",
@@ -544,7 +544,7 @@ const AIAutomation = forwardRef((props, ref) => {
                         ref={(el) => (symbolRefs.current[index] = el)}
                         style={{ display: "inline-block" }}
                       >
-                        ➢
+                        ●
                       </span>
                       {service.title}
                     </Typography>
@@ -900,7 +900,7 @@ const AIAutomation = forwardRef((props, ref) => {
                       ref={(el) => (symbolRefs.current[index] = el)}
                       style={{ display: "inline-block" }}
                     >
-                      ➢
+                      ●
                     </span>
                     {service.title}
                   </Typography>

@@ -66,7 +66,7 @@ const HeroPageSection7 = () => {
     : is1300pxto1535px
     ? Math.max(1900 - scrollY * 0.5, 0)
     : isLargeScreen
-    ? Math.max(1900 - scrollY * 0.5, 0)
+    ? Math.max(1800 - scrollY * 0.5, 0)
     : isSmallerLaptop
     ? Math.max(1800 - scrollY * 0.5, 0)
     : Math.max(100 - scrollY * 0.5, 0); ;

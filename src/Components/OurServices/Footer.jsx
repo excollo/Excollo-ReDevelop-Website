@@ -17,7 +17,7 @@ import ExcolloWebsiteLogo from "../../assets/logo/ExcolloWebsiteLogo.png";
 const Footer = () => {
   const isTablet = useMediaQuery("(min-width:480px) and (max-width:899px)");
   const specificCondition = useMediaQuery(
-    "(min-width: 1800px) and (max-width: 2600px) and (max-height:1600px)"
+    "(min-width: 1800px) and (max-width: 2600px) and (max-height:1700px)"
   );
 
   const navigationLinks = [
@@ -60,9 +60,29 @@ const Footer = () => {
               gap: 0.5,
               textDecoration: "none",
               "&:hover": { color: "#a693c1" },
+              // justifyContent: { xs: "center", md: "flex-start" },
+              mt: 1,
+              fontSize: {
+                xs: "0.875rem",
+                sm: "1rem",
+                xl: specificCondition
+                  ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                  : "auto",
+              },
             }}
           >
-            Learn More <LaunchIcon sx={{ fontSize: 14 }} />
+            Learn More{" "}
+            <LaunchIcon
+              sx={{
+                fontSize: {
+                  xs: 14,
+                  sm: 16,
+                  xl: specificCondition
+                    ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                    : "auto",
+                },
+              }}
+            />
           </Link>
         </Box>
       </Box>
@@ -101,6 +121,8 @@ const Footer = () => {
             <EmailIcon sx={{ fontSize: 18, color: "grey.400" }} />
             <Link
               href="mailto:info@excollo.com"
+              target="_blank" // This opens in new tab
+              rel="noopener noreferrer" // Security best practice for links opening in new tab
               sx={{
                 color: "grey.400",
                 textDecoration: "none",
@@ -114,6 +136,8 @@ const Footer = () => {
             <PhoneIcon sx={{ fontSize: 18, color: "grey.400" }} />
             <Link
               href="tel:+918890204938"
+              target="_blank" // This opens in new tab
+              rel="noopener noreferrer" // Security best practice for links opening in new tab
               sx={{
                 color: "grey.400",
                 textDecoration: "none",
@@ -124,11 +148,57 @@ const Footer = () => {
             </Link>
           </Box>
           <Box sx={{ display: "flex", alignItems: "flex-start", gap: 1 }}>
-            <LocationOnIcon sx={{ fontSize: 18, color: "grey.400", mt: 0.5 }} />
-            <Typography variant="body2" color="grey.400">
-              C-230 Bharat Marg, Hanuman Nagar, Vaishali, Jaipur, Rajasthan -
-              302021
-            </Typography>
+            <Link
+              href="https://www.google.co.in/maps/place/230,+Bharat+Marg,+Singh+Bhoomi,+Khatipura,+Jaipur,+Rajasthan+302012/@26.9221888,75.7497856,14z/data=!4m5!3m4!1s0x396db368ef4a6f2f:0x8183d4a0e877ec15!8m2!3d26.9268325!4d75.7413077?entry=ttu&g_ep=EgoyMDI1MDExMC4wIKXMDSoJLDEwMjExMjMzSAFQAw%3D%3D"
+              target="_blank" // This opens in new tab
+              rel="noopener noreferrer" // Security best practice for links opening in new tab
+              sx={{ textDecoration: "none" }}
+            >
+              <Typography
+                variant="body2"
+                color="grey.400"
+                sx={{
+                  fontSize: {
+                    xs: "0.875rem",
+                    sm: "1rem",
+                    xl: specificCondition
+                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                      : "auto",
+                  },
+                  textAlign: "left",
+                }}
+              >
+                <Box sx={{ display: "flex", width: "60%" }}>
+                  <LocationOnIcon
+                    sx={{
+                      fontSize: {
+                        xs: 12,
+                        sm: 20,
+                        md: 20,
+                        lg: 16,
+                        xl: specificCondition
+                          ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                          : "auto",
+                      },
+                      color: "grey.400",
+                      mr: 0.5,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      ml: 0.5,
+                      mt: -0.5,
+                      position: "relative",
+                      cursor: "pointer !important",
+                      "&:hover": { color: "#a693c1" },
+                    }}
+                  >
+                    C-230 Bharat Marg, Hanuman Nagar, Vaishali, Jaipur,
+                    Rajasthan - 302021
+                  </Box>
+                </Box>
+              </Typography>
+            </Link>
           </Box>
         </Box>
       </Box>
@@ -140,7 +210,9 @@ const Footer = () => {
         </Typography>
         <Box sx={{ width: "70%" }}>
           <Link
-            href="#"
+            href="https://www.linkedin.com/company/excollo/posts/?feedView=all"
+            target="_blank" // This opens in new tab
+            rel="noopener noreferrer" // Security best practice for links opening in new tab
             sx={{
               color: "grey.400",
               display: "flex",
@@ -155,6 +227,8 @@ const Footer = () => {
           </Link>
           <Link
             href="/contact"
+            target="_blank" // This opens in new tab
+            rel="noopener noreferrer" // Security best practice for links opening in new tab
             sx={{
               color: "grey.400",
               display: "flex",
@@ -169,6 +243,8 @@ const Footer = () => {
           </Link>
           <Link
             href="/services"
+            target="_blank" // This opens in new tab
+            rel="noopener noreferrer" // Security best practice for links opening in new tab
             sx={{
               color: "grey.400",
               display: "flex",
@@ -214,7 +290,7 @@ const Footer = () => {
           left: 0,
           right: 0,
           height: "12%",
-          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 1) 0%, rgba(0, 0, 0, 0) 0%)`,
+          background: `radial-gradient(ellipse at bottom, rgba(196, 188, 213, 0.38) 0%, rgba(0, 0, 0, 0) 0%)`,
           zIndex: -1,
           "@media (max-width: 899px)": {
             display: "none",
@@ -261,7 +337,6 @@ const Footer = () => {
             }}
           >
             <Typography
-              variant="h6"
               sx={{
                 fontWeight: "500",
                 mb: 2,
@@ -280,6 +355,13 @@ const Footer = () => {
                     loading="lazy"
                     style={{
                       width: specificCondition ? "100%" : "50%",
+                      // {
+                      //   xs: "20%",
+                      //   sm: "20%",
+                      //   md: "30%",
+                      //   lg: "50%",
+                      //   xl: specificCondition ? "70%" : "50%",
+                      // },
                     }}
                   />
                 </Link>
@@ -472,6 +554,8 @@ const Footer = () => {
                 />
                 <Link
                   href="mailto:info@excollo.com"
+                  target="_blank" // This opens in new tab
+                  rel="noopener noreferrer" // Security best practice for links opening in new tab
                   sx={{
                     color: "grey.400",
                     textDecoration: "none",
@@ -510,6 +594,8 @@ const Footer = () => {
                 />
                 <Link
                   href="tel:+918890204938"
+                  target="_blank" // This opens in new tab
+                  rel="noopener noreferrer" // Security best practice for links opening in new tab
                   sx={{
                     color: "grey.400",
                     textDecoration: "none",
@@ -538,6 +624,8 @@ const Footer = () => {
               >
                 <Link
                   href="https://www.google.co.in/maps/place/230,+Bharat+Marg,+Singh+Bhoomi,+Khatipura,+Jaipur,+Rajasthan+302012/@26.9221888,75.7497856,14z/data=!4m5!3m4!1s0x396db368ef4a6f2f:0x8183d4a0e877ec15!8m2!3d26.9268325!4d75.7413077?entry=ttu&g_ep=EgoyMDI1MDExMC4wIKXMDSoJLDEwMjExMjMzSAFQAw%3D%3D"
+                  target="_blank" // This opens in new tab
+                  rel="noopener noreferrer" // Security best practice for links opening in new tab
                   sx={{ textDecoration: "none" }}
                 >
                   <Typography
@@ -557,8 +645,15 @@ const Footer = () => {
                     <Box sx={{ display: "flex" }}>
                       <LocationOnIcon
                         sx={{
+                          display: {
+                            xs: "none",
+                            sm: "block",
+                            md: "block",
+                            lg: "block",
+                            xl: "block",
+                          },
                           fontSize: {
-                            xs: 12,
+                            xs: 20,
                             sm: 20,
                             md: 20,
                             lg: 16,
@@ -570,7 +665,39 @@ const Footer = () => {
                           mr: 0.5,
                         }}
                       />
-                      <Box sx={{ ml: 0.5, mt: -0.5, position: "relative" }}>
+                      <Box
+                        sx={{
+                          ml: 0.5,
+                          mt: -0.5,
+                          position: "relative",
+                          cursor: "pointer !important",
+                          "&:hover": { color: "#a693c1" },
+                        }}
+                      >
+                        <LocationOnIcon
+                          sx={{
+                            display: {
+                              xs: "flex",
+                              sm: "none",
+                              md: "none",
+                              lg: "none",
+                              xl: "none",
+                            },
+                            position: "absolute",
+                            right: "98%",
+                            fontSize: {
+                              xs: 20,
+                              sm: 20,
+                              md: 20,
+                              lg: 16,
+                              xl: specificCondition
+                                ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
+                                : "auto",
+                            },
+                            color: "grey.400",
+                            mr: 0.5,
+                          }}
+                        />{" "}
                         C-230 Bharat Marg, Hanuman Nagar, Vaishali, Jaipur,
                         Rajasthan - 302021
                       </Box>
@@ -625,6 +752,8 @@ const Footer = () => {
             >
               <Link
                 href="https://www.linkedin.com/company/excollo/posts/?feedView=all"
+                // target="_blank" // This opens in new tab
+                // rel="noopener noreferrer" // Security best practice for links opening in new tab
                 sx={{
                   color: "grey.400",
                   display: "flex",
@@ -657,6 +786,8 @@ const Footer = () => {
               </Link>
               <Link
                 href="/contact"
+                // target="_blank" // This opens in new tab
+                // rel="noopener noreferrer" // Security best practice for links opening in new tab
                 sx={{
                   color: "grey.400",
                   display: "flex",
@@ -689,6 +820,8 @@ const Footer = () => {
               </Link>
               <Link
                 href="/services"
+                target="_blank" // This opens in new tab
+                rel="noopener noreferrer" // Security best practice for links opening in new tab
                 sx={{
                   color: "grey.400",
                   display: "flex",
@@ -781,6 +914,8 @@ const Footer = () => {
           <Link
             variant="caption"
             href="/privacy&policy"
+            target="_blank" // This opens in new tab
+            rel="noopener noreferrer" // Security best practice for links opening in new tab
             sx={{
               color: "grey.400",
               textDecoration: "none",
@@ -799,6 +934,8 @@ const Footer = () => {
           <Link
             variant="caption"
             href="/termsofservice"
+            target="_blank" // This opens in new tab
+            rel="noopener noreferrer" // Security best practice for links opening in new tab
             sx={{
               color: "grey.400",
               textDecoration: "none",

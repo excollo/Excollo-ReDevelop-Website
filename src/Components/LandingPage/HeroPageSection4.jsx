@@ -171,8 +171,8 @@ const HeroPageSection4 = ({ onComplete }) => {
 
     const mainCardTrigger = ScrollTrigger.create({
       trigger: ".hero-page-section-4",
-      start: "center 60%",
-      end: "center 60%",
+      start: "center 55%",
+      end: "center 55%",
       scrub: 1,
       pin: true,
       pinSpacing: true,

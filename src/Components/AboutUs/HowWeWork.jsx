@@ -182,7 +182,7 @@ const HowWeWork = () => {
    const mainTl = gsap.timeline({
      scrollTrigger: {
        trigger: container,
-       start: "top -10%",
+       start: "top 0%",
        end: "+=400%",
        pin: true,
        scrub: 0.5,
@@ -223,8 +223,7 @@ const HowWeWork = () => {
       <WorkTable>
         <Box
           sx={{
-            mb: { xs: "4rem", md: "10%" },
-            mt: { xs: "4rem", md: "5rem", xl: "10%" },
+            mb: { xs: "4rem", md: "15%" },
             ml: { xs: "0rem", sm: "2rem", md: "0rem" },
             position: "relative",
           }}

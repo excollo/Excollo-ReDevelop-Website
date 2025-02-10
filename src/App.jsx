@@ -10,6 +10,7 @@ import "./App.css";
 import ServicesPage from "./Pages/ServicesPage";
 import CustomCursor from "./Components/CursorEffect/CursorEffetct";
 import ScrollToTop from "./Components/ScrollToTop";
+import Model from "./Components/Model";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <CustomCursor />
         <Routes>
           <Route path="/" element={<HeroPage />} />
+          <Route path="/model" element={<Model />} />
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/contact" element={<ContactForm />} />

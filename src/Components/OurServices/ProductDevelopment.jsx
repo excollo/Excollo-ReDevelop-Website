@@ -529,7 +529,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
                         ref={(el) => (symbolRefs.current[index] = el)}
                         style={{ display: "inline-block" }}
                       >
-                        ➢
+                        ●
                       </span>
                       {service.title}
                     </Typography>
@@ -889,7 +889,7 @@ const ProductDevelopment = forwardRef((props, ref) => {
                       ref={(el) => (symbolRefs.current[index] = el)}
                       style={{ display: "inline-block" }}
                     >
-                      ➢
+                      ●
                     </span>
                     {service.title}
                   </Typography>

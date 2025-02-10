@@ -51,7 +51,6 @@ const PrivacyPolicy = () => {
           padding: "60px 20px",
           marginBottom: "40px",
           borderBottom: "1px solid #ddd",
-          color: "#fff",
           fontFamily: '"Inter", sans-serif',
           fontWeight: "600",
         }}
@@ -124,7 +123,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "1rem",
+            
               color: "#fff",
               mb: 3,
               fontSize: {
@@ -249,7 +248,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "1rem",
+          
               color: "#fff",
               mb: 2,
               fontSize: {
@@ -353,7 +352,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "1rem",
+            
               color: "#fff",
               mb: 2,
               fontSize: {
@@ -434,7 +433,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "1rem",
+           
               color: "#fff",
               mb: 2,
               fontSize: {
@@ -517,7 +516,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "1rem",
+          
               color: "#fff",
               mb: 3,
               fontSize: {
@@ -555,7 +554,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "1rem",
+            
               color: "#fff",
               mb: 3,
               fontSize: {
@@ -593,7 +592,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "1rem",
+          
               color: "#fff",
               mb: 3,
               fontSize: {
@@ -631,7 +630,6 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: "1rem",
               color: "#fff",
               fontSize: {
                 md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
@@ -648,7 +646,6 @@ const PrivacyPolicy = () => {
               <li>
                 <Typography
                   sx={{
-                    fontSize: "1rem",
                     color: "#fff",
                     fontSize: {
                       md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
@@ -675,7 +672,6 @@ const PrivacyPolicy = () => {
               <li>
                 <Typography
                   sx={{
-                    fontSize: "1rem",
                     color: "#fff",
                     fontSize: {
                       md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,

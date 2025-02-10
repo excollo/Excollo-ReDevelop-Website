@@ -5,8 +5,13 @@
 
 /* Hide cursor by default on all elements */
 * {
-  cursor: none !important;
+  cursor: auto !important;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
 
 /* Show default cursor for interactive elements */
 button:not(.custom-cursor-disable),

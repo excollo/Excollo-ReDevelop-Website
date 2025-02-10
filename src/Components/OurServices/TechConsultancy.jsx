@@ -166,109 +166,109 @@ const TechConsultancy = forwardRef((props, ref) => {
   };
 
   useEffect(() => {
-    if (!isMobile && !isTablet) {
-      const screenHeight = window.innerHeight;
-
-      // Define y values relative to screen height
-      const yValue = screenHeight * 0.15;
-
-      gsap.set(".animate-content-5", {
-        x: "100%",
-        opacity: 0,
-      });
-
-      gsap.set(".services-title-5", {
-        opacity: 0,
-        y: yValue,
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".services-container-5",
-          start: "center center",
-          end: "+=150%",
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
-
-      tl.fromTo(
-        ".fade-in-heading-5",
-        {
-          opacity: 1,
-          y: yValue * 4,
-        },
-        {
-          opacity: 1,
-          y: yValue*4,
-          duration: 1,
-          scrollTrigger: {
-            trigger: ".fade-in-heading-5",
-            start: "top 100%",
-            end: "top 50%",
-            scrub: 1,
-          },
-        }
-      )
-        .to(".fade-in-heading-5", {
-          x: "-100%",
-          opacity: 1,
-          delay: 2,
-          duration: 5,
-          scrollTrigger: {
-            trigger: ".fade-in-heading-5",
-            start: "center 20%",
-            end: "center 10%",
-            scrub: 2,
-          },
-        })
-        .to(".animate-content-5", {
-          x: "0%",
-          opacity: 1,
-          delay: 2,
-          duration: 5,
-          scrollTrigger: {
-            trigger: ".animate-content-5",
-            start: "center 10%",
-            end: "center 10%",
-            scrub: 2,
-          },
-        })
-        .to(".services-title-5", {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          delay: 0.3,
-          scrollTrigger: {
-            trigger: ".services-title-5",
-            start: "center 10%",
-            end: "center 10%",
-            scrub: 1,
-          },
-        });
-
-      // Animate service items
-      gsap.utils.toArray(".service-item").forEach((item, index) => {
-        gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top bottom-=100",
-            toggleActions: "play none none reverse",
-            markers: true,
-          },
+      if (!isMobile && !isTablet) {
+        const screenHeight = window.innerHeight;
+  
+        // Define y values relative to screen height
+        const yValue = screenHeight * 0.13;
+  
+        gsap.set(".animate-content-5", {
+          x: "100%",
           opacity: 0,
-          y: 50,
-          duration: 0.6,
-          delay: index * 0.1,
         });
-      });
-
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    }
-  }, [isMobile, isTablet]);
+  
+        gsap.set(".services-title-5", {
+          opacity: 0,
+          y: yValue,
+        });
+  
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".services-container-5",
+            start: "center center",
+            end: "+=150%",
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+          },
+        });
+  
+        tl.fromTo(
+          ".fade-in-heading5",
+          {
+            opacity: 1,
+            y: yValue * 4,
+          },
+          {
+            opacity: 1,
+            y: yValue*4,
+            duration: 1,
+            scrollTrigger: {
+              trigger: ".fade-in-heading5",
+              start: "top 100%",
+              end: "top 50%",
+              scrub: 1,
+            },
+          }
+        )
+          .to(".fade-in-heading5", {
+            x: "-100%",
+            opacity: 1,
+            delay: 2,
+            duration: 5,
+            scrollTrigger: {
+              trigger: ".fade-in-heading5",
+              start: "center 5%",
+              end: "center 0%",
+              scrub: 2,
+            },
+          })
+          .to(".animate-content-5", {
+            x: "0%",
+            opacity: 1,
+            delay: 2,
+            duration: 5,
+            scrollTrigger: {
+              trigger: ".animate-content-5",
+              start: "center 10%",
+              end: "center 10%",
+              scrub: 2,
+            },
+          })
+          .to(".services-title-5", {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 0.3,
+            scrollTrigger: {
+              trigger: ".services-title-5",
+              start: "center 10%",
+              end: "center 10%",
+              scrub: 1,
+            },
+          });
+  
+        // Animate service items
+        gsap.utils.toArray(".service-item").forEach((item, index) => {
+          gsap.from(item, {
+            scrollTrigger: {
+              trigger: item,
+              start: "top bottom-=100",
+              toggleActions: "play none none reverse",
+              markers: true,
+            },
+            opacity: 0,
+            y: 50,
+            duration: 0.6,
+            delay: index * 0.1,
+          });
+        });
+  
+        return () => {
+          ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        };
+      }
+    }, [isMobile, isTablet]);
 
   const containerStyles = {
     width: "100%",
@@ -529,7 +529,7 @@ const TechConsultancy = forwardRef((props, ref) => {
                         ref={(el) => (symbolRefs.current[index] = el)}
                         style={{ display: "inline-block" }}
                       >
-                        ➢
+                        ●
                       </span>
                       {service.title}
                     </Typography>
@@ -751,12 +751,12 @@ const TechConsultancy = forwardRef((props, ref) => {
       className="services-container-5"
       sx={{
         width: "100%",
-        minHeight: "140vh",
+        minHeight: "100vh",
         position: "relative",
       }}
     >
       <Box
-        className="fade-in-heading-5"
+        className="fade-in-heading5"
         sx={{
           position: "relative",
           top: 0,
@@ -889,7 +889,7 @@ const TechConsultancy = forwardRef((props, ref) => {
                       ref={(el) => (symbolRefs.current[index] = el)}
                       style={{ display: "inline-block" }}
                     >
-                      ➢
+                      ●
                     </span>
                     {service.title}
                   </Typography>

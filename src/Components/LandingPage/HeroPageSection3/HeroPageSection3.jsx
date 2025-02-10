@@ -17,11 +17,10 @@ const HeroPageSection3 = () => {
         textAlign: "center",
         position: "relative",
         minHeight: {
-          xs: "120vh",
-          sm: "140vh",
+          xs: "100vh",
           md: "120vh",
         },
-        marginTop: {sm: "-3rem", md: "-10rem"}
+        marginTop: { sm: "-3rem", md: "-10rem" },
       }}
     >
       <Box

@@ -526,7 +526,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
                         ref={(el) => (symbolRefs.current[index] = el)}
                         style={{ display: "inline-block" }}
                       >
-                        ➢
+                        ●
                       </span>
                       {service.title}
                     </Typography>
@@ -889,7 +889,7 @@ const SalesChannelDevelopment = forwardRef((props, ref) => {
                       ref={(el) => (symbolRefs.current[index] = el)}
                       style={{ display: "inline-block" }}
                     >
-                      ➢
+                      ●
                     </span>
                     {service.title}
                   </Typography>

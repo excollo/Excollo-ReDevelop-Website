@@ -76,6 +76,22 @@ const CursorInner = styled(Box)({
   backgroundColor: "#FFFFFF",
   transform: "translate(-50%, -50%)",
   transition: "width 0.2s ease, height 0.2s ease",
+  background: "transparent",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    inset: 0,
+    padding: "2px", // Adjust the thickness of the border
+    background:
+      "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)",
+    borderRadius: "50px",
+    WebkitMask:
+      "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+    WebkitMaskComposite: "xor",
+    maskComposite: "exclude",
+    // zIndex: -1,
+    zIndex: 9999,
+  },
 });
 const CustomCursor = ({ idleTimeout = 5000 }) => {
   const { cursorType, isHovered } = useCursor();
@@ -102,6 +118,51 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
       }
     }, idleTimeout);
   };
+
+  // hide the cursor out of the body
+
+  const [isVisible, setIsVisible] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Update cursor position
+      setPosition({ x: e.clientX, y: e.clientY });
+
+      // Check if cursor is within document body
+      const isWithinBody =
+        e.clientX >= 0 &&
+        e.clientX <= document.body.clientWidth &&
+        e.clientY >= 0 &&
+        e.clientY <= document.body.clientHeight;
+
+      setIsVisible(isWithinBody);
+    };
+
+    const handleMouseLeave = () => {
+      setIsVisible(false);
+    };
+
+    const handleMouseEnter = () => {
+      setIsVisible(true);
+    };
+
+    // Add event listeners
+    document.addEventListener("mousemove", handleMouseMove);
+    document.body.addEventListener("mouseleave", handleMouseLeave);
+    document.body.addEventListener("mouseenter", handleMouseEnter);
+
+    // Hide default cursor
+    document.body.style.cursor = "none";
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
+      document.body.removeEventListener("mouseenter", handleMouseEnter);
+      document.body.style.cursor = "auto";
+    };
+  }, []);
 
   useEffect(() => {
     const moveCursor = (e) => {
@@ -214,14 +275,16 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
         ref={cursorInnerRef}
         sx={{
           display: isIdle || isPointer ? "none" : "block",
-          width: isHovered ? "50px" : isIdle ? "10px" : "15px",
-          height: isHovered ? "50px" : isIdle ? "10px" : "15px",
-          opacity: isHovered ? 1 : 0.95,
+          width: isHovered ? "50px" : isIdle ? "10px" : "25px",
+          height: isHovered ? "50px" : isIdle ? "10px" : "25px",
+          opacity: isHovered || isVisible ? 1 : 0,
           zIndex: 9999,
+
           background:
             isHovered || isPointer
               ? "white"
-              : "linear-gradient(90deg, rgb(169, 63, 255) 0%, rgb(94, 129, 235) 100%)",
+              : // : "linear-gradient(90deg, rgb(169, 63, 255) 0%, rgb(94, 129, 235) 100%)",
+                "transparent",
           transform: `scale(${isHovered || isPointer ? 1.2 : 1})`,
           // boxShadow:
           //   isHovered || isPointer
