@@ -96,8 +96,9 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
     <Box
       sx={{
         width: isMobile ? "90%" : "80%", // Adjust for mobile vs tablet
-        mb: 2,
+        // mb: 2,
         p: 2,
+
         borderRadius: 2,
         fontFamily: '"Inter", sans-serif',
         boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 10px 0px",
@@ -167,13 +168,6 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const islaptop = useMediaQuery(theme.breakpoints.up("lg"));
   const isXtraLargeLaptop = useMediaQuery(theme.breakpoints.up("xl"));
 
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-  const SCROLL_TIMING = {
-    duration: isSafari ? 1200 : 800, // Longer duration for Safari
-    cooldown: isSafari ? 1000 : 800, // Longer cooldown for Safari
-  };
-
   // Dynamic card dimensions
   const { CARD_WIDTH, GAP } = getCardDimensions(window.innerWidth);
   const TOTAL_WIDTH = CARD_WIDTH + GAP;
@@ -210,25 +204,37 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     setIsOverCard(false);
   };
 
-  const smoothScroll = (element, target, duration) => {
-    let start = element.scrollLeft;
-    let startTime = performance.now();
+  const handleContainerMouseLeave = () => {
+    setIsOverCard(false);
+  };
+ 
+  const CAROUSEL_TIMING = {
+    duration: 800,
+    cooldown: 850,
+  };
 
-    const animate = (currentTime) => {
-      let elapsed = currentTime - startTime;
-      let progress = Math.min(elapsed / duration, 1);
-      element.scrollLeft = start + (target - start) * easeOutCubic(progress);
+  const smoothScrollTo = (element, targetPosition, duration) => {
+    const start = element.scrollLeft;
+    const distance = targetPosition - start;
+    const startTime = performance.now();
+
+    const easeInOutCubic = (t) => {
+      return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    };
+
+    const animation = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      element.scrollLeft = start + distance * easeInOutCubic(progress);
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animation);
       }
     };
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animation);
   };
-
-  // Ease-out function for a smoother effect
-  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
   const handleWheelEvent = (e) => {
     if (isMobile || isTablet) return;
@@ -244,7 +250,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
 
     if (isHorizontalScroll) {
       e.stopPropagation();
-      e.preventDefault();
+    e.preventDefault();
     } else {
       return;
     }
@@ -252,53 +258,116 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     if (!containerRef.current || isScrolling) return;
 
     const currentTime = Date.now();
-    if (currentTime - lastScrollTime.current < SCROLL_TIMING.cooldown) return;
+    if (currentTime - lastScrollTime.current < CAROUSEL_TIMING.cooldown) return;
 
     if (
       !isScrolling &&
       (Math.abs(e.deltaY) > INITIAL_SCROLL_THRESHOLD ||
         Math.abs(e.deltaX) > INITIAL_SCROLL_THRESHOLD)
-    ) {
-      const direction = isReverse
-        ? e.deltaY > 0 || e.deltaX > 0
-          ? -1
-          : 1
-        : e.deltaY > 0 || e.deltaX > 0
-        ? 1
-        : -1;
-      initialScrollDirection.current = direction;
+    ){
 
-      const currentPosition = containerRef.current.scrollLeft;
-      const currentIndex = Math.round(currentPosition / TOTAL_WIDTH);
-      const targetIndex = Math.max(
-        0,
-        Math.min(carouselContent.length - 1, currentIndex + direction)
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    const direction = delta > 0 ? 1 : -1;
+
+    const targetDirection = direction;
+    const currentPosition = containerRef.current.scrollLeft;
+    const currentIndex = Math.round(currentPosition / TOTAL_WIDTH);
+    const targetIndex = Math.max(
+      0,
+      Math.min(carouselContent.length - 1, currentIndex + targetDirection)
+    );
+    const targetPosition = targetIndex * TOTAL_WIDTH;
+
+    if (targetPosition !== currentPosition) {
+      setIsScrolling(true);
+      lastScrollTime.current = currentTime;
+      setActiveScroller(isReverse ? "reverse" : "normal");
+      setScrollPosition(targetPosition);
+
+      smoothScrollTo(
+        containerRef.current,
+        targetPosition,
+        CAROUSEL_TIMING.duration
       );
-      const targetPosition = targetIndex * TOTAL_WIDTH;
 
-      if (targetPosition !== currentPosition) {
-        setIsScrolling(true);
-        lastScrollTime.current = currentTime;
-        setActiveScroller(isReverse ? "reverse" : "normal");
-        setScrollPosition(targetPosition);
+      setTimeout(() => {
+        setIsScrolling(false);
+        setActiveScroller(null);
+      }, CAROUSEL_TIMING.cooldown);
+    }
+  }
+  };
 
-          containerRef.current.scrollTo({
-            left: targetPosition,
-            behavior: "smooth",
-          });
+  // Update button click handler
+  const handleButtonClick = (direction) => {
+    if (!containerRef.current || isScrolling) return;
 
-        setTimeout(() => {
-          setIsScrolling(false);
-          initialScrollDirection.current = null;
-          setActiveScroller(null);
-        }, SCROLL_TIMING.cooldown);
-      }
+    const currentPosition = containerRef.current.scrollLeft;
+    const currentIndex = Math.round(currentPosition / TOTAL_WIDTH);
+    const targetIndex = Math.max(
+      0,
+      Math.min(carouselContent.length - 1, currentIndex + direction)
+    );
+    const targetPosition = targetIndex * TOTAL_WIDTH;
+
+    if (targetPosition !== currentPosition) {
+      setIsScrolling(true);
+      setActiveScroller(isReverse ? "reverse" : "normal");
+      setScrollPosition(targetPosition);
+
+      smoothScrollTo(
+        containerRef.current,
+        targetPosition,
+        CAROUSEL_TIMING.duration
+      );
+
+      setTimeout(() => {
+        setIsScrolling(false);
+        setActiveScroller(null);
+      }, CAROUSEL_TIMING.cooldown);
     }
   };
 
-  const handleContainerMouseLeave = () => {
-    setIsOverCard(false);
+  // Update dot click handler
+  const handleDotClick = (index) => {
+    if (!containerRef.current || isScrolling) return;
+
+    const targetPosition = index * TOTAL_WIDTH;
+
+    setIsScrolling(true);
+    setActiveScroller(isReverse ? "reverse" : "normal");
+    setScrollPosition(targetPosition);
+
+    smoothScrollTo(
+      containerRef.current,
+      targetPosition,
+      CAROUSEL_TIMING.duration
+    );
+
+    setTimeout(() => {
+      setIsScrolling(false);
+      setActiveScroller(null);
+    }, CAROUSEL_TIMING.cooldown);
   };
+
+  // Update the useEffect for scroll position changes
+  useEffect(() => {
+    if (containerRef.current) {
+      const targetPosition = isReverse
+        ? (carouselContent.length - 1) * TOTAL_WIDTH - scrollPosition
+        : scrollPosition;
+
+      if (activeScroller) {
+        smoothScrollTo(
+          containerRef.current,
+          targetPosition,
+          CAROUSEL_TIMING.duration
+        );
+      } else {
+        containerRef.current.scrollLeft = targetPosition;
+      }
+    }
+  }, [scrollPosition, activeScroller]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -323,56 +392,6 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       setHoveredIndex(null);
     }
   }, [isOverCard]);
-
-  const handleButtonClick = (direction) => {
-    if (!containerRef.current || isScrolling) return;
-
-    const currentPosition = containerRef.current.scrollLeft;
-    const currentIndex = Math.round(currentPosition / TOTAL_WIDTH);
-    const targetIndex = Math.max(
-      0,
-      Math.min(carouselContent.length - 1, currentIndex + direction)
-    );
-    const targetPosition = targetIndex * TOTAL_WIDTH;
-
-    if (targetPosition !== currentPosition) {
-      setIsScrolling(true);
-      setActiveScroller(isReverse ? "reverse" : "normal");
-      setScrollPosition(targetPosition);
-
-        containerRef.current.scrollTo({
-          left: targetPosition,
-          behavior: "smooth",
-          
-        });
-      
-
-      setTimeout(() => {
-        setIsScrolling(false);
-        setActiveScroller(null);
-      }, SCROLL_TIMING.cooldown);
-    }
-  };
-
-  const handleDotClick = (index) => {
-    if (!containerRef.current || isScrolling) return;
-
-    const targetPosition = index * TOTAL_WIDTH;
-
-    setIsScrolling(true);
-    setActiveScroller(isReverse ? "reverse" : "normal");
-    setScrollPosition(targetPosition);
-
-    containerRef.current.scrollTo({
-      left: targetPosition,
-      behavior: "smooth",
-    });
-
-    setTimeout(() => {
-      setIsScrolling(false);
-      setActiveScroller(null);
-    }, SCROLL_COOLDOWN);
-  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -412,8 +431,20 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
         : isMobile || isTablet
         ? "auto"
         : "calc(60vh + 5vw)",
-      marginTop: isLargeScreen ? "4rem" : islaptop ? "2rem" : isMobile || isTablet ? "1rem" : "4rem",
-      marginBottom: isLargeScreen ? "4rem" : islaptop ? "2rem" : isMobile || isTablet ? "1rem" : "4rem",
+      marginTop: isLargeScreen
+        ? "4rem"
+        : islaptop
+        ? "2rem"
+        : isMobile || isTablet
+        ? "1rem"
+        : "4rem",
+      marginBottom: isLargeScreen
+        ? "4rem"
+        : islaptop
+        ? "2rem"
+        : isMobile || isTablet
+        ? "1rem"
+        : "4rem",
       padding: isMobile || isTablet ? "1rem" : "1rem",
       display: "flex",
       flexDirection: "column",
@@ -528,6 +559,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
           width: "100%",
           height: "auto",
           scrollSnapType: "x mandatory",
+          scrollBehavior: "smooth",
           scrollbarWidth: "none",
           "-ms-overflow-style": "none",
           "&::-webkit-scrollbar": { display: "none" },
@@ -555,7 +587,9 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
               <Link
                 to={item.link || "#"}
                 style={{
-                  marginTop: isXtraLargeLaptop ? "-6rem" : islaptop
+                  marginTop: isXtraLargeLaptop
+                    ? "-6rem"
+                    : islaptop
                     ? "-5rem"
                     : issmallLaptop
                     ? "-6rem"

@@ -805,7 +805,7 @@ const Footer = () => {
                   },
                 }}
               >
-                Schedule a Consultation{" "}
+                Schedule a Call{" "}
                 <LaunchIcon
                   sx={{
                     fontSize: {

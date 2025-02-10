@@ -11,26 +11,13 @@ import {
   Paper,
 } from "@mui/material";
 import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png";
+import NavBar from "./NavBar";
 
 const TermsOfService = () => {
   return (
     <Box sx={{ backgroundColor: "#000", color: "white", minHeight: "100vh" }}>
       {/* Header */}
-      <Box sx={{ backgroundColor: "#000", color: "white", padding: "20px 0" }}>
-        <Toolbar>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            margin="auto"
-            sx={{ position: "relative", zIndex: 0 }}
-          >
-            <Link to="/">
-              <img src={ExcolloWebsiteLogo} alt="excollo" loading="lazy" />
-            </Link>
-          </Box>
-        </Toolbar>
-      </Box>
+      <NavBar />
 
       {/* Title Section */}
       <Box
@@ -45,10 +32,10 @@ const TermsOfService = () => {
           <Typography
             sx={{
               fontSize: {
-                xs: `clamp(1rem, calc(1.25rem + 1.5vw), 9rem)`,
-                md: `clamp(1rem, calc(1.25rem + 1.5vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.37rem + 2vw), 8rem)`,
-                xl: `clamp(1.5rem, calc(2rem + 2vw), 10rem)`,
+                xs: "1.5rem",
+                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
+                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -84,16 +71,15 @@ const TermsOfService = () => {
             />
             {/* Introduction */}
             <Typography
-              variant="h5"
               fontWeight="bold"
               color="#fff"
               sx={{
                 marginBottom: 2,
                 fontSize: {
                   xs: "1.5rem",
-                  md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                  lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                  xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                  md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                  xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
                 },
                 fontFamily: '"Inter", sans-serif',
               }}
@@ -128,9 +114,9 @@ const TermsOfService = () => {
                 marginBottom: 2,
                 fontSize: {
                   xs: "1.5rem",
-                  md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                  lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                  xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                  md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                  xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
                 },
                 fontFamily: '"Inter", sans-serif',
               }}
@@ -138,7 +124,7 @@ const TermsOfService = () => {
               Website Use
             </Typography>
             <Typography
-              variant="body1"
+              // variant="body1"
               color="#fff"
               sx={{
                 marginBottom: 2,
@@ -171,59 +157,62 @@ const TermsOfService = () => {
             >
               Prohibited Activities: You agree not to:
             </Typography>
-            <List
-              sx={{
-                color: "white",
-                paddingLeft: 2,
-                fontSize: {
-                  md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                  lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                  xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                },
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: 200,
-              }}
-            >
-              <ListItem
-                sx={{
-                  fontSize: {
-                    md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                    lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                    xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: 200,
-                }}
-              >
-                <ListItemText primary="Use the website for any unlawful purpose." />
-              </ListItem>
-              <ListItem
-                sx={{
-                  fontSize: {
-                    md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                    lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                    xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: 200,
-                }}
-              >
-                <ListItemText primary="Attempt to access restricted areas or disrupt website functionality." />
-              </ListItem>
-              <ListItem
-                sx={{
-                  fontSize: {
-                    md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                    lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                    xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: 200,
-                }}
-              >
-                <ListItemText primary="Submit false or misleading information through our contact form." />
-              </ListItem>
-            </List>
+            {/* Replace the List and ListItem components with ul and li */}
+            <ul style={{ marginLeft: "2%" }}>
+              <li>
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    mb: 1,
+                    fontSize: {
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
+                    },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 200,
+                  }}
+                >
+                  • Use the website for any unlawful purpose.
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    mb: 1,
+                    fontSize: {
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
+                    },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 200,
+                  }}
+                >
+                  • Attempt to access restricted areas or disrupt website
+                  functionality.
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    mb: 1,
+                    fontSize: {
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
+                    },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 200,
+                  }}
+                >
+                  • Submit false or misleading information through our contact
+                  form.
+                </Typography>
+              </li>
+            </ul>
 
             {/* Intellectual Property */}
             <Typography
@@ -234,56 +223,54 @@ const TermsOfService = () => {
                 marginBottom: 2,
                 fontSize: {
                   xs: "1.5rem",
-                  md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                  lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                  xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                  md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                  xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
                 },
                 fontFamily: '"Inter", sans-serif',
               }}
             >
               Intellectual Property
             </Typography>
-            <List
-              sx={{
-                color: "white",
-                paddingLeft: 2,
-                fontSize: {
-                  md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                  lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                  xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                },
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: 200,
-              }}
-            >
-              <ListItem
-                sx={{
-                  fontSize: {
-                    md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                    lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                    xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: 200,
-                }}
-              >
-                <ListItemText primary="All content on this website, including text, images, logos, and graphics, is the property of Excollo and is protected by intellectual property laws." />
-              </ListItem>
-              <ListItem
-                sx={{
-                  fontSize: {
-                    md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                    lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                    xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: 200,
-                }}
-              >
-                <ListItemText primary="You may not reproduce, distribute, or modify website content without prior written consent from Excollo." />
-              </ListItem>
-            </List>
-
+            <ul>
+              <li>
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    mb: 1,
+                    fontSize: {
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
+                    },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 200,
+                  }}
+                >
+                  All content on this website, including text, images, logos,
+                  and graphics, is the property of Excollo and is protected by
+                  intellectual property laws.
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    mb: 1,
+                    fontSize: {
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
+                    },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 200,
+                  }}
+                >
+                  You may not reproduce, distribute, or modify website content
+                  without prior written consent from Excollo.
+                </Typography>
+              </li>
+            </ul>
             {/* Disclaimer */}
             <Typography
               variant="h5"
@@ -293,55 +280,55 @@ const TermsOfService = () => {
                 marginBottom: 2,
                 fontSize: {
                   xs: "1.5rem",
-                  md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                  lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                  xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                  md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                  xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
                 },
                 fontFamily: '"Inter", sans-serif',
               }}
             >
               Disclaimer
             </Typography>
-            <List
-              sx={{
-                color: "white",
-                paddingLeft: 2,
-                fontSize: {
-                  md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                  lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                  xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                },
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: 200,
-              }}
-            >
-              <ListItem
-                sx={{
-                  fontSize: {
-                    md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                    lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                    xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: 200,
-                }}
-              >
-                <ListItemText primary="No Guarantees: While we strive to keep our website content accurate and up-to-date, we make no guarantees regarding its completeness or accuracy." />
-              </ListItem>
-              <ListItem
-                sx={{
-                  fontSize: {
-                    md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
-                    lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
-                    xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
-                  },
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: 200,
-                }}
-              >
-                <ListItemText primary="Third-Party Links: Our website may contain links to external sites. Excollo is not responsible for the content or functionality of third-party websites." />
-              </ListItem>
-            </List>
+            <ul>
+              <li>
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    mb: 1,
+                    fontSize: {
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
+                    },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 200,
+                  }}
+                >
+                  No Guarantees: While we strive to keep our website content
+                  accurate and up-to-date, we make no guarantees regarding its
+                  completeness or accuracy.
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  sx={{
+                    color: "#fff",
+                    mb: 1,
+                    fontSize: {
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
+                    },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: 200,
+                  }}
+                >
+                  Third-Party Links: Our website may contain links to external
+                  sites. Excollo is not responsible for the content or
+                  functionality of third-party websites.
+                </Typography>
+              </li>
+            </ul>
 
             {/* Limitation of Liability */}
             <Typography
@@ -352,9 +339,9 @@ const TermsOfService = () => {
                 marginBottom: 2,
                 fontSize: {
                   xs: "1.5rem",
-                  md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                  lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                  xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                  md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                  xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
                 },
                 fontFamily: '"Inter", sans-serif',
               }}
@@ -389,9 +376,9 @@ const TermsOfService = () => {
                 marginBottom: 2,
                 fontSize: {
                   xs: "1.5rem",
-                  md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                  lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                  xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                  md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                  xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
                 },
                 fontFamily: '"Inter", sans-serif',
               }}
@@ -425,9 +412,9 @@ const TermsOfService = () => {
                 marginBottom: 2,
                 fontSize: {
                   xs: "1.5rem",
-                  md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                  lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                  xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                  md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                  xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
                 },
                 fontFamily: '"Inter", sans-serif',
               }}

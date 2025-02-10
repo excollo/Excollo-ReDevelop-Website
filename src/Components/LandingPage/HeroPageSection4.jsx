@@ -294,30 +294,34 @@ const HeroPageSection4 = ({ onComplete }) => {
             sm: "90%",
             md: "85%",
           },
+          paddingTop: {
+            xs: "25%",
+            sm: "10%",
+          },
           mx: "auto",
           zIndex: 2,
           marginTop: {
             xs: "8vh",
             sm: "0",
           },
-          "@media (min-width: 300px) and (max-width:340px)": {
-            marginTop: "22vh",
-          },
-          "@media (min-width: 341px) and (max-width:380px)": {
-            marginTop: "18vh",
-          },
-          "@media (min-width: 381px) and (max-width:400px)": {
-            marginTop: "18vh",
-          },
-          "@media (min-width: 401px) and (max-width:450px)": {
-            marginTop: "13vh",
-          },
-          "@media (min-width: 451px) and (max-width:500px)": {
-            marginTop: "10vh",
-          },
-          "@media (min-width: 800px) and (max-width:899px)": {
-            marginTop: "10vh",
-          },
+          // "@media (min-width: 300px) and (max-width:340px)": {
+          //   marginTop: "22vh",
+          // },
+          // "@media (min-width: 341px) and (max-width:380px)": {
+          //   marginTop: "18vh",
+          // },
+          // "@media (min-width: 381px) and (max-width:400px)": {
+          //   marginTop: "18vh",
+          // },
+          // "@media (min-width: 401px) and (max-width:450px)": {
+          //   marginTop: "13vh",
+          // },
+          // "@media (min-width: 451px) and (max-width:500px)": {
+          //   marginTop: "10vh",
+          // },
+          // "@media (min-width: 800px) and (max-width:899px)": {
+          //   marginTop: "10vh",
+          // },
         }}
       >
         <Typography

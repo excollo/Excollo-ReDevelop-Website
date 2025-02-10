@@ -305,7 +305,7 @@ const Footer = () => {
           container
           spacing={{ xs: 3, sm: 4, md: 5 }}
           sx={{
-            paddingTop: { xs: 1, sm: 2, md: 12 },
+            paddingTop: { xs: 1, sm: 2, md: 15 },
             flexWrap: "wrap",
             "@media (max-width: 320px)": {
               paddingLeft: 0,
@@ -805,7 +805,7 @@ const Footer = () => {
                   },
                 }}
               >
-                Schedule a Consultation{" "}
+                Schedule a Call{" "}
                 <LaunchIcon
                   sx={{
                     fontSize: {

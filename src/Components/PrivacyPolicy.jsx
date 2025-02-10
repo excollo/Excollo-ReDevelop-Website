@@ -9,39 +9,13 @@ import {
   Toolbar,
 } from "@mui/material";
 import ExcolloWebsiteLogo from "../assets/logo/ExcolloWebsiteLogo.png";
+import NavBar from "./NavBar";
 const PrivacyPolicy = () => {
   return (
     <>
       <CssBaseline />
-      {/* Header */}
-      <AppBar
-        position="static"
-        sx={{
-          backgroundColor: "#000",
-          color: "white",
-          fontFamily: '"Inter", sans-serif',
-          fontWeight: "600",
-        }}
-      >
-        <Toolbar>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            margin="auto"
-            sx={{
-              position: "relative",
-              zIndex: 0,
-              fontFamily: '"Inter", sans-serif',
-              fontWeight: "600",
-            }}
-          >
-            <Link to="/">
-              <img src={ExcolloWebsiteLogo} alt="excollo" loading="lazy" />
-            </Link>
-          </Box>
-        </Toolbar>
-      </AppBar>
+
+      <NavBar />
       {/* Hero Section */}
       <Box
         sx={{
@@ -56,14 +30,12 @@ const PrivacyPolicy = () => {
         }}
       >
         <Typography
-          variant="h2"
-          component="h1"
           sx={{
             fontSize: {
-              xs: `clamp(1rem, calc(1.25rem + 1.5vw), 9rem)`,
-              md: `clamp(1rem, calc(1.25rem + 1.5vw), 9rem)`,
-              lg: `clamp(1rem, calc(1.37rem + 2vw), 8rem)`,
-              xl: `clamp(1.5rem, calc(2rem + 2vw), 10rem)`,
+              xs: "1.5rem",
+              md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
+              lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
+              xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
             },
             fontFamily: '"Inter", sans-serif',
             fontWeight: "600",
@@ -108,9 +80,9 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -123,7 +95,7 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-            
+              // fontSize: "1rem",
               color: "#fff",
               mb: 3,
               fontSize: {
@@ -148,9 +120,9 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -165,7 +137,7 @@ const PrivacyPolicy = () => {
             We collect various types of information to provide and improve our
             services:
           </Typography> */}
-          <ul>
+          <ul style={{ marginLeft: "3%" }}>
             <li>
               <Typography
                 sx={{
@@ -233,9 +205,9 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -248,7 +220,6 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-          
               color: "#fff",
               mb: 2,
               fontSize: {
@@ -262,7 +233,7 @@ const PrivacyPolicy = () => {
           >
             We use the information we collect for the following purposes:
           </Typography>
-          <ul>
+          <ul style={{ marginLeft: "3%" }}>
             <li>
               <Typography
                 sx={{
@@ -332,14 +303,12 @@ const PrivacyPolicy = () => {
 
           {/* Sharing Your Information */}
           <Typography
-            variant="h4"
-            component="h2"
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -352,7 +321,6 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-            
               color: "#fff",
               mb: 2,
               fontSize: {
@@ -367,7 +335,7 @@ const PrivacyPolicy = () => {
             We do not sell or rent your personal information. However, we may
             share your data with:
           </Typography>
-          <ul>
+          <ul style={{ marginLeft: "3%" }}>
             <li>
               <Typography
                 sx={{
@@ -418,9 +386,9 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -433,7 +401,6 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-           
               color: "#fff",
               mb: 2,
               fontSize: {
@@ -448,7 +415,7 @@ const PrivacyPolicy = () => {
             <strong>Access and Correction: </strong>You can request access to
             your personal data and update inaccuracies.
           </Typography>
-          <ul>
+          <ul style={{ marginLeft: "3%" }}>
             <li>
               <Typography
                 sx={{
@@ -501,9 +468,9 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -516,7 +483,6 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-          
               color: "#fff",
               mb: 3,
               fontSize: {
@@ -539,9 +505,9 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -554,7 +520,6 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-            
               color: "#fff",
               mb: 3,
               fontSize: {
@@ -577,9 +542,9 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -592,7 +557,6 @@ const PrivacyPolicy = () => {
           </Typography>
           <Typography
             sx={{
-          
               color: "#fff",
               mb: 3,
               fontSize: {
@@ -615,9 +579,9 @@ const PrivacyPolicy = () => {
             sx={{
               fontSize: {
                 xs: "1.5rem",
-                md: `clamp(1rem, calc(0.5rem + 1vw), 9rem)`,
-                lg: `clamp(1rem, calc(1.25rem + 2vw), 9rem)`,
-                xl: `clamp(1rem, calc(1rem + 2vw), 8rem)`,
+                md: `clamp(1rem, calc(0.5rem + 0.8vw), 5rem)`,
+                lg: `clamp(1rem, calc(1.25rem + 1.5vw), 5rem)`,
+                xl: `clamp(1rem, calc(1rem + 1.5vw), 4.5rem)`,
               },
               fontFamily: '"Inter", sans-serif',
               fontWeight: "600",
@@ -642,18 +606,21 @@ const PrivacyPolicy = () => {
           >
             If you have questions or concerns about this Privacy Policy, please
             contact us at:
-            <ul>
+          </Typography>
+          <Typography>
+            <ul style={{ marginLeft: "3%" }}>
               <li>
                 <Typography
                   sx={{
+                    // fontSize: "1rem",
                     color: "#fff",
                     fontSize: {
-                      md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                      lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
-                      xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
                     },
                     fontFamily: '"Inter", sans-serif',
-                    fontWeight: 200,
+                    // fontWeight: 200,
                   }}
                 >
                   <strong>Email :</strong>
@@ -672,21 +639,21 @@ const PrivacyPolicy = () => {
               <li>
                 <Typography
                   sx={{
+                    // fontSize: "1rem",
                     color: "#fff",
                     fontSize: {
-                      md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                      lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
-                      xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                      md: `clamp(0.2rem, calc(0.5rem + 0.6vw), 1rem)`,
+                      lg: `clamp(0.2rem, calc(0.5rem + 0.7vw), 1.2rem)`,
+                      xl: `clamp(0.2rem, calc(0.5rem + 0.8vw), 1.5rem)`,
                     },
                     fontFamily: '"Inter", sans-serif',
-                    fontWeight: 200,
+                    // fontWeight: 200,
                   }}
                 >
                   <strong>Phone :</strong>+91-8890204938
                 </Typography>
               </li>
             </ul>
-            .
           </Typography>
         </Box>
       </Container>

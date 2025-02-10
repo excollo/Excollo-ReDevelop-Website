@@ -104,21 +104,22 @@ const SubmitButton = styled(Button)(({ theme }) => ({
 const ContactForm = () => {
   const theme = useTheme();
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     companyName: "",
     email: "",
     phoneNumber: "",
     message: "",
     services: [],
     otherService: "",
+    uploadedFiles: [],
+    isOtherServiceEnabled: false,
   });
   const [showButton, setShowButton] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [submitState, setSubmitState] = useState("initial"); // "initial", "submitting", "submitted"
 
   const GOOGLE_FORM_ACTION =
-    "https://script.google.com/macros/s/AKfycbx0rpL6A-S9C9q6W2sGAXwGJw5VcKUkTZkL7OM_fLkWszqdhcjlEyDZJUmb2YHumQq0/exec";
+    "https://script.google.com/macros/s/AKfycbz4LggW4hnSyV4GbcLTl-9JiGykDQyLuR9inpt58x6-v_LFrAf1opb8ptiKBmYpPhLm/exec";
 
   const serviceOptions = [
     "AI & Automation Solutions",
@@ -128,10 +129,47 @@ const ContactForm = () => {
   ];
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+  // Add method to handle other service checkbox
+  // const handleOtherServiceToggle = (e) => {
+  //   const isChecked = e.target.checked;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     isOtherServiceEnabled: isChecked,
+  //     // Clear the other service input if unchecked
+  //     otherService: isChecked ? prev.otherService : "",
+  //   }));
+  // };
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    const allowedTypes = /\.(doc|docx|pdf|ppt|pptx|jpg|jpeg|png)$/i;
+
+    const validFiles = files.filter((file) => {
+      const isValidSize = file.size <= maxSize;
+      const isValidType = allowedTypes.test(file.name);
+
+      if (!isValidSize) {
+        alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+      }
+      if (!isValidType) {
+        alert(
+          `File ${file.name} has an invalid type. Allowed types are: doc, docx, pdf, ppt, pptx, jpg, jpeg, png`
+        );
+      }
+
+      return isValidSize && isValidType;
+    });
+
+    setFormData((prev) => ({
+      ...prev,
+      uploadedFiles: [...prev.uploadedFiles, ...validFiles],
     }));
   };
 
@@ -147,8 +185,7 @@ const ContactForm = () => {
   const submitToGoogleScript = async (data) => {
     try {
       const formData = new URLSearchParams();
-      formData.append("firstName", data.firstName);
-      formData.append("lastName", data.lastName);
+      formData.append("fullName", data.fullName);
       formData.append("companyName", data.companyName);
       formData.append("email", data.email);
       formData.append("phoneNumber", data.phoneNumber);
@@ -158,6 +195,20 @@ const ContactForm = () => {
         formData.append("otherService", data.otherService);
       }
 
+      // handle file upload
+      for (let i = 0; i < data.uploadedFiles.length; i++) {
+        const file = data.uploadedFiles[i];
+        // Convert file to base64
+        const base64File = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(file);
+        });
+
+        formData.append("uploadedFiles", base64File);
+        formData.append("fileName", file.name);
+        formData.append("fileType", file.type);
+      }
       const response = await fetch(GOOGLE_FORM_ACTION, {
         redirect: "follow",
         method: "POST",
@@ -177,14 +228,15 @@ const ContactForm = () => {
 
   const resetForm = () => {
     setFormData({
-      firstName: "",
-      lastName: "",
+      fullName: "",
       companyName: "",
       email: "",
       phoneNumber: "",
       message: "",
       services: [],
       otherService: "",
+      uploadedFiles: [],
+      isOtherServiceEnabled: false,
     });
   };
 
@@ -194,16 +246,29 @@ const ContactForm = () => {
     resetForm();
   };
 
+  const handleRemoveFile = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      uploadedFiles: prev.uploadedFiles.filter((_, i) => i !== index),
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitState("submitting");
 
     try {
-      await submitToGoogleScript(formData);
-      setShowCalendar(true);
+      const result = await submitToGoogleScript(formData);
+      if (result.status === "success") {
+        setShowCalendar(true);
+        setSubmitState("submitted");
+      } else {
+        throw new Error(result.message || "Submission failed");
+      }
     } catch (error) {
+      console.error("Form submission error:", error);
+      alert("There was an error submitting the form. Please try again.");
       setSubmitState("initial");
-      // Handle error appropriately
     }
   };
 
@@ -238,7 +303,7 @@ const ContactForm = () => {
           </Box>
         );
       default:
-        return "Submit & Schedule Meeting";
+        return "Schedule Meeting";
     }
   };
   useEffect(() => {
@@ -389,9 +454,9 @@ const ContactForm = () => {
                 mb={1}
                 sx={{
                   fontSize: {
-                    md: `clamp(1rem, calc(1rem + 1.5vw), 6rem)`,
-                    lg: `clamp(1rem, calc(1rem + 1.68vw), 6rem)`,
-                    xl: `clamp(1rem, calc(1rem + 1.80vw), 6rem)`,
+                    md: `clamp(1rem, calc(1rem + 1.25vw), 6rem)`,
+                    lg: `clamp(1rem, calc(1rem + 1.4vw), 6rem)`,
+                    xl: `clamp(1rem, calc(1rem + 1.4vw), 6rem)`,
                   },
                 }}
               >
@@ -416,14 +481,16 @@ const ContactForm = () => {
               </Typography>
               <form onSubmit={handleSubmit}>
                 {/* Name Fields */}
-                  <StyledTextField
-                    name="firstName"
-                    placeholder="First Name"
-                    fullWidth
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    required
-                  />
+
+                <StyledTextField
+                  name="fullName"
+                  placeholder="Full Name"
+                  fullWidth
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  required
+                />
+
                 {/* Contact Fields */}
                 <StyledTextField
                   name="companyName"
@@ -468,7 +535,7 @@ const ContactForm = () => {
                 </Typography>
                 <FormGroup
                   sx={{
-                    mb: 1,
+                    mb: 2,
                     fontSize: {
                       xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
                       md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
@@ -492,7 +559,7 @@ const ContactForm = () => {
                       sx={{
                         "& .MuiFormControlLabel-label": {
                           fontSize: {
-                            xs: "clamp(0.5rem, calc(0.8rem + 0.2vw), 1rem)", // Default/mobile
+                            xs: "clamp(0.5rem, calc(0.8rem + 0.2vw), 1rem)",
                             md: `clamp(0.5rem, calc(0.8rem + 0.3vw), 1.5rem)`,
                             lg: `clamp(0.5rem, calc(0.8rem + 0.4vw), 1.8rem)`,
                             xl: `clamp(0.5rem, calc(0.8rem + 0.5vw), 2.1rem)`,
@@ -503,13 +570,40 @@ const ContactForm = () => {
                       }}
                     />
                   ))}
-                  <StyledTextField
-                    name="otherService"
-                    placeholder="Other Service (Optional)"
-                    fullWidth
-                    value={formData.otherService}
-                    onChange={handleInputChange}
+
+                  {/* Other Services Checkbox and TextField */}
+                  <FormControlLabel
+                    control={
+                      <StyledCheckbox
+                        name="otherServiceChecked"
+                        checked={formData.otherServiceChecked}
+                        onChange={handleInputChange}
+                      />
+                    }
+                    label="Other Services"
+                    sx={{
+                      "& .MuiFormControlLabel-label": {
+                        fontSize: {
+                          xs: "clamp(0.5rem, calc(0.8rem + 0.2vw), 1rem)",
+                          md: `clamp(0.5rem, calc(0.8rem + 0.3vw), 1.5rem)`,
+                          lg: `clamp(0.5rem, calc(0.8rem + 0.4vw), 1.8rem)`,
+                          xl: `clamp(0.5rem, calc(0.8rem + 0.5vw), 2.1rem)`,
+                        },
+                        fontWeight: 200,
+                        lineHeight: 1.7,
+                      },
+                    }}
                   />
+
+                  {formData.otherServiceChecked && (
+                    <StyledTextField
+                      name="otherService"
+                      placeholder="Specify Other Service"
+                      fullWidth
+                      value={formData.otherService}
+                      onChange={handleInputChange}
+                    />
+                  )}
                 </FormGroup>
                 {/* Message Field */}
                 <StyledTextField
@@ -522,6 +616,88 @@ const ContactForm = () => {
                   onChange={handleInputChange}
                   required
                 />
+
+                {/* File Upload Section */}
+                <Box sx={{ mb: 3 }}>
+                  <Typography
+                    color="grey.300"
+                    sx={{
+                      fontSize: {
+                        xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                        md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                        lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                        xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
+                      },
+                      fontWeight: 200,
+                      lineHeight: 1.7,
+                      mb: 1,
+                    }}
+                  >
+                    Upload Files (Optional):
+                  </Typography>
+                  <input
+                    accept=".doc,.docx,.pdf,.ppt,.pptx,.jpg,.jpeg,.png"
+                    style={{ display: "none" }}
+                    id="file-upload"
+                    type="file"
+                    multiple
+                    onChange={handleFileChange}
+                  />
+                  <label htmlFor="file-upload">
+                    <Button
+                      component="span"
+                      variant="outlined"
+                      sx={{
+                        color: "grey.300",
+                        borderColor: "grey.700",
+                        "&:hover": {
+                          borderColor: "#8E54F7",
+                          backgroundColor: "rgba(142, 84, 247, 0.1)",
+                        },
+                        width: "100%",
+                        padding: 2,
+                        fontSize: {
+                          xs: `clamp(0.2rem, calc(0.3rem + 0.8vw), 1.5rem)`,
+                          md: `clamp(0.5rem, calc(0.3rem + 0.8vw), 1.5rem)`,
+                          xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                        },
+                      }}
+                    >
+                      Choose Files
+                    </Button>
+                  </label>
+
+                  {formData.uploadedFiles.length > 0 && (
+                    <Box sx={{ mt: 2 }}>
+                      {formData.uploadedFiles.map((file, index) => (
+                        <Box
+                          key={index}
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            backgroundColor: "rgba(30, 32, 37, 0.6)",
+                            padding: 1,
+                            borderRadius: 1,
+                            mb: 1,
+                          }}
+                        >
+                          <Typography color="grey.300">
+                            {file.name} (
+                            {(file.size / (1024 * 1024)).toFixed(2)} MB)
+                          </Typography>
+                          <Button
+                            size="small"
+                            onClick={() => handleRemoveFile(index)}
+                            sx={{ color: "grey.400" }}
+                          >
+                            Remove
+                          </Button>
+                        </Box>
+                      ))}
+                    </Box>
+                  )}
+                </Box>
                 {/* Submit Button */}
                 <SubmitButton
                   type="submit"
@@ -533,7 +709,11 @@ const ContactForm = () => {
                       submitState === "submitted"
                         ? " #8E54F7"
                         : "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-                    fontSize: "1.0rem",
+                    fontSize: {
+                      xs: `clamp(0.2rem, calc(0.3rem + 0.8vw), 1.5rem)`,
+                      md: `clamp(0.5rem, calc(0.3rem + 0.8vw), 1.5rem)`,
+                      xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                    },
                     fontWeight: "400",
                   }}
                 >

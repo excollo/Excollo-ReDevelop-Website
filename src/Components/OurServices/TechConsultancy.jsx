@@ -170,7 +170,7 @@ const TechConsultancy = forwardRef((props, ref) => {
         const screenHeight = window.innerHeight;
   
         // Define y values relative to screen height
-        const yValue = screenHeight * 0.13;
+        const yValue = screenHeight * 0.14;
   
         gsap.set(".animate-content-5", {
           x: "100%",
