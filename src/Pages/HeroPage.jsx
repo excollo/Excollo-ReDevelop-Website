@@ -389,24 +389,14 @@ const HeroPage = () => {
           color="primary"
           sx={{
             position: "fixed",
-            bottom: 50,
             height: 60,
-            right: 50,
+            bottom: { xs: 100, md: 50 },
+            right: { xs: 30, md: 50 },
             zIndex: 1000,
             borderRadius: "50%",
             background: "rgba(255, 255, 255, 0.1)",
             "&:hover": {
               background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-            },
-            "@media (max-width: 768px)": {
-              position: "fixed",
-              bottom: 50,
-              right: 50,
-            },
-            "@media (max-width: 480px)": {
-              position: "fixed",
-              bottom: 50,
-              right: 50,
             },
           }}
         >
@@ -530,7 +520,7 @@ const HeroPage = () => {
       >
         <HeroPageSection3 />
         <ErrorBoundary>
-        <HeroPageSection4 />
+          <HeroPageSection4 />
         </ErrorBoundary>
         <HeroPageSection5 />
         <HeroPageSection6 />
