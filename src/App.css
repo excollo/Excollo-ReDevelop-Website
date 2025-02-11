@@ -8,8 +8,11 @@
   cursor: auto !important;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
+  overflow: auto;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 
