@@ -64,7 +64,7 @@ const HeroPage = () => {
   }, [location]);
 
   // threeDE animation with scrollTrigger
-  const ANIMATION_SESSION_DURATION = 12 * 60 * 60 * 1000;
+  const ANIMATION_SESSION_DURATION = 1* 60 * 60 * 1000;
 
   const [hasAnimationPlayed, setHasAnimationPlayed] = useState(() => {
     const lastAnimationTime = localStorage.getItem("lastAnimationTime");

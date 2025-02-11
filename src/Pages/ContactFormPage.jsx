@@ -707,7 +707,7 @@ const ContactForm = () => {
                   sx={{
                     background:
                       submitState === "submitted"
-                        ? " #8E54F7"
+                        ? " linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)"
                         : "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
                     fontSize: {
                       xs: `clamp(0.2rem, calc(0.3rem + 0.8vw), 1.5rem)`,
