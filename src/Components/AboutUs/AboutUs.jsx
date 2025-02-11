@@ -557,9 +557,10 @@ const AboutUs = () => {
                   mt: isLandscapeMedium ? 2 : { xs: 3, md: 5 },
                 }}
               >
-                Excollo bridges today’s challenges and tomorrow’s opportunities.
-                We harness cutting-edge technology, AI, and tailored solutions
-                to deliver outcomes and make businesses future-ready.
+                Excollo helps enterprises transform their digital stack using
+                cutting-edge AI, automation, and consultancy. We identify
+                opportunities, close gaps, and implement strategies for scalable
+                success.
               </Typography>
             </Box>
 
