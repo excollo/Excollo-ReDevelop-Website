@@ -365,21 +365,13 @@ const HeroPage = () => {
       }
     }
   }, [hero1Complete, isDesktop, isSpecificSize]);
-  const handleScrollToTop = () => {
-    const section4 = document.querySelector(".hero-page-section-4");
-    const section4Bounds = section4?.getBoundingClientRect();
-    if (
-      !section4Bounds ||
-      section4Bounds.top < 0 ||
-      section4Bounds.bottom > window.innerHeight
-    ) {
-      gsap.to(window, {
-        duration: 1,
-        scrollTo: 0,
-        ease: "power2.inOut",
-      });
-    }
-  };
+ const handleScrollToTop = () => {
+   // Immediately set scroll position
+   window.scrollTo({
+     top: 0,
+     behavior: "smooth",
+   });
+ };
   return (
     <Box
       sx={{

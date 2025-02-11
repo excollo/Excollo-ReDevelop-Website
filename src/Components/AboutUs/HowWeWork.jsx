@@ -218,7 +218,7 @@ const HowWeWork = () => {
         minHeight: "100vh",
         fontFamily: '"Inter", sans-serif',
         letterSpacing: "-0.00833em",
-        mt: { xs: "10%", md: "10%" },
+        mt: { xs: "0%", sm: "0%", md: "10%" },
         mb: { xs: "2rem", md: "0rem" },
       }}
     >
@@ -305,7 +305,7 @@ const HowWeWork = () => {
                     width: "100%",
                   }}
                 >
-                  <Box sx={{margin: "10% 0"}}>
+                  <Box sx={{margin: {xs: "0", md: "10% 0"}}}>
                     <Typography variant="h3">{step.title}</Typography>
                   </Box>
                   <Typography variant="body1">{step.content}</Typography>

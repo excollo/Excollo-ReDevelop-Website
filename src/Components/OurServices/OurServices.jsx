@@ -106,7 +106,11 @@ const OurServices = () => {
     };
   }, [isMobile]);
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Immediately set scroll position
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
   return (
     <Box className="services-section">

@@ -256,7 +256,6 @@ const AboutUs = () => {
        const storedWidth = parseInt(
          sessionStorage.getItem("screenWidth") || "0"
        );
-       // Check if width changed by more than 100px (adjust this threshold as needed)
        if (Math.abs(currentWidth - storedWidth) > 100) {
          sessionStorage.setItem("screenWidth", currentWidth.toString());
          window.location.reload();
@@ -264,7 +263,7 @@ const AboutUs = () => {
      };
      const debouncedResize = () => {
        clearTimeout(resizeTimeout);
-       resizeTimeout = setTimeout(handleResize, 250); // Wait 250ms after resize ends
+       resizeTimeout = setTimeout(handleResize, 250); 
      };
      // Store initial width
      sessionStorage.setItem("screenWidth", window.innerWidth.toString());
@@ -312,7 +311,11 @@ const AboutUs = () => {
   }, []);
 
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Immediately set scroll position
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const VisionSection = useCallback(
@@ -444,7 +447,7 @@ const AboutUs = () => {
 
   return (
     <Box>
-      <Box
+      {/* <Box
         sx={{
           minHeight: isLandscapeMedium
             ? "50vh"
@@ -626,9 +629,186 @@ const AboutUs = () => {
         <HowWeWork />
         <Excollo3D />
       </Box>
+       */}
       <Box
-        sx={{ position: "relative", top: isMobile || isSpecificSize ? 450 : 0 }}
+        sx={{
+          minHeight: isLandscapeMedium
+            ? "50vh"
+            : isMobile || isSpecificSize
+            ? "38vh"
+            : "100vh",
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          width: "100%",
+          position: "relative",
+        }}
       >
+        <Box
+          sx={{
+            maxWidth: { xs: "95%", sm: "90%", md: "85%", lg: "85%", xl: "85%" },
+            margin: isLandscapeMedium
+              ? "120px auto 60px"
+              : { xs: "20px auto", md: "0px auto" },
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              minHeight: isLandscapeMedium
+                ? "auto"
+                : { xs: "auto", sm: "auto", md: "auto" },
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: "center",
+              mt: isLandscapeMedium
+                ? "0"
+                : { xs: "10%", md: "-10%", lg: "-10%" },
+              mb: { xs: 0, sm: 0, md: 0 },
+              position: "relative",
+            }}
+          >
+            <Box
+              sx={{
+                width: { md: "70%", lg: "70%", xl: "70%" },
+                mb: { xs: 0, sm: 0, md: 0 },
+              }}
+            >
+              <Box
+                sx={{
+                  width: { xs: "100%", md: "50%", lg: "40%" },
+                  height: "60vh",
+                  display: { xs: "block", md: "none", lg: "none", xl: "none" },
+                  // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
+                  top: 0,
+                  left: 200,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <ThreeDE />
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
+                  alignItems: { xs: "center", md: "flex-start" },
+                  marginBottom: isLandscapeMedium ? "40px" : undefined,
+                }}
+              >
+                <Typography
+                  variant="h2"
+                  sx={{
+                    textAlign: { xs: "center", md: "left" },
+                    fontSize: {
+                      xs: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
+                      md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+                      lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+                      xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
+                    },
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: "600",
+                    color: "#fff",
+                    whiteSpace: "nowrap", // Prevent line break
+                    ml: isLandscapeMedium ? "5%" : 0,
+                  }}
+                >
+                  <span className="highlight">About </span>
+                  <span
+                    style={{
+                      background:
+                        "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    Excollo
+                  </span>
+                </Typography>
+              </Box>
+
+              <Typography
+                sx={{
+                  maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
+                  fontSize: {
+                    xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                    md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                    lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                    xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                  },
+                  fontWeight: 200,
+                  lineHeight: 1.7,
+                  textAlign: { xs: "center", md: "left" },
+                  ml: isLandscapeMedium ? "5%" : { xs: 0, md: "1%" },
+                  px: { xs: 2, md: 0 },
+                  mt: isLandscapeMedium ? 2 : { xs: 3, md: 5 },
+                }}
+              >
+                Excollo bridges today’s challenges and tomorrow’s opportunities.
+                We harness cutting-edge technology, AI, and tailored solutions
+                to deliver outcomes and make businesses future-ready.
+              </Typography>
+            </Box>
+
+            {!isMobile && !isTablet && (
+              <Box
+                sx={{
+                  width: isLandscapeMedium ? "50%" : { md: "50%", lg: "40%" },
+                  height: "100vh",
+                  display: "flex",
+                  "@media (min-width: 200px) and (max-width: 899px)": {
+                    display: "none",
+                  },
+                  top: 0,
+                  left: 0,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <ThreeDE />
+                </Box>
+              </Box>
+            )}
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          margin: "auto",
+          marginTop: isMobile || isSpecificSize ? 0 : "-8%",
+          display: isMobile || isSpecificSize ? "block" : "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          rowGap: "2rem",
+        }}
+      >
+        <VisionSection />
+        <MissionSection />
+        <PhilosophySection />
+      </Box>
+      <Box sx={{ position: "relative" }}>
+        <HowWeWork />
+        <Excollo3D />
+      </Box>
+      <Box sx={{ position: "relative" }}>
         <Footer />
       </Box>
       <Fade in={showButton}>
@@ -638,14 +818,14 @@ const AboutUs = () => {
           color="primary"
           sx={{
             position: "fixed",
-            bottom: 50,
             height: 60,
-            right: 50,
+            bottom: isLandscapeMedium ? 30 : 50,
+            right: isLandscapeMedium ? 30 : 50,
             zIndex: 1000,
             borderRadius: "50%",
             background: "rgba(255, 255, 255, 0.1)",
             "&:hover": {
-              background: "linear-gradient(180deg, #2579e3 0%, #8e54f7 100%)",
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
             },
             "@media (max-width: 768px)": {
               position: "fixed",
