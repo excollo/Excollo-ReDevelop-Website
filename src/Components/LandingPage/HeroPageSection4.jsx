@@ -392,7 +392,8 @@ const HeroPageSection4 = ({ onComplete }) => {
               justifyContent: "space-between",
               width: "30%",
               mt: isMobile ? 25 : 32,
-              marginLeft: "-5%",
+              marginLeft: "-10%",
+              gap: 1,
             }}
           >
             <Box
@@ -405,7 +406,7 @@ const HeroPageSection4 = ({ onComplete }) => {
             >
               <IconButton
                 onClick={handlePrev}
-                sx={{ ml: 0.1, p: 1, color: "white" }}
+                sx={{ ml: 0.5, p: 1, color: "white" }}
               >
                 <ArrowBackIosIcon />
               </IconButton>
