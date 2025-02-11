@@ -422,7 +422,7 @@ const HeroPage = () => {
           top: 0,
           left: 0,
           width: "90%",
-          height: "5%",
+          height: { xs: "5%", md: "4%" },
           background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
           zIndex: 1,
           opacity: isMobile || isTablet ? 1 : 0,

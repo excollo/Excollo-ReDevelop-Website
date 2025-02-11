@@ -416,25 +416,7 @@ const AboutUs = () => {
   );
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        fontFamily: '"Inter", sans-serif',
-        overflowX: "hidden",
-      }}
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "90%",
-          height: "30%",
-          background: `radial-gradient(ellipse at top, rgba(154, 106, 255, 0.6) 0%, rgba(0, 0, 0, 0) 60%)`,
-          zIndex: 1,
-        }}
-      />
-      <NavBar />
+    <Box>
       <Box
         sx={{
           minHeight: isLandscapeMedium
