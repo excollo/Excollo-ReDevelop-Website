@@ -454,6 +454,7 @@ const ContactForm = () => {
                 mb={1}
                 sx={{
                   fontSize: {
+                    xs: `clamp(1rem, calc(1rem + 1.25vw), 6rem)`,
                     md: `clamp(1rem, calc(1rem + 1.25vw), 6rem)`,
                     lg: `clamp(1rem, calc(1rem + 1.4vw), 6rem)`,
                     xl: `clamp(1rem, calc(1rem + 1.4vw), 6rem)`,
@@ -660,7 +661,7 @@ const ContactForm = () => {
                           xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
                         },
                         fontWeight: "400",
-                        textTransform: "none"
+                        textTransform: "none",
                       }}
                     >
                       Choose Files
