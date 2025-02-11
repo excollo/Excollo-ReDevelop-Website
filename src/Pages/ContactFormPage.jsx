@@ -618,7 +618,7 @@ const ContactForm = () => {
                 />
 
                 {/* File Upload Section */}
-                <Box sx={{ mb: 3 }}>
+                <Box sx={{ mb: 2, display: "flex" }}>
                   <Typography
                     color="grey.300"
                     sx={{
@@ -630,10 +630,9 @@ const ContactForm = () => {
                       },
                       fontWeight: 200,
                       lineHeight: 1.7,
-                      mb: 1,
                     }}
                   >
-                    Upload Files (Optional):
+                    Upload Files (Optional): &nbsp;
                   </Typography>
                   <input
                     accept=".doc,.docx,.pdf,.ppt,.pptx,.jpg,.jpeg,.png"
@@ -649,18 +648,19 @@ const ContactForm = () => {
                       variant="outlined"
                       sx={{
                         color: "grey.300",
+                        width: "100%",
                         borderColor: "grey.700",
                         "&:hover": {
                           borderColor: "#8E54F7",
                           backgroundColor: "rgba(142, 84, 247, 0.1)",
                         },
-                        width: "100%",
-                        padding: 2,
                         fontSize: {
                           xs: `clamp(0.2rem, calc(0.3rem + 0.8vw), 1.5rem)`,
                           md: `clamp(0.5rem, calc(0.3rem + 0.8vw), 1.5rem)`,
                           xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
                         },
+                        fontWeight: "400",
+                        textTransform: "none"
                       }}
                     >
                       Choose Files

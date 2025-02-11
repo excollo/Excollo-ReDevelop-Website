@@ -84,6 +84,7 @@ const TableContent = styled("div")(({ theme }) => ({
     transform: "translateY(100%)",
     visibility: "hidden",
     marginBottom: 0,
+    padding: "1vw 1vw",
     borderRadius: 0,
     background: "transparent",
     margin: 0, // Remove any margin
@@ -99,6 +100,7 @@ const TableContent = styled("div")(({ theme }) => ({
     transform: "translateY(100%)",
     visibility: "hidden",
     marginBottom: 0,
+    padding: "1vw 1vw",
     borderRadius: 0,
     background: "transparent",
     margin: 0, // Remove any margin

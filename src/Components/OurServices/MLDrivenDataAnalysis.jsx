@@ -169,7 +169,7 @@ const MLDrivenDataAnalysis = forwardRef((props, ref) => {
       const screenHeight = window.innerHeight;
 
       // Define y values relative to screen height
-      const yValue = screenHeight * 0.13;
+      const yValue = screenHeight * 0.145;
 
       gsap.set(".animate-content-3", {
         x: "100%",
