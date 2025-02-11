@@ -73,7 +73,6 @@ const HeroPageSection5 = () => {
   useEffect(() => {
     const handleResize = () => {
       setWindowSize(window.innerWidth);
-      ScrollTrigger.refresh(); // Refresh ScrollTrigger to recalculate positions
       initializeAnimations(); // Reinitialize animations
     };
 

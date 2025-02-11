@@ -483,10 +483,11 @@ const AboutUs = () => {
               <Box
                 sx={{
                   width: { xs: "100%", md: "50%", lg: "40%" },
+                  height: "60vh",
                   display: { xs: "block", md: "none", lg: "none", xl: "none" },
                   // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
                   top: 0,
-                  left: 0,
+                  left: 200,
                 }}
               >
                 <Box
@@ -557,10 +558,9 @@ const AboutUs = () => {
                   mt: isLandscapeMedium ? 2 : { xs: 3, md: 5 },
                 }}
               >
-                Excollo helps enterprises transform their digital stack using
-                cutting-edge AI, automation, and consultancy. We identify
-                opportunities, close gaps, and implement strategies for scalable
-                success.
+                Excollo bridges today’s challenges and tomorrow’s opportunities.
+                We harness cutting-edge technology, AI, and tailored solutions
+                to deliver outcomes and make businesses future-ready.
               </Typography>
             </Box>
 

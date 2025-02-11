@@ -10,8 +10,6 @@
 
 html, body {
   scroll-behavior: smooth;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 
