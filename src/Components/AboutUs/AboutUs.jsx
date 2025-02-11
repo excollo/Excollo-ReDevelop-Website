@@ -480,7 +480,7 @@ const AboutUs = () => {
                 mb: { xs: -50, sm: -50, md: 0 },
               }}
             >
-              <Box
+              {/* <Box
                 sx={{
                   width: { xs: "100%", md: "50%", lg: "40%" },
                   height: "60vh",
@@ -501,7 +501,7 @@ const AboutUs = () => {
                 >
                   <ThreeDE />
                 </Box>
-              </Box>
+              </Box> */}
               <Box
                 sx={{
                   display: "flex",
