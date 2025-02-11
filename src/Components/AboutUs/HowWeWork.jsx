@@ -218,7 +218,7 @@ const HowWeWork = () => {
         minHeight: "100vh",
         fontFamily: '"Inter", sans-serif',
         letterSpacing: "-0.00833em",
-        mt: { xs: 0, md: "10%" },
+        mt: { xs: "10%", md: "10%" },
         mb: { xs: "2rem", md: "0rem" },
       }}
     >

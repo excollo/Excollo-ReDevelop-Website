@@ -480,14 +480,13 @@ const AboutUs = () => {
                 mb: { xs: -50, sm: -50, md: 0 },
               }}
             >
-              {/* <Box
+              <Box
                 sx={{
                   width: { xs: "100%", md: "50%", lg: "40%" },
-                  height: "60vh",
                   display: { xs: "block", md: "none", lg: "none", xl: "none" },
                   // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
                   top: 0,
-                  left: 200,
+                  left: 0,
                 }}
               >
                 <Box
@@ -501,7 +500,7 @@ const AboutUs = () => {
                 >
                   <ThreeDE />
                 </Box>
-              </Box> */}
+              </Box>
               <Box
                 sx={{
                   display: "flex",
