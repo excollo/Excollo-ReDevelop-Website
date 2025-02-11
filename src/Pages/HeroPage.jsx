@@ -33,6 +33,16 @@ const HeroPage = () => {
   const isLargeScreenSize = useMediaQuery(theme.breakpoints.up("lg"));
   const isXtraLargeScreenSize = useMediaQuery(theme.breakpoints.up("xl"));
   const isDesktop = !isMobile && !isTablet;
+  useEffect(() => {
+    const handleResize = () => {
+      window.location.reload();
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
    useEffect(() => {
      let resizeTimeout;
      const handleResize = () => {

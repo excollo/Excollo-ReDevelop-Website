@@ -38,7 +38,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
       "linear-gradient(180deg, rgba(170, 63, 255, 0.9) 0%, rgba(94, 129, 235, 0.9) 100%)", // Maintain gradient on hover
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "1rem",
+    fontSize: "2rem",
     padding: "10px 20px",
     minWidth: "120px",
   },
@@ -158,7 +158,7 @@ const AnimatedCTA = () => {
           xl: "0.5vw 2vw",
         },
         borderRadius: "980px",
-        fontSize: `clamp(0rem, calc(0.5rem + 0.7vw), 4rem)`,
+        fontSize: `clamp(1rem, calc(0.5rem + 0.7vw), 4rem)`,
         fontWeight: "500",
         minWidth: "200px",
         duration: 0.36,
