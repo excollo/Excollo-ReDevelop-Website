@@ -305,7 +305,7 @@ const NavBar = () => {
                 </Typography>
                 <Box sx={{ mt: "4%" }}>
                   <FaChevronRight
-                    style={{ marginLeft: "0px", marginRight: "5px" }}
+                    style={{ marginLeft: "-10px", marginRight: "10px" }}
                   />
                 </Box>
               </Typography>
