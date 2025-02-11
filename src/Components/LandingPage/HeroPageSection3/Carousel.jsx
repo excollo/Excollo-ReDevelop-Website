@@ -75,6 +75,7 @@ const ResponsiveView = ({ type, isTablet }) => {
           width: "100%",
           maxWidth: "600px", // Maximum width for tablet
           justifyItems: "center", // Center cards horizontally
+          alignContent: "center"
         }}
       >
         {carouselContent.map((item, index) => (
@@ -103,6 +104,7 @@ const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
         fontFamily: '"Inter", sans-serif',
         boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 10px 0px",
         border: "1px solid #7e22ce",
+        position: "relative",
         cursor: "pointer",
         transition: "transform 0.3s",
         marginLeft: "auto",

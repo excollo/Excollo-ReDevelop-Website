@@ -23,9 +23,6 @@ const FeatureCard = ({
   isMainCard,
   isMobile,
   isTablet,
-  md,
-  lg,
-  xl,
 }) => {
   const cardStyles = {
     background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
@@ -296,7 +293,7 @@ const HeroPageSection4 = ({ onComplete }) => {
           },
           paddingTop: {
             xs: "25%",
-            sm: "10%",
+            sm: "25%",
           },
           mx: "auto",
           zIndex: 2,
@@ -304,24 +301,6 @@ const HeroPageSection4 = ({ onComplete }) => {
             xs: "8vh",
             sm: "0",
           },
-          // "@media (min-width: 300px) and (max-width:340px)": {
-          //   marginTop: "22vh",
-          // },
-          // "@media (min-width: 341px) and (max-width:380px)": {
-          //   marginTop: "18vh",
-          // },
-          // "@media (min-width: 381px) and (max-width:400px)": {
-          //   marginTop: "18vh",
-          // },
-          // "@media (min-width: 401px) and (max-width:450px)": {
-          //   marginTop: "13vh",
-          // },
-          // "@media (min-width: 451px) and (max-width:500px)": {
-          //   marginTop: "10vh",
-          // },
-          // "@media (min-width: 800px) and (max-width:899px)": {
-          //   marginTop: "10vh",
-          // },
         }}
       >
         <Typography

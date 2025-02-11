@@ -16,15 +16,16 @@ import Footer from "../Components/Footer";
 import HeroPageSection6 from "../Components/LandingPage/HeroPageSection6";
 import HeroPageSection7 from "../Components/LandingPage/HeroPageSection7";
 import { useLocation } from "react-router-dom";
+import { ErrorBoundary } from "./ErrorBoundary";
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MotionPathPlugin);
+
 const HeroPage = () => {
   const [showThreeDE, setShowThreeDE] = useState(true);
   const [animationComplete, setAnimationComplete] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [hero1Complete, setHero1Complete] = useState(false);
   const [hero2Complete, setHero2Complete] = useState(false);
-  const [hero4Complete, setHero4Complete] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const threeDERef = useRef(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -33,15 +34,6 @@ const HeroPage = () => {
   const isLargeScreenSize = useMediaQuery(theme.breakpoints.up("lg"));
   const isXtraLargeScreenSize = useMediaQuery(theme.breakpoints.up("xl"));
   const isDesktop = !isMobile && !isTablet;
-  useEffect(() => {
-    const handleResize = () => {
-      window.location.reload();
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
    useEffect(() => {
      let resizeTimeout;
@@ -105,7 +97,7 @@ const HeroPage = () => {
   }, [location]);
 
   // threeDE animation with scrollTrigger
-  const ANIMATION_SESSION_DURATION = 1* 60 * 60 * 1000;
+  const ANIMATION_SESSION_DURATION = 1 * 60 * 60 * 1000;
 
   const [hasAnimationPlayed, setHasAnimationPlayed] = useState(() => {
     const lastAnimationTime = localStorage.getItem("lastAnimationTime");
@@ -545,7 +537,9 @@ const HeroPage = () => {
         }}
       >
         <HeroPageSection3 />
+        <ErrorBoundary>
         <HeroPageSection4 />
+        </ErrorBoundary>
         <HeroPageSection5 />
         <HeroPageSection6 />
         <HeroPageSection7 />
