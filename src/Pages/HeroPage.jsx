@@ -33,15 +33,46 @@ const HeroPage = () => {
   const isLargeScreenSize = useMediaQuery(theme.breakpoints.up("lg"));
   const isXtraLargeScreenSize = useMediaQuery(theme.breakpoints.up("xl"));
   const isDesktop = !isMobile && !isTablet;
-  useEffect(() => {
-    const handleResize = () => {
-      window.location.reload();
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+   useEffect(() => {
+     let resizeTimeout;
+     const handleResize = () => {
+       // Only reload if there's a significant change in screen width
+       const currentWidth = window.innerWidth;
+       const storedWidth = parseInt(
+         sessionStorage.getItem("screenWidth") || "0"
+       );
+       // Check if width changed by more than 100px (adjust this threshold as needed)
+       if (Math.abs(currentWidth - storedWidth) > 100) {
+         sessionStorage.setItem("screenWidth", currentWidth.toString());
+         window.location.reload();
+       }
+     };
+     const debouncedResize = () => {
+       clearTimeout(resizeTimeout);
+       resizeTimeout = setTimeout(handleResize, 250); // Wait 250ms after resize ends
+     };
+     // Store initial width
+     sessionStorage.setItem("screenWidth", window.innerWidth.toString());
+     // Add debounced event listener
+     window.addEventListener("resize", debouncedResize);
+     return () => {
+       window.removeEventListener("resize", debouncedResize);
+       clearTimeout(resizeTimeout);
+     };
+   }, []);
+   // Add orientation change handler separately if needed
+   useEffect(() => {
+     const handleOrientationChange = () => {
+       // Wait for the orientation change to complete
+       setTimeout(() => {
+         window.location.reload();
+       }, 100);
+     };
+     window.addEventListener("orientationchange", handleOrientationChange);
+     return () => {
+       window.removeEventListener("orientationchange", handleOrientationChange);
+     };
+   }, []);
 
   // scroll remember
   const location = useLocation();
