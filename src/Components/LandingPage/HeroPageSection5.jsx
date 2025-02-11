@@ -69,22 +69,6 @@ const HeroPageSection5 = () => {
     }
   };
 
-  // Handle Window Resize
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize(window.innerWidth);
-      initializeAnimations(); // Reinitialize animations
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isDesktop]);
-
-  // Initialize animations on mount and when isDesktop changes
-  useEffect(() => {
-    initializeAnimations();
-  }, [isDesktop]);
-
   return (
     <Box
       ref={sectionRef}
