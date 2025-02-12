@@ -377,9 +377,7 @@ const Footer = () => {
 
                   md: "1rem",
                   lg: "1rem",
-                  xl: specificCondition
-                    ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                    : "1rem",
+                  xl: "2rem",
                 },
               }}
               gutterBottom
@@ -415,9 +413,7 @@ const Footer = () => {
                   fontSize: {
                     xs: 14,
                     sm: 16,
-                    xl: specificCondition
-                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                      : "auto",
+                    xl: "2rem",
                   },
                 }}
               />
@@ -447,9 +443,7 @@ const Footer = () => {
                 fontSize: {
                   xs: "1rem",
                   sm: "1.1rem",
-                  xl: specificCondition
-                    ? `clamp(0.5rem, calc(0.5rem + 1.25vw), 3.5rem)`
-                    : "auto",
+                  xl: "2rem",
                 },
               }}
             >
@@ -477,9 +471,7 @@ const Footer = () => {
                     fontSize: {
                       xs: "1rem",
                       sm: "1rem",
-                      xl: specificCondition
-                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                        : "auto",
+                      xl: "1.5rem",
                     },
                     mb: 1,
                     "&:hover": { color: "#a693c1" },
@@ -513,9 +505,7 @@ const Footer = () => {
                 fontSize: {
                   xs: "1rem",
                   sm: "1.1rem",
-                  xl: specificCondition
-                    ? `clamp(0.5rem, calc(0.5rem + 1.25vw), 3.5rem)`
-                    : "auto",
+                  xl: "2rem",
                 },
               }}
             >
@@ -545,9 +535,7 @@ const Footer = () => {
                     fontSize: {
                       xs: 18,
                       sm: 20,
-                      xl: specificCondition
-                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                        : "auto",
+                      xl: "1.5rem",
                     },
                     color: "grey.400",
                   }}
@@ -563,9 +551,7 @@ const Footer = () => {
                     fontSize: {
                       xs: "0.875rem",
                       sm: "1rem",
-                      xl: specificCondition
-                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                        : "auto",
+                      xl: "1.5rem",
                     },
                   }}
                 >
@@ -585,9 +571,7 @@ const Footer = () => {
                     fontSize: {
                       xs: 18,
                       sm: 20,
-                      xl: specificCondition
-                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                        : "auto",
+                      xl: "1.5rem",
                     },
                     color: "grey.400",
                   }}
@@ -603,9 +587,7 @@ const Footer = () => {
                     fontSize: {
                       xs: "0.875rem",
                       sm: "1rem",
-                      xl: specificCondition
-                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                        : "auto",
+                      xl: "1.5rem",
                     },
                   }}
                 >
@@ -635,9 +617,7 @@ const Footer = () => {
                       fontSize: {
                         xs: "0.875rem",
                         sm: "1rem",
-                        xl: specificCondition
-                          ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                          : "auto",
+                        xl: "1.5rem",
                       },
                       textAlign: { xs: "center", md: "left" },
                     }}
@@ -657,9 +637,7 @@ const Footer = () => {
                             sm: 20,
                             md: 20,
                             lg: 16,
-                            xl: specificCondition
-                              ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                              : "auto",
+                            xl: "1.5rem",
                           },
                           color: "grey.400",
                           mr: 0.5,
@@ -690,9 +668,7 @@ const Footer = () => {
                               sm: 20,
                               md: 20,
                               lg: 16,
-                              xl: specificCondition
-                                ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                                : "auto",
+                              xl: "1.5rem",
                             },
                             color: "grey.400",
                             mr: 0.5,
@@ -731,9 +707,7 @@ const Footer = () => {
                 fontSize: {
                   xs: "1rem",
                   sm: "1.1rem",
-                  xl: specificCondition
-                    ? `clamp(0.5rem, calc(0.5rem + 1.25vw), 3.5rem)`
-                    : "auto",
+                  xl: "2rem",
                 },
               }}
             >
@@ -765,9 +739,7 @@ const Footer = () => {
                   fontSize: {
                     xs: "0.875rem",
                     sm: "1rem",
-                    xl: specificCondition
-                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                      : "auto",
+                    xl: "1.5rem",
                   },
                 }}
               >
@@ -776,9 +748,7 @@ const Footer = () => {
                     fontSize: {
                       xs: 18,
                       sm: 20,
-                      xl: specificCondition
-                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                        : "auto",
+                      xl: "1.5rem",
                     },
                   }}
                 />{" "}
@@ -799,9 +769,7 @@ const Footer = () => {
                   fontSize: {
                     xs: "0.875rem",
                     sm: "1rem",
-                    xl: specificCondition
-                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                      : "auto",
+                    xl: "1.5rem",
                   },
                 }}
               >
@@ -811,9 +779,7 @@ const Footer = () => {
                     fontSize: {
                       xs: 14,
                       sm: 16,
-                      xl: specificCondition
-                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                        : "auto",
+                      xl: "1.5rem",
                     },
                   }}
                 />
@@ -833,9 +799,7 @@ const Footer = () => {
                   fontSize: {
                     xs: "0.875rem",
                     sm: "1rem",
-                    xl: specificCondition
-                      ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                      : "auto",
+                    xl: "1.5rem",
                   },
                 }}
               >
@@ -845,9 +809,7 @@ const Footer = () => {
                     fontSize: {
                       xs: 14,
                       sm: 16,
-                      xl: specificCondition
-                        ? `clamp(0.5rem, calc(0.5rem + 1vw), 3rem)`
-                        : "auto",
+                      xl: "1.5rem",
                     },
                   }}
                 />
@@ -888,9 +850,7 @@ const Footer = () => {
             fontSize: {
               xs: "0.75rem",
               sm: "0.875rem",
-              xl: specificCondition
-                ? `clamp(0.5rem, calc(0.5rem + 1vw), 2.5rem)`
-                : "auto",
+              xl: "1.5rem",
             },
             textAlign: { xs: "center", sm: "left" },
           }}
@@ -923,9 +883,7 @@ const Footer = () => {
               fontSize: {
                 xs: "0.75rem",
                 sm: "0.8rem",
-                xl: specificCondition
-                  ? `clamp(0.5rem, calc(0.5rem + 1vw), 2.5rem)`
-                  : "auto",
+                xl: "1.5rem",
               },
             }}
           >
@@ -943,9 +901,7 @@ const Footer = () => {
               fontSize: {
                 xs: "0.75rem",
                 sm: "0.8rem",
-                xl: specificCondition
-                  ? `clamp(0.5rem, calc(0.5rem + 1vw), 2.5rem)`
-                  : "auto",
+                xl: "1.5rem",
               },
             }}
           >

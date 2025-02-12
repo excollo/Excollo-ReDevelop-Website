@@ -100,16 +100,16 @@ const TableContent = styled("div")(({ theme }) => ({
     transform: "translateY(100%)",
     visibility: "hidden",
     marginBottom: 0,
-    padding: "1vw 1vw",
+    padding: "2vw 1vw",
     borderRadius: 0,
     background: "transparent",
-    margin: 0, // Remove any margin
-    borderLeft: "none", // Remove left border
+    margin: 0, 
+    borderLeft: "none",
     "&:first-of-type": {
-      borderLeft: "1px solid #7E22CE", // Add back left border only to first card
+      borderLeft: "1px solid #7E22CE",
     },
     "& > div": {
-      marginTop: "calc(25vh - 100%)", // Slightly adjusted for larger text size
+      marginTop: "calc(25vh - 100%)",
     },
   },
 
@@ -215,7 +215,7 @@ const HowWeWork = () => {
       ref={containerRef}
       sx={{
         color: "#fff",
-        minHeight: "100vh",
+        minHeight: "90vh",
         fontFamily: '"Inter", sans-serif',
         letterSpacing: "-0.00833em",
         mt: { xs: "10%", sm: "10%", md: "10%" },
@@ -225,7 +225,7 @@ const HowWeWork = () => {
       <WorkTable>
         <Box
           sx={{
-            mb: { xs: "4rem", md: "15%" },
+            mb: { xs: "4rem", md: "10%" },
             ml: { xs: "0rem", sm: "2rem", md: "0rem" },
             position: "relative",
           }}

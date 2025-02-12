@@ -56,11 +56,11 @@ const HeroPageSection7 = () => {
     setRotation({ x: 0, y: 0 });
   };
   const translateYImage = is2301to2600px
-    ? Math.max(3600 - scrollY * 0.5, 0)
+    ? Math.max(3000 - scrollY * 0.5, 0)
     : is2001to2300px
-    ? Math.max(3100 - scrollY * 0.5, 0)
+    ? Math.max(2700 - scrollY * 0.5, 0)
     : is1750to2000px
-    ? Math.max(2800 - scrollY * 0.5, 0)
+    ? Math.max(2500 - scrollY * 0.5, 0)
     : isXtraLargeScreen
     ? Math.max(2300 - scrollY * 0.5, 0)
     : is1300pxto1535px
