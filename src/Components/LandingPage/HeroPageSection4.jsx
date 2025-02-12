@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Paper, Typography, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,13 +32,19 @@ const FeatureCard = ({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "1rem",
-    boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 20px 0px",
+    boxShadow: {
+      xs: "rgba(133, 86, 245, 0.4) 0px 0px 20px 0px",
+      md: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
+    },
     border: isFinalState ? "1px solid #7e22ce" : "1px solid #7e22ce",
     transition: "all 0.3s ease",
     "&:hover": {
       backgroundColor: "#000000",
       transform: "translateY(-5px)",
-      boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 25px 0px",
+      boxShadow: {
+        xs: "rgba(133, 86, 245, 0.4) 0px 0px 50px 0px",
+        md: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
+      },
     },
   };
 
@@ -76,15 +88,15 @@ const FeatureCard = ({
           className="feature-description"
           sx={{
             fontSize: {
-              xs: `clamp(0.8rem, calc(0.7rem + 1vw), 9rem)`,
+              xs: `clamp(0.8rem, calc(0.5rem + 1vw), 9rem)`,
               md: `clamp(0.5rem, calc(0.6rem + 0.4vw), 1.5rem)`,
               lg: `clamp(0.5rem, calc(0.6rem + 0.6vw), 1.8rem)`,
               xl: `clamp(0.25rem, calc(0.5rem + 0.8vw), 3rem)`,
             },
-            fontWeight: 100,
-            lineHeight: "1.5",
+            fontWeight: 200,
+            lineHeight: "1.7",
             fontFamily: '"Inter", sans-serif',
-            maxWidth: isMobile ? "90%" : "80%",
+            maxWidth: "80%",
             opacity: isMobile || isTablet ? 1 : showDescription ? 1 : 0,
             transition: "opacity 0.5s ease",
           }}
@@ -96,7 +108,6 @@ const FeatureCard = ({
   );
 };
 
-// pagination dots for mobile screen
 const PaginationDot = ({ active, onClick }) => (
   <Box
     onClick={onClick}
@@ -119,7 +130,6 @@ const HeroPageSection4 = ({ onComplete }) => {
   const [direction, setDirection] = useState(0);
   const [key, setKey] = useState(0);
   const sectionRef = useRef(null);
-  // const previousWidthRef = useRef(window.innerWidth);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
@@ -144,7 +154,7 @@ const HeroPageSection4 = ({ onComplete }) => {
         "Cutting-edge AI and automation drive scalable, innovative solutions.",
     },
   ];
-  //array for mobile and tablet
+
   const MobileCards = [
     {
       title: "Iterative Excellence",
@@ -162,7 +172,6 @@ const HeroPageSection4 = ({ onComplete }) => {
     },
   ];
 
-  // mobile card swapping function
   const handleDragStart = (event) => {
     setIsDragging(true);
     setDragStart(event.touches[0].clientX);
@@ -187,7 +196,7 @@ const HeroPageSection4 = ({ onComplete }) => {
     if (Math.abs(diff) >= dragThreshold) {
       if (diff > 0 && currentIndex > 0) {
         // Swipe right
-        setCurrentIndex((prev) => prev - 1);
+      setCurrentIndex((prev) => prev - 1);
       } else if (diff < 0 && currentIndex < MobileCards.length - 1) {
         // Swipe left
         setCurrentIndex((prev) => prev + 1);
@@ -336,7 +345,10 @@ const HeroPageSection4 = ({ onComplete }) => {
           paddingTop: { xs: "25%", sm: "25%" },
           mx: "auto",
           zIndex: 2,
-          marginTop: { xs: "8vh", sm: "0" },
+          marginTop: {
+            xs: "5%",
+            sm: "10%",
+          },
           overflow: "hidden",
         }}
       >
@@ -347,7 +359,7 @@ const HeroPageSection4 = ({ onComplete }) => {
             fontWeight: 600,
             lineHeight: 1.167,
             letterSpacing: "-0.01562em",
-            mb: "20%",
+            mb: { xs: "20%", sm: "10%" },
             fontSize: { xs: `clamp(1.75rem, calc(1.15rem + 2vw), 9rem)` },
             position: "relative",
             zIndex: 2,
@@ -393,14 +405,13 @@ const HeroPageSection4 = ({ onComplete }) => {
           onTouchEnd={handleDragEnd}
         >
           {MobileCards.map((card, index) => (
+            // const style = getCardStyle(index);
             <Box
               key={index}
               sx={{
                 width: "60%",
                 flexShrink: 0,
                 transition: "all 0.3s ease",
-                opacity: index === currentIndex ? 1 : 0.5,
-                transform: `scale(${index === currentIndex ? 1.2 : 0.8})`,
               }}
             >
               <FeatureCard
@@ -408,6 +419,8 @@ const HeroPageSection4 = ({ onComplete }) => {
                 description={card.description}
                 isMobile={isMobile}
                 isTablet={isTablet}
+                opacity={index === currentIndex ? 1 : 0.5}
+                scale={index === currentIndex ? 1.2 : 0.8}
               />
             </Box>
           ))}
