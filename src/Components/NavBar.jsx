@@ -170,7 +170,7 @@ const NavBar = () => {
               sx={{ display: { md: "none" } }}
             >
               <MenuIcon
-                sx={{ color: "#ADA7FF", height: "40px", width: "40px" }}
+                sx={{ color: "#fff", height: "40px", width: "40px" }}
               />
             </IconButton>
           ) : (

@@ -11,27 +11,24 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const WorkTable = styled("section")({
-  width: "95%",
+  width: "100%",
   position: "relative",
-  margin: "auto"
 });
 
 const TableGrid = styled("div")(({ theme }) => ({
   display: "flex",
   flexWrap: "wrap",
   width: "100%",
-  margin: "auto",
   position: "relative",
   justifyContent: "center", // Center items on all screens
   alignItems: "center", // Center vertically in column layout
   flexDirection: "column",
   [theme.breakpoints.up("xs")]: {
-    marginLeft: "22%",
-    width: "50%", // Changed from maxWidth: "50%" to width: "100%"
+    width: "70%", // Changed from maxWidth: "50%" to width: "100%"
+    margin: "auto"
   },
   [theme.breakpoints.up("sm")]: {
-    marginLeft: "19%",
-    width: "60%", // Changed from maxWidth: "50%" to width: "100%"
+    width: "80%", // Changed from maxWidth: "50%" to width: "100%"
   },
   [theme.breakpoints.up("md")]: {
     flexDirection: "row",
@@ -44,9 +41,7 @@ const TableGrid = styled("div")(({ theme }) => ({
 
 const TableContent = styled("div")(({ theme }) => ({
   flex: "1 1",
-  border: "1px solid #7E22CE",
   margin: "0 0",
-  width: "100%",
   padding: "10px",
   height: "auto",
   opacity: 1,
@@ -60,7 +55,11 @@ const TableContent = styled("div")(({ theme }) => ({
   justifyContent: "center",
   marginBottom: "20px",
   borderRadius: "20px",
-  background: "linear-gradient(180deg, #05000A 0%,#1B1125 50%)",
+  background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+  color: "#fff",
+  m: 2,
+  border: "2px solid rgba(255, 255, 255, 0.1)",
+  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   [theme.breakpoints.up("md")]: {
     width: "14vw",
     height: "60vh",
@@ -103,7 +102,7 @@ const TableContent = styled("div")(({ theme }) => ({
     padding: "2vw 1vw",
     borderRadius: 0,
     background: "transparent",
-    margin: 0, 
+    margin: 0,
     borderLeft: "none",
     "&:first-of-type": {
       borderLeft: "1px solid #7E22CE",

@@ -266,7 +266,7 @@ const OurServices = () => {
       <Box
         sx={{
           position: "relative",
-          mt: { xs: 0, sm: -5, md: -30 },
+          mt: { xs: "-20%", sm: -5, md: -30 },
           paddingTop: isTablet || isLandscapeMedium ? "10px" : { xs: 0, md: 0 },
         }}
       >

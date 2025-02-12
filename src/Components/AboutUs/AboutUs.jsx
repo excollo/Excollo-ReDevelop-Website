@@ -29,12 +29,10 @@ const ContentSection = styled("section")(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
     alignItems: "center",
-    width: "95%",
-    padding: "20px 0",
+    padding: "0px 0",
   },
   [theme.breakpoints.down("sm")]: {
-    width: "100%",
-    padding: "10px 10px",
+    padding: "0px 0px",
   },
 }));
 
@@ -155,13 +153,9 @@ const Card = styled("div")(
 
     [theme.breakpoints.down("md")]: {
       width: "90%",
-      height: "auto",
-      minHeight: isMobile ? "auto" : "250px",
       marginBottom: "20px",
       fontSize: `clamp(0.8rem, calc(0.6rem + 1vw), 9rem)`,
-      background: isMobile
-        ? "none"
-        : `linear-gradient(${direction}, rgba(142, 84, 247, 0.5), rgba(51, 46, 108, 0.8), rgba(0, 0, 0, 1))`,
+      background: `linear-gradient(${direction}, rgba(142, 84, 247, 0.5), rgba(51, 46, 108, 0.8), rgba(0, 0, 0, 1))`,
       padding: isMobile ? "0" : "30px",
       "&::before": {
         display: isMobile ? "none" : "block",
@@ -174,17 +168,17 @@ const Card = styled("div")(
     },
 
     [theme.breakpoints.down("sm")]: {
-      width: "100%",
-      marginBottom: "-30px",
+      width: "80%",
       borderRadius: "30px",
+      background: `linear-gradient(${direction},rgba(0, 0, 0, 1), rgba(51, 46, 108, 0.8), rgba(51, 46, 108, 0.8), rgba(0, 0, 0, 1))`,
       fontSize: `clamp(0.8rem, calc(0.6rem + 1vw), 9rem)`,
-      padding: isMobile ? "0" : "20px",
+      padding: isMobile ? "0" : "0px 20px",
       "&::before": {
         borderRadius: "31px",
       },
       "& p": {
-        padding: "10px",
-        margin: "5px",
+        padding: "0px",
+        margin: "0px",
       },
     },
 
@@ -447,189 +441,6 @@ const AboutUs = () => {
 
   return (
     <Box>
-      {/* <Box
-        sx={{
-          minHeight: isLandscapeMedium
-            ? "50vh"
-            : isMobile || isSpecificSize
-            ? "38vh"
-            : "100vh",
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          width: "100%",
-          position: "relative",
-        }}
-      >
-        <Box
-          sx={{
-            maxWidth: { xs: "95%", sm: "90%", md: "85%", lg: "85%", xl: "85%" },
-            margin: isLandscapeMedium
-              ? "120px auto 60px"
-              : { xs: "20px auto", md: "0px auto" },
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            alignItems: "center",
-          }}
-        >
-          <Box
-            sx={{
-              minHeight: isLandscapeMedium
-                ? "auto"
-                : { xs: "auto", sm: "auto", md: "auto" },
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: "center",
-              mt: isLandscapeMedium
-                ? "0"
-                : { xs: "10%", md: "-10%", lg: "-10%" },
-              mb: { xs: -50, sm: -50, md: 0 },
-              position: "relative",
-            }}
-          >
-            <Box
-              sx={{
-                width: { md: "70%", lg: "70%", xl: "70%" },
-                mb: { xs: -50, sm: -50, md: 0 },
-              }}
-            >
-              <Box
-                sx={{
-                  width: { xs: "100%", md: "50%", lg: "40%" },
-                  height: "60vh",
-                  display: { xs: "block", md: "none", lg: "none", xl: "none" },
-                  // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
-                  top: 0,
-                  left: 200,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                >
-                  <ThreeDE />
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: { xs: "column", md: "row" },
-                  alignItems: { xs: "center", md: "flex-start" },
-                  marginBottom: isLandscapeMedium ? "40px" : undefined,
-                }}
-              >
-                <Typography
-                  variant="h2"
-                  sx={{
-                    textAlign: { xs: "center", md: "left" },
-                    fontSize: {
-                      xs: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
-                      md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
-                      lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
-                      xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
-                    },
-                    fontFamily: '"Inter", sans-serif',
-                    fontWeight: "600",
-                    color: "#fff",
-                    whiteSpace: "nowrap", // Prevent line break
-                    ml: isLandscapeMedium ? "5%" : 0,
-                  }}
-                >
-                  <span className="highlight">About </span>
-                  <span
-                    style={{
-                      background:
-                        "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }}
-                  >
-                    Excollo
-                  </span>
-                </Typography>
-              </Box>
-
-              <Typography
-                sx={{
-                  maxWidth: isLandscapeMedium ? "90%" : { xs: "100%" },
-                  fontSize: {
-                    xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                    md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                    lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
-                    xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
-                  },
-                  fontWeight: 200,
-                  lineHeight: 1.7,
-                  textAlign: { xs: "center", md: "left" },
-                  ml: isLandscapeMedium ? "5%" : { xs: 0, md: "1%" },
-                  px: { xs: 2, md: 0 },
-                  mt: isLandscapeMedium ? 2 : { xs: 3, md: 5 },
-                }}
-              >
-                Excollo bridges today’s challenges and tomorrow’s opportunities.
-                We harness cutting-edge technology, AI, and tailored solutions
-                to deliver outcomes and make businesses future-ready.
-              </Typography>
-            </Box>
-
-            {!isMobile && !isTablet && (
-              <Box
-                sx={{
-                  width: isLandscapeMedium ? "50%" : { md: "50%", lg: "40%" },
-                  height: "100vh",
-                  display: "flex",
-                  "@media (min-width: 200px) and (max-width: 899px)": {
-                    display: "none",
-                  },
-                  top: 0,
-                  left: 0,
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                >
-                  <ThreeDE />
-                </Box>
-              </Box>
-            )}
-          </Box>
-        </Box>
-      </Box>
-
-      <Box
-        sx={{
-          position: "relative",
-          top: isMobile || isSpecificSize ? 450 : 0,
-          width: "100%",
-          margin: "auto",
-          marginTop: isMobile || isSpecificSize ? 0 : "-8%",
-          display: isMobile || isSpecificSize ? "block" : "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          rowGap: "2rem",
-        }}
-      >
-        <VisionSection />
-        <MissionSection />
-        <PhilosophySection />
-      </Box>
-      <Box
-        sx={{ position: "relative", top: isMobile || isSpecificSize ? 450 : 0 }}
-      >
-        <HowWeWork />
-        <Excollo3D />
-      </Box>
-       */}
       <Box
         sx={{
           minHeight: isLandscapeMedium
@@ -793,7 +604,6 @@ const AboutUs = () => {
         sx={{
           position: "relative",
           width: "100%",
-          margin: "auto",
           marginTop: isMobile || isSpecificSize ? 0 : "-8%",
           display: isMobile || isSpecificSize ? "block" : "flex",
           flexDirection: "column",
