@@ -664,7 +664,7 @@ const AboutUs = () => {
               alignItems: "center",
               mt: isLandscapeMedium
                 ? "0"
-                : { xs: "10%", md: "-10%", lg: "-10%" },
+                : { xs: "0%", md: "-10%", lg: "-10%" },
               mb: { xs: 0, sm: 0, md: 0 },
               position: "relative",
             }}
@@ -678,7 +678,7 @@ const AboutUs = () => {
               <Box
                 sx={{
                   width: { xs: "100%", md: "50%", lg: "40%" },
-                  height: "60vh",
+                  height: "50vh",
                   display: { xs: "block", md: "none", lg: "none", xl: "none" },
                   // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
                   top: 0,
@@ -703,6 +703,7 @@ const AboutUs = () => {
                   flexDirection: { xs: "column", md: "row" },
                   alignItems: { xs: "center", md: "flex-start" },
                   marginBottom: isLandscapeMedium ? "40px" : undefined,
+                  marginTop: { xs: "25%", md: "0" },
                 }}
               >
                 <Typography

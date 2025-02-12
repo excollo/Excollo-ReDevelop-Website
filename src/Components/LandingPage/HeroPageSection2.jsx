@@ -111,7 +111,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         position: "relative",
         zIndex: 2,
         marginTop: {
-          xs: "-60px",
+          xs: "-20%",
           sm: "-60px",
           md: "0rem",
         },
@@ -122,7 +122,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
         sx={{
           position: "absolute",
           top: {
-            xs: "0%",
+            xs: "20%",
             md: "-10%",
             lg: "-20%",
           },

@@ -3,6 +3,7 @@ import {
   Box,
   Typography,
   IconButton,
+  Paper,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
@@ -10,6 +11,7 @@ import { ScrollContext } from "./ScrollProvider";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Dynamic card width and gap based on screen size
 const getCardDimensions = (width) => {
@@ -27,6 +29,84 @@ const getCardDimensions = (width) => {
 
 const SCROLL_COOLDOWN = 800;
 const INITIAL_SCROLL_THRESHOLD = 20;
+
+const Feature = ({ title, description, isMobile, isTablet }) => {
+  const cardStyles = {
+    background: "linear-gradient(180deg, #05000A 0%, #1B1125 100%)",
+    borderRadius: "12px",
+    textAlign: "center",
+    padding: "1",
+    width: "100%",
+    height: isMobile ? "150px" : isTablet ? "200px" : "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "1px solid #7e22ce",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#000000",
+      transform: "translateY(-5px)",
+      boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 100px 0px",
+    },
+  };
+
+  const titleStyles = {
+    background: isMobile
+      ? "linear-gradient(90deg, #2579e3, #8e54f7)"
+      : "linear-gradient(90deg, #2579e3, #8e54f7)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    display: "inline-block",
+    marginBottom: isMobile ? "0.5rem" : "1rem",
+    marginTop: isMobile ? "0" : isTablet ? "0" : "2rem",
+    transition: "margin-top 0.5s ease",
+    fontSize: 
+      isMobile
+      ? `clamp(1.35rem, calc(0.5rem + 1vw), 9rem)`
+      : isTablet
+      ? `clamp(1.35rem, calc(1rem + 1vw), 9rem)`
+      : {
+          md: `clamp(0.25rem,calc(1rem + 0.5vw),2.2rem)`,
+          lg: `clamp(0.25rem,calc(1rem + 0.8vw),2.2rem)`,
+          xl: `clamp(0.25rem,calc(1rem + 1vw),3rem)`,
+        },
+    fontWeight: 400,
+  };
+
+  return (
+    <Paper elevation={6} sx={cardStyles}>
+      <Typography gutterBottom className="feature-title" sx={titleStyles}>
+        {title}
+      </Typography>
+      {((!isMobile && !isTablet) ||
+        (isMobile && description) ||
+        (isTablet && description)) && (
+        <Typography
+          fontWeight={100}
+          color="white"
+          className="feature-description"
+          sx={{
+            fontSize: {
+              xs: `clamp(0.8rem, calc(0.5rem + 1vw), 9rem)`,
+              md: `clamp(0.5rem, calc(0.6rem + 0.4vw), 1.5rem)`,
+              lg: `clamp(0.5rem, calc(0.6rem + 0.6vw), 1.8rem)`,
+              xl: `clamp(0.25rem, calc(0.5rem + 0.8vw), 3rem)`,
+            },
+            fontWeight: 200,
+            lineHeight: "1.7",
+            fontFamily: '"Inter", sans-serif',
+            maxWidth: "80%",
+            opacity: 1,
+            transition: "opacity 0.5s ease",
+          }}
+        >
+          {description}
+        </Typography>
+      )}
+    </Paper>
+  );
+};
 
 const carouselContent = [
   {
@@ -62,82 +142,144 @@ const carouselContent = [
 ];
 
 const ResponsiveView = ({ type, isTablet }) => {
+  const [direction, setDirection] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [key, setKey] = useState(0);
+
+  const cards = [
+    {
+      title: "AI & Automation",
+      description:
+        "Identify gaps in processes, align technology to bridge those gaps, and implement transformative solutions tailored for success.",
+    },
+    {
+      title: "Sales Channel Development",
+      description:
+        "Scalable websites and applications on both, web and mobile, tailored to meet your business’s unique challenges and goals.",
+    },
+    {
+      title: "ML Driven Analysis",
+      description:
+        "Harness cutting-edge machine learning to decode data, predict trends, and empower precise, forward-thinking business strategies.",
+    },
+    {
+      title: "Product Development",
+      description:
+        "Set up or enhance e-commerce and WhatsApp sales channels to unlock new growth opportunities and expand reach.",
+    },
+    {
+      title: "Tech Consultancy",
+      description:
+        "From intelligent chatbots to workflow automation, we bring AI solutions that optimize operations and reduce costs.",
+    },
+  ];
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + cards.length) % cards.length
+    );
+  };
+
   return (
     <Box
-      sx={{ p: 2, minHeight: "100vh", display: "flex", justifyContent: "center" }}
+      key={key}
+      sx={{
+        minHeight: {
+          xs: "100vh",
+        },
+        color: "#fff",
+        fontFamily: '"Inter", sans-serif',
+        position: "relative",
+        marginTop: {
+          xs: "20%",
+          sm: "10%"
+        },
+      }}
     >
       <Box
         sx={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gridTemplateRows: "repeat(5, auto)",
-          gap: 2,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
           width: "100%",
-          maxWidth: "600px", // Maximum width for tablet
-          justifyItems: "center", // Center cards horizontally
-          alignContent: "center"
+          position: "relative",
+          backgroundColor: "black",
         }}
       >
-        {carouselContent.map((item, index) => (
-          <ResponsiveCard
-            key={index}
-            {...item}
-            type={type}
-            isTablet={isTablet}
-            isMobile={!isTablet} // Add this prop if needed
-          />
-        ))}
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            initial={{ opacity: 0, x: direction > 0 ? "100%" : "-100%" }}
+            animate={{ opacity: 1, x: "0%" }}
+            exit={{ opacity: 0, x: direction > 0 ? "-100%" : "100%" }}
+            transition={{ duration: 0.5 }}
+            style={{
+              width: "80%",
+              position: "absolute",
+              left: "10%",
+              x: "-50%",
+            }}
+          >
+            <Feature
+              title={cards[currentIndex].title}
+              description={cards[currentIndex].description}
+              isMobile={isMobile}
+              isTablet={isTablet}
+            />
+          </motion.div>
+        </AnimatePresence>
+        <Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "30%",
+              mt: isMobile ? 22 : 32,
+              gap: 1,
+            }}
+          >
+            <Box
+              sx={{
+                borderRadius: "50%",
+                border: "1px solid rgb(206, 84, 247)",
+                height: "40px",
+                width: "40px",
+              }}
+            >
+              <IconButton
+                onClick={handlePrev}
+                sx={{ ml: 0.5, p: 1, color: "white" }}
+              >
+                <ArrowBackIosIcon />
+              </IconButton>
+            </Box>
+            <Box
+              sx={{
+                borderRadius: "50%",
+                border: "1px solid rgb(206, 84, 247)",
+                height: "40px",
+                width: "40px",
+              }}
+            >
+              <IconButton
+                onClick={handleNext}
+                sx={{ ml: 0.2, p: 1, color: "white" }}
+              >
+                <ArrowForwardIosIcon />
+              </IconButton>
+            </Box>
+          </Box>
+        </Box>
       </Box>
-    </Box>
-  );
-};
-
-const ResponsiveCard = ({ title, description, type, isTablet, isMobile }) => {
-  return (
-    <Box
-      sx={{
-        width: isMobile ? "90%" : "80%", // Adjust for mobile vs tablet
-        // mb: 2,
-        p: 2,
-
-        borderRadius: 2,
-        fontFamily: '"Inter", sans-serif',
-        boxShadow: "rgba(133, 86, 245, 0.4) 0px 0px 10px 0px",
-        border: "1px solid #7e22ce",
-        position: "relative",
-        cursor: "pointer",
-        transition: "transform 0.3s",
-        marginLeft: "auto",
-        marginRight: "auto",
-      }}
-    >
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: 400,
-          fontSize: { xs: `clamp(1.35rem, calc(0.5rem + 1vw), 9rem)` },
-          mb: 2,
-          textAlign: "center",
-          background: isTablet
-            ? "linear-gradient(180deg, #2579e3, #8e54f7 100%)"
-            : "linear-gradient(90deg, #2579e3, #8e54f7 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-        }}
-      >
-        {title}
-      </Typography>
-      <Typography
-        sx={{
-          color: "#ddd",
-          fontWeight: 200,
-          fontSize: { xs: `clamp(0.8rem, calc(0.5rem + 1vw), 9rem)` },
-          letterSpacing: "0.001em",
-          textAlign: "center",
-        }}
-      >
-        {description}
-      </Typography>
     </Box>
   );
 };
@@ -209,7 +351,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
   const handleContainerMouseLeave = () => {
     setIsOverCard(false);
   };
- 
+
   const CAROUSEL_TIMING = {
     duration: 800,
     cooldown: 850,
@@ -252,7 +394,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
 
     if (isHorizontalScroll) {
       e.stopPropagation();
-    e.preventDefault();
+      e.preventDefault();
     } else {
       return;
     }
@@ -266,38 +408,38 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
       !isScrolling &&
       (Math.abs(e.deltaY) > INITIAL_SCROLL_THRESHOLD ||
         Math.abs(e.deltaX) > INITIAL_SCROLL_THRESHOLD)
-    ){
+    ) {
+      const delta =
+        Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      const direction = delta > 0 ? 1 : -1;
 
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    const direction = delta > 0 ? 1 : -1;
-
-    const targetDirection = direction;
-    const currentPosition = containerRef.current.scrollLeft;
-    const currentIndex = Math.round(currentPosition / TOTAL_WIDTH);
-    const targetIndex = Math.max(
-      0,
-      Math.min(carouselContent.length - 1, currentIndex + targetDirection)
-    );
-    const targetPosition = targetIndex * TOTAL_WIDTH;
-
-    if (targetPosition !== currentPosition) {
-      setIsScrolling(true);
-      lastScrollTime.current = currentTime;
-      setActiveScroller(isReverse ? "reverse" : "normal");
-      setScrollPosition(targetPosition);
-
-      smoothScrollTo(
-        containerRef.current,
-        targetPosition,
-        CAROUSEL_TIMING.duration
+      const targetDirection = direction;
+      const currentPosition = containerRef.current.scrollLeft;
+      const currentIndex = Math.round(currentPosition / TOTAL_WIDTH);
+      const targetIndex = Math.max(
+        0,
+        Math.min(carouselContent.length - 1, currentIndex + targetDirection)
       );
+      const targetPosition = targetIndex * TOTAL_WIDTH;
 
-      setTimeout(() => {
-        setIsScrolling(false);
-        setActiveScroller(null);
-      }, CAROUSEL_TIMING.cooldown);
+      if (targetPosition !== currentPosition) {
+        setIsScrolling(true);
+        lastScrollTime.current = currentTime;
+        setActiveScroller(isReverse ? "reverse" : "normal");
+        setScrollPosition(targetPosition);
+
+        smoothScrollTo(
+          containerRef.current,
+          targetPosition,
+          CAROUSEL_TIMING.duration
+        );
+
+        setTimeout(() => {
+          setIsScrolling(false);
+          setActiveScroller(null);
+        }, CAROUSEL_TIMING.cooldown);
+      }
     }
-  }
   };
 
   // Update button click handler

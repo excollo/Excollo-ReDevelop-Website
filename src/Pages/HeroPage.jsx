@@ -458,7 +458,7 @@ const HeroPage = () => {
       <Box
         sx={{
           width: { xs: "100%", md: "50%", lg: "40%" },
-          height: "60vh",
+          height: "55vh",
           display: { xs: "block", md: "none", lg: "none", xl: "none" },
           // isMobile || isTablet || isLandscapeMedium ? "block" : "none",
           top: 0,
@@ -483,7 +483,7 @@ const HeroPage = () => {
           display: "flex",
           position: "relative",
           zIndex: 3,
-          marginTop: "-6rem",
+          marginTop: { xs: "-20%", sm: "-6rem" },
           opacity: isMobile || isTablet ? 1 : 0,
           transform:
             isMobile || isTablet ? "translateX(0)" : "translateX(-100px)",
@@ -518,7 +518,9 @@ const HeroPage = () => {
           zIndex: 1,
         }}
       >
-        <HeroPageSection3 />
+        <Box>
+          <HeroPageSection3 />
+        </Box>
         <ErrorBoundary>
           <HeroPageSection4 />
         </ErrorBoundary>
