@@ -77,8 +77,6 @@ const HeroPageSection5 = () => {
         fontFamily: '"Inter", sans-serif',
         position: "relative",
         bgcolor: "#000",
-        pt: { xs: 4, sm: 6, md: 0 },
-        pb: { xs: 4, sm: 6, md: 0 },
       }}
     >
       {/* Background gradient */}
@@ -97,11 +95,11 @@ const HeroPageSection5 = () => {
         }}
       />
       {/* Title Section */}
-      <Box sx={{ marginBottom: { md: "0%", xl: "1%" } }}>
+      <Box sx={{ marginTop: {xs: "10%",sm: "15%", md: "0"}, marginBottom: {xs: "20%", sm: "10%", md: "0%", xl: "1%" } }}>
         <Box
           sx={{
             position: "absolute",
-            top: "-20%",
+            top: {xs: "-10%", md: "-20%"},
             left: "0",
             right: "0%",
             bottom: 0,
