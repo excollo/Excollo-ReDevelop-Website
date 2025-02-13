@@ -8,16 +8,26 @@ import {
   Typography,
   useTheme,
   Dialog,
+  Link,
+  Grid,
+  Autocomplete,
+  Paper,
+  Chip,
   DialogContent,
+  useMediaQuery,
   FormGroup,
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { styled } from "@mui/material/styles";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/OurServices/Footer";
 import ThreeDE from "../Components/ThreeDE";
+import { IoLogoWhatsapp } from "react-icons/io5";
+import { MdOutlineEmail } from "react-icons/md";
 
 // Styled Components
 const StyledFormContainer = styled(Box)(({ theme }) => ({
@@ -33,26 +43,38 @@ const StyledFormContainer = styled(Box)(({ theme }) => ({
     padding: theme.spacing(4),
     maxHeight: "950px",
   },
-  // "@media (min-width: 481px) and (max-width:768px)": {
-  //   padding: theme.spacing(5),
-  //   maxHeight: "950px",
-  // },
-  // "@media (min-width: 769px) and (max-width:1024px)": {
-  //   padding: theme.spacing(6),
-  //   maxHeight: "950px",
-  // },
-  // "@media (min-width: 1025px) and (max-width:1300px)": {
-  //   padding: theme.spacing(7),
-  //   maxHeight: "950px",
-  // },
-  // "@media (min-width: 1301px) and (max-width:1600px)": {
-  //   padding: theme.spacing(7),
-  //   maxHeight: "1000px",
-  // },
-  // "@media (min-width: 1601px) and (max-width:2600px) and (max-height:1600px)": {
-  //   padding: theme.spacing(8),
-  //   maxHeight: "1100px",
-  // },
+}));
+
+const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
+  "& .MuiInputBase-root": {
+    backgroundColor: "rgba(30, 32, 37, 0.6)",
+    borderRadius: theme.spacing(1),
+    color: theme.palette.common.white,
+    "&:hover": {
+      backgroundColor: "rgba(30, 32, 37, 0.8)",
+    },
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    border: "none",
+  },
+  "& .MuiAutocomplete-tag": {
+    backgroundColor: "rgba(142, 84, 247, 0.2)",
+    borderRadius: theme.spacing(1),
+    color: theme.palette.common.white,
+    margin: theme.spacing(0.5),
+  },
+  "& .MuiChip-deleteIcon": {
+    color: theme.palette.grey[400],
+    "&:hover": {
+      color: theme.palette.common.white,
+    },
+  },
+  "& .MuiAutocomplete-popupIndicator": {
+    color: theme.palette.grey[400],
+  },
+  "& .MuiAutocomplete-clearIndicator": {
+    color: theme.palette.grey[400],
+  },
 }));
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -114,9 +136,23 @@ const ContactForm = () => {
     uploadedFiles: [],
     isOtherServiceEnabled: false,
   });
+  const isMd = useMediaQuery(theme.breakpoints.up("md"));
+  const isLg = useMediaQuery(theme.breakpoints.up("lg"));
+  const isXl = useMediaQuery(theme.breakpoints.up("xl"));
   const [showButton, setShowButton] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(true);
   const [submitState, setSubmitState] = useState("initial"); // "initial", "submitting", "submitted"
+
+  let textSize;
+  if (isXl) {
+    textSize = 60; // Text size for xl screens
+  } else if (isLg) {
+    textSize = 60; // Text size for lg screens
+  } else if (isMd) {
+    textSize = 60; // Text size for md screens
+  } else {
+    textSize = 25; // Default text size for small screens
+  }
 
   const GOOGLE_FORM_ACTION =
     "https://script.google.com/macros/s/AKfycbz4LggW4hnSyV4GbcLTl-9JiGykDQyLuR9inpt58x6-v_LFrAf1opb8ptiKBmYpPhLm/exec";
@@ -124,8 +160,10 @@ const ContactForm = () => {
   const serviceOptions = [
     "AI & Automation Solutions",
     "Sales Channel Development",
+    "ML Driven Data Analysis",
     "Technical Consultancy",
     "Website or Application Development",
+    "Other Services",
   ];
 
   const handleInputChange = (e) => {
@@ -135,16 +173,6 @@ const ContactForm = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-  // Add method to handle other service checkbox
-  // const handleOtherServiceToggle = (e) => {
-  //   const isChecked = e.target.checked;
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     isOtherServiceEnabled: isChecked,
-  //     // Clear the other service input if unchecked
-  //     otherService: isChecked ? prev.otherService : "",
-  //   }));
-  // };
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -173,12 +201,21 @@ const ContactForm = () => {
     }));
   };
 
-  const handleServiceChange = (service) => {
+  const handleServicesChange = (event, newValue) => {
     setFormData((prev) => {
-      const services = prev.services.includes(service)
-        ? prev.services.filter((s) => s !== service)
-        : [...prev.services, service];
-      return { ...prev, services };
+      const updatedData = { ...prev, services: newValue };
+
+      // Handle "Other Services" selection
+      if (newValue.includes("Other Services")) {
+        if (!prev.services.includes("Other Services")) {
+          updatedData.otherServiceChecked = true;
+        }
+      } else {
+        updatedData.otherServiceChecked = false;
+        updatedData.otherService = "";
+      }
+
+      return updatedData;
     });
   };
 
@@ -195,10 +232,8 @@ const ContactForm = () => {
         formData.append("otherService", data.otherService);
       }
 
-      // handle file upload
       for (let i = 0; i < data.uploadedFiles.length; i++) {
         const file = data.uploadedFiles[i];
-        // Convert file to base64
         const base64File = await new Promise((resolve) => {
           const reader = new FileReader();
           reader.onloadend = () => resolve(reader.result);
@@ -240,12 +275,6 @@ const ContactForm = () => {
     });
   };
 
-  const handleCalendarClose = () => {
-    setShowCalendar(false);
-    setSubmitState("submitted");
-    resetForm();
-  };
-
   const handleRemoveFile = (index) => {
     setFormData((prev) => ({
       ...prev,
@@ -260,8 +289,8 @@ const ContactForm = () => {
     try {
       const result = await submitToGoogleScript(formData);
       if (result.status === "success") {
-        setShowCalendar(true);
         setSubmitState("submitted");
+        resetForm();
       } else {
         throw new Error(result.message || "Submission failed");
       }
@@ -285,6 +314,7 @@ const ContactForm = () => {
       }
     };
   }, [submitState]);
+  
   const getButtonContent = () => {
     switch (submitState) {
       case "submitting":
@@ -303,7 +333,7 @@ const ContactForm = () => {
           </Box>
         );
       default:
-        return "Schedule Meeting";
+        return "Submit";
     }
   };
   useEffect(() => {
@@ -339,7 +369,7 @@ const ContactForm = () => {
             position: "fixed",
             height: 60,
             bottom: { xs: 100, md: 50 },
-            right: { xs: 30, md: 50 },
+            left: { xs: 30, md: 50 },
             zIndex: 1000,
             borderRadius: "50%",
             background: "rgba(255, 255, 255, 0.1)",
@@ -349,6 +379,28 @@ const ContactForm = () => {
           }}
         >
           <ArrowUpwardIcon />
+        </Button>
+      </Fade>
+
+      <Fade in={showButton}>
+        <Button
+          onClick={handleScrollToTop}
+          variant="contained"
+          color="primary"
+          sx={{
+            position: "fixed",
+            height: 60,
+            bottom: { xs: 100, md: 50 },
+            right: { xs: 30, md: 50 },
+            zIndex: 1000,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.1)",
+            "&:hover": {
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+            },
+          }}
+        >
+          <IoLogoWhatsapp size={30} />
         </Button>
       </Fade>
       {/* Gradient Overlay */}
@@ -370,7 +422,7 @@ const ContactForm = () => {
         sx={{ paddingTop: theme.spacing(8), position: "relative", zIndex: 2 }}
       >
         {/* Header Section */}
-        <Box textAlign="center" mb={8}>
+        <Box textAlign="center" mb={4}>
           <Typography
             sx={{
               fontSize: {
@@ -397,7 +449,8 @@ const ContactForm = () => {
             </Box>
           </Typography>
           <Typography
-            color="grey.300"
+            textAlign="center"
+            color="#fff"
             sx={{
               fontSize: {
                 xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
@@ -407,10 +460,140 @@ const ContactForm = () => {
               },
               fontWeight: 200,
               lineHeight: 1.7,
+              width: "80%",
+              marginLeft: "10%",
             }}
           >
-            Reach out, and let's create a universe of possibilities together!
+            Looking to automate, optimize, or scale your business with tailored
+            AI-native solutions? Let us craft the right solution for you.
           </Typography>
+        </Box>
+        <Box
+          textAlign="center"
+          mb={8}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              justifyContent: { xs: "center", md: "flex-start" },
+            }}
+          >
+            <MdOutlineEmail
+              size={25}
+              color="#8E54F7"
+              sx={{
+                fontSize: {
+                  xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                  xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                },
+                zIndex: "2",
+                fontWeight: 200,
+                lineHeight: 1.7,
+              }}
+            />
+
+            <Link
+              href="mailto:info@excollo.com"
+              target="_blank" // This opens in new tab
+              rel="noopener noreferrer" // Security best practice for links opening in new tab
+              sx={{
+                color: "#fff",
+                textDecoration: "none",
+                zIndex: "2",
+                fontSize: {
+                  xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                  xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                },
+                "&:hover": { color: "#8E54F7" },
+                fontWeight: 200,
+                lineHeight: 1.7,
+                fontFamily: '"Inter", sans-serif',
+              }}
+            >
+              info@excollo.com
+            </Link>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              justifyContent: { xs: "center", md: "flex-start" },
+            }}
+          >
+            <Typography
+              sx={{
+                color: "#fff",
+                textDecoration: "none",
+                zIndex: "2",
+                fontSize: {
+                  xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                  xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                },
+                fontWeight: 200,
+                lineHeight: 1.7,
+              }}
+            >
+              &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp;
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              justifyContent: { xs: "center", md: "flex-start" },
+            }}
+          >
+            <IoLogoWhatsapp
+              size={25}
+              color="#8E54F7"
+              sx={{
+                fontSize: {
+                  xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  lg: `clamp(0.5rem, calc(1rem + 1vw), 1.8rem)`,
+                  xl: `clamp(0.5rem, calc(1rem + 1vw), 2.1rem)`,
+                },
+                fontWeight: 200,
+                lineHeight: 1.7,
+              }}
+            />
+            <Link
+              href="tel:+918890204938"
+              target="_blank" // This opens in new tab
+              rel="noopener noreferrer" // Security best practice for links opening in new tab
+              sx={{
+                textDecoration: "none",
+                color: "#fff",
+                fontSize: {
+                  xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+                  xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+                },
+                "&:hover": { color: "#8E54F7" },
+                fontWeight: 200,
+                lineHeight: 1.7,
+                fontFamily: '"Inter", sans-serif',
+              }}
+            >
+              +91 8890204938
+            </Link>
+          </Box>
         </Box>
         {/* Main Form Container */}
         <StyledFormContainer>
@@ -421,12 +604,10 @@ const ContactForm = () => {
               alignItems="center"
               justifyContent="center"
               sx={{
-                marginTop: "-40%",
-                marginBottom: "-25%",
                 position: "relative",
               }}
             >
-              <ThreeDE />
+              <ThreeDE textSize={textSize} />
             </Box>
             {/* Form Section */}
             <Box>
@@ -443,7 +624,7 @@ const ContactForm = () => {
                   },
                 }}
               >
-                Let's connect constellations
+                Let’s Talk Tech!
               </Typography>
               <Typography
                 color="grey.400"
@@ -459,135 +640,160 @@ const ContactForm = () => {
                   lineHeight: 1.7,
                 }}
               >
-                Let's align our constellations! Reach out and let the magic of
-                collaboration illuminate our skies.
+                Tell us about your project, and we’ll take it from there.
               </Typography>
               <form onSubmit={handleSubmit}>
                 {/* Name Fields */}
 
-                <StyledTextField
-                  name="fullName"
-                  placeholder="Full Name"
-                  fullWidth
-                  value={formData.fullName}
-                  onChange={handleInputChange}
-                  required
-                />
-
-                {/* Contact Fields */}
-                <StyledTextField
-                  name="companyName"
-                  placeholder="Company Name"
-                  fullWidth
-                  value={formData.companyName}
-                  onChange={handleInputChange}
-                  required
-                />
-                <StyledTextField
-                  name="email"
-                  placeholder="Email"
-                  fullWidth
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  type="email"
-                />
-                <StyledTextField
-                  name="phoneNumber"
-                  placeholder="Phone Number"
-                  fullWidth
-                  value={formData.phoneNumber}
-                  onChange={handleInputChange}
-                  required
-                />
-                {/* Services Selection */}
-                <Typography
-                  color="grey.300"
-                  sx={{
-                    fontSize: {
-                      xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                      md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
-                      lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
-                      xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
-                    },
-                    fontWeight: 200,
-                    lineHeight: 1.7,
-                  }}
-                >
-                  Services Required:
-                </Typography>
-                <FormGroup
-                  sx={{
-                    mb: 2,
-                    fontSize: {
-                      xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                      md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
-                      lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
-                      xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
-                    },
-                    fontWeight: 200,
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {serviceOptions.map((service) => (
-                    <FormControlLabel
-                      key={service}
-                      control={
-                        <StyledCheckbox
-                          checked={formData.services.includes(service)}
-                          onChange={() => handleServiceChange(service)}
-                        />
-                      }
-                      label={service}
-                      sx={{
-                        "& .MuiFormControlLabel-label": {
-                          fontSize: {
-                            xs: "clamp(0.5rem, calc(0.8rem + 0.2vw), 1rem)",
-                            md: `clamp(0.5rem, calc(0.8rem + 0.3vw), 1.5rem)`,
-                            lg: `clamp(0.5rem, calc(0.8rem + 0.4vw), 1.8rem)`,
-                            xl: `clamp(0.5rem, calc(0.8rem + 0.5vw), 2.1rem)`,
-                          },
-                          fontWeight: 200,
-                          lineHeight: 1.7,
-                        },
-                      }}
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <StyledTextField
+                      name="fullName"
+                      placeholder="Full Name"
+                      fullWidth
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      required
                     />
-                  ))}
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <StyledTextField
+                      name="companyName"
+                      placeholder="Company Name"
+                      fullWidth
+                      value={formData.companyName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <StyledTextField
+                      name="email"
+                      placeholder="Email"
+                      fullWidth
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      type="email"
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <StyledTextField
+                      name="phoneNumber"
+                      placeholder="Phone Number"
+                      fullWidth
+                      value={formData.phoneNumber}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </Grid>
+                </Grid>
 
-                  {/* Other Services Checkbox and TextField */}
-                  <FormControlLabel
-                    control={
-                      <StyledCheckbox
-                        name="otherServiceChecked"
-                        checked={formData.otherServiceChecked}
-                        onChange={handleInputChange}
-                      />
-                    }
-                    label="Other Services"
+                {/* Services Selection */}
+                <Box sx={{ mb: 3 }}>
+                  <Typography
+                    color="grey.300"
                     sx={{
-                      "& .MuiFormControlLabel-label": {
-                        fontSize: {
-                          xs: "clamp(0.5rem, calc(0.8rem + 0.2vw), 1rem)",
-                          md: `clamp(0.5rem, calc(0.8rem + 0.3vw), 1.5rem)`,
-                          lg: `clamp(0.5rem, calc(0.8rem + 0.4vw), 1.8rem)`,
-                          xl: `clamp(0.5rem, calc(0.8rem + 0.5vw), 2.1rem)`,
-                        },
-                        fontWeight: 200,
-                        lineHeight: 1.7,
+                      fontSize: {
+                        xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                        md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                        lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                        xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
                       },
+                      fontWeight: 200,
+                      lineHeight: 1.7,
+                      mb: 1,
                     }}
+                  >
+                    Services Required:
+                  </Typography>
+
+                  <StyledAutocomplete
+                    multiple
+                    options={serviceOptions}
+                    value={formData.services}
+                    onChange={handleServicesChange}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        placeholder={
+                          formData.services.length === 0
+                            ? "Select Services"
+                            : ""
+                        }
+                        sx={{
+                          fontSize: {
+                            xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                            md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                            lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                            xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
+                          },
+                        }}
+                      />
+                    )}
+                    renderTags={(selected, getTagProps) =>
+                      selected.map((option, index) => (
+                        <Chip
+                          key={option}
+                          label={option}
+                          {...getTagProps({ index })}
+                          sx={{
+                            fontSize: {
+                              xs: "0.8rem",
+                              md: "0.9rem",
+                              lg: "1rem",
+                            },
+                          }}
+                        />
+                      ))
+                    }
+                    renderOption={(props, option) => (
+                      <Box
+                        component="li"
+                        {...props}
+                        sx={{
+                          color: "white",
+                          fontSize: {
+                            xs: "0.8rem",
+                            md: "0.9rem",
+                            lg: "1rem",
+                          },
+                          "&:hover": {
+                            backgroundColor: "rgba(142, 84, 247, 0.2)",
+                          },
+                          "&.Mui-selected": {
+                            backgroundColor: "rgba(142, 84, 247, 0.3)",
+                          },
+                        }}
+                      >
+                        {option}
+                      </Box>
+                    )}
+                    PaperComponent={(props) => (
+                      <Paper
+                        {...props}
+                        sx={{
+                          backgroundColor: "#12101A",
+                          border: "1px solid #7E22CE",
+                          boxShadow: "0px 0px 20px rgba(133, 86, 245, 0.2)",
+                        }}
+                      />
+                    )}
                   />
 
-                  {formData.otherServiceChecked && (
+                  {formData.services.includes("Other Services") && (
                     <StyledTextField
                       name="otherService"
                       placeholder="Specify Other Service"
                       fullWidth
                       value={formData.otherService}
                       onChange={handleInputChange}
+                      sx={{ mt: 2 }}
                     />
                   )}
-                </FormGroup>
+                </Box>
                 {/* Message Field */}
                 <StyledTextField
                   name="message"
@@ -615,7 +821,7 @@ const ContactForm = () => {
                       lineHeight: 1.7,
                     }}
                   >
-                    Upload Files (Optional): &nbsp;
+                    Upload File (Optional): &nbsp;
                   </Typography>
                   <input
                     accept=".doc,.docx,.pdf,.ppt,.pptx,.jpg,.jpeg,.png"
@@ -646,7 +852,7 @@ const ContactForm = () => {
                         textTransform: "none",
                       }}
                     >
-                      Choose Files
+                      Choose File
                     </Button>
                   </label>
 
@@ -707,23 +913,69 @@ const ContactForm = () => {
           </Box>
         </StyledFormContainer>
       </Container>
-
-      {/* Calendar Dialog */}
-      <Dialog
-        open={showCalendar}
-        onClose={handleCalendarClose}
-        maxWidth="md"
-        fullWidth
+      <Box textAlign="center" mt={8} mb={8}>
+        <Typography
+          sx={{
+            fontSize: {
+              xs: `clamp(1.75rem, calc(1.25rem + 2vw), 9rem)`,
+              md: `clamp(1.75rem, calc(1.25rem + 2.5vw), 9rem)`,
+              lg: `clamp(1.75rem, calc(1.37rem + 3vw), 8rem)`,
+              xl: `clamp(2.25rem, calc(2rem + 3vw), 10rem)`,
+            },
+          }}
+          color="common.white"
+          fontWeight="bold"
+          mb={2}
+        >
+          Book a Free{" "}
+          <Box
+            component="span"
+            sx={{
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Consultation
+          </Box>
+        </Typography>
+        <Typography
+          textAlign="center"
+          color="#fff"
+          sx={{
+            fontSize: {
+              xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+              md: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+              lg: `clamp(0.5rem, calc(0.8rem + 0.7vw), 1.8rem)`,
+              xl: `clamp(0.5rem, calc(0.8rem + 0.8vw), 2.1rem)`,
+            },
+            fontWeight: 200,
+            lineHeight: 1.7,
+            width: "80%",
+            marginLeft: "10%",
+          }}
+        >
+          Got 30 minutes? Let's talk!
+        </Typography>
+      </Box>
+      <Box
+        textAlign="center"
+        sx={{
+          width: "80%",
+          margin: "auto",
+          background: "#fff",
+          borderRadius: "20px",
+        }}
       >
-        <DialogContent>
+        <Box open={showCalendar}>
           <iframe
             src="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2aNDl_midhT_0sp4OMzqwX_h8inTRRLY8QlOToNJjU1dFkdKrLBoHp9BSTBLZ0iaDCTpCwt0cY"
-            style={{ width: "100%", height: "600px", border: "none" }}
+            style={{ width: "100%", height: "100vh", border: "none" }}
             title="Schedule Appointment"
           />
-        </DialogContent>
-      </Dialog>
-      {/* Footer */}
+        </Box>
+      </Box>
+
       <Box sx={{ position: "relative", zIndex: 1, marginTop: 5 }}>
         <Footer />
       </Box>
@@ -732,44 +984,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-
-//   // submition
-//  if (formState.isSubmitted && !showCalendar) {
-//    return (
-//      <Box sx={{ backgroundColor: "#000000", minHeight: "100vh" }}>
-//        <Container maxWidth="lg" sx={{ paddingTop: theme.spacing(8) }}>
-//          <StyledFormContainer>
-//            <Typography variant="h4" color="common.white" align="center" mb={2}>
-//              Thank you for your submission!
-//            </Typography>
-//            <Typography color="grey.400" align="center" mb={4}>
-//              We'll be in touch soon.
-//            </Typography>
-//            <Box align="center" sx={{margin:"auto"}} >
-//              <SubmitButton
-//                onClick={() => {
-//                  setFormState({
-//                    isSubmitting: false,
-//                    isSubmitted: false,
-//                    error: null,
-//                  });
-//                  setFormData({
-//                    firstName: "",
-//                    lastName: "",
-//                    companyName:"",
-//                    email: "",
-//                    phoneNumber: "",
-//                    message: "",
-//                    services: [],
-//                    otherService: "",
-//                  });
-//                }}
-//              >
-//                Submit Another Response
-//              </SubmitButton>
-//            </Box>
-//          </StyledFormContainer>
-//        </Container>
-//      </Box>
-//    );
-//  }

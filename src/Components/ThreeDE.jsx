@@ -8,24 +8,9 @@ import { gsap } from "gsap";
 const FONT_URL =
   "https://excollo.github.io/Outfit-Font-Strong/Outfit_ExtraBold_Regular.json";
 
-const ThreeDE = ({ onComplete }) => {
+const ThreeDE = ({textSize}) => {
   const mountRef = useRef(null);
   const textRef = useRef(null);
-  const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up("md"));
-  const isLg = useMediaQuery(theme.breakpoints.up("lg"));
-  const isXl = useMediaQuery(theme.breakpoints.up("xl"));
-
-  let textSize;
-  if (isXl) {
-    textSize = "34.5"; 
-  } else if (isLg) {
-    textSize = "34.5";
-  } else if (isMd) {
-    textSize = "34.5";
-  } else{
-    textSize = "30";
-  }
 
   useEffect(() => {
     if (!mountRef.current) return;

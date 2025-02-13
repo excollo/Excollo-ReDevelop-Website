@@ -14,6 +14,7 @@ import ProductDevelopment from "./ProductDevelopment";
 import TechConsultancy from "./TechConsultancy";
 import SalesChannelDevelopment from "./SalesChannelDevelopment";
 import MLDrivenDataAnalysis from "./MLDrivenDataAnalysis";
+import { IoLogoWhatsapp } from "react-icons/io5";
 const OurServices = () => {
   const [showButton, setShowButton] = useState(false);
   const theme = useTheme();
@@ -169,7 +170,7 @@ const OurServices = () => {
                     height: "100%",
                   }}
                 >
-                  <ThreeDE />
+                  <ThreeDE textSize="34.5" />
                 </Box>
               </Box>
               <Box
@@ -178,7 +179,7 @@ const OurServices = () => {
                   flexDirection: { xs: "column", md: "row" },
                   alignItems: { xs: "center", md: "flex-start" },
                   marginBottom: isLandscapeMedium ? "40px" : undefined,
-                  marginTop: {xs: "25%", md: "0"}
+                  marginTop: { xs: "25%", md: "0" },
                 }}
               >
                 <Typography
@@ -256,7 +257,7 @@ const OurServices = () => {
                     height: "100%",
                   }}
                 >
-                  <ThreeDE />
+                  <ThreeDE textSize="34.5" />
                 </Box>
               </Box>
             )}
@@ -293,7 +294,7 @@ const OurServices = () => {
             position: "fixed",
             height: 60,
             bottom: { xs: 100, md: 50 },
-            right: { xs: 30, md: 50 },
+            left: { xs: 30, md: 50 },
             zIndex: 1000,
             borderRadius: "50%",
             background: "rgba(255, 255, 255, 0.1)",
@@ -303,6 +304,27 @@ const OurServices = () => {
           }}
         >
           <ArrowUpwardIcon />
+        </Button>
+      </Fade>
+      <Fade in={showButton}>
+        <Button
+          onClick={handleScrollToTop}
+          variant="contained"
+          color="primary"
+          sx={{
+            position: "fixed",
+            height: 60,
+            bottom: { xs: 100, md: 50 },
+            right: { xs: 30, md: 50 },
+            zIndex: 1000,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.1)",
+            "&:hover": {
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+            },
+          }}
+        >
+          <IoLogoWhatsapp size={30} />
         </Button>
       </Fade>
     </Box>

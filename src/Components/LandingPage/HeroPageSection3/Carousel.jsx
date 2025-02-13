@@ -388,6 +388,7 @@ const DesktopCarousel = ({ isReverse, type = "title" }) => {
     if (!isOverCard) {
       if (isHorizontalScroll) {
         e.preventDefault();
+        e.stopPropagation();
       }
       return;
     }

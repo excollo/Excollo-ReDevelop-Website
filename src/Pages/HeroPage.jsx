@@ -17,6 +17,7 @@ import HeroPageSection6 from "../Components/LandingPage/HeroPageSection6";
 import HeroPageSection7 from "../Components/LandingPage/HeroPageSection7";
 import { useLocation } from "react-router-dom";
 import { ErrorBoundary } from "./ErrorBoundary";
+import { IoLogoWhatsapp } from "react-icons/io5";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MotionPathPlugin);
 
@@ -391,7 +392,7 @@ const HeroPage = () => {
             position: "fixed",
             height: 60,
             bottom: { xs: 100, md: 50 },
-            right: { xs: 30, md: 50 },
+            left: { xs: 30, md: 50 },
             zIndex: 1000,
             borderRadius: "50%",
             background: "rgba(255, 255, 255, 0.1)",
@@ -401,6 +402,27 @@ const HeroPage = () => {
           }}
         >
           <ArrowUpwardIcon />
+        </Button>
+      </Fade>
+      <Fade in={showButton}>
+        <Button
+          onClick={handleScrollToTop}
+          variant="contained"
+          color="primary"
+          sx={{
+            position: "fixed",
+            height: 60,
+            bottom: { xs: 100, md: 50 },
+            right: { xs: 30, md: 50 },
+            zIndex: 1000,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.1)",
+            "&:hover": {
+              background: "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+            },
+          }}
+        >
+          <IoLogoWhatsapp size={30} />
         </Button>
       </Fade>
       <Box
@@ -427,7 +449,7 @@ const HeroPage = () => {
             height: "100%",
           }}
         >
-          <ThreeDE />
+          <ThreeDE textSize="34.5" />
         </Box>
       </Box>
       <Box
@@ -474,7 +496,7 @@ const HeroPage = () => {
             height: "100%",
           }}
         >
-          <ThreeDE />
+          <ThreeDE textSize="34.5" />
         </Box>
       </Box>
       <Box
