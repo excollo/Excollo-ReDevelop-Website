@@ -200,7 +200,7 @@ const AnimatedCTA = () => {
         onClick={handleButtonClick}
         // Add onClick handler
       >
-        LET’S CONNECT
+        Get In Touch
       </StyledButton>
     </CTAContainer>
   );

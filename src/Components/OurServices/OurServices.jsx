@@ -26,6 +26,7 @@ const OurServices = () => {
   const isMediumScreen = useMediaQuery(theme.breakpoints.only("md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.only("lg"));
   const isExtraLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
+  const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
   const aiAutomationRef = useRef(null);
   const salesChannelRef = useRef(null);
   const mlDrivenDataAnalysisRef = useRef(null);
@@ -76,6 +77,20 @@ const OurServices = () => {
      };
    }, []);
 
+   useEffect(() => {
+       const handleScroll = () => {
+         if (window.scrollY > 0) {
+           setShowWhatsAppButton(true);
+         } else {
+           setShowButton(false);
+         }
+       };
+       window.addEventListener("scroll", handleScroll);
+       return () => {
+         window.removeEventListener("scroll", handleScroll);
+       };
+     }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 250) {
@@ -113,6 +128,14 @@ const OurServices = () => {
       behavior: "smooth",
     });
   };
+
+  const handleWhatsapp = () => {
+    window.open(
+      "https://wa.me/918890204938?text=Hey%2C%20I%20need%20help%20with%20a%20tech%20solution.%20Let’s%20talk%21",
+      "_blank"
+    );
+  };
+
   return (
     <Box className="services-section">
       <Box
@@ -306,7 +329,7 @@ const OurServices = () => {
           <ArrowUpwardIcon />
         </Button>
       </Fade>
-      <Fade in={showButton}>
+      <Fade in={showWhatsAppButton}>
         <Button
           onClick={handleScrollToTop}
           variant="contained"

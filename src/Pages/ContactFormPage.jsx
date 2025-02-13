@@ -138,6 +138,7 @@ const ContactForm = () => {
   const isMd = useMediaQuery(theme.breakpoints.up("md"));
   const isLg = useMediaQuery(theme.breakpoints.up("lg"));
   const isXl = useMediaQuery(theme.breakpoints.up("xl"));
+  const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [showCalendar, setShowCalendar] = useState(true);
   const [submitState, setSubmitState] = useState("initial"); // "initial", "submitting", "submitted"
@@ -357,6 +358,27 @@ const ContactForm = () => {
     });
   };
 
+  useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 0) {
+          setShowWhatsAppButton(true);
+        } else {
+          setShowButton(false);
+        }
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+
+    const handleWhatsapp = () => {
+      window.open(
+        "https://wa.me/918890204938?text=Hey%2C%20I%20need%20help%20with%20a%20tech%20solution.%20Let’s%20talk%21",
+        "_blank"
+      );
+    };
+
   return (
     <Box sx={{ backgroundColor: "#000000", minHeight: "100vh", width: "100%" }}>
       <Fade in={showButton}>
@@ -381,9 +403,9 @@ const ContactForm = () => {
         </Button>
       </Fade>
 
-      <Fade in={showButton}>
+      <Fade in={showWhatsAppButton}>
         <Button
-          onClick={handleScrollToTop}
+          onClick={handleWhatsapp}
           variant="contained"
           color="primary"
           sx={{
@@ -623,7 +645,14 @@ const ContactForm = () => {
             <ThreeDE textSize={textSize} />
           </Box>
           {/* Form Section */}
-          <Box>
+          <Box
+            alignItems="center"
+            justifyContent="center"
+            margin="auto 0"
+            sx={{
+              position: "relative",
+            }}
+          >
             <Typography
               variant="h4"
               color="common.white"
@@ -975,15 +1004,16 @@ const ContactForm = () => {
           margin: "auto",
           background: "#fff",
           borderRadius: "20px",
+          height: "100%",
         }}
       >
-        <IframeWrapper open={showCalendar}>
+        <Box open={showCalendar}>
           <iframe
             src="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2aNDl_midhT_0sp4OMzqwX_h8inTRRLY8QlOToNJjU1dFkdKrLBoHp9BSTBLZ0iaDCTpCwt0cY"
             style={{ width: "100%", height: "100vh", border: "none" }}
             title="Schedule Appointment"
           />
-        </IframeWrapper>
+        </Box>
       </Box>
 
       <Box sx={{ position: "relative", zIndex: 1, marginTop: 5 }}>

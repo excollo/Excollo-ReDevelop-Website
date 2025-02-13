@@ -25,6 +25,7 @@ const HeroPage = () => {
   const [showThreeDE, setShowThreeDE] = useState(true);
   const [animationComplete, setAnimationComplete] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
   const [hero1Complete, setHero1Complete] = useState(false);
   const [hero2Complete, setHero2Complete] = useState(false);
   const threeDERef = useRef(null);
@@ -117,6 +118,20 @@ const HeroPage = () => {
     const handleScroll = () => {
       if (window.scrollY > 250) {
         setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setShowWhatsAppButton(true);
       } else {
         setShowButton(false);
       }
@@ -373,6 +388,15 @@ const HeroPage = () => {
      behavior: "smooth",
    });
  };
+
+ const handleWhatsapp = () => {
+   window.open(
+     "https://wa.me/918890204938?text=Hey%2C%20I%20need%20help%20with%20a%20tech%20solution.%20Let’s%20talk%21",
+     "_blank"
+   );
+ };
+
+
   return (
     <Box
       sx={{
@@ -404,9 +428,9 @@ const HeroPage = () => {
           <ArrowUpwardIcon />
         </Button>
       </Fade>
-      <Fade in={showButton}>
+      <Fade in={showWhatsAppButton}>
         <Button
-          onClick={handleScrollToTop}
+          onClick={handleWhatsapp}
           variant="contained"
           color="primary"
           sx={{

@@ -271,7 +271,8 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 },
                 border: "1px solid transparent",
                 padding: {
-                  xs: "1vw 2vw",
+                  xs: "1.5vw 4vw",
+                  sm: "1vw 2vw",
                 },
                 borderRadius: { xs: "80px", md: "80px", xl: "80px" },
                 background:
@@ -288,7 +289,7 @@ const HeroPageSection2 = ({ onAnimationComplete }) => {
                 },
               }}
             >
-              What we do
+              Explore Our Services
             </Typography>
           </Box>
         </Box>

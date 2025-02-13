@@ -189,7 +189,8 @@ const HeroPageSection1 = ({ animationComplete }) => {
               },
               border: "1px solid transparent",
               padding: {
-                xs: "1vw 2vw"
+                xs: "1.5vw 4vw",
+                sm: "1vw 2vw",
               },
               borderRadius: { xs: "80px", md: "80px", xl: "80px" },
               background:

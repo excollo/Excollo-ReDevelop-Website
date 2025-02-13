@@ -210,6 +210,7 @@ const AboutUs = () => {
   const [showButton, setShowButton] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [shouldRefresh, setShouldRefresh] = useState(false);
+  const [showWhatsAppButton, setShowWhatsAppButton] = useState(false);
 
   // Handle window resize and trigger refresh if needed
   useEffect(() => {
@@ -311,6 +312,27 @@ const AboutUs = () => {
       top: 0,
       behavior: "smooth",
     });
+  };
+
+  useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 0) {
+          setShowWhatsAppButton(true);
+        } else {
+          setShowButton(false);
+        }
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+
+  const handleWhatsapp = () => {
+    window.open(
+      "https://wa.me/918890204938?text=Hey%2C%20I%20need%20help%20with%20a%20tech%20solution.%20Let’s%20talk%21",
+      "_blank"
+    );
   };
 
   const VisionSection = useCallback(
@@ -644,9 +666,9 @@ const AboutUs = () => {
           <ArrowUpwardIcon />
         </Button>
       </Fade>
-      <Fade in={showButton}>
+      <Fade in={showWhatsAppButton}>
         <Button
-          onClick={handleScrollToTop}
+          onClick={handleWhatsapp}
           variant="contained"
           color="primary"
           sx={{
