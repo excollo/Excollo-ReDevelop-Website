@@ -93,6 +93,7 @@ const CursorInner = styled(Box)({
     zIndex: 9999,
   },
 });
+
 const CustomCursor = ({ idleTimeout = 5000 }) => {
   const { cursorType, isHovered } = useCursor();
   const cursorOuterRef = useRef(null);
@@ -106,6 +107,80 @@ const CustomCursor = ({ idleTimeout = 5000 }) => {
   const [isIdle, setIsIdle] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
   const idleTimerRef = useRef(null);
+
+  useEffect(() => {
+    // Function to wrap iframes with cursor overlay
+    const setupIframeOverlays = () => {
+      const iframes = document.querySelectorAll("iframe");
+      iframes.forEach((iframe) => {
+        if (!iframe.parentElement.classList.contains("iframe-wrapper")) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "iframe-wrapper";
+          wrapper.style.position = "relative";
+          wrapper.style.width = "100%";
+          wrapper.style.height = "100%";
+
+          const overlay = document.createElement("div");
+          overlay.className = "iframe-cursor-overlay";
+
+          iframe.parentNode.insertBefore(wrapper, iframe);
+          wrapper.appendChild(iframe);
+          wrapper.appendChild(overlay);
+        }
+      });
+    };
+
+    // Initial setup
+    setupIframeOverlays();
+
+    const handleMouseMove = (e) => {
+      const iframe = e.target.closest("iframe");
+      const overlay = e.target.closest(".iframe-cursor-overlay");
+
+      if (iframe || overlay) {
+        const rect =
+          iframe?.getBoundingClientRect() || overlay?.getBoundingClientRect();
+        const isWithinIframe =
+          rect &&
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom;
+
+        setIsPointer(isWithinIframe);
+        setIsVisible(true);
+      }
+
+      mouse.current = { x: e.clientX, y: e.clientY };
+      velocity.current = {
+        x: mouse.current.x - lastMousePosition.current.x,
+        y: mouse.current.y - lastMousePosition.current.y,
+      };
+      lastMousePosition.current = { x: mouse.current.x, y: mouse.current.y };
+      resetIdleTimer();
+    };
+
+    // Mutation observer to handle dynamically added iframes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length) {
+          setupIframeOverlays();
+        }
+      });
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      observer.disconnect();
+    };
+  }, []);
 
   const resetIdleTimer = () => {
     if (idleTimerRef.current) {

@@ -107,6 +107,12 @@ const StyledCheckbox = styled(Checkbox)(({ theme }) => ({
   },
 }));
 
+const IframeWrapper = styled(Box)({
+  position: "relative",
+  width: "100%",
+  height: "100vh",
+});
+
 const SubmitButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#8E54F7",
   color: "white",
@@ -967,13 +973,13 @@ const ContactForm = () => {
           borderRadius: "20px",
         }}
       >
-        <Box open={showCalendar}>
+        <IframeWrapper open={showCalendar}>
           <iframe
             src="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2aNDl_midhT_0sp4OMzqwX_h8inTRRLY8QlOToNJjU1dFkdKrLBoHp9BSTBLZ0iaDCTpCwt0cY"
             style={{ width: "100%", height: "100vh", border: "none" }}
             title="Schedule Appointment"
           />
-        </Box>
+        </IframeWrapper>
       </Box>
 
       <Box sx={{ position: "relative", zIndex: 1, marginTop: 5 }}>

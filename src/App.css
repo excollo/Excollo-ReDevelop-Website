@@ -12,6 +12,7 @@ html, body {
   scroll-behavior: smooth;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  background-color: black;
 }
 
 
@@ -45,6 +46,20 @@ path:not(.custom-cursor-disable),
   cursor: pointer !important;
 }
 
+iframe:not(.custom-cursor-disable) {
+  cursor: pointer !important;
+}
+/* Create an overlay for iframes to maintain custom cursor */
+.iframe-cursor-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  cursor: pointer !important;
+  pointer-events: "auto";
+}
 
 /* Show text cursor for text inputs and editable content */
 input[type="text"]:not(.custom-cursor-disable),
