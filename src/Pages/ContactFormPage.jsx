@@ -37,7 +37,7 @@ const StyledFormContainer = styled(Box)(({ theme }) => ({
   border: "1px solid #7E22CE",
   boxShadow: "0px 0px 100px 0px rgba(133, 86, 245, 0.4)",
   margin: "0 auto",
-  maxWidth: "95%",
+  width: "100%",
   maxHeight: "fit-content", // Increased to accommodate the new form fields
   "@media (min-width: 320px) and (max-width:480px)": {
     padding: theme.spacing(4),
@@ -100,13 +100,6 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const StyledCheckbox = styled(Checkbox)(({ theme }) => ({
-  color: theme.palette.grey[400],
-  "&.Mui-checked": {
-    color: "#8E54F7",
-  },
-}));
-
 const IframeWrapper = styled(Box)({
   position: "relative",
   width: "100%",
@@ -151,11 +144,11 @@ const ContactForm = () => {
 
   let textSize;
   if (isXl) {
-    textSize = 60; // Text size for xl screens
+    textSize = 50; // Text size for xl screens
   } else if (isLg) {
-    textSize = 60; // Text size for lg screens
+    textSize = 50; // Text size for lg screens
   } else if (isMd) {
-    textSize = 60; // Text size for md screens
+    textSize = 50; // Text size for md screens
   } else {
     textSize = 25; // Default text size for small screens
   }
@@ -365,7 +358,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#000000", minHeight: "100vh" }}>
+    <Box sx={{ backgroundColor: "#000000", minHeight: "100vh", width: "100%" }}>
       <Fade in={showButton}>
         <Button
           onClick={handleScrollToTop}
@@ -424,7 +417,6 @@ const ContactForm = () => {
       />
       <NavBar />
       <Container
-        maxWidth="lg"
         sx={{ paddingTop: theme.spacing(8), position: "relative", zIndex: 2 }}
       >
         {/* Header Section */}
@@ -601,324 +593,336 @@ const ContactForm = () => {
             </Link>
           </Box>
         </Box>
-        {/* Main Form Container */}
-        <StyledFormContainer>
-          <Box display="grid" gridTemplateColumns={{ md: "1fr 1fr" }} gap={2}>
-            {/* 3D Element Section */}
-            <Box
-              display={{ xs: "none", md: "flex" }}
-              alignItems="center"
-              justifyContent="center"
+      </Container>
+      <Box
+        sx={{
+          background: "#12101A",
+          border: "1px solid #7E22CE",
+          boxShadow: "0px 0px 100px 0px rgba(133, 86, 245, 0.4)",
+          width: "76%",
+          margin: "auto",
+          borderRadius: theme.spacing(4),
+          padding: "2vw 2vw",
+          maxHeight: "fit-content", // Increased to accommodate the new form fields
+          "@media (min-width: 320px) and (max-width:480px)": {
+            padding: theme.spacing(4),
+            maxHeight: "950px",
+          },
+        }}
+      >
+        <Box display="grid" gridTemplateColumns={{ md: "1fr 1fr" }} gap={2}>
+          {/* 3D Element Section */}
+          <Box
+            display={{ xs: "none", md: "flex" }}
+            alignItems="center"
+            justifyContent="center"
+            sx={{
+              position: "relative",
+            }}
+          >
+            <ThreeDE textSize={textSize} />
+          </Box>
+          {/* Form Section */}
+          <Box>
+            <Typography
+              variant="h4"
+              color="common.white"
+              mb={1}
               sx={{
-                position: "relative",
+                fontSize: {
+                  xs: `clamp(1rem, calc(1rem + 1.25vw), 6rem)`,
+                  md: `clamp(1rem, calc(1rem + 1.25vw), 6rem)`,
+                  lg: `clamp(1rem, calc(1rem + 1.4vw), 6rem)`,
+                  xl: `clamp(1rem, calc(1rem + 1.4vw), 6rem)`,
+                },
               }}
             >
-              <ThreeDE textSize={textSize} />
-            </Box>
-            {/* Form Section */}
-            <Box>
-              <Typography
-                variant="h4"
-                color="common.white"
-                mb={1}
-                sx={{
-                  fontSize: {
-                    xs: `clamp(1rem, calc(1rem + 1.25vw), 6rem)`,
-                    md: `clamp(1rem, calc(1rem + 1.25vw), 6rem)`,
-                    lg: `clamp(1rem, calc(1rem + 1.4vw), 6rem)`,
-                    xl: `clamp(1rem, calc(1rem + 1.4vw), 6rem)`,
-                  },
-                }}
-              >
-                Let’s Talk Tech!
-              </Typography>
-              <Typography
-                color="grey.400"
-                mb={4}
-                sx={{
-                  fontSize: {
-                    xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                    md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
-                    lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
-                    xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
-                  },
-                  fontWeight: 200,
-                  lineHeight: 1.7,
-                }}
-              >
-                Tell us about your project, and we’ll take it from there.
-              </Typography>
-              <form onSubmit={handleSubmit}>
-                {/* Name Fields */}
+              Let’s Talk Tech!
+            </Typography>
+            <Typography
+              color="grey.400"
+              mb={4}
+              sx={{
+                fontSize: {
+                  xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                  md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                  lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                  xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
+                },
+                fontWeight: 200,
+                lineHeight: 1.7,
+              }}
+            >
+              Tell us about your project, and we’ll take it from there.
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              {/* Name Fields */}
 
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <StyledTextField
-                      name="fullName"
-                      placeholder="Full Name"
-                      fullWidth
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <StyledTextField
-                      name="companyName"
-                      placeholder="Company Name"
-                      fullWidth
-                      value={formData.companyName}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Grid>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <StyledTextField
+                    name="fullName"
+                    placeholder="Full Name"
+                    fullWidth
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    required
+                  />
                 </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <StyledTextField
-                      name="email"
-                      placeholder="Email"
-                      fullWidth
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      type="email"
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <StyledTextField
-                      name="phoneNumber"
-                      placeholder="Phone Number"
-                      fullWidth
-                      value={formData.phoneNumber}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Grid>
+                <Grid item xs={12} md={6}>
+                  <StyledTextField
+                    name="companyName"
+                    placeholder="Company Name"
+                    fullWidth
+                    value={formData.companyName}
+                    onChange={handleInputChange}
+                    required
+                  />
                 </Grid>
+              </Grid>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <StyledTextField
+                    name="email"
+                    placeholder="Email"
+                    fullWidth
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    type="email"
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <StyledTextField
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    fullWidth
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Grid>
+              </Grid>
 
-                {/* Services Selection */}
-                <Box sx={{ mb: 3 }}>
-                  <Typography
-                    color="grey.300"
-                    sx={{
-                      fontSize: {
-                        xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                        md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
-                        lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
-                        xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
-                      },
-                      fontWeight: 200,
-                      lineHeight: 1.7,
-                      mb: 1,
-                    }}
-                  >
-                    Services Required:
-                  </Typography>
+              {/* Services Selection */}
+              <Box sx={{ mb: 3 }}>
+                <Typography
+                  color="grey.300"
+                  sx={{
+                    fontSize: {
+                      xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                      md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                      lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                      xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
+                    },
+                    fontWeight: 200,
+                    lineHeight: 1.7,
+                    mb: 1,
+                  }}
+                >
+                  Services Required:
+                </Typography>
 
-                  <StyledAutocomplete
-                    multiple
-                    options={serviceOptions}
-                    value={formData.services}
-                    onChange={handleServicesChange}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        placeholder={
-                          formData.services.length === 0
-                            ? "Select Services"
-                            : ""
-                        }
+                <StyledAutocomplete
+                  multiple
+                  options={serviceOptions}
+                  value={formData.services}
+                  onChange={handleServicesChange}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder={
+                        formData.services.length === 0 ? "Select Services" : ""
+                      }
+                      sx={{
+                        fontSize: {
+                          xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                          md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                          lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                          xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
+                        },
+                      }}
+                    />
+                  )}
+                  renderTags={(selected, getTagProps) =>
+                    selected.map((option, index) => (
+                      <Chip
+                        key={option}
+                        label={option}
+                        {...getTagProps({ index })}
                         sx={{
-                          fontSize: {
-                            xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                            md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
-                            lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
-                            xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
-                          },
-                        }}
-                      />
-                    )}
-                    renderTags={(selected, getTagProps) =>
-                      selected.map((option, index) => (
-                        <Chip
-                          key={option}
-                          label={option}
-                          {...getTagProps({ index })}
-                          sx={{
-                            fontSize: {
-                              xs: "0.8rem",
-                              md: "0.9rem",
-                              lg: "1rem",
-                            },
-                          }}
-                        />
-                      ))
-                    }
-                    renderOption={(props, option) => (
-                      <Box
-                        component="li"
-                        {...props}
-                        sx={{
-                          color: "white",
                           fontSize: {
                             xs: "0.8rem",
                             md: "0.9rem",
                             lg: "1rem",
                           },
-                          "&:hover": {
-                            backgroundColor: "rgba(142, 84, 247, 0.2)",
-                          },
-                          "&.Mui-selected": {
-                            backgroundColor: "rgba(142, 84, 247, 0.3)",
-                          },
-                        }}
-                      >
-                        {option}
-                      </Box>
-                    )}
-                    PaperComponent={(props) => (
-                      <Paper
-                        {...props}
-                        sx={{
-                          backgroundColor: "#12101A",
-                          border: "1px solid #7E22CE",
-                          boxShadow: "0px 0px 20px rgba(133, 86, 245, 0.2)",
                         }}
                       />
-                    )}
-                  />
-
-                  {formData.services.includes("Other Services") && (
-                    <StyledTextField
-                      name="otherService"
-                      placeholder="Specify Other Service"
-                      fullWidth
-                      value={formData.otherService}
-                      onChange={handleInputChange}
-                      sx={{ mt: 2 }}
-                    />
-                  )}
-                </Box>
-                {/* Message Field */}
-                <StyledTextField
-                  name="message"
-                  placeholder="Message"
-                  fullWidth
-                  multiline
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                />
-
-                {/* File Upload Section */}
-                <Box sx={{ mb: 2, display: "flex" }}>
-                  <Typography
-                    color="grey.300"
-                    sx={{
-                      fontSize: {
-                        xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
-                        md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
-                        lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
-                        xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
-                      },
-                      fontWeight: 200,
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    Upload File (Optional): &nbsp;
-                  </Typography>
-                  <input
-                    accept=".doc,.docx,.pdf,.ppt,.pptx,.jpg,.jpeg,.png"
-                    style={{ display: "none" }}
-                    id="file-upload"
-                    type="file"
-                    multiple
-                    onChange={handleFileChange}
-                  />
-                  <label htmlFor="file-upload">
-                    <Button
-                      component="span"
-                      variant="outlined"
+                    ))
+                  }
+                  renderOption={(props, option) => (
+                    <Box
+                      component="li"
+                      {...props}
                       sx={{
-                        color: "grey.300",
-                        width: "100%",
-                        borderColor: "grey.700",
-                        "&:hover": {
-                          borderColor: "#8E54F7",
-                          backgroundColor: "rgba(142, 84, 247, 0.1)",
-                        },
+                        color: "white",
                         fontSize: {
-                          xs: `clamp(0.2rem, calc(0.3rem + 0.8vw), 1.5rem)`,
-                          md: `clamp(0.5rem, calc(0.3rem + 0.8vw), 1.5rem)`,
-                          xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                          xs: "0.8rem",
+                          md: "0.9rem",
+                          lg: "1rem",
                         },
-                        fontWeight: "400",
-                        textTransform: "none",
+                        "&:hover": {
+                          backgroundColor: "rgba(142, 84, 247, 0.2)",
+                        },
+                        "&.Mui-selected": {
+                          backgroundColor: "rgba(142, 84, 247, 0.3)",
+                        },
                       }}
                     >
-                      Choose File
-                    </Button>
-                  </label>
-
-                  {formData.uploadedFiles.length > 0 && (
-                    <Box sx={{ mt: 2 }}>
-                      {formData.uploadedFiles.map((file, index) => (
-                        <Box
-                          key={index}
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            backgroundColor: "rgba(30, 32, 37, 0.6)",
-                            padding: 1,
-                            borderRadius: 1,
-                            mb: 1,
-                          }}
-                        >
-                          <Typography color="grey.300">
-                            {file.name} (
-                            {(file.size / (1024 * 1024)).toFixed(2)} MB)
-                          </Typography>
-                          <Button
-                            size="small"
-                            onClick={() => handleRemoveFile(index)}
-                            sx={{ color: "grey.400" }}
-                          >
-                            Remove
-                          </Button>
-                        </Box>
-                      ))}
+                      {option}
                     </Box>
                   )}
-                </Box>
-                {/* Submit Button */}
-                <SubmitButton
-                  type="submit"
-                  fullWidth
-                  disabled={submitState === "submitting"}
-                  className={submitState === "submitted" ? "submitted" : ""}
+                  PaperComponent={(props) => (
+                    <Paper
+                      {...props}
+                      sx={{
+                        backgroundColor: "#12101A",
+                        border: "1px solid #7E22CE",
+                        boxShadow: "0px 0px 20px rgba(133, 86, 245, 0.2)",
+                      }}
+                    />
+                  )}
+                />
+
+                {formData.services.includes("Other Services") && (
+                  <StyledTextField
+                    name="otherService"
+                    placeholder="Specify Other Service"
+                    fullWidth
+                    value={formData.otherService}
+                    onChange={handleInputChange}
+                    sx={{ mt: 2 }}
+                  />
+                )}
+              </Box>
+              {/* Message Field */}
+              <StyledTextField
+                name="message"
+                placeholder="Message"
+                fullWidth
+                multiline
+                rows={4}
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+              />
+
+              {/* File Upload Section */}
+              <Box sx={{ mb: 2, display: "flex" }}>
+                <Typography
+                  color="grey.300"
                   sx={{
-                    background:
-                      submitState === "submitted"
-                        ? " linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)"
-                        : "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
                     fontSize: {
-                      xs: `clamp(0.2rem, calc(0.3rem + 0.8vw), 1.5rem)`,
-                      md: `clamp(0.5rem, calc(0.3rem + 0.8vw), 1.5rem)`,
-                      xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                      xs: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.5rem)`,
+                      md: `clamp(0.5rem, calc(0.8rem + 0.5vw), 1.5rem)`,
+                      lg: `clamp(0.5rem, calc(0.8rem + 0.6vw), 1.8rem)`,
+                      xl: `clamp(0.5rem, calc(0.8rem + 0.7vw), 2.1rem)`,
                     },
-                    fontWeight: "400",
+                    fontWeight: 200,
+                    lineHeight: 1.7,
                   }}
                 >
-                  {getButtonContent()}
-                </SubmitButton>
-              </form>
-            </Box>
+                  Upload File (Optional): &nbsp;
+                </Typography>
+                <input
+                  accept=".doc,.docx,.pdf,.ppt,.pptx,.jpg,.jpeg,.png"
+                  style={{ display: "none" }}
+                  id="file-upload"
+                  type="file"
+                  multiple
+                  onChange={handleFileChange}
+                />
+                <label htmlFor="file-upload">
+                  <Button
+                    component="span"
+                    variant="outlined"
+                    sx={{
+                      color: "grey.300",
+                      width: "100%",
+                      borderColor: "grey.700",
+                      "&:hover": {
+                        borderColor: "#8E54F7",
+                        backgroundColor: "rgba(142, 84, 247, 0.1)",
+                      },
+                      fontSize: {
+                        xs: `clamp(0.2rem, calc(0.3rem + 0.8vw), 1.5rem)`,
+                        md: `clamp(0.5rem, calc(0.3rem + 0.8vw), 1.5rem)`,
+                        xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                      },
+                      fontWeight: "400",
+                      textTransform: "none",
+                    }}
+                  >
+                    Choose File
+                  </Button>
+                </label>
+
+                {formData.uploadedFiles.length > 0 && (
+                  <Box sx={{ mt: 2 }}>
+                    {formData.uploadedFiles.map((file, index) => (
+                      <Box
+                        key={index}
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          backgroundColor: "rgba(30, 32, 37, 0.6)",
+                          padding: 1,
+                          borderRadius: 1,
+                          mb: 1,
+                        }}
+                      >
+                        <Typography color="grey.300">
+                          {file.name} ({(file.size / (1024 * 1024)).toFixed(2)}{" "}
+                          MB)
+                        </Typography>
+                        <Button
+                          size="small"
+                          onClick={() => handleRemoveFile(index)}
+                          sx={{ color: "grey.400" }}
+                        >
+                          Remove
+                        </Button>
+                      </Box>
+                    ))}
+                  </Box>
+                )}
+              </Box>
+              {/* Submit Button */}
+              <SubmitButton
+                type="submit"
+                fullWidth
+                disabled={submitState === "submitting"}
+                className={submitState === "submitted" ? "submitted" : ""}
+                sx={{
+                  background:
+                    submitState === "submitted"
+                      ? " linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)"
+                      : "linear-gradient(180deg, #2579E3 0%, #8E54F7 100%)",
+                  fontSize: {
+                    xs: `clamp(0.2rem, calc(0.3rem + 0.8vw), 1.5rem)`,
+                    md: `clamp(0.5rem, calc(0.3rem + 0.8vw), 1.5rem)`,
+                    xl: `clamp(0rem, calc(0.5rem + 0.8vw), 5rem)`,
+                  },
+                  fontWeight: "400",
+                }}
+              >
+                {getButtonContent()}
+              </SubmitButton>
+            </form>
           </Box>
-        </StyledFormContainer>
-      </Container>
+        </Box>
+      </Box>
       <Box textAlign="center" mt={8} mb={8}>
         <Typography
           sx={{
