@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "excollo-8106a"
-  }
+    "default": "excollo-db90b",
+    "excollo": "excollo-db90b"
+  },
+  "targets": {},
+  "etags": {}
 }

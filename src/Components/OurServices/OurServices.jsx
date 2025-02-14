@@ -331,7 +331,7 @@ const OurServices = () => {
       </Fade>
       <Fade in={showWhatsAppButton}>
         <Button
-          onClick={handleScrollToTop}
+          onClick={handleWhatsapp}
           variant="contained"
           color="primary"
           sx={{
