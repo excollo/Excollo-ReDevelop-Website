@@ -148,6 +148,12 @@ const ResponsiveView = ({ type, isTablet }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [key, setKey] = useState(0);
 
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate("/services");
+  };
+
   const cards = [
     {
       title: "AI & Automation",
@@ -200,7 +206,7 @@ const ResponsiveView = ({ type, isTablet }) => {
         position: "relative",
         marginTop: {
           xs: "20%",
-          sm: "10%"
+          sm: "10%",
         },
       }}
     >
@@ -227,7 +233,9 @@ const ResponsiveView = ({ type, isTablet }) => {
               position: "absolute",
               left: "10%",
               x: "-50%",
+              cursor: "pointer",
             }}
+            onClick={handleCardClick}
           >
             <Feature
               title={cards[currentIndex].title}
